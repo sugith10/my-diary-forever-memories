@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
 
-class Notifications extends StatelessWidget {
-  const Notifications({super.key});
-
+class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: 
-    Scaffold(
-      appBar: AppBar(),
-       body: Center(
-          child: Container(
-            width: 100, // Set the width of the Container
-            height: 100, // Set the height of the Container
-            decoration: BoxDecoration(
-              shape: BoxShape.circle, // Makes the Container circular
-              border: Border.all(
-                color: Colors.blue, // Border color
-                width: 2.0, // Border width
-              ),
-            ),
-          ))
-    )
+    // Your NotificationPage content goes here
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Notification Page'),
+        ),
+        body: Center(
+          child: Text('This is the Notification Page content.'),
+        ),
+      ),
     );
   }
 }

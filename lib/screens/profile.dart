@@ -12,6 +12,7 @@ class Profile extends StatelessWidget {
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
+              
             },
             icon: Icon(
               Icons.close,
@@ -79,7 +80,7 @@ class Profile extends StatelessWidget {
                   InkWell(
                     onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage()));
-
+                               
                       },
                     child: Row(
                       children: [
