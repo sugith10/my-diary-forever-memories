@@ -1,5 +1,6 @@
 import 'package:diary/screens/notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
@@ -25,7 +26,9 @@ class Profile extends StatelessWidget {
         )),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/onboarding');
+              },
               icon: Icon(
                 Icons.power_settings_new_outlined,
                 color: Colors.black,
@@ -112,7 +115,7 @@ class Profile extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             backgroundColor: Color(0xFFF1F5FF),
-                            child: Icon(Icons.settings, color: Colors.black),
+                            child: Icon(Ionicons.color_palette_outline, color: Colors.black),
                           ),
                           SizedBox(
                             width: 18,

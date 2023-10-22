@@ -1,5 +1,7 @@
 import 'package:diary/screens/profile.dart';
+import 'package:diary/screens/create_page.dart';
 import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -19,23 +21,26 @@ class HomeScreen extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                
+              },
               icon: Icon(Icons.search, color: Colors.black),
             ),
             IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.access_alarm_sharp, color: Colors.black)),
+                icon: Icon(Ionicons.bookmarks_outline, color: Colors.black)),
             IconButton(
                 onPressed: () {
                   Navigator.of(context)
                       .push(MaterialPageRoute(builder: (context) => Profile()));
                 },
-                icon: CircleAvatar(
-                  backgroundColor: Colors.white,
-                    child: IconButton(onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> Profile()));
-                    }, icon: Icon(Icons.account_circle_outlined,color: Colors.black)),
-                    ))
+                icon: IconButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Profile()));
+                      },
+                      icon: Icon(Ionicons.person_outline,
+                          color: Colors.black)),)
           ],
           elevation: 0,
         ),
@@ -51,8 +56,23 @@ class HomeScreen extends StatelessWidget {
                   lastDay: DateTime(2025, 12, 31),
                   focusedDay: DateTime(2023, 10, 10),
                   daysOfWeekStyle: DaysOfWeekStyle(
-                      weekendStyle: TextStyle(color: Colors.red)),
+                    weekendStyle: TextStyle(color: Colors.red),
+                  ),
                   weekendDays: [DateTime.sunday],
+                  selectedDayPredicate: (day) {
+                    // Define the condition for the focused day and current day
+                    final focusedDay = DateTime(2023, 10, 10);
+                    return isSameDay(day, focusedDay) ||
+                        isSameDay(day, DateTime.now());
+                  },
+                  calendarStyle: CalendarStyle(
+                    selectedDecoration: BoxDecoration(
+                      color: Colors
+                          .blue, // Set your desired color for the focused day and current day
+                      shape: BoxShape
+                          .circle, // You can customize the shape as needed
+                    ),
+                  ),
                 ),
                 color: Color.fromARGB(255, 237, 237, 237),
               ),
@@ -80,7 +100,9 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => CreatePage()));
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 237, 237, 237),
                           shape: RoundedRectangleBorder(

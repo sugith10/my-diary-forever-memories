@@ -13,10 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'My App',
-     
-      home: Onbording(),
-      
+      initialRoute: '/splash', // Set the initial route to your Splash screen
+      routes: {
+        '/splash': (context) => Splash(),
+        '/onboarding': (context) => Onbording(),
+        // Define routes for other screens as needed
+      },
     );
   }
 }
