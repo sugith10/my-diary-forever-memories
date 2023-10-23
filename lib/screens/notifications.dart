@@ -9,7 +9,9 @@ class NotificationPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: IconButton(onPressed: (){},
+          leading: IconButton(onPressed: (){
+            Navigator.pop(context);
+          },
           icon: Icon( Ionicons.chevron_back_outline,
               color: Colors.black, size: 30),),
          

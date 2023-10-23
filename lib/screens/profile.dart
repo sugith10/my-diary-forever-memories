@@ -13,7 +13,6 @@ class Profile extends StatelessWidget {
         leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
-              
             },
             icon: Icon(
               Icons.close,
@@ -27,7 +26,7 @@ class Profile extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushReplacementNamed(context, '/onboarding');
+                _showPopupDialog(context);
               },
               icon: Icon(
                 Icons.power_settings_new_outlined,
@@ -82,15 +81,17 @@ class Profile extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage()));
-                               
-                      },
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()));
+                    },
                     child: Row(
                       children: [
                         CircleAvatar(
                           backgroundColor: Color(0xFFF1F5FF),
-                          child:
-                              Icon(Icons.notifications_none, color: Colors.black),
+                          child: Icon(Icons.notifications_none,
+                              color: Colors.black),
                         ),
                         SizedBox(
                           width: 18,
@@ -106,7 +107,8 @@ class Profile extends StatelessWidget {
                     height: 50,
                   ),
                   Material(
-                    color: Colors.transparent, // You can set a different color here if needed
+                    color: Colors
+                        .transparent, // You can set a different color here if needed
                     child: InkWell(
                       onTap: () {
                         Navigator.pop(context);
@@ -115,7 +117,8 @@ class Profile extends StatelessWidget {
                         children: [
                           CircleAvatar(
                             backgroundColor: Color(0xFFF1F5FF),
-                            child: Icon(Ionicons.color_palette_outline, color: Colors.black),
+                            child: Icon(Ionicons.color_palette_outline,
+                                color: Colors.black),
                           ),
                           SizedBox(
                             width: 18,
@@ -183,3 +186,39 @@ class Profile extends StatelessWidget {
     ));
   }
 }
+
+void _showPopupDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text(
+          'Logout Confirmation',
+          style: TextStyle(
+            fontSize: 27,
+          ),
+        ),
+        content: const Text(
+          'Are you sure you want to log out?',
+          style: TextStyle(fontSize: 17),
+        ),
+        actions: [
+          TextButton(
+            child: const Text('Cancel', style: TextStyle(color: Colors.black)),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: const Text('Logout', style: TextStyle(color: Colors.red)),
+            onPressed: () {
+             Navigator.pushReplacementNamed(context, '/onboarding');
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+

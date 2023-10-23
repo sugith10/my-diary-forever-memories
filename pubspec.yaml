@@ -38,6 +38,7 @@ dependencies:
   table_calendar: ^3.0.9
   ionicons: ^0.2.2
   lottie: ^2.7.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,11 @@ flutter:
     - images/date.png
     - images/start_writing.png
     - images/profile.png
+    - images/animation-1697987169484.json
+    - images/text.png
+    - images/smile.png
+    - images/art-gallery.png
+    - images/clock.png
      
 
      
