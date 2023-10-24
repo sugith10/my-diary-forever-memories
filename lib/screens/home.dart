@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Text(
                 DateFormat('d MMMM,y').format(today),
                 style: TextStyle(color: Colors.black),
+                
               ),
               IconButton(onPressed: (){}, icon: Icon(Ionicons.chevron_down_outline, color: Colors.black,))
             ],
