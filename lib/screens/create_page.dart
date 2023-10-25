@@ -25,8 +25,16 @@ class _CreatePageState extends State<CreatePage> {
                 color: Colors.black, size: 25),
           ),
           actions: [
-            Center(child: Text('Save', style: TextStyle(color: Colors.black, fontSize: 20),)),
-            SizedBox(width: 20,)
+            Center(
+                child: TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Save',
+                      style: TextStyle(color: Colors.black, fontSize: 20),
+                    ))),
+            SizedBox(
+              width: 20,
+            )
           ],
           elevation: 0,
           bottom: PreferredSize(

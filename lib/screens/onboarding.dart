@@ -1,5 +1,5 @@
+import 'package:diary/screens/MainScreen.dart';
 import 'package:diary/screens/content_model.dart';
-import 'package:diary/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -113,7 +113,7 @@ class _OnbordingState extends State<Onbording> {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => HomeScreen(),
+                            builder: (_) => MainScreen(),
                           ),
                         );
                       }
@@ -130,7 +130,7 @@ class _OnbordingState extends State<Onbording> {
                 Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => HomeScreen(),
+                            builder: (_) => MainScreen(),
                           ),
                         );
               }, child: Text('Skip', style: TextStyle(color: Colors.black),))

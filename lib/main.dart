@@ -12,6 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+       theme: ThemeData(
+        primaryColor: Colors.white,
+       appBarTheme: AppBarTheme(backgroundColor: Colors.white)
+        
+      ),
       debugShowCheckedModeBanner: false,
       initialRoute: '/splash', // Set the initial route to your Splash screen
       routes: {

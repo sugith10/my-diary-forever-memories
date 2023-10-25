@@ -2,27 +2,15 @@ import 'package:diary/screens/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({super.key});
+class AccountScreen extends StatelessWidget {
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.close,
-              color: Colors.black,
-            )),
-        title: Center(
-            child: Text(
-          'Profile',
-          style: TextStyle(color: Colors.black),
-        )),
+        leading: Text('Hi ${'User Name'}', style: TextStyle(color: Colors.black),),
         actions: [
           IconButton(
               onPressed: () {
@@ -110,9 +98,6 @@ class Profile extends StatelessWidget {
                     color: Colors
                         .transparent, // You can set a different color here if needed
                     child: InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
                       child: Row(
                         children: [
                           CircleAvatar(
@@ -212,7 +197,7 @@ void _showPopupDialog(BuildContext context) {
           TextButton(
             child: const Text('Logout', style: TextStyle(color: Colors.red)),
             onPressed: () {
-             Navigator.pushReplacementNamed(context, '/onboarding');
+              Navigator.pushReplacementNamed(context, '/onboarding');
             },
           ),
         ],
@@ -220,5 +205,3 @@ void _showPopupDialog(BuildContext context) {
     },
   );
 }
-
-
