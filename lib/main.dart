@@ -1,8 +1,17 @@
+import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/onboarding.dart';
 import 'package:diary/screens/splash.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
-void main() {
+Future <void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Hive.initFlutter();
+  
+  if (!Hive.isAdapterRegistered(DiaryEntryAdapter().typeId)){
+    Hive.registerAdapter(DiaryEntryAdapter());
+  }
   runApp(const MyApp());
 }
 

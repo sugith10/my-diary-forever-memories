@@ -10,7 +10,8 @@ class AccountScreen extends StatelessWidget {
     return SafeArea(
         child: Scaffold(
       appBar: AppBar(
-        leading: Text('Hi ${'User Name'}', style: TextStyle(color: Colors.black),),
+        
+        // leading: Text('Hi ${'User Name'}', style: TextStyle(color: Colors.black),),
         actions: [
           IconButton(
               onPressed: () {
@@ -96,7 +97,7 @@ class AccountScreen extends StatelessWidget {
                   ),
                   Material(
                     color: Colors
-                        .transparent, // You can set a different color here if needed
+                        .transparent,
                     child: InkWell(
                       child: Row(
                         children: [

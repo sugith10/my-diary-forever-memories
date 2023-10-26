@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
-
 
 class Splash extends StatelessWidget {
   const Splash({super.key});
@@ -9,22 +7,13 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(Duration(seconds: 1), () {
-     Navigator.pushReplacementNamed(context, '/onboarding');
+      Navigator.pushReplacementNamed(context, '/onboarding');
     });
 
-    return  
-      SafeArea(
+    return SafeArea(
         child: Scaffold(
-          backgroundColor: Colors.white,
-          body:Center(
-            child:
-           
-            Image(image: AssetImage('images/first-img.png')
-            )
-            
-          )
-        )
-      );
-    
+            backgroundColor: Colors.white,
+            body: Center(
+                child: Image(image: AssetImage('images/first-img.png')))));
   }
 }
