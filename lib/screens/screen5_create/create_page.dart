@@ -1,5 +1,6 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/screen5_create/emoji_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
@@ -14,11 +15,19 @@ class CreatePage extends StatefulWidget {
 }
 
 class _CreatePageState extends State<CreatePage> {
-  // int _selectedIndex = 0;
-  final DateTime? selectedDate;  
+late DateTime selectedDate; 
+   @override
+  void initState() {
+    super.initState();
+    selectedDate = widget.selectedDate; 
+  }
+
+
+ 
   _CreatePageState(this.selectedDate);
    final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
+  
   
   @override
   Widget build(BuildContext context) {
@@ -28,43 +37,45 @@ class _CreatePageState extends State<CreatePage> {
           backgroundColor: Colors.white,
           leading: IconButton(
             onPressed: () {
-               
               Navigator.pop(context);
             },
             icon: Icon(Ionicons.chevron_back_outline,
                 color: Colors.black, size: 25),
           ),
           actions: [
-            Center(
-                child: TextButton(
-                    onPressed: () {
-                      final entry = DiaryEntry(
-      date: widget.selectedDate,
-      title: titleController.text,
-      content: contentController.text,
-    );
-    HiveOperations().addDiaryEntry(entry);
+           Center(
+  child: TextButton(
+    onPressed: () {
+      final title = titleController.text;
+      final content = contentController.text;
+      if (title.isNotEmpty) {
+        final entry = DiaryEntry(
+          date: widget.selectedDate,
+          title: title,
+          content: content,
+        );
 
+        HiveOperations().addDiaryEntry(entry);
 
-    // Print all data to the terminal
-                      HiveOperations().getDiaryEntries().then((entries) {
-                        print("All Diary Entries:");
-                        entries.forEach((entry) {
-                          print("Date: ${entry.date}");
-                          print("Title: ${entry.title}");
-                          print("Content: ${entry.content}");
-                        });
-                      });
-              Navigator.pop(context);
-                    },
-                    child: Text(
-                      'Save',
-                      style: TextStyle(color: Colors.black, fontSize: 20),
-                    )),
-            ),
-            SizedBox(
-              width: 20,
-            ),
+        HiveOperations().getDiaryEntries().then((entries) {
+          print("All Diary Entries:");
+          entries.forEach((entry) {
+            print("Date: ${entry.date}");
+            print("Title: ${entry.title}");
+            print("Content: ${entry.content}");
+          });
+        });
+      }
+      Navigator.pop(context);
+    },
+    child: Text(
+      'Save',
+      style: TextStyle(color: Colors.black, fontSize: 20),
+    ),
+  ),
+),
+
+           
           ],
           elevation: 0,
           bottom: PreferredSize(
@@ -86,13 +97,51 @@ class _CreatePageState extends State<CreatePage> {
               SizedBox(height: 15),
               Row(
                 children: [
-                  Text(
-                    DateFormat('d MMMM,y').format(selectedDate!),
-                    style: TextStyle(color: Colors.black),
-                  ),
+                  TextButton(
+                     onPressed: () {
+     showDatePicker(
+                        context: context,
+                        initialDate: selectedDate,
+                        firstDate: DateTime(2023),
+                        lastDate: DateTime(2029), 
+                      ).then((pickedDate) {
+                        if (pickedDate != null && pickedDate != selectedDate) {
+                          
+                          setState(() {
+                            selectedDate = pickedDate;
+                          });
+                        }
+                      });
+  },
+                   
+                      
+                      child: Row(
+                        children: [
+                          Text(
+                            DateFormat('d MMMM,y').format(selectedDate!),
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          Icon(Ionicons.caret_down_outline, color: Colors.black,)
+                        ],
+                      ),
+                    ),
+                  
                   Spacer(),
-                  CircleAvatar(
-                    child: Icon(Ionicons.happy_outline),
+                  GestureDetector(
+                    onTap: () {
+                       showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return EmojiPicker(
+          onEmojiSelected: (selectedEmoji) {
+          },
+        );
+      },
+    );
+                    },
+                    child: CircleAvatar(
+                      child: Icon(Ionicons.happy_outline),
+                    ),
                   ),
                 ],
               ),

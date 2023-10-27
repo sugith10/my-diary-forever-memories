@@ -1,4 +1,4 @@
-import 'package:diary/screens/notifications.dart';
+import 'package:diary/screens/screen4_profile/notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -9,8 +9,7 @@ class AccountScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(
-        
+      appBar: AppBar(  
         // leading: Text('Hi ${'User Name'}', style: TextStyle(color: Colors.black),),
         actions: [
           IconButton(
@@ -22,11 +21,11 @@ class AccountScreen extends StatelessWidget {
                 color: Colors.black,
               ))
         ],
-        backgroundColor: Colors.white,
+       
         elevation: 0,
       ),
       body: Container(
-        decoration: BoxDecoration(color: Colors.white),
+       
         child: Column(
           children: [
             Spacer(),

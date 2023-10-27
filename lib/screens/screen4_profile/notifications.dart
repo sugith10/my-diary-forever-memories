@@ -4,7 +4,7 @@ import 'package:ionicons/ionicons.dart';
 class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // Your NotificationPage content goes here
+    
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -22,21 +22,7 @@ class NotificationPage extends StatelessWidget {
           elevation: 0,
           centerTitle: true,
         ),
-        body: Center(
-          child: Container(
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              border: Border.all(
-                width: 1.0,
-                color: Colors.black,
-              ),
-              
-            ),
-            
-            alignment: Alignment.center,
-            child: Icon(Ionicons.chevron_back_outline),
-          ),
-        ),
+       
       ),
     );
   }

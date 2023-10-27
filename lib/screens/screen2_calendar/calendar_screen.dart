@@ -1,9 +1,10 @@
-
-import 'package:diary/screens/create_page.dart';
+import 'package:diary/screens/screen5_create/create_page.dart';
+import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -15,19 +16,11 @@ class CalendarScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<CalendarScreen> {
   DateTime today = DateTime.now();
-  void _onDaySelected(DateTime day, DateTime focusedDay) {
-    setState(() {
-      today = day;
-    });
-  }
-
- 
-
   var currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-  
+    final changer = Provider.of<Changer>(context);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -38,7 +31,9 @@ class _HomeScreenState extends State<CalendarScreen> {
               borderRadius: BorderRadius.circular(50),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                changer.toggleCalendarVisibility();
+              },
               child: Row(
                 children: [
                   Text(
@@ -47,14 +42,16 @@ class _HomeScreenState extends State<CalendarScreen> {
                   ),
                   SizedBox(width: 10),
                   Icon(
-                    Ionicons.chevron_down_outline,
+                    changer.isCalendarVisible
+                        ? Ionicons.chevron_down_outline
+                        : Ionicons
+                            .chevron_up_outline, 
                     color: Colors.black,
                   ),
                 ],
               ),
             ),
           ),
-          
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(0),
@@ -71,54 +68,59 @@ class _HomeScreenState extends State<CalendarScreen> {
         body: Column(
           children: [
             Container(
-              color: Color.fromARGB(255, 237, 237, 237),
+              // color: Color.fromARGB(255, 237, 237, 237),
               child: Container(
-                color: Color.fromARGB(255, 237, 237, 237),
+                // color: Color.fromARGB(255, 237, 237, 237),
                 margin: EdgeInsets.only(left: 10, right: 10),
-                child: TableCalendar(
-                  headerStyle: HeaderStyle(
-                      formatButtonVisible: false, titleCentered: true),
-                  availableGestures: AvailableGestures.all,
-                  selectedDayPredicate: (day) => isSameDay(day, today),
-                  firstDay: DateTime(2000, 10, 1),
-                  lastDay: DateTime(2025, 12, 31),
-                  focusedDay: today,
-                  daysOfWeekStyle: DaysOfWeekStyle(
-                    weekendStyle: TextStyle(color: Colors.red),
+                child: Visibility(
+                  visible: changer.isCalendarVisible,
+                  child: TableCalendar(
+                    headerStyle: HeaderStyle(
+                        formatButtonVisible: false, titleCentered: true),
+                    availableGestures: AvailableGestures.all,
+                    selectedDayPredicate: (day) =>
+                        isSameDay(day, changer.selectedDate),
+                    firstDay: DateTime(2000, 10, 1),
+                    lastDay: DateTime(2025, 12, 31),
+                    focusedDay: today,
+                    daysOfWeekStyle: DaysOfWeekStyle(
+                      weekendStyle: TextStyle(color: Colors.red),
+                    ),
+                    weekendDays: [DateTime.sunday],
+                    onDaySelected: (day, focusedDay) {
+                      changer.selectDate(day);
+                    },
                   ),
-                  weekendDays: [DateTime.sunday],
-                  onDaySelected: _onDaySelected,
                 ),
               ),
             ),
             Spacer(),
             InkWell(
               onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreatePage(selectedDate: today),
-                            ),
-                          );
-                        },
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatePage(selectedDate: today),
+                  ),
+                );
+              },
               child: Container(
                 margin: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   children: [
                     Container(
-                      
                       child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Start writing about your day...',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 31, 31, 31),
-                                fontSize: 20,
-                              ),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Start writing about your day...',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 31, 31, 31),
+                              fontSize: 20,
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 7,
@@ -142,7 +144,7 @@ class _HomeScreenState extends State<CalendarScreen> {
 Widget customIcon() {
   return Image.asset(
     'images/start_writing.png',
-    width: 64, 
+    width: 64,
     height: 64,
   );
 }
