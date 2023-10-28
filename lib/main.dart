@@ -1,4 +1,5 @@
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen0_welcome/onboarding.dart';
 import 'package:diary/screens/screen0_welcome/provider_onboarding.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
@@ -24,6 +25,11 @@ Future<void> main() async {
     ChangeNotifierProvider(
       create: (context) => OnboardingState(),
     ),
+    ChangeNotifierProvider(
+      create: (context) => MainScreenProvider(),
+    ),
+    
+    
   ],
   child: MyApp(),
 ),

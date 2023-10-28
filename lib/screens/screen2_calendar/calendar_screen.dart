@@ -36,9 +36,13 @@ class _HomeScreenState extends State<CalendarScreen> {
               },
               child: Row(
                 children: [
-                  Text(
-                    DateFormat('d MMMM,y').format(today),
-                    style: TextStyle(color: Colors.black),
+                 Consumer<Changer>(
+                    builder: (context, changer, child) {
+                      return Text(
+                        DateFormat('d MMMM,y').format(changer.selectedDate),
+                        style: TextStyle(color: Colors.black),
+                      );
+                    },
                   ),
                   SizedBox(width: 10),
                   Icon(
@@ -82,7 +86,7 @@ class _HomeScreenState extends State<CalendarScreen> {
                         isSameDay(day, changer.selectedDate),
                     firstDay: DateTime(2000, 10, 1),
                     lastDay: DateTime(2025, 12, 31),
-                    focusedDay: today,
+                    focusedDay: changer.selectedDate,
                     daysOfWeekStyle: DaysOfWeekStyle(
                       weekendStyle: TextStyle(color: Colors.red),
                     ),
@@ -100,7 +104,7 @@ class _HomeScreenState extends State<CalendarScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CreatePage(selectedDate: today),
+                    builder: (context) => CreatePage(selectedDate: changer.selectedDate),
                   ),
                 );
               },

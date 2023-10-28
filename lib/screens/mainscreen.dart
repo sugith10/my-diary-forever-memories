@@ -1,19 +1,14 @@
 
+import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen1_my_diary/mydiary_screen.dart';
 import 'package:diary/screens/screen2_calendar/calendar_screen.dart';
 import 'package:diary/screens/screen3_gallery/gallery_screen.dart';
 import 'package:diary/screens/screen4_profile/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
-class MainScreen extends StatefulWidget {
-  @override
-  _MainScreenState createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
-
+class MainScreen extends StatelessWidget {
   final List<Widget> _mainScreens = [
     MyDiaryScreen(),
     CalendarScreen(),
@@ -23,6 +18,9 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+     int _currentIndex = Provider.of<MainScreenProvider>(context).currentIndex;
+    final bottomNavigationProvider =
+        Provider.of<MainScreenProvider>(context);
     double displayWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
@@ -47,10 +45,10 @@ class _MainScreenState extends State<MainScreen> {
       final isSelected = index == _currentIndex;
       return InkWell(
         onTap: () {
-          setState(() {
-            _currentIndex = index;
+         
+           bottomNavigationProvider.setCurrentIndex(index);
             HapticFeedback.lightImpact();
-          });
+          
         },
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
@@ -142,10 +140,4 @@ class _MainScreenState extends State<MainScreen> {
     'Gallery',
     'Account',
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 }
