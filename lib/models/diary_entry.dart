@@ -3,7 +3,7 @@ part 'diary_entry.g.dart';
 
 
 @HiveType(typeId: 0)
-class DiaryEntry {
+class DiaryEntry { 
   @HiveField(0)
   DateTime date;
 

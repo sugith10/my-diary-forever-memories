@@ -4,63 +4,64 @@ import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/emoji_picker.dart';
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 
-
-class CreatePage extends StatefulWidget {
+class CreatePage extends StatelessWidget {
   // late  DateTime selectedDate;
-   final Changer changer; // Inject Changer here
+  final Changer changer; // Inject Changer here
 
-   CreatePage({Key? key, required this.changer}) : super(key: key);
+  CreatePage({Key? key, required this.changer}) : super(key: key);
 
-  @override
-  State<CreatePage> createState() => _CreatePageState();
-}
-
-class _CreatePageState extends State<CreatePage> {
- 
   final TextEditingController titleController = TextEditingController();
+
   final TextEditingController contentController = TextEditingController();
-  
 
   @override
   Widget build(BuildContext context) {
-    
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           backgroundColor: Colors.white,
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
             },
-            icon: Icon(Ionicons.chevron_back_outline, color: Colors.black, size: 25),
+            icon: Icon(Ionicons.chevron_back_outline,
+                color: Colors.black, size: 25),
           ),
           actions: [
             Center(
               child: TextButton(
-                onPressed: () {
+                onPressed: () async {
                   final title = titleController.text;
                   final content = contentController.text;
+
+                  final box = await Hive.openBox<DiaryEntry>('diary_entries');
+
                   if (title.isNotEmpty) {
                     final entry = DiaryEntry(
-                      date: widget.changer.selectedDate,
+                      date: changer.selectedDate,
                       title: title,
                       content: content,
                     );
 
-                    HiveOperations().addDiaryEntry(entry);
+                    await box.add(entry);
 
-                    HiveOperations().getDiaryEntries().then((entries) {
+                    if (!box.isEmpty) {
                       print("All Diary Entries:");
-                      entries.forEach((entry) {
+                      final entries = box.values.toList() as List<DiaryEntry>;
+                      for (var entry in entries) {
                         print("Date: ${entry.date}");
                         print("Title: ${entry.title}");
                         print("Content: ${entry.content}");
-                      });
-                    });
+                      }
+                    } else {
+                      print("No diary entries found!");
+                    }
                   }
                   Navigator.pop(context);
                 },
@@ -92,37 +93,37 @@ class _CreatePageState extends State<CreatePage> {
               Row(
                 children: [
                   TextButton(
-              onPressed: () async {
-                final pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: widget.changer.selectedDate,
-                  firstDate: DateTime(2023),
-                  lastDate: DateTime(2029),
-                );
-                if (pickedDate != null) {
-                  widget.changer.selectDate(pickedDate); // Use the Changer to update the date
-                  print(widget.changer.selectedDate);
-                  var selectedate = widget.changer.selectedDate;
-                }
-              },
-              child: Row(
-                children: [
-                 Consumer<Changer>(
-  builder: (context, changer, child) {
-    return Text(
-      DateFormat('d MMMM,y').format(changer.selectedDate),
-      style: TextStyle(color: Colors.black),
-    );
-  },
-),
-
-                  Icon(
-                    Ionicons.caret_down_outline,
-                    color: Colors.black,
-                  )
-                ],
-              ),
-            ),
+                    onPressed: () async {
+                      final pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: changer.selectedDate,
+                        firstDate: DateTime(2023),
+                        lastDate: DateTime(2029),
+                      );
+                      if (pickedDate != null) {
+                        changer.selectDate(pickedDate);
+                        print(changer.selectedDate);
+                        var selectedate = changer.selectedDate;
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        Consumer<Changer>(
+                          builder: (context, changer, child) {
+                            return Text(
+                              DateFormat('d MMMM,y')
+                                  .format(changer.selectedDate),
+                              style: TextStyle(color: Colors.black),
+                            );
+                          },
+                        ),
+                        Icon(
+                          Ionicons.caret_down_outline,
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
+                  ),
                   Spacer(),
                   GestureDetector(
                     onTap: () {
@@ -153,7 +154,6 @@ class _CreatePageState extends State<CreatePage> {
                 style: TextStyle(fontSize: 28),
                 textCapitalization: TextCapitalization.sentences,
               ),
-
               SizedBox(height: 5),
               TextField(
                 controller: contentController,
@@ -170,6 +170,25 @@ class _CreatePageState extends State<CreatePage> {
             ],
           ),
         ),
+        bottomNavigationBar: BottomNavigationBar(
+           showUnselectedLabels: false,
+        showSelectedLabels: false,
+          type: BottomNavigationBarType.fixed, // This is all you need!
+          items: [
+          BottomNavigationBarItem(
+              icon: Icon(
+                Ionicons.text_outline,
+              ),
+              label: 'Font'),
+              
+          BottomNavigationBarItem(
+              icon: Icon(Ionicons.happy_outline), label: 'Emoji'),
+          BottomNavigationBarItem(
+              icon: Icon(Ionicons.image_outline), label: 'Gallery'),
+              
+               BottomNavigationBarItem(
+              icon: Icon(Ionicons.color_palette_outline), label: 'Color',)
+        ]),
       ),
     );
   }

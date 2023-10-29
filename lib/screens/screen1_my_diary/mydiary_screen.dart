@@ -4,35 +4,13 @@ import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 
-class MyDiaryScreen extends StatefulWidget {
+class MyDiaryScreen extends StatelessWidget {
   const MyDiaryScreen({Key? key}) : super(key: key);
-
-  @override
-  _MyDiaryScreenState createState() => _MyDiaryScreenState();
-}
-
-class _MyDiaryScreenState extends State<MyDiaryScreen> {
-  List<DiaryEntry> diaryEntries = []; 
-
-  @override
-  void initState() {
-    super.initState();
-    
-    getDiaryEntries();
-  }
-
- 
-  void getDiaryEntries() {
-    HiveOperations().getDiaryEntries().then((entries) {
-      setState(() {
-        diaryEntries = entries;
-      });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,29 +51,53 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
             ),
           ),
         ),
-        body: ListView.builder(
-          itemCount: diaryEntries.length,
-          itemBuilder: (context, index) {
-            return DiaryEntryCard(diaryEntries[index]);
-          },
-        ),
+        body: DiaryEntryList(),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Changer changer = Provider.of<Changer>(context, listen: false);
+            final changer = Provider.of<Changer>(context, listen: false);
             Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreatePage(changer: changer),
-                  ),
-                );
+              context,
+              MaterialPageRoute(
+                builder: (context) => CreatePage(changer: changer),
+              ),
+            );
           },
           child: Icon(Icons.create_outlined),
-         backgroundColor: Color(0xFF5B6ABF), 
+          backgroundColor: Color(0xFF5B6ABF),
         ),
       ),
     );
   }
 }
+
+class DiaryEntryList extends StatelessWidget {
+  Future<List<DiaryEntry>> getDiaryEntries() async {
+    final box = await Hive.openBox<DiaryEntry>('diary_entries');
+    return box.values.toList() as List<DiaryEntry>;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: getDiaryEntries(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          final diaryEntries = snapshot.data as List<DiaryEntry>;
+          return ListView.builder(
+            itemCount: diaryEntries.length,
+            itemBuilder: (context, index) {
+              return DiaryEntryCard(diaryEntries[index]);
+            },
+          );
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    );
+  }
+}
+
 
 class DiaryEntryCard extends StatelessWidget {
   final DiaryEntry entry;
@@ -104,6 +106,7 @@ class DiaryEntryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('djkjkl');
     return Card(
       margin: EdgeInsets.all(10.0),
       child: ListTile(
@@ -114,4 +117,3 @@ class DiaryEntryCard extends StatelessWidget {
     );
   }
 }
-

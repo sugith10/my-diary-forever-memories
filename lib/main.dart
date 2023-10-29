@@ -16,6 +16,9 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(DiaryEntryAdapter().typeId)) {
     Hive.registerAdapter(DiaryEntryAdapter());
   }
+
+  
+
   runApp(
     MultiProvider(
   providers: [
@@ -28,7 +31,6 @@ Future<void> main() async {
     ChangeNotifierProvider(
       create: (context) => MainScreenProvider(),
     ),
-    
     
   ],
   child: MyApp(),

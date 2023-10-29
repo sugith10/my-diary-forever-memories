@@ -6,6 +6,7 @@ import 'package:diary/screens/screen3_gallery/gallery_screen.dart';
 import 'package:diary/screens/screen4_profile/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatelessWidget {
@@ -130,7 +131,7 @@ class MainScreen extends StatelessWidget {
   List<IconData> listOfIcons = [
     Icons.menu_book_rounded,
     Icons.calendar_month_outlined,
-    Icons.photo_camera_back_outlined,
+    Ionicons.images_outline,
     Icons.person_outline_sharp,
   ];
 

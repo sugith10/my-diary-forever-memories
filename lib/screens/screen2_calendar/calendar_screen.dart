@@ -1,21 +1,16 @@
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
-
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalendarScreen extends StatefulWidget {
-  const CalendarScreen({super.key});
+class CalendarScreen extends StatelessWidget {
+   CalendarScreen({super.key});
 
-  @override
-  State<CalendarScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<CalendarScreen> {
   DateTime today = DateTime.now();
+
   var currentIndex = 0;
 
   @override

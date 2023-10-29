@@ -116,7 +116,7 @@ class Onbording extends StatelessWidget {
                       );
                    
                   },
-                  child: Text('Next', style: TextStyle(color: Colors.black)),
+                  child: Text('Skip', style: TextStyle(color: Colors.black)),
                 ),
                 SizedBox(height: 10),
               ],
