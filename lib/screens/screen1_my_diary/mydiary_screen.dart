@@ -1,10 +1,12 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 
 class MyDiaryScreen extends StatefulWidget {
   const MyDiaryScreen({Key? key}) : super(key: key);
@@ -79,13 +81,13 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-           
+            Changer changer = Provider.of<Changer>(context, listen: false);
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreatePage(selectedDate: DateTime.now()),
-              ),
-            );
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatePage(changer: changer),
+                  ),
+                );
           },
           child: Icon(Icons.create_outlined),
          backgroundColor: Color(0xFF5B6ABF), 

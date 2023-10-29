@@ -1,16 +1,19 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/emoji_picker.dart';
-import 'package:diary/screens/screen5_create/provider_create.dart';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:provider/provider.dart';
 
 
 class CreatePage extends StatefulWidget {
-  late  DateTime selectedDate;
+  // late  DateTime selectedDate;
+   final Changer changer; // Inject Changer here
 
-   CreatePage({Key? key, required this.selectedDate}) : super(key: key);
+   CreatePage({Key? key, required this.changer}) : super(key: key);
 
   @override
   State<CreatePage> createState() => _CreatePageState();
@@ -20,6 +23,7 @@ class _CreatePageState extends State<CreatePage> {
  
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +46,7 @@ class _CreatePageState extends State<CreatePage> {
                   final content = contentController.text;
                   if (title.isNotEmpty) {
                     final entry = DiaryEntry(
-                      date: widget.selectedDate,
+                      date: widget.changer.selectedDate,
                       title: title,
                       content: content,
                     );
@@ -88,32 +92,37 @@ class _CreatePageState extends State<CreatePage> {
               Row(
                 children: [
                   TextButton(
-                    onPressed: () async {
-    final pickedDate = await showDatePicker(
-      context: context,
-      initialDate: widget.selectedDate,
-      firstDate: DateTime(2023),
-      lastDate: DateTime(2029),
+              onPressed: () async {
+                final pickedDate = await showDatePicker(
+                  context: context,
+                  initialDate: widget.changer.selectedDate,
+                  firstDate: DateTime(2023),
+                  lastDate: DateTime(2029),
+                );
+                if (pickedDate != null) {
+                  widget.changer.selectDate(pickedDate); // Use the Changer to update the date
+                  print(widget.changer.selectedDate);
+                  var selectedate = widget.changer.selectedDate;
+                }
+              },
+              child: Row(
+                children: [
+                 Consumer<Changer>(
+  builder: (context, changer, child) {
+    return Text(
+      DateFormat('d MMMM,y').format(changer.selectedDate),
+      style: TextStyle(color: Colors.black),
     );
-    if (pickedDate != null) {
-      setState(() {
-        widget.selectedDate = pickedDate;
-      });
-    }
-  },       
-                    child: Row(
-                      children: [
-                        Text(
-                          DateFormat('d MMMM,y').format(widget.selectedDate),
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        Icon(
-                          Ionicons.caret_down_outline,
-                          color: Colors.black,
-                        )
-                      ],
-                    ),
-                  ),
+  },
+),
+
+                  Icon(
+                    Ionicons.caret_down_outline,
+                    color: Colors.black,
+                  )
+                ],
+              ),
+            ),
                   Spacer(),
                   GestureDetector(
                     onTap: () {

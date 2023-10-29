@@ -104,7 +104,7 @@ class _HomeScreenState extends State<CalendarScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => CreatePage(selectedDate: changer.selectedDate),
+                    builder: (context) => CreatePage(changer: changer),
                   ),
                 );
               },
