@@ -63,7 +63,7 @@ class MyDiaryScreen extends StatelessWidget {
             );
           },
           child: Icon(Icons.create_outlined),
-          backgroundColor: Color(0xFF5B6ABF),
+          backgroundColor: Color.fromARGB(255, 150, 186, 222),
         ),
       ),
     );
@@ -106,14 +106,58 @@ class DiaryEntryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('djkjkl');
-    return Card(
-      margin: EdgeInsets.all(10.0),
-      child: ListTile(
-        title: Text(entry.title, style: TextStyle(fontSize: 18.0)),
-        subtitle: Text(entry.content),
-        trailing: Text(DateFormat('d MMMM, y').format(entry.date)),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+      child: Container(
+        padding: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: Offset(0, 3),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              entry.title,
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8.0),
+            Text(
+              entry.content,
+              style: TextStyle(
+                fontSize: 16.0,
+              ),
+            ),
+            SizedBox(height: 12.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  DateFormat('d MMMM, y').format(entry.date),
+                  style: TextStyle(
+                    fontSize: 14.0,
+                    color: Colors.grey,
+                  ),
+                ),
+                // You can add additional icons or buttons here if needed
+                // For example, an edit button or a delete button
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+

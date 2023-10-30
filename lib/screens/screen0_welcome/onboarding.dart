@@ -1,10 +1,13 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:diary/screens/MainScreen.dart';
 import 'package:diary/models/content_model.dart';
+import 'package:diary/screens/screen0.1_auth/welcome_screen.dart';
 import 'package:diary/screens/screen0_welcome/provider_onboarding.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class Onbording extends StatelessWidget {
   final PageController pageController = PageController(initialPage: 0);
@@ -39,9 +42,7 @@ class Onbording extends StatelessWidget {
                           Text(
                             contents[i].title,
                             style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),
+                                    fontSize: 25.sp, fontWeight: FontWeight.w600)
                           ),
                           SizedBox(height: 20),
                           Container(
@@ -81,29 +82,66 @@ class Onbording extends StatelessWidget {
                       color: Color(0xFFE2E8F0),
                     ),
                   ),
-                  child: TextButton(
-                    child: Text(
-                      onboardingState.currentIndex == contents.length - 1
-                          ? "Continue"
-                          : "Next",
-                      style: TextStyle(color: Colors.black, fontSize: 20),
-                    ),
-                    onPressed: () {
+                  // child: TextButton(
+                  //   child: Text(
+                  //     onboardingState.currentIndex == contents.length - 1
+                  //         ? "Continue"
+                  //         : "Next",
+                  //     style: TextStyle(color: Colors.black, fontSize: 20),
+                  //   ),
+                  //   onPressed: () {
+                  //     if (onboardingState.currentIndex == contents.length - 1) {
+                  //       Navigator.pushReplacement(
+                  //         context,
+                  //         MaterialPageRoute(
+                  //           builder: (_) => WelcomePage(),
+                  //         ),
+                  //       );
+                  //     } else {
+                  //       pageController.nextPage(
+                  //         duration: Duration(milliseconds: 100),
+                  //         curve: Curves.bounceIn,
+                  //       );
+                  //     }
+                  //   },
+                  // ),
+                child:  ElevatedButton(
+                               onPressed: () {
                       if (onboardingState.currentIndex == contents.length - 1) {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => MainScreen(),
+                            builder: (_) => WelcomePage(),
                           ),
                         );
                       } else {
                         pageController.nextPage(
-                          duration: Duration(milliseconds: 100),
+                          duration: Duration(milliseconds: 10),
                           curve: Curves.bounceIn,
                         );
                       }
                     },
-                  ),
+                              child: FadeInUp(
+                                  delay: const Duration(milliseconds: 1000),
+                                  duration: const Duration(milliseconds: 1000),
+                                  child: Text(
+                      onboardingState.currentIndex == contents.length - 1
+                          ? "Continue"
+                          : "Next",
+                     
+                    ),),
+                              style: ElevatedButton.styleFrom(
+                                  elevation: 0,
+                                  textStyle: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Satoshi'),
+                                  backgroundColor: Color(0xFF0C6198),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  padding: EdgeInsets.symmetric(vertical: 16)),
+                            ),
                 ),
                 TextButton(
                   onPressed: () {
@@ -116,7 +154,7 @@ class Onbording extends StatelessWidget {
                       );
                    
                   },
-                  child: Text('Skip', style: TextStyle(color: Colors.black)),
+                  child: Text('Skip', style: TextStyle(color: Color.fromARGB(255, 150, 169, 194))),
                 ),
                 SizedBox(height: 10),
               ],
