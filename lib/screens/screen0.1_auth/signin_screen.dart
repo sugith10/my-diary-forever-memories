@@ -157,11 +157,6 @@ class _SignInPageState extends State<SignInPage> {
                             Expanded(
                               child: ElevatedButton(
                                 onPressed: () {},
-                                child: FadeInUp(
-                                  delay: const Duration(milliseconds: 700),
-                                  duration: const Duration(milliseconds: 800),
-                                  child: Text('Sign Up'),
-                                ),
                                 style: ElevatedButton.styleFrom(
                                   elevation: 0,
                                   textStyle: const TextStyle(
@@ -174,6 +169,11 @@ class _SignInPageState extends State<SignInPage> {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   padding: EdgeInsets.symmetric(vertical: 16),
+                                ),
+                                child: FadeInUp(
+                                  delay: const Duration(milliseconds: 700),
+                                  duration: const Duration(milliseconds: 800),
+                                  child: Text('Sign Up'),
                                 ),
                               ),
                             ),

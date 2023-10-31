@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/foundation.dart';
 
-class HiveOperations {
+class HiveOperations extends ChangeNotifier {
   final String _boxName = 'diary_entries';
   final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
       ValueNotifier<List<DiaryEntry>>([]);
@@ -16,10 +16,12 @@ class HiveOperations {
     final box = await openBox();
     await box.add(entry);
     diaryEntriesNotifier.value.add(entry); // Notify listeners
+    notifyListeners();
   }
 
   Future<void> getDiaryEntries() async {
     final box = await openBox();
     diaryEntriesNotifier.value = box.values.toList(); // Update the ValueNotifier
   }
+
 }

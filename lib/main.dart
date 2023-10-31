@@ -1,3 +1,4 @@
+import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen0.1_auth/provider_auth.dart';
@@ -22,6 +23,8 @@ Future<void> main() async {
   runApp(
     MultiProvider(
   providers: [
+     ChangeNotifierProvider(
+          create: (context) => HiveOperations(),),
     ChangeNotifierProvider(
       create: (context) => Changer(),
     ),

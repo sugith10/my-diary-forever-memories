@@ -50,8 +50,15 @@ class CreatePage extends StatelessWidget {
                     );
 
                     await box.add(entry);
+                    
+                     // Get the HiveOperations instance
+                  final hiveOperations = Provider.of<HiveOperations>(context, listen: false);
+
+                  // Call the refreshEventdata method
+                  // await hiveOperations.refreshEventdata();
 
                     if (!box.isEmpty) {
+                      
                       print("All Diary Entries:");
                       final entries = box.values.toList() as List<DiaryEntry>;
                       for (var entry in entries) {
@@ -173,7 +180,7 @@ class CreatePage extends StatelessWidget {
         bottomNavigationBar: BottomNavigationBar(
            showUnselectedLabels: false,
         showSelectedLabels: false,
-          type: BottomNavigationBarType.fixed, // This is all you need!
+          type: BottomNavigationBarType.fixed, 
           items: [
           BottomNavigationBarItem(
               icon: Icon(

@@ -35,7 +35,7 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
               Container(
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: const BoxDecoration(color: Colors.white),
                 padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -88,21 +88,21 @@ class WelcomePage extends StatelessWidget {
                                       builder: (context) => LoginPage(),
                                     ));
                               },
-                              child: FadeInUp(
-                                  delay: const Duration(milliseconds: 1100),
-                                  duration: const Duration(milliseconds: 1200),
-                                  child: Text('Log In')),
                               style: ElevatedButton.styleFrom(
                                   elevation: 0,
-                                  textStyle: TextStyle(
+                                  textStyle: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: 'Satoshi'),
-                                  backgroundColor: Color(0xFF0C6198),
+                                  backgroundColor: Color(0xFF835DF1),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   padding: EdgeInsets.symmetric(vertical: 16)),
+                              child: FadeInUp(
+                                  delay: const Duration(milliseconds: 1100),
+                                  duration: const Duration(milliseconds: 1200),
+                                  child: Text('Log In')),
                             ),
                           )
                         ],
@@ -129,7 +129,7 @@ class WelcomePage extends StatelessWidget {
                               child: const Text(
                                 'Register',
                                 style: TextStyle(
-                                  color: Color(0xFF0C6198),
+                                  color: Color(0xFF835DF1),
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
                                 ),

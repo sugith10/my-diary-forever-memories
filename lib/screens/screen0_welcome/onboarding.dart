@@ -6,7 +6,6 @@ import 'package:diary/screens/screen0_welcome/provider_onboarding.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class Onbording extends StatelessWidget {
@@ -136,7 +135,7 @@ class Onbording extends StatelessWidget {
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                       fontFamily: 'Satoshi'),
-                                  backgroundColor: Color(0xFF0C6198),
+                                  backgroundColor: Color(0xFF835DF1),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12),
                                   ),

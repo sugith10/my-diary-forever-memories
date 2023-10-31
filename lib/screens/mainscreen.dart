@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 
+
 class MainScreen extends StatelessWidget {
   final List<Widget> _mainScreens = [
     MyDiaryScreen(),
@@ -33,7 +34,7 @@ class MainScreen extends StatelessWidget {
 
     boxShadow: [
       BoxShadow(
-        color: Colors.black.withOpacity(0.1),
+        color: Color(0xFF835DF1).withOpacity(0.1),
         blurRadius: 38,
         offset: Offset(0, 10),
       ),
