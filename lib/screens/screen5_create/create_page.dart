@@ -5,7 +5,6 @@ import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/emoji_picker.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -50,7 +49,7 @@ class CreatePage extends StatelessWidget {
                       title: title,
                       content: content,
                     );
-                  await  NewDat().addDiaryEntry(entry).then((value) => log("function completed$value"));
+                  await  DbFunctions().addDiaryEntry(entry).then((value) => log("function completed$value"));
                     
                    
                     

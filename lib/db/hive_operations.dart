@@ -5,14 +5,27 @@ import 'package:flutter/foundation.dart';
   final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
       ValueNotifier<List<DiaryEntry>>([]);
 
+class DbFunctions{
+  List<DiaryEntry> diaryEntryNotifier = [];
+ final box =  Hive.box<DiaryEntry>('_boxName');
+Future  addDiaryEntry(DiaryEntry entry) async{
+  final box =  Hive.box<DiaryEntry>('_boxName');
+  await box.add(entry);
+  diaryEntryNotifier.add(entry);
 
-// Future  addDiaryEntry(DiaryEntry entry) async{
-//   final box = await Hive.openBox<DiaryEntry>('_boxName');
-//   await box.add(entry);
-//   diaryEntriesNotifier.value.add(entry);
+ // diaryEntriesNotifier.notifyListeners();
+}
 
-//   diaryEntriesNotifier.notifyListeners();
-// }
+    Future  getAllDiary() async {
+   final box =  Hive.box<DiaryEntry>('_boxName');
+    diaryEntryNotifier.clear();
+    diaryEntryNotifier.addAll(box.values);
+   
+   // diaryEntriesNotifier.notifyListeners();
+
+}
+}
+
 
 
 

@@ -62,9 +62,7 @@ class MyDiaryScreen extends StatelessWidget {
           itemCount: value.length,
           itemBuilder: (context, index) {
           final data = value.values.toList()[index];
-          return ListTile(
-            title: Text(data.title),
-          );
+          return DiaryEntryCard(data);
         },);
       },
     ),
@@ -86,15 +84,6 @@ class MyDiaryScreen extends StatelessWidget {
   }
 }
 
-// class DiaryEntryList extends StatelessWidget {
-//   const DiaryEntryList({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     getAllDiary();
-//     return
-//   }
-// }
 
 
 class DiaryEntryCard extends StatelessWidget {
