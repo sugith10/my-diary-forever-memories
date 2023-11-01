@@ -50,6 +50,7 @@ class CreatePage extends StatelessWidget {
                     );
 
                     await box.add(entry);
+                   
                     
                      // Get the HiveOperations instance
                   // final hiveOperations = Provider.of<HiveOperations>(context, listen: false);

@@ -23,9 +23,9 @@ Future<void> main() async {
   runApp(
     MultiProvider(
   providers: [
-     ChangeNotifierProvider(
-      create: (context) => DiaryEntryProvider(),
-    ),
+    //  ChangeNotifierProvider(
+    //   create: (context) => DiaryEntryProvider(),
+    // ),
     ChangeNotifierProvider(
       create: (context) => Changer(),
     ),

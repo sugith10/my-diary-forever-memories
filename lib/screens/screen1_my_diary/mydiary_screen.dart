@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,7 @@ class MyDiaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -51,7 +54,35 @@ class MyDiaryScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: DiaryEntryList(),
+        body:  ValueListenableBuilder(
+      valueListenable: diaryEntriesNotifier,
+      builder: (BuildContext ctx, List<DiaryEntry> diaryEntry, Widget? child) {
+      
+        log('DiaryEntryList: Rebuilding with ${diaryEntry.length} entries'); // Add this line
+        return Consumer<MainScreenProvider>(
+          builder: (context, value, child) => 
+           FutureBuilder(
+            future: value.getAllDiary(),
+            builder: (context, snapshot) {
+              if(snapshot.hasData){
+                return  ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                print('DiaryEntryList: Building item $index'); // Add this line
+                return DiaryEntryCard(diaryEntry[index]);
+              },
+                     );
+              }
+               else{
+                return Center(child: Text(snapshot.error.toString()),);
+               }
+            },
+           
+            
+           ),
+        );
+      },
+    ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             final changer = Provider.of<Changer>(context, listen: false);
@@ -70,33 +101,15 @@ class MyDiaryScreen extends StatelessWidget {
   }
 }
 
-class DiaryEntryList extends StatelessWidget {
-  Future<List<DiaryEntry>> getDiaryEntries() async {
-    final box = await Hive.openBox<DiaryEntry>('diary_entries');
-    return box.values.toList() as List<DiaryEntry>;
-  }
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: getDiaryEntries(),
-      builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final diaryEntries = snapshot.data as List<DiaryEntry>;
-          return ListView.builder(
-            itemCount: diaryEntries.length,
-            itemBuilder: (context, index) {
-              return DiaryEntryCard(diaryEntries[index]);
-            },
-          );
-        } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
-        } else {
-          return CircularProgressIndicator();
-        }
-      },
-    );
-  }
-}
+// class DiaryEntryList extends StatelessWidget {
+//   const DiaryEntryList({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     getAllDiary();
+//     return
+//   }
+// }
 
 
 class DiaryEntryCard extends StatelessWidget {
