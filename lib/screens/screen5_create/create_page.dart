@@ -52,7 +52,7 @@ class CreatePage extends StatelessWidget {
                     await box.add(entry);
                     
                      // Get the HiveOperations instance
-                  final hiveOperations = Provider.of<HiveOperations>(context, listen: false);
+                  // final hiveOperations = Provider.of<HiveOperations>(context, listen: false);
 
                   // Call the refreshEventdata method
                   // await hiveOperations.refreshEventdata();

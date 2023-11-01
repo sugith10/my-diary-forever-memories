@@ -1,6 +1,8 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:diary/screens/mainscreen.dart';
 import 'package:diary/screens/screen0.1_auth/signin_screen.dart';
 import 'package:diary/screens/screen0.1_auth/welcome_screen.dart';
+import 'package:diary/screens/screen1_my_diary/mydiary_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:iconly/iconly.dart';
@@ -219,7 +221,9 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> MainScreen()));
+                              },
                               child: FadeInUp(
                                   delay: const Duration(milliseconds: 700),
                                   duration: const Duration(milliseconds: 800),

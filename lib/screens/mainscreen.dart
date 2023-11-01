@@ -1,6 +1,7 @@
 
 import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen1_my_diary/mydiary_screen.dart';
+import 'package:diary/screens/screen1_my_diary/mydiary_screen_.dart';
 import 'package:diary/screens/screen2_calendar/calendar_screen.dart';
 import 'package:diary/screens/screen3_gallery/gallery_screen.dart';
 import 'package:diary/screens/screen4_profile/account_screen.dart';
@@ -15,7 +16,7 @@ class MainScreen extends StatelessWidget {
     MyDiaryScreen(),
     CalendarScreen(),
     GalleryScreen(),
-    AccountScreen(),
+    DiaryEntryListScreen(),
   ];
 
   @override

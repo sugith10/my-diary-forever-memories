@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:diary/screens/mainscreen.dart';
 import 'package:diary/screens/screen0.1_auth/login_screen.dart';
 import 'package:diary/screens/screen0.1_auth/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -156,7 +157,9 @@ class _SignInPageState extends State<SignInPage> {
                           children: [
                             Expanded(
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MainScreen()));
+                                },
                                 style: ElevatedButton.styleFrom(
                                   elevation: 0,
                                   textStyle: const TextStyle(

@@ -24,7 +24,8 @@ Future<void> main() async {
     MultiProvider(
   providers: [
      ChangeNotifierProvider(
-          create: (context) => HiveOperations(),),
+      create: (context) => DiaryEntryProvider(),
+    ),
     ChangeNotifierProvider(
       create: (context) => Changer(),
     ),

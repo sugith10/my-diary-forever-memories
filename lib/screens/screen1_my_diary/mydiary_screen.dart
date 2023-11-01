@@ -1,3 +1,4 @@
+import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
@@ -9,7 +10,6 @@ import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 
 class MyDiaryScreen extends StatelessWidget {
-  
   const MyDiaryScreen({Key? key}) : super(key: key);
 
   @override
@@ -63,7 +63,7 @@ class MyDiaryScreen extends StatelessWidget {
             );
           },
           child: Icon(Icons.create_outlined),
-          backgroundColor: Color(0xFF5B6ABF).withOpacity(0.7),
+          backgroundColor: Color.fromARGB(255, 150, 186, 222),
         ),
       ),
     );
@@ -156,10 +156,7 @@ class DiaryEntryCard extends StatelessWidget {
             ),
           ],
         ),
-
-        
       ),
     );
   }
 }
-
