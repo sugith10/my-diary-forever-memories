@@ -19,6 +19,7 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(DiaryEntryAdapter().typeId)) {
     Hive.registerAdapter(DiaryEntryAdapter());
   }
+  await Hive.openBox<DiaryEntry>('_boxName');
 
   runApp(
     MultiProvider(

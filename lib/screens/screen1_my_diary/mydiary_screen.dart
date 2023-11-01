@@ -7,6 +7,7 @@ import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
@@ -55,32 +56,16 @@ class MyDiaryScreen extends StatelessWidget {
           ),
         ),
         body:  ValueListenableBuilder(
-      valueListenable: diaryEntriesNotifier,
-      builder: (BuildContext ctx, List<DiaryEntry> diaryEntry, Widget? child) {
-      
-        log('DiaryEntryList: Rebuilding with ${diaryEntry.length} entries'); // Add this line
-        return Consumer<MainScreenProvider>(
-          builder: (context, value, child) => 
-           FutureBuilder(
-            future: value.getAllDiary(),
-            builder: (context, snapshot) {
-              if(snapshot.hasData){
-                return  ListView.builder(
-              itemCount: snapshot.data.length,
-              itemBuilder: (context, index) {
-                print('DiaryEntryList: Building item $index'); // Add this line
-                return DiaryEntryCard(diaryEntry[index]);
-              },
-                     );
-              }
-               else{
-                return Center(child: Text(snapshot.error.toString()),);
-               }
-            },
-           
-            
-           ),
-        );
+      valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+      builder: (context, value, child) {
+        return ListView.builder(
+          itemCount: value.length,
+          itemBuilder: (context, index) {
+          final data = value.values.toList()[index];
+          return ListTile(
+            title: Text(data.title),
+          );
+        },);
       },
     ),
         floatingActionButton: FloatingActionButton(

@@ -6,13 +6,13 @@ import 'package:flutter/foundation.dart';
       ValueNotifier<List<DiaryEntry>>([]);
 
 
-Future <void> addDiaryEntry(DiaryEntry entry) async{
-  final box = await Hive.openBox<DiaryEntry>('_boxName');
-  await box.add(entry);
-  diaryEntriesNotifier.value.add(entry);
+// Future  addDiaryEntry(DiaryEntry entry) async{
+//   final box = await Hive.openBox<DiaryEntry>('_boxName');
+//   await box.add(entry);
+//   diaryEntriesNotifier.value.add(entry);
 
-  diaryEntriesNotifier.notifyListeners();
-}
+//   diaryEntriesNotifier.notifyListeners();
+// }
 
 
 

@@ -13,12 +13,30 @@ class MainScreenProvider with ChangeNotifier {
     _currentIndex = index;
     notifyListeners();
   }
-  Future  getAllDiary() async {
-   final box = await Hive.openBox<DiaryEntry>('_boxName');
-    diaryEntriesNotifier.value.clear();
-    diaryEntriesNotifier.value.addAll( box.values);
-    notifyListeners();
-    diaryEntriesNotifier.notifyListeners();
+
+  // final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
+  //     ValueNotifier<List<DiaryEntry>>([]);
+
+
+}
+
+class NewDat{
+  List<DiaryEntry> diaryEntryNotifier = [];
+ final box =  Hive.box<DiaryEntry>('_boxName');
+Future  addDiaryEntry(DiaryEntry entry) async{
+  final box =  Hive.box<DiaryEntry>('_boxName');
+  await box.add(entry);
+  diaryEntryNotifier.add(entry);
+
+ // diaryEntriesNotifier.notifyListeners();
+}
+
+    Future  getAllDiary() async {
+   final box =  Hive.box<DiaryEntry>('_boxName');
+    diaryEntryNotifier.clear();
+    diaryEntryNotifier.addAll(box.values);
+   
+   // diaryEntriesNotifier.notifyListeners();
 
 }
 }

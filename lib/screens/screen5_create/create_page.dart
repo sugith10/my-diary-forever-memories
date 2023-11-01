@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/emoji_picker.dart';
 
@@ -40,7 +43,6 @@ class CreatePage extends StatelessWidget {
                   final title = titleController.text;
                   final content = contentController.text;
 
-                  final box = await Hive.openBox<DiaryEntry>('diary_entries');
 
                   if (title.isNotEmpty) {
                     final entry = DiaryEntry(
@@ -48,8 +50,8 @@ class CreatePage extends StatelessWidget {
                       title: title,
                       content: content,
                     );
-
-                    await box.add(entry);
+                  await  NewDat().addDiaryEntry(entry).then((value) => log("function completed$value"));
+                    
                    
                     
                      // Get the HiveOperations instance
@@ -58,18 +60,18 @@ class CreatePage extends StatelessWidget {
                   // Call the refreshEventdata method
                   // await hiveOperations.refreshEventdata();
 
-                    if (!box.isEmpty) {
+                    // if (!box.isEmpty) {
                       
-                      print("All Diary Entries:");
-                      final entries = box.values.toList() as List<DiaryEntry>;
-                      for (var entry in entries) {
-                        print("Date: ${entry.date}");
-                        print("Title: ${entry.title}");
-                        print("Content: ${entry.content}");
-                      }
-                    } else {
-                      print("No diary entries found!");
-                    }
+                    //   print("All Diary Entries:");
+                    //   final entries = box.values.toList() as List<DiaryEntry>;
+                    //   for (var entry in entries) {
+                    //     print("Date: ${entry.date}");
+                    //     print("Title: ${entry.title}");
+                    //     print("Content: ${entry.content}");
+                    //   }
+                    // } else {
+                    //   print("No diary entries found!");
+                    // }
                   }
                   Navigator.pop(context);
                 },
