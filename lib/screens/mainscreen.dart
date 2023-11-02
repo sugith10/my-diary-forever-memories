@@ -62,12 +62,12 @@ class MainScreen extends StatelessWidget {
               width: isSelected ? displayWidth * 0.32 : displayWidth * 0.18,
               alignment: Alignment.center,
               child: AnimatedContainer(
-                duration: Duration(seconds: 1),
+                duration: const Duration(seconds: 1),
                 curve: Curves.fastLinearToSlowEaseIn,
                 height: isSelected ? displayWidth * 0.12 : 0,
                 width: isSelected ? displayWidth * 0.32 : 0,
                 decoration: BoxDecoration(
-                  color: isSelected ? Color(0xFF5B6ABF).withOpacity(0.2) : Colors.transparent,
+                  color: isSelected ? const Color(0xFF5B6ABF).withOpacity(0.2) : Colors.transparent,
                   borderRadius: BorderRadius.circular(50),
                 ),
               ),
@@ -92,7 +92,7 @@ class MainScreen extends StatelessWidget {
                         curve: Curves.fastLinearToSlowEaseIn,
                         child: Text(
                           isSelected ? listOfStrings[index] : '',
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black87,
                             fontWeight: FontWeight.w600,
                             fontSize: 15,

@@ -47,6 +47,8 @@ dependencies:
   animate_do: ^3.1.2
   iconly: ^1.0.1
   flutter_slidable: ^3.0.0
+  emoji_picker_flutter: ^1.6.3
+  image_picker: ^1.0.4
 
 dev_dependencies:
   flutter_test:

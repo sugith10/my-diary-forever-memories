@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class EmojiPicker extends StatefulWidget {
   final Function(IconData) onEmojiSelected;
 
-  EmojiPicker({required this.onEmojiSelected});
+  EmojiPicker({required this.onEmojiSelected, required TextEditingController textEditingController});
 
   @override
   _EmojiPickerState createState() => _EmojiPickerState();
