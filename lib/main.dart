@@ -6,6 +6,7 @@ import 'package:diary/screens/screen0_welcome/onboarding.dart';
 import 'package:diary/screens/screen0_welcome/provider_onboarding.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen0_welcome/splash.dart';
+import 'package:diary/screens/screen5_create/provider_create.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -24,9 +25,9 @@ Future<void> main() async {
   runApp(
     MultiProvider(
   providers: [
-    //  ChangeNotifierProvider(
-    //   create: (context) => DiaryEntryProvider(),
-    // ),
+     ChangeNotifierProvider(
+      create: (context) => CreatePageProvider(),
+    ),
     ChangeNotifierProvider(
       create: (context) => Changer(),
     ),

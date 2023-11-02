@@ -5,6 +5,7 @@ import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/emoji_picker.dart';
+import 'package:diary/screens/screen5_create/provider_create.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -51,26 +52,6 @@ class CreatePage extends StatelessWidget {
                     );
                   await  DbFunctions().addDiaryEntry(entry).then((value) => log("function completed$value"));
                     
-                   
-                    
-                     // Get the HiveOperations instance
-                  // final hiveOperations = Provider.of<HiveOperations>(context, listen: false);
-
-                  // Call the refreshEventdata method
-                  // await hiveOperations.refreshEventdata();
-
-                    // if (!box.isEmpty) {
-                      
-                    //   print("All Diary Entries:");
-                    //   final entries = box.values.toList() as List<DiaryEntry>;
-                    //   for (var entry in entries) {
-                    //     print("Date: ${entry.date}");
-                    //     print("Title: ${entry.title}");
-                    //     print("Content: ${entry.content}");
-                    //   }
-                    // } else {
-                    //   print("No diary entries found!");
-                    // }
                   }
                   Navigator.pop(context);
                 },
@@ -179,26 +160,61 @@ class CreatePage extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomNavigationBar(
-           showUnselectedLabels: false,
-        showSelectedLabels: false,
-          type: BottomNavigationBarType.fixed, 
-          items: [
-          BottomNavigationBarItem(
-              icon: Icon(
-                Ionicons.text_outline,
-              ),
-              label: 'Font'),
-              
-          BottomNavigationBarItem(
-              icon: Icon(Ionicons.happy_outline), label: 'Emoji'),
-          BottomNavigationBarItem(
-              icon: Icon(Ionicons.image_outline), label: 'Gallery'),
-              
-               BottomNavigationBarItem(
-              icon: Icon(Ionicons.color_palette_outline), label: 'Color',)
-        ]),
-      ),
+         bottomNavigationBar: Consumer<CreatePageProvider>(
+            builder: (context, bottomNavigationProvider, child) {
+              return BottomNavigationBar(
+                showUnselectedLabels: false,
+                showSelectedLabels: false,
+                type: BottomNavigationBarType.fixed,
+                currentIndex: bottomNavigationProvider.selectedIndex, // Use the selected index from the provider
+                onTap: (index) {
+                  // Update the selected index using the provider
+                   switch (index) {
+          case 0:
+            // Handle the first icon's onPressed
+            Navigator.pop(context);
+            break;
+          case 1:
+            // Handle the second icon's onPressed
+            Navigator.pop(context);
+            break;
+          case 2:
+            // Handle the third icon's onPressed
+            Navigator.pop(context);
+            break;
+          case 3:
+            // Handle the fourth icon's onPressed
+            Navigator.pop(context);
+            break;
+        }
+                  bottomNavigationProvider.setSelectedIndex(index);
+                },
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(
+                      Ionicons.text_outline,
+                    ),
+                    label: 'Font',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Ionicons.happy_outline),
+                    label: 'Emoji',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Ionicons.image_outline),
+                    label: 'Gallery',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Ionicons.color_palette_outline),
+                    label: 'Color',
+                  ),
+                ],
+              );
+            },
+          ),
+        
+      )
+      
     );
   }
 }

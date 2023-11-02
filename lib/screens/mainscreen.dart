@@ -20,21 +20,21 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     int _currentIndex = Provider.of<MainScreenProvider>(context).currentIndex;
+     int currentIndex = Provider.of<MainScreenProvider>(context).currentIndex;
     final bottomNavigationProvider =
         Provider.of<MainScreenProvider>(context);
     double displayWidth = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        body: _mainScreens[_currentIndex],
+        body: _mainScreens[currentIndex],
         bottomNavigationBar: Container(
   height: displayWidth * 0.155,
   decoration: BoxDecoration(
-    color:Color(0xFFFAFAFA),
+    color:const Color(0xFFFAFAFA),
 
     boxShadow: [
       BoxShadow(
-        color: Color(0xFF835DF1).withOpacity(0.1),
+        color: const Color(0xFF835DF1).withOpacity(0.1),
         blurRadius: 38,
         offset: Offset(0, 10),
       ),
@@ -44,7 +44,7 @@ class MainScreen extends StatelessWidget {
   child: Row(
     mainAxisAlignment: MainAxisAlignment.spaceAround, 
     children: List.generate(4, (index) {
-      final isSelected = index == _currentIndex;
+      final isSelected = index == currentIndex;
       return InkWell(
         onTap: () {
          
