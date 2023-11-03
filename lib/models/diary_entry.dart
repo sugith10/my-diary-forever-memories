@@ -13,9 +13,17 @@ class DiaryEntry {
   @HiveField(2)
   String content;
 
+  @HiveField(3)
+  String? imagePath; 
+
+  @HiveField(4) 
+  String? newField;
+
   DiaryEntry({
     required this.date,
     required this.title,
     required this.content,
+    this.imagePath, 
+    this.newField,
   });
 }

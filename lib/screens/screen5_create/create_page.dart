@@ -14,6 +14,7 @@ import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' as foundation;
 
@@ -47,6 +48,20 @@ class _CreatePageState extends State<CreatePage> {
     });
   }
 
+  Future<String?> saveImage(File image) async {
+  try {
+    final appDocDir = await getApplicationDocumentsDirectory();
+    final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+    final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
+    await image.copy(imagePath);
+    return imagePath;
+  } catch (e) {
+    log("Error saving image: $e");
+    return null;
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -65,21 +80,38 @@ class _CreatePageState extends State<CreatePage> {
           Center(
             child: TextButton(
               onPressed: () async {
-                final title = titleController.text;
-                final content = contentController.text;
+  final title = titleController.text;
+  final content = contentController.text;
 
-                if (title.isNotEmpty) {
-                  final entry = DiaryEntry(
-                    date: widget.changer.selectedDate,
-                    title: title,
-                    content: content,
-                  );
-                  await DbFunctions()
-                      .addDiaryEntry(entry)
-                      .then((value) => log("function completed$value"));
-                }
-                Navigator.pop(context);
-              },
+  String? imagePath;
+  if (_image != null) {
+    imagePath = await saveImage(_image!);
+  }
+
+  if (title.isNotEmpty) {
+    final entry = DiaryEntry(
+      date: widget.changer.selectedDate,
+      title: title,
+      content: content,
+      imagePath: imagePath,
+    );
+
+    await DbFunctions().addDiaryEntry(entry).then((value) async {
+      log("Function completed: $value");
+
+      // Print all data in the Hive box
+      var hiveBox = await Hive.openBox<DiaryEntry>('_boxName'); // Change to your box name
+      final allData = hiveBox.values.toList();
+   
+     log(allData.length.toString() );
+      for (var data in allData) {
+        log("Diary Entry: Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");
+      }
+    });
+  }
+  Navigator.pop(context);
+},
+
               child: Text(
                 'Save',
                 style: TextStyle(color: Colors.black, fontSize: 20),

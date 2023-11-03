@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-class MySearchAppBar extends StatefulWidget {
-  @override
-  _MySearchAppBarState createState() => _MySearchAppBarState();
-}
-
-class _MySearchAppBarState extends State<MySearchAppBar> {
+class MySearchAppBar extends StatelessWidget {
   TextEditingController _searchController = TextEditingController();
+   final GlobalKey<FormFieldState<String>> _searchKey = GlobalKey<FormFieldState<String>>();
 
   var currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    
 
     return SafeArea(
       child: Scaffold(
@@ -23,22 +20,43 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Ionicons.chevron_back_outline,
+              icon: const Icon(Ionicons.chevron_back_outline,
                   color: Colors.black, size: 30),
             ),
           ),
           title: TextField(
             controller: _searchController,
-            decoration: InputDecoration(
-              hintText: 'Search...',
+             autofocus: true,
+              decoration: const InputDecoration(
+                hintText: 'Search...',
+                hintStyle: TextStyle(fontSize: 20),
+                border: InputBorder.none,
+              ),
+              cursorColor: Color.fromARGB(115, 95, 95, 95),
+              cursorHeight: 22,
+              style: TextStyle(fontSize: 20),
+              textCapitalization: TextCapitalization.sentences,
+          ),
+          elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 0.1,
+              ),
             ),
           ),
         ),
-        body: Column(
+        ),
+        body: const Column(
           children: [
             Expanded(
               child: Center(
                 child: Text("Your content goes here"),
+          
+
               ),
             ),
           ],

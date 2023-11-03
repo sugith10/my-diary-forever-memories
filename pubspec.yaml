@@ -49,6 +49,8 @@ dependencies:
   flutter_slidable: ^3.0.0
   emoji_picker_flutter: ^1.6.3
   image_picker: ^1.0.4
+  page_transition: ^2.1.0
+  popover: ^0.2.8+2
 
 dev_dependencies:
   flutter_test:

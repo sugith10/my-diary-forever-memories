@@ -3,6 +3,7 @@ import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -93,25 +94,21 @@ class CalendarScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(),
+            const Spacer(),
             InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CreatePage(changer: changer),
-                  ),
-                );
+               Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: CreatePage(changer: changer,)));
+
               },
               child: Container(
                 margin: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   children: [
                     Container(
-                      child: Row(
+                      child: const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(
+                          Text(
                             'Start writing about your day...',
                             style: TextStyle(
                               color: Color.fromARGB(255, 31, 31, 31),
