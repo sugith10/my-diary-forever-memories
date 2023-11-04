@@ -98,11 +98,9 @@ class _CreatePageState extends State<CreatePage> {
 
     await DbFunctions().addDiaryEntry(entry).then((value) async {
       log("Function completed: $value");
-
       // Print all data in the Hive box
       var hiveBox = await Hive.openBox<DiaryEntry>('_boxName'); 
       final allData = hiveBox.values.toList();
-   
      log(allData.length.toString() );
       for (var data in allData) {
         log("Diary Entry: Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");

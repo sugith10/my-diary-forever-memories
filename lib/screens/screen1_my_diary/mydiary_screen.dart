@@ -164,9 +164,10 @@ class DiaryEntryCard extends StatelessWidget {
 
       child: InkWell(
         onTap: () {
-         if (entry.id != null) {
-    deleteDiaryEntry( entry,  context);
-  }
+            Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: DiaryDetailPage(entry: entry)));
+  //        if (entry.id != null) {
+  //   deleteDiaryEntry( entry,  context);
+  // }
         },
         child: Padding(
           padding:  EdgeInsets.fromLTRB(8, 4, 8, 4),
