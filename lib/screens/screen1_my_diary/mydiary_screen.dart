@@ -6,6 +6,7 @@ import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
@@ -18,7 +19,6 @@ class MyDiaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -27,8 +27,11 @@ class MyDiaryScreen extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.push(context, PageTransition(type: PageTransitionType.fade, child: MySearchAppBar()));
-              
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.fade,
+                        child: MySearchAppBar()));
               },
               icon: const Icon(Icons.search, color: Colors.black),
             ),
@@ -37,31 +40,31 @@ class MyDiaryScreen extends StatelessWidget {
               icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
             ),
             IconButton(
-  onPressed: () {
-    showMenu(
-      context: context,
-           position: RelativeRect.fromLTRB(1, 0, 0, 5),
-      items: <PopupMenuEntry>[
-        PopupMenuItem(
-          value: 'item1',
-          child: Text('Newest First'),
-        ),
-        PopupMenuItem(
-          value: 'item2',
-          child: Text('Oldest First'),
-        ),
-      ],
-    ).then((value) {
-      if (value == 'item1') {
-        // Handle item1
-      } else if (value == 'item2') {
-        // Handle item2
-      }
-    });
-  },
-  icon: const Icon(Ionicons.ellipsis_vertical_outline, color: Colors.black),
-),
-
+              onPressed: () {
+                showMenu(
+                  context: context,
+                  position: RelativeRect.fromLTRB(1, 0, 0, 5),
+                  items: <PopupMenuEntry>[
+                    PopupMenuItem(
+                      value: 'item1',
+                      child: Text('Newest First'),
+                    ),
+                    PopupMenuItem(
+                      value: 'item2',
+                      child: Text('Oldest First'),
+                    ),
+                  ],
+                ).then((value) {
+                  if (value == 'item1') {
+                    // Handle item1
+                  } else if (value == 'item2') {
+                    // Handle item2
+                  }
+                });
+              },
+              icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                  color: Colors.black),
+            ),
           ],
           elevation: 0,
           bottom: PreferredSize(
@@ -76,26 +79,31 @@ class MyDiaryScreen extends StatelessWidget {
             ),
           ),
         ),
-        body:  ValueListenableBuilder(
-      valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-      builder: (context, value, child) {
-        return ListView.builder(
-          itemCount: value.length,
-          itemBuilder: (context, index) {
-          final data = value.values.toList()[index];
-          return DiaryEntryCard(data);
-        },);
-      },
-    ),
+        body: ValueListenableBuilder(
+          valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+          builder: (context, value, child) {
+            return ListView.builder(
+              itemCount: value.length,
+              itemBuilder: (context, index) {
+                final data = value.values.toList()[index];
+                return DiaryEntryCard(data);
+              },
+            );
+          },
+        ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             final changer = Provider.of<Changer>(context, listen: false);
+
+            //  Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: CreatePage(changer: changer,)));
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreatePage(changer: changer),
-              ),
-            );
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeftJoined,
+                    child: CreatePage(
+                      changer: changer,
+                    ),
+                    childCurrent: this));
           },
           backgroundColor: Color.fromARGB(255, 150, 186, 222),
           child: const Icon(Icons.create_outlined),
@@ -105,71 +113,118 @@ class MyDiaryScreen extends StatelessWidget {
   }
 }
 
-
-
 class DiaryEntryCard extends StatelessWidget {
   final DiaryEntry entry;
 
-  const DiaryEntryCard(this.entry, {super.key});
+  DiaryEntryCard(this.entry, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-      Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: Diary()));
-      },
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12.0),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: Offset(0, 3),
-              ),
-            ],
+    return Slidable(
+      key: const ValueKey(0),
+
+      // The start action pane is the one at the left or the top side.
+      startActionPane: ActionPane(
+        // A motion is a widget used to control how the pane animates.
+        motion: const ScrollMotion(),
+
+        // A pane can dismiss the Slidable.
+        dismissible: DismissiblePane(onDismissed: () {}),
+
+        // All actions are defined in the children parameter.
+        children: [
+          // A SlidableAction can have an icon and/or a label.
+          SlidableAction(
+            onPressed: doNothing,
+            backgroundColor: Color(0xFF7BC043),
+            foregroundColor: Colors.white,
+            icon: Icons.archive,
+            label: 'Archive',
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                entry.title,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+        ],
+      ),
+
+      // The end action pane is the one at the right or the bottom side.
+      endActionPane:  ActionPane(
+        motion: BehindMotion(),
+
+      dismissible: DismissiblePane(onDismissed: () {}),
+
+        children: [
+          SlidableAction(
+            // An action can be bigger than the others.
+
+            onPressed: doNothing,
+            backgroundColor: Color(0xFFFE4A49),
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+            label: 'Delete',
+          ),
+        ],
+      ),
+
+      child: InkWell(
+        onTap: () {
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.leftToRight, child: Diary()));
+        },
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 3),
                 ),
-              ),
-              SizedBox(height: 8.0),
-              Text(
-                entry.content,
-                style: TextStyle(
-                  fontSize: 16.0,
-                ),
-              ),
-              SizedBox(height: 12.0),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    DateFormat('d MMMM, y').format(entry.date),
-                    style: TextStyle(
-                      fontSize: 14.0,
-                      color: Colors.grey,
-                    ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  entry.title,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
                   ),
-                  // You can add additional icons or buttons here if needed
-                  // For example, an edit button or a delete button
-                ],
-              ),
-            ],
+                ),
+                const SizedBox(height: 8.0),
+                Text(
+                  entry.content,
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                  ),
+                ),
+                const SizedBox(height: 12.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      DateFormat('d MMMM, y').format(entry.date),
+                      style: const TextStyle(
+                        fontSize: 14.0,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    // You can add additional icons or buttons here if needed
+                    // For example, an edit button or a delete button
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
 }
+
+void doNothing(BuildContext context) {}
