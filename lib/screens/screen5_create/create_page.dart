@@ -100,7 +100,7 @@ class _CreatePageState extends State<CreatePage> {
       log("Function completed: $value");
 
       // Print all data in the Hive box
-      var hiveBox = await Hive.openBox<DiaryEntry>('_boxName'); // Change to your box name
+      var hiveBox = await Hive.openBox<DiaryEntry>('_boxName'); 
       final allData = hiveBox.values.toList();
    
      log(allData.length.toString() );
@@ -163,7 +163,7 @@ class _CreatePageState extends State<CreatePage> {
                           );
                         },
                       ),
-                      Icon(
+                      const Icon(
                         Ionicons.caret_down_outline,
                         color: Colors.black,
                       )

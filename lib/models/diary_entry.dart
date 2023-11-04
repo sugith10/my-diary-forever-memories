@@ -4,22 +4,27 @@ part 'diary_entry.g.dart';
 
 @HiveType(typeId: 0)
 class DiaryEntry { 
+
   @HiveField(0)
-  DateTime date;
+  int? id;
 
   @HiveField(1)
-  String title;
+  DateTime date;
 
   @HiveField(2)
-  String content;
+  String title;
 
   @HiveField(3)
+  String content;
+
+  @HiveField(4)
   String? imagePath; 
 
-  @HiveField(4) 
+  @HiveField(5) 
   String? newField;
 
   DiaryEntry({
+    this.id,
     required this.date,
     required this.title,
     required this.content,

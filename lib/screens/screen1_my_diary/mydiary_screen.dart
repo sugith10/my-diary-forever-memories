@@ -19,95 +19,93 @@ class MyDiaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text('My Diary', style: TextStyle(color: Colors.black)),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade,
-                        child: MySearchAppBar()));
-              },
-              icon: const Icon(Icons.search, color: Colors.black),
-            ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
-            ),
-            IconButton(
-              onPressed: () {
-                showMenu(
-                  context: context,
-                  position: RelativeRect.fromLTRB(1, 0, 0, 5),
-                  items: <PopupMenuEntry>[
-                    PopupMenuItem(
-                      value: 'item1',
-                      child: Text('Newest First'),
-                    ),
-                    PopupMenuItem(
-                      value: 'item2',
-                      child: Text('Oldest First'),
-                    ),
-                  ],
-                ).then((value) {
-                  if (value == 'item1') {
-                    // Handle item1
-                  } else if (value == 'item2') {
-                    // Handle item2
-                  }
-                });
-              },
-              icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                  color: Colors.black),
-            ),
-          ],
-          elevation: 0,
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 0.1,
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('My Diary', style: TextStyle(color: Colors.black)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade,
+                      child: MySearchAppBar()));
+            },
+            icon: const Icon(Icons.search, color: Colors.black),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
+          ),
+          IconButton(
+            onPressed: () {
+              showMenu(
+                context: context,
+                position: RelativeRect.fromLTRB(1, 0, 0, 5),
+                items: <PopupMenuEntry>[
+                  PopupMenuItem(
+                    value: 'item1',
+                    child: Text('Newest First'),
+                  ),
+                  PopupMenuItem(
+                    value: 'item2',
+                    child: Text('Oldest First'),
+                  ),
+                ],
+              ).then((value) {
+                if (value == 'item1') {
+                  // Handle item1
+                } else if (value == 'item2') {
+                  // Handle item2
+                }
+              });
+            },
+            icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                color: Colors.black),
+          ),
+        ],
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 0.1,
               ),
             ),
           ),
         ),
-        body: ValueListenableBuilder(
-          valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-          builder: (context, value, child) {
-            return ListView.builder(
-              itemCount: value.length,
-              itemBuilder: (context, index) {
-                final data = value.values.toList()[index];
-                return DiaryEntryCard(data);
-              },
-            );
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            final changer = Provider.of<Changer>(context, listen: false);
+      ),
+      body: ValueListenableBuilder(
+        valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+        builder: (context, value, child) {
+          return ListView.builder(
+            itemCount: value.length,
+            itemBuilder: (context, index) {
+              final data = value.values.toList()[index];
+              return DiaryEntryCard(data);
+            },
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final changer = Provider.of<Changer>(context, listen: false);
 
-            //  Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: CreatePage(changer: changer,)));
-            Navigator.push(
-                context,
-                PageTransition(
-                    type: PageTransitionType.rightToLeftJoined,
-                    child: CreatePage(
-                      changer: changer,
-                    ),
-                    childCurrent: this));
-          },
-          backgroundColor: Color.fromARGB(255, 150, 186, 222),
-          child: const Icon(Icons.create_outlined),
-        ),
+          //  Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: CreatePage(changer: changer,)));
+          Navigator.push(
+              context,
+              PageTransition(
+                  type: PageTransitionType.rightToLeftJoined,
+                  child: CreatePage(
+                    changer: changer,
+                  ),
+                  childCurrent: this));
+        },
+        backgroundColor: Color.fromARGB(255, 150, 186, 222),
+        child: const Icon(Icons.create_outlined),
       ),
     );
   }
@@ -121,7 +119,7 @@ class DiaryEntryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      key: const ValueKey(0),
+      key:  ValueKey(0),
 
       // The start action pane is the one at the left or the top side.
       startActionPane: ActionPane(
@@ -154,7 +152,8 @@ class DiaryEntryCard extends StatelessWidget {
           SlidableAction(
             // An action can be bigger than the others.
 
-            onPressed: doNothing,
+            onPressed:(context) => deleteDiaryEntry(entry, context),
+
             backgroundColor: Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -165,15 +164,14 @@ class DiaryEntryCard extends StatelessWidget {
 
       child: InkWell(
         onTap: () {
-          Navigator.push(
-              context,
-              PageTransition(
-                  type: PageTransitionType.leftToRight, child: Diary()));
+         if (entry.id != null) {
+    deleteDiaryEntry( entry,  context);
+  }
         },
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+          padding:  EdgeInsets.fromLTRB(8, 4, 8, 4),
           child: Container(
-            padding: const EdgeInsets.all(16.0),
+            padding:  EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12.0),
@@ -189,12 +187,22 @@ class DiaryEntryCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  entry.title,
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      entry.title,
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),Spacer(),
+                     InkWell(child: Icon(Icons.delete), onTap: () {
+                        if (entry.id != null) {
+    DbFunctions().deleteDiary(entry.id!); // Pass the entry's id to delete
+  }
+                      
+                     },)
+                  ],
                 ),
                 const SizedBox(height: 8.0),
                 Text(
@@ -228,3 +236,10 @@ class DiaryEntryCard extends StatelessWidget {
 }
 
 void doNothing(BuildContext context) {}
+
+void deleteDiaryEntry(DiaryEntry entry, BuildContext context) async {
+    final dbFunctions = DbFunctions();
+    await dbFunctions.deleteDiary(entry.id!); // Delete from Hive box
+    dbFunctions.diaryEntryNotifier.remove(entry); // Remove from local list
+    diaryEntriesNotifier.notifyListeners(); // Notify listeners
+}

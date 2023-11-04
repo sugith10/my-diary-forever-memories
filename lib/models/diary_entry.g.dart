@@ -17,28 +17,30 @@ class DiaryEntryAdapter extends TypeAdapter<DiaryEntry> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return DiaryEntry(
-      date: fields[0] as DateTime,
-      title: fields[1] as String,
-      content: fields[2] as String,
-      imagePath: fields[3] as String?,
-      newField: fields[4] as String?,
-    );
+      date: fields[1] as DateTime,
+      title: fields[2] as String,
+      content: fields[3] as String,
+      imagePath: fields[4] as String?,
+      newField: fields[5] as String?,
+    )..id = fields[0] as int?;
   }
 
   @override
   void write(BinaryWriter writer, DiaryEntry obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(6)
       ..writeByte(0)
-      ..write(obj.date)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.title)
+      ..write(obj.date)
       ..writeByte(2)
-      ..write(obj.content)
+      ..write(obj.title)
       ..writeByte(3)
-      ..write(obj.imagePath)
+      ..write(obj.content)
       ..writeByte(4)
-      ..write(obj.newField); 
+      ..write(obj.imagePath)
+      ..writeByte(5)
+      ..write(obj.newField);
   }
 
   @override

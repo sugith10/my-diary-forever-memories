@@ -1,29 +1,48 @@
+import 'dart:math';
+
 import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/foundation.dart';
 
-  final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
-      ValueNotifier<List<DiaryEntry>>([]);
+final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
+    ValueNotifier<List<DiaryEntry>>([]);
 
-class DbFunctions{
+class DbFunctions {
   List<DiaryEntry> diaryEntryNotifier = [];
- final box =  Hive.box<DiaryEntry>('_boxName');
-Future  addDiaryEntry(DiaryEntry entry) async{
-  final box =  Hive.box<DiaryEntry>('_boxName');
-  await box.add(entry);
-  diaryEntryNotifier.add(entry);
+  final box = Hive.box<DiaryEntry>('_boxName');
+  Future addDiaryEntry(DiaryEntry entry) async {
+    final box = Hive.box<DiaryEntry>('_boxName');
+    final boxId = await box.add(entry);
+    entry.id = boxId;
+    diaryEntryNotifier.add(entry);
 
- // diaryEntriesNotifier.notifyListeners();
-}
+    // diaryEntriesNotifier.notifyListeners();
+  }
 
-    Future  getAllDiary() async {
-   final box =  Hive.box<DiaryEntry>('_boxName');
+  Future getAllDiary() async {
+    final box = Hive.box<DiaryEntry>('_boxName');
     diaryEntryNotifier.clear();
     diaryEntryNotifier.addAll(box.values);
-   
-   // diaryEntriesNotifier.notifyListeners();
 
+    // diaryEntriesNotifier.notifyListeners();
+  }
+
+  Future<void> deleteDiary(int id) async {
+     final box = Hive.box<DiaryEntry>('_boxName');
+     box.delete(id);
+      print('success');
+  }
+
+  Future<List<DiaryEntry>> searchDiaryEntries(String searchTerm) async {
+  final box = Hive.box<DiaryEntry>('_boxName');
+  final allEntries = box.values.toList();
+  final matchingEntries = allEntries
+      .where((entry) =>
+          entry.title.toLowerCase().contains(searchTerm.toLowerCase()) )
+      .toList();
+  return matchingEntries;
 }
+
 }
 
 

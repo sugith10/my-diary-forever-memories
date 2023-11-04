@@ -7,168 +7,167 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(  
-        // leading: Text('Hi ${'User Name'}', style: TextStyle(color: Colors.black),),
-        actions: [
-          IconButton(
-              onPressed: () {
-                _showPopupDialog(context);
-              },
-              icon: Icon(
-                Icons.power_settings_new_outlined,
-                color: Colors.black,
-              ))
-        ],
+    // leading: Text('Hi ${'User Name'}', style: TextStyle(color: Colors.black),),
+    actions: [
+      IconButton(
+          onPressed: () {
+            _showPopupDialog(context);
+          },
+          icon: Icon(
+            Icons.power_settings_new_outlined,
+            color: Colors.black,
+          ))
+    ],
        
-        elevation: 0,
+    elevation: 0,
       ),
       body: Container(
        
-        child: Column(
-          children: [
-            Spacer(),
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
-              child: const Column(
+    child: Column(
+      children: [
+        Spacer(),
+        Container(
+          margin: EdgeInsets.only(left: 20, right: 20),
+          child: const Column(
+            children: [
+              CircleAvatar(
+                backgroundImage: AssetImage(
+                  'images/profile.png',
+                ),
+                backgroundColor: Color(0xFFF1F5FF),
+                maxRadius: 40,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CircleAvatar(
-                    backgroundImage: AssetImage(
-                      'images/profile.png',
-                    ),
-                    backgroundColor: Color(0xFFF1F5FF),
-                    maxRadius: 40,
+                  Text(
+                    'Name',
+                    style: TextStyle(fontSize: 24),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 5,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Name',
-                        style: TextStyle(fontSize: 24),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        'user email',
-                        style: TextStyle(color: Colors.black26, fontSize: 15),
-                      )
-                    ],
+                  Text(
+                    'user email',
+                    style: TextStyle(color: Colors.black26, fontSize: 15),
                   )
                 ],
+              )
+            ],
+          ),
+        ),
+        Spacer(),
+        Container(
+          margin: EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NotificationPage()));
+                },
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Color(0xFFF1F5FF),
+                      child: Icon(Icons.notifications_none,
+                          color: Colors.black),
+                    ),
+                    SizedBox(
+                      width: 18,
+                    ),
+                    Text(
+                      'Notifications',
+                      style: TextStyle(fontSize: 17),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Spacer(),
-            Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
-              child: Column(
+              SizedBox(
+                height: 50,
+              ),
+              Material(
+                color: Colors
+                    .transparent,
+                child: InkWell(
+                  child: Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Color(0xFFF1F5FF),
+                        child: Icon(Ionicons.color_palette_outline,
+                            color: Colors.black),
+                      ),
+                      SizedBox(
+                        width: 18,
+                      ),
+                      Text('Customization', style: TextStyle(fontSize: 17)),
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
                 children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => NotificationPage()));
-                    },
-                    child: Row(
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: Color(0xFFF1F5FF),
-                          child: Icon(Icons.notifications_none,
-                              color: Colors.black),
-                        ),
-                        SizedBox(
-                          width: 18,
-                        ),
-                        Text(
-                          'Notifications',
-                          style: TextStyle(fontSize: 17),
-                        )
-                      ],
-                    ),
+                  CircleAvatar(
+                    backgroundColor: Color(0xFFF1F5FF),
+                    child: Icon(Icons.backup_outlined, color: Colors.black),
                   ),
                   SizedBox(
-                    height: 50,
+                    width: 18,
                   ),
-                  Material(
-                    color: Colors
-                        .transparent,
-                    child: InkWell(
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Color(0xFFF1F5FF),
-                            child: Icon(Ionicons.color_palette_outline,
-                                color: Colors.black),
-                          ),
-                          SizedBox(
-                            width: 18,
-                          ),
-                          Text('Customization', style: TextStyle(fontSize: 17)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Color(0xFFF1F5FF),
-                        child: Icon(Icons.backup_outlined, color: Colors.black),
-                      ),
-                      SizedBox(
-                        width: 18,
-                      ),
-                      Text('Backup', style: TextStyle(fontSize: 17))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Color(0xFFF1F5FF),
-                        child: Icon(Icons.restore, color: Colors.black),
-                      ),
-                      SizedBox(
-                        width: 18,
-                      ),
-                      Text('Restore', style: TextStyle(fontSize: 17))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Color(0xFFF1F5FF),
-                        child:
-                            Icon(Icons.feedback_outlined, color: Colors.black),
-                      ),
-                      SizedBox(
-                        width: 18,
-                      ),
-                      Text('Feedback', style: TextStyle(fontSize: 17))
-                    ],
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
+                  Text('Backup', style: TextStyle(fontSize: 17))
                 ],
               ),
-            )
-          ],
-        ),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Color(0xFFF1F5FF),
+                    child: Icon(Icons.restore, color: Colors.black),
+                  ),
+                  SizedBox(
+                    width: 18,
+                  ),
+                  Text('Restore', style: TextStyle(fontSize: 17))
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+              Row(
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Color(0xFFF1F5FF),
+                    child:
+                        Icon(Icons.feedback_outlined, color: Colors.black),
+                  ),
+                  SizedBox(
+                    width: 18,
+                  ),
+                  Text('Feedback', style: TextStyle(fontSize: 17))
+                ],
+              ),
+              SizedBox(
+                height: 50,
+              ),
+            ],
+          ),
+        )
+      ],
+    ),
       ),
-    ));
+    );
   }
 }
 
