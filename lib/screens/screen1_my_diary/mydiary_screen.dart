@@ -19,93 +19,95 @@ class MyDiaryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        title: const Text('My Diary', style: TextStyle(color: Colors.black)),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.fade,
-                      child: MySearchAppBar()));
-            },
-            icon: const Icon(Icons.search, color: Colors.black),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
-          ),
-          IconButton(
-            onPressed: () {
-              showMenu(
-                context: context,
-                position: RelativeRect.fromLTRB(1, 0, 0, 5),
-                items: <PopupMenuEntry>[
-                  PopupMenuItem(
-                    value: 'item1',
-                    child: Text('Newest First'),
-                  ),
-                  PopupMenuItem(
-                    value: 'item2',
-                    child: Text('Oldest First'),
-                  ),
-                ],
-              ).then((value) {
-                if (value == 'item1') {
-                  // Handle item1
-                } else if (value == 'item2') {
-                  // Handle item2
-                }
-              });
-            },
-            icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                color: Colors.black),
-          ),
-        ],
-        elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 0, 0, 0),
-                width: 0.1,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text('My Diary', style: TextStyle(color: Colors.black)),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.fade,
+                        child: MySearchAppBar()));
+              },
+              icon: const Icon(Icons.search, color: Colors.black),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
+            ),
+            IconButton(
+              onPressed: () {
+                showMenu(
+                  context: context,
+                  position: RelativeRect.fromLTRB(1, 0, 0, 5),
+                  items: <PopupMenuEntry>[
+                    PopupMenuItem(
+                      value: 'item1',
+                      child: Text('Newest First'),
+                    ),
+                    PopupMenuItem(
+                      value: 'item2',
+                      child: Text('Oldest First'),
+                    ),
+                  ],
+                ).then((value) {
+                  if (value == 'item1') {
+                    // Handle item1
+                  } else if (value == 'item2') {
+                    // Handle item2
+                  }
+                });
+              },
+              icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                  color: Colors.black),
+            ),
+          ],
+          elevation: 0,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 0.1,
+                ),
               ),
             ),
           ),
         ),
-      ),
-      body: ValueListenableBuilder(
-        valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-        builder: (context, value, child) {
-          return ListView.builder(
-            itemCount: value.length,
-            itemBuilder: (context, index) {
-              final data = value.values.toList()[index];
-              return DiaryEntryCard(data);
-            },
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          final changer = Provider.of<Changer>(context, listen: false);
+        body: ValueListenableBuilder(
+          valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+          builder: (context, value, child) {
+            return ListView.builder(
+              itemCount: value.length,
+              itemBuilder: (context, index) {
+                final data = value.values.toList()[index];
+                return DiaryEntryCard(data);
+              },
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            final changer = Provider.of<Changer>(context, listen: false);
 
-          //  Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: CreatePage(changer: changer,)));
-          Navigator.push(
-              context,
-              PageTransition(
-                  type: PageTransitionType.rightToLeftJoined,
-                  child: CreatePage(
-                    changer: changer,
-                  ),
-                  childCurrent: this));
-        },
-        backgroundColor: Color.fromARGB(255, 150, 186, 222),
-        child: const Icon(Icons.create_outlined),
+            //  Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: CreatePage(changer: changer,)));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeftJoined,
+                    child: CreatePage(
+                      changer: changer,
+                    ),
+                    childCurrent: this));
+          },
+          backgroundColor: Color.fromARGB(255, 150, 186, 222),
+          child: const Icon(Icons.create_outlined),
+        ),
       ),
     );
   }
@@ -130,7 +132,7 @@ class DiaryEntryCard extends StatelessWidget {
         dismissible: DismissiblePane(onDismissed: () {}),
 
         // All actions are defined in the children parameter.
-        children: [
+        children: const [
           // A SlidableAction can have an icon and/or a label.
           SlidableAction(
             onPressed: doNothing,
@@ -145,13 +147,10 @@ class DiaryEntryCard extends StatelessWidget {
       // The end action pane is the one at the right or the bottom side.
       endActionPane:  ActionPane(
         motion: BehindMotion(),
-
       dismissible: DismissiblePane(onDismissed: () {}),
-
         children: [
           SlidableAction(
             // An action can be bigger than the others.
-
             onPressed:(context) => deleteDiaryEntry(entry, context),
 
             backgroundColor: Color(0xFFFE4A49),
@@ -164,10 +163,7 @@ class DiaryEntryCard extends StatelessWidget {
 
       child: InkWell(
         onTap: () {
-            Navigator.push(context, PageTransition(type: PageTransitionType.leftToRight, child: DiaryDetailPage(entry: entry)));
-  //        if (entry.id != null) {
-  //   deleteDiaryEntry( entry,  context);
-  // }
+       Navigator.push(context, MaterialPageRoute(builder: (context)=> DiaryDetailPage(entry: entry,)));
         },
         child: Padding(
           padding:  EdgeInsets.fromLTRB(8, 4, 8, 4),
@@ -239,6 +235,7 @@ class DiaryEntryCard extends StatelessWidget {
 void doNothing(BuildContext context) {}
 
 void deleteDiaryEntry(DiaryEntry entry, BuildContext context) async {
+ 
     final dbFunctions = DbFunctions();
     await dbFunctions.deleteDiary(entry.id!); // Delete from Hive box
     dbFunctions.diaryEntryNotifier.remove(entry); // Remove from local list

@@ -1,14 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
-
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
-import 'package:diary/screens/screen5_create/emoji_picker.dart';
 import 'package:diary/screens/screen5_create/provider_create.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
@@ -33,7 +29,14 @@ class _CreatePageState extends State<CreatePage> {
 
   final TextEditingController contentController = TextEditingController();
 
-  bool _showEmoji = false;
+  bool _isEmojiKeyboardVisible = false;
+
+  _onBackspacePressed() {
+    contentController
+      ..text = contentController.text.characters.toString()
+      ..selection = TextSelection.fromPosition(
+          TextPosition(offset: contentController.text.length));
+  }
 
   File? _image;
 
@@ -49,18 +52,17 @@ class _CreatePageState extends State<CreatePage> {
   }
 
   Future<String?> saveImage(File image) async {
-  try {
-    final appDocDir = await getApplicationDocumentsDirectory();
-    final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-    final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
-    await image.copy(imagePath);
-    return imagePath;
-  } catch (e) {
-    log("Error saving image: $e");
-    return null;
+    try {
+      final appDocDir = await getApplicationDocumentsDirectory();
+      final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+      final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
+      await image.copy(imagePath);
+      return imagePath;
+    } catch (e) {
+      log("Error saving image: $e");
+      return null;
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -80,36 +82,35 @@ class _CreatePageState extends State<CreatePage> {
           Center(
             child: TextButton(
               onPressed: () async {
-  final title = titleController.text;
-  final content = contentController.text;
+                final title = titleController.text;
+                final content = contentController.text;
 
-  String? imagePath;
-  if (_image != null) {
-    imagePath = await saveImage(_image!);
-  }
+                String? imagePath;
+                if (_image != null) {
+                  imagePath = await saveImage(_image!);
+                }
 
-  if (title.isNotEmpty) {
-    final entry = DiaryEntry(
-      date: widget.changer.selectedDate,
-      title: title,
-      content: content,
-      imagePath: imagePath,
-    );
+                if (title.isNotEmpty) {
+                  final entry = DiaryEntry(
+                    date: widget.changer.selectedDate,
+                    title: title,
+                    content: content,
+                    imagePath: imagePath,
+                  );
 
-    await DbFunctions().addDiaryEntry(entry).then((value) async {
-      log("Function completed: $value");
-      // Print all data in the Hive box
-      var hiveBox = await Hive.openBox<DiaryEntry>('_boxName'); 
-      final allData = hiveBox.values.toList();
-     log(allData.length.toString() );
-      for (var data in allData) {
-        log("Diary Entry: Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");
-      }
-    });
-  }
-  Navigator.pop(context);
-},
-
+                  await DbFunctions().addDiaryEntry(entry).then((value) async {
+                    log("Function completed: $value");
+                    // Print all data in the Hive box
+                    var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
+                    final allData = hiveBox.values.toList();
+                    log(allData.length.toString());
+                    for (var data in allData) {
+                      log("Diary Entry: Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");
+                    }
+                  });
+                }
+                Navigator.pop(context);
+              },
               child: Text(
                 'Save',
                 style: TextStyle(color: Colors.black, fontSize: 20),
@@ -173,52 +174,94 @@ class _CreatePageState extends State<CreatePage> {
             ),
             TextField(
               controller: titleController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: ' Title',
                 hintStyle: TextStyle(fontSize: 28),
                 border: InputBorder.none,
               ),
               cursorColor: Colors.green[900],
               cursorHeight: 28,
-              style: TextStyle(fontSize: 28),
+              style: const TextStyle(fontSize: 28),
               textCapitalization: TextCapitalization.sentences,
             ),
-
             Container(
-  child: _image != null ? ClipRRect(
-    borderRadius: BorderRadius.circular(10), // Adjust the border radius as needed
-    child: Image.file(
-      _image!,
-      height: 200, // Adjust the height as needed
-    ),
-  ) : Container(), // Placeholder or empty container if _image is null
-)
-,
-            TextField(
-              controller: contentController,
-              decoration: const InputDecoration(
-                hintText: '  Start typing here',
-                hintStyle: TextStyle(fontSize: 18),
-                border: InputBorder.none,
-              ),
-              cursorColor: Colors.red[900],
-              cursorHeight: 18,
-              style: TextStyle(fontSize: 18),
-              textCapitalization: TextCapitalization.sentences,
+              child: _image != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                          10), // Adjust the border radius as needed
+                      child: Image.file(
+                        _image!,
+                        height: 200, // Adjust the height as needed
+                      ),
+                    )
+                  : Container(), // Placeholder or empty container if _image is null
             ),
-            //             SizedBox(
-            //               height: 100,
-            //               child: EmojiPicker(
-            //                 textEditingController: contentController,
-            //                 onEmojiSelected: (emoji) {
-            //   // Handle the selected emoji (e.g., add it to the text field)
-            //   contentController.text += emoji.emoji;
-            // },
-            //                 config: Config(
-            //                   columns: 7,
-            //                   emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
-            //                 )),
-            //             )
+            Expanded(
+              child: TextField(
+                maxLines: null,
+                minLines: null,
+                expands: true,
+                controller: contentController,
+                decoration: const InputDecoration(
+                  hintText: '  Start typing here',
+                  hintStyle: TextStyle(fontSize: 18),
+                  border: InputBorder.none,
+                ),
+                cursorColor: Colors.red[900],
+                cursorHeight: 18,
+                style: TextStyle(fontSize: 18),
+                textCapitalization: TextCapitalization.sentences,
+              ),
+            ),
+            Offstage(
+              offstage: !_isEmojiKeyboardVisible,
+              child: SizedBox(
+                height: 250,
+                width: double.infinity,
+                child: EmojiPicker(
+                  textEditingController: contentController,
+                  onBackspacePressed: _onBackspacePressed,
+                  onEmojiSelected: (Category? category, Emoji? emoji) {
+                    if (emoji != null) {
+                      // Handle the selected emoji (e.g., add it to the text field)
+                      contentController.text += emoji.emoji;
+                    }
+                  },
+                  config: Config(
+                    columns: 8,
+                    emojiSizeMax: 32 *
+                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
+                            ? 1.30
+                            : 1.0),
+                    verticalSpacing: 0,
+                    horizontalSpacing: 0,
+                    gridPadding: EdgeInsets.zero,
+                    initCategory: Category.RECENT,
+                    bgColor: const Color(0xFFF2F2F2),
+                    indicatorColor: Colors.blue,
+                    iconColor: Colors.grey,
+                    iconColorSelected: Colors.blue,
+                    backspaceColor: Colors.blue,
+                    skinToneDialogBgColor: Colors.white,
+                    skinToneIndicatorColor: Colors.grey,
+                    enableSkinTones: true,
+                    recentTabBehavior: RecentTabBehavior.RECENT,
+                    recentsLimit: 28,
+                    replaceEmojiOnLimitExceed: false,
+                    noRecents: const Text(
+                      'No Recents',
+                      style: TextStyle(fontSize: 20, color: Colors.black26),
+                      textAlign: TextAlign.center,
+                    ),
+                    loadingIndicator: const SizedBox.shrink(),
+                    tabIndicatorAnimDuration: kTabScrollDuration,
+                    categoryIcons: const CategoryIcons(),
+                    buttonMode: ButtonMode.MATERIAL,
+                    checkPlatformCompatibility: true,
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
@@ -234,13 +277,12 @@ class _CreatePageState extends State<CreatePage> {
               // Update the selected index using the provider
               switch (index) {
                 case 0:
-                  //Font
-                  Navigator.pop(context);
                   break;
                 case 1:
                   //Emoji
                   //  openEmojiPicker(context);
-                  _showEmoji = !_showEmoji;
+                  toggleEmojiKeyboard();
+                  print(_isEmojiKeyboardVisible);
                   break;
                 case 2:
                   //Gallery
@@ -248,7 +290,6 @@ class _CreatePageState extends State<CreatePage> {
                   break;
                 case 3:
                   //Color
-                  Navigator.pop(context);
                   break;
               }
               bottomNavigationProvider.setSelectedIndex(index);
@@ -278,20 +319,10 @@ class _CreatePageState extends State<CreatePage> {
       ),
     ));
   }
-}
 
-// void openEmojiPicker(BuildContext context) {
-//   showDialog(
-//     context: context,
-//     builder: (BuildContext context) {
-//       return EmojiPicker(
-//         onEmojiSelected: (Emoji emoji) {
-//           // Handle the selected emoji (e.g., append it to the text)
-//           final selectedEmoji = emoji.emoji;
-//           // You can use the selected emoji as needed
-//           Navigator.pop(context); // Close the emoji picker dialog
-//         },
-//       );
-//     },
-//   );
-// }
+  void toggleEmojiKeyboard() {
+    setState(() {
+      _isEmojiKeyboardVisible = !_isEmojiKeyboardVisible;
+    });
+  }
+}
