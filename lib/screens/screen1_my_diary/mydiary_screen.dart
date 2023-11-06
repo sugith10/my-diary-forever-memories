@@ -1,6 +1,5 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/screens/provider_mainscreen.dart';
 import 'package:diary/screens/screen1_my_diary/diary.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
@@ -11,7 +10,6 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:popover/popover.dart';
 import 'package:provider/provider.dart';
 
 class MyDiaryScreen extends StatelessWidget {
@@ -45,7 +43,7 @@ class MyDiaryScreen extends StatelessWidget {
                   context: context,
                   position: RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 'item1',
                       child: Text('Newest First'),
                     ),
@@ -95,7 +93,7 @@ class MyDiaryScreen extends StatelessWidget {
           onPressed: () {
             final changer = Provider.of<Changer>(context, listen: false);
 
-            //  Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: CreatePage(changer: changer,)));
+           
             Navigator.push(
                 context,
                 PageTransition(

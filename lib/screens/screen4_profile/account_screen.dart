@@ -1,171 +1,234 @@
-import 'package:diary/screens/screen4_profile/notifications.dart';
+import 'package:diary/screens/screen4_profile/item_1_notifications.dart';
+import 'package:diary/screens/screen4_profile/item_2_customization.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:sizer/sizer.dart';
+import 'package:intl/intl.dart';
+
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
+   AccountScreen({super.key});
+
+   String getCurrentTime() {
+  var now = DateTime.now();
+  var formatter = DateFormat('hh:mm a');
+  return formatter.format(now);
+}
+
+  List<String> greeting = ['Good morning', 'Good afternoon', 'How was your day?'];
+  
+
 
   @override
   Widget build(BuildContext context) {
+    String greetingTitle = '';
+switch (getCurrentTime()) {
+  case '00:00 - 11:59 AM':
+    greetingTitle = greeting[0];
+    break;
+  case '12:00 - 05:59 PM':
+    greetingTitle = greeting[1];
+    break;
+  default:
+    greetingTitle = greeting[2];
+}
     return Scaffold(
-      appBar: AppBar(  
-    // leading: Text('Hi ${'User Name'}', style: TextStyle(color: Colors.black),),
-    actions: [
-      IconButton(
-          onPressed: () {
-            _showPopupDialog(context);
-          },
-          icon: Icon(
-            Icons.power_settings_new_outlined,
-            color: Colors.black,
-          ))
-    ],
-       
-    elevation: 0,
-      ),
-      body: Container(
-       
-    child: Column(
-      children: [
-        Spacer(),
-        Container(
-          margin: EdgeInsets.only(left: 20, right: 20),
-          child: const Column(
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage(
-                  'images/profile.png',
-                ),
-                backgroundColor: Color(0xFFF1F5FF),
-                maxRadius: 40,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+          title: Text(greetingTitle, style: TextStyle(color: Colors.black)),
+        actions: [
+          IconButton(
+              onPressed: () {
+                _showPopupDialog(context);
+              },
+              icon: const Icon(
+                Icons.power_settings_new_outlined,
+                color: Color.fromARGB(255, 197, 60, 50),
+              ))
+        ],
+
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 0.1,
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Name',
-                    style: TextStyle(fontSize: 24),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'user email',
-                    style: TextStyle(color: Colors.black26, fontSize: 15),
-                  )
-                ],
-              )
-            ],
+            ),
           ),
         ),
-        Spacer(),
-        Container(
-          margin: EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => NotificationPage()));
-                },
-                child: Row(
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Color(0xFFF1F5FF),
-                      child: Icon(Icons.notifications_none,
-                          color: Colors.black),
-                    ),
-                    SizedBox(
-                      width: 18,
-                    ),
-                    Text(
-                      'Notifications',
-                      style: TextStyle(fontSize: 17),
-                    )
-                  ],
+      ),
+
+      //bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+      body: Column(
+        children: [
+          Container(
+            margin: const EdgeInsets.only(left: 20, right: 20),
+            height: 30.h,
+            width: 100.w,
+            // color: Colors.amber,
+            child: const Column(
+              children: [
+                Spacer(),
+                CircleAvatar(
+                  backgroundImage: AssetImage(
+                    'images/profile.png',
+                  ),
+                  backgroundColor: Color(0xFFF1F5FF),
+                  maxRadius: 40,
                 ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Material(
-                color: Colors
-                    .transparent,
-                child: InkWell(
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Color(0xFFF1F5FF),
-                        child: Icon(Ionicons.color_palette_outline,
-                            color: Colors.black),
-                      ),
-                      SizedBox(
-                        width: 18,
-                      ),
-                      Text('Customization', style: TextStyle(fontSize: 17)),
-                    ],
-                  ),
+                SizedBox(
+                  height: 10,
                 ),
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Color(0xFFF1F5FF),
-                    child: Icon(Icons.backup_outlined, color: Colors.black),
-                  ),
-                  SizedBox(
-                    width: 18,
-                  ),
-                  Text('Backup', style: TextStyle(fontSize: 17))
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Color(0xFFF1F5FF),
-                    child: Icon(Icons.restore, color: Colors.black),
-                  ),
-                  SizedBox(
-                    width: 18,
-                  ),
-                  Text('Restore', style: TextStyle(fontSize: 17))
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Color(0xFFF1F5FF),
-                    child:
-                        Icon(Icons.feedback_outlined, color: Colors.black),
-                  ),
-                  SizedBox(
-                    width: 18,
-                  ),
-                  Text('Feedback', style: TextStyle(fontSize: 17))
-                ],
-              ),
-              SizedBox(
-                height: 50,
-              ),
-            ],
+                Text(
+                  'Name',
+                  style: TextStyle(fontSize: 24),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'user email',
+                  style: TextStyle(color: Colors.black26, fontSize: 15),
+                ),
+                Spacer(),
+              ],
+            ),
           ),
-        )
-      ],
-    ),
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                children: [
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.rightToLeftJoined,
+                              child:  NotificationPage(),
+                              childCurrent: this));
+                    },
+                    child: const Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Color(0xFFF1F5FF),
+                          child: Icon(Icons.notifications_none,
+                              color: Colors.black),
+                        ),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        Text(
+                          'Notifications',
+                          style: TextStyle(fontSize: 17),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
+                   InkWell(
+                  onTap: ()=> Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.rightToLeftJoined,
+                              child:  CustomizationPage(),
+                              childCurrent: this)),  
+                    child: const Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Color(0xFFF1F5FF),
+                          child: Icon(Ionicons.color_palette_outline,
+                              color: Colors.black),
+                        ),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        Text('Customization', style: TextStyle(fontSize: 17)),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
+                  const InkWell(
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Color(0xFFF1F5FF),
+                          child:
+                              Icon(Icons.backup_outlined, color: Colors.black),
+                        ),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        Text('Backup', style: TextStyle(fontSize: 17))
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
+                  const InkWell(
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Color(0xFFF1F5FF),
+                          child: Icon(Icons.restore, color: Colors.black),
+                        ),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        Text('Restore', style: TextStyle(fontSize: 17))
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
+                  Divider(),
+                  SizedBox(
+                    height: 1.2.h,
+                  ),
+                  const InkWell(
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundColor: Color(0xFFF1F5FF),
+                          child: Icon(Icons.feedback_outlined,
+                              color: Colors.black),
+                        ),
+                        SizedBox(
+                          width: 18,
+                        ),
+                        Text('Feedback', style: TextStyle(fontSize: 17))
+                      ],
+                    ),
+                  ),
+                  Spacer()
+                ],
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

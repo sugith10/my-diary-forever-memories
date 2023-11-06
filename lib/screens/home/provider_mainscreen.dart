@@ -1,7 +1,7 @@
 import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import '../db/hive_operations.dart';
+
 
 class MainScreenProvider with ChangeNotifier {
    int _currentIndex = 0;

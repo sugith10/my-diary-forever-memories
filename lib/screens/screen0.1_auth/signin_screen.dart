@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:diary/screens/mainscreen.dart';
+import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/screen0.1_auth/login_screen.dart';
 import 'package:diary/screens/screen0.1_auth/welcome_screen.dart';
 import 'package:flutter/material.dart';
@@ -39,192 +39,190 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Column(
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Container(
-                  height: 100.h,
-                  decoration: BoxDecoration(color: Colors.white),
-                  padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      FadeInDown(
-                        delay: const Duration(milliseconds: 900),
-                        duration: const Duration(milliseconds: 1000),
-                        child: IconButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=> WelcomePage()));
-                          },
-                          icon: Icon(
-                            IconlyBroken.arrow_left,
-                            size: 3.6.h,
-                          ),
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Container(
+                height: 100.h,
+                decoration: BoxDecoration(color: Colors.white),
+                padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    FadeInDown(
+                      delay: const Duration(milliseconds: 900),
+                      duration: const Duration(milliseconds: 1000),
+                      child: IconButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> WelcomePage()));
+                        },
+                        icon: Icon(
+                          IconlyBroken.arrow_left,
+                          size: 3.6.h,
                         ),
                       ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            FadeInDown(
-                              delay: const Duration(milliseconds: 800),
-                              duration: const Duration(milliseconds: 900),
-                              child: Text(
-                                'Welcome to the club!',
-                                style: TextStyle(
-                                  fontSize: 25.sp,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            FadeInDown(
-                              delay: const Duration(milliseconds: 700),
-                              duration: const Duration(milliseconds: 800),
-                              child: Text(
-                                'Excited to have you as',
-                                style: TextStyle(
-                                  fontSize: 25.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                            FadeInDown(
-                              delay: const Duration(milliseconds: 600),
-                              duration: const Duration(milliseconds: 700),
-                              child: Text(
-                                'Part of our community...',
-                                style: TextStyle(
-                                  fontSize: 25.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      // Row(
-                      //   children: [
-                      //      InputField(
-                      //   labelText: 'Email',
-                      //   focusNode: focusNodeEmail,
-                      //   isFocused: isFocusedEmail,
-                      //   controller: emailController,
-                      // ),
-                      
-                      //   ],
-                      // ),
-                      InputField(
-                        labelText: 'Email',
-                        focusNode: focusNodeEmail,
-                        isFocused: isFocusedEmail,
-                        controller: emailController,
-                      ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      InputField(
-                        labelText: 'Password',
-                        focusNode: focusNodePassword,
-                        isFocused: isFocusedPassword,
-                        controller: passwordController,
-                      ),
-                      const Expanded(
-                        child: SizedBox(
-                          height: 10,
-                        ),
-                      ),
-                      FadeInUp(
-                        delay: const Duration(milliseconds: 600),
-                        duration: const Duration(milliseconds: 700),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> MainScreen()));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  elevation: 0,
-                                  textStyle: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'Satoshi',
-                                  ),
-                                  backgroundColor: Color(0xFF835DF1),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  padding: EdgeInsets.symmetric(vertical: 16),
-                                ),
-                                child: FadeInUp(
-                                  delay: const Duration(milliseconds: 700),
-                                  duration: const Duration(milliseconds: 800),
-                                  child: Text('Sign Up'),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                       FadeInUp(
-                      delay: const Duration(milliseconds: 800),
-                      duration: const Duration(milliseconds: 900),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Have an account?',
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                          FadeInDown(
+                            delay: const Duration(milliseconds: 800),
+                            duration: const Duration(milliseconds: 900),
+                            child: Text(
+                              'Welcome to the club!',
+                              style: TextStyle(
+                                fontSize: 25.sp,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
-                          TextButton(
-                              onPressed: () {
-                                 Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
-                              },
-                              child: const Text(
-                                'Login',
-                                style: TextStyle(
-                                  color: Color(0xFF835DF1),
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          FadeInDown(
+                            delay: const Duration(milliseconds: 700),
+                            duration: const Duration(milliseconds: 800),
+                            child: Text(
+                              'Excited to have you as',
+                              style: TextStyle(
+                                fontSize: 25.sp,
+                                fontWeight: FontWeight.w400,
                               ),
-                              
+                            ),
+                          ),
+                          FadeInDown(
+                            delay: const Duration(milliseconds: 600),
+                            duration: const Duration(milliseconds: 700),
+                            child: Text(
+                              'Part of our community...',
+                              style: TextStyle(
+                                fontSize: 25.sp,
+                                fontWeight: FontWeight.w400,
                               ),
-                             
+                            ),
+                          ),
                         ],
                       ),
                     ),
-                      SizedBox(
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    // Row(
+                    //   children: [
+                    //      InputField(
+                    //   labelText: 'Email',
+                    //   focusNode: focusNodeEmail,
+                    //   isFocused: isFocusedEmail,
+                    //   controller: emailController,
+                    // ),
+                    
+                    //   ],
+                    // ),
+                    InputField(
+                      labelText: 'Email',
+                      focusNode: focusNodeEmail,
+                      isFocused: isFocusedEmail,
+                      controller: emailController,
+                    ),
+                    SizedBox(
+                      height: 2.h,
+                    ),
+                    InputField(
+                      labelText: 'Password',
+                      focusNode: focusNodePassword,
+                      isFocused: isFocusedPassword,
+                      controller: passwordController,
+                    ),
+                    const Expanded(
+                      child: SizedBox(
                         height: 10,
                       ),
-                    ],
+                    ),
+                    FadeInUp(
+                      delay: const Duration(milliseconds: 600),
+                      duration: const Duration(milliseconds: 700),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context)=> MainScreen()));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                textStyle: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: 'Satoshi',
+                                ),
+                                backgroundColor: Color(0xFF835DF1),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                padding: EdgeInsets.symmetric(vertical: 16),
+                              ),
+                              child: FadeInUp(
+                                delay: const Duration(milliseconds: 700),
+                                duration: const Duration(milliseconds: 800),
+                                child: Text('Sign Up'),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                     FadeInUp(
+                    delay: const Duration(milliseconds: 800),
+                    duration: const Duration(milliseconds: 900),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text(
+                          'Have an account?',
+                          style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        TextButton(
+                            onPressed: () {
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                            },
+                            child: const Text(
+                              'Login',
+                              style: TextStyle(
+                                color: Color(0xFF835DF1),
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            
+                            ),
+                           
+                      ],
+                    ),
                   ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

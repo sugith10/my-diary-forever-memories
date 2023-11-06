@@ -1,6 +1,7 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/screens/provider_mainscreen.dart';
+import 'package:diary/screens/home/provider_mainscreen.dart';
+
 import 'package:diary/screens/screen0.1_auth/provider_auth.dart';
 import 'package:diary/screens/screen0_welcome/onboarding.dart';
 import 'package:diary/screens/screen0_welcome/provider_onboarding.dart';

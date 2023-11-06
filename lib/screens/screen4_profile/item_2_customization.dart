@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
-class NotificationPage extends StatelessWidget {
+class CustomizationPage extends StatelessWidget {
+  const CustomizationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     
@@ -12,15 +14,26 @@ class NotificationPage extends StatelessWidget {
           leading: IconButton(onPressed: (){
             Navigator.pop(context);
           },
-          icon: Icon( Ionicons.chevron_back_outline,
+          icon: const Icon( Ionicons.chevron_back_outline,
               color: Colors.black, size: 30),),
          
-          title: Text(
-            'Notification Page',
+          title: const Text(
+            'Cutomization',
             style: TextStyle(color: Colors.black),
           ),
           elevation: 0,
           centerTitle: true,
+           bottom: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                  width: 0.1,
+                ),
+              ),
+            ),
+          ),
         ),
        
       ),

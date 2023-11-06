@@ -52,6 +52,7 @@ dependencies:
   page_transition: ^2.1.0
   popover: ^0.2.8+2
   flutter_keyboard_visibility: ^5.4.1
+  numberpicker: ^2.1.2
 
 dev_dependencies:
   flutter_test:

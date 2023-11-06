@@ -10,10 +10,9 @@ class Splash extends StatelessWidget {
       Navigator.pushReplacementNamed(context, '/onboarding');
     });
 
-    return SafeArea(
-        child: Scaffold(
-            backgroundColor: Colors.white,
-            body: Center(
-                child: Image(image: AssetImage('images/first-img.png')))));
+    return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+            child: Image(image: AssetImage('images/first-img.png'))));
   }
 }

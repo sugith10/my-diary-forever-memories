@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:ionicons/ionicons.dart';
 
 class DiaryDetailPage extends StatelessWidget {
   final DiaryEntry entry;
@@ -13,17 +14,37 @@ class DiaryDetailPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0, // Remove app bar shadow
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: Icon(Icons.arrow_back, color: Colors.blue), // Twitter blue color
+        leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(Ionicons.chevron_back_outline,
+                  color: Colors.black, size: 30),
+            ),
+          ),
+          actions: [
+           
+           IconButton(onPressed: (){},  icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                  color: Colors.black),)
+          ],
+          bottom: PreferredSize(
+      preferredSize: Size.fromHeight(0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: Color.fromARGB(255, 0, 0, 0),
+            width: 0.1,
+          ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+    ),
+
+      ),
+      body: ListView(
+        children: 
+           [
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
@@ -55,8 +76,7 @@ class DiaryDetailPage extends StatelessWidget {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
+    floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           if (entry.id != null) {
             DbFunctions().deleteDiary(entry.id!);
@@ -69,7 +89,10 @@ class DiaryDetailPage extends StatelessWidget {
           'Delete',
           style: TextStyle(color: Colors.white),
         ),
-      ),
-    );
+      )
+    
+      );
+      
+    
   }
 }
