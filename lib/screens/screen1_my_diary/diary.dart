@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 
 class DiaryDetailPage extends StatelessWidget {
@@ -8,12 +11,29 @@ class DiaryDetailPage extends StatelessWidget {
 
   DiaryDetailPage({required this.entry, Key? key}) : super(key: key);
 
+   void _showOriginalImage(BuildContext context) {
+    if (entry.imagePath != null) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Image.file(
+              File(entry.imagePath!),
+              fit: BoxFit.contain,
+            ),
+          );
+        },
+      );
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0, // Remove app bar shadow
+        elevation: 0, 
         leading: Padding(
             padding: const EdgeInsets.all(8.0),
             child: IconButton(
@@ -47,24 +67,46 @@ class DiaryDetailPage extends StatelessWidget {
            [
             Padding(
               padding: const EdgeInsets.all(16),
-              child: Text(
-                entry.title,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+              child: Row(
+                children: [
+                  Text(
+                    entry.title,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Spacer(),
+                       Text(
+                        DateFormat('d MMMM,y').format(entry.date),
+              
+              style: const TextStyle(
+                fontSize: 16,
+                color: Colors.grey, 
+              ),
+            ),
+                ],
+              ),
+            ),
+             if (entry.imagePath != null)
+            GestureDetector(
+               onTap: () {
+                _showOriginalImage(context);
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: ClipRRect(
+                   borderRadius: BorderRadius.circular(
+                        10), 
+                  child: Image.file(
+                    File(entry.imagePath!), 
+                    fit: BoxFit.cover,
+                    height: 500, 
+                  ),
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                entry.date.toString(),
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.grey, // Twitter gray color
-                ),
-              ),
-            ),
+           
             Padding(
               padding: const EdgeInsets.all(16),
               child: Text(
@@ -81,11 +123,11 @@ class DiaryDetailPage extends StatelessWidget {
           if (entry.id != null) {
             DbFunctions().deleteDiary(entry.id!);
           }
-          Navigator.pop(context);
+          // Navigator.pop(context);
         },
         backgroundColor: Colors.red, // Twitter red color
         icon: Icon(Icons.delete, color: Colors.white),
-        label: Text(
+        label: const Text(
           'Delete',
           style: TextStyle(color: Colors.white),
         ),

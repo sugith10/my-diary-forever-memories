@@ -1,5 +1,3 @@
-
-
 import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/foundation.dart';
@@ -27,10 +25,14 @@ class DbFunctions {
   }
 
   Future<void> deleteDiary(int id) async {
-     final box = Hive.box<DiaryEntry>('_boxName');
-     print('del success');
-     box.delete(id);
-     
+  final box = Hive.box<DiaryEntry>('_boxName');
+  if (box.containsKey(id)) {
+    box.delete(id);
+    print('Deleted entry with ID: $id');
+  } else {
+    print('Entry with ID $id not found');
   }
+}
+
 
 }

@@ -1,6 +1,7 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen1_my_diary/diary.dart';
+import 'package:diary/screens/screen1_my_diary/watchlist.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
@@ -34,7 +35,13 @@ class MyDiaryScreen extends StatelessWidget {
               icon: const Icon(Icons.search, color: Colors.black),
             ),
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                 Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.fade,
+                        child: WatchList()));
+              },
               icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
             ),
             IconButton(
@@ -47,7 +54,7 @@ class MyDiaryScreen extends StatelessWidget {
                       value: 'item1',
                       child: Text('Newest First'),
                     ),
-                    PopupMenuItem(
+                    const PopupMenuItem(
                       value: 'item2',
                       child: Text('Oldest First'),
                     ),
@@ -77,17 +84,22 @@ class MyDiaryScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: ValueListenableBuilder(
-          valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-          builder: (context, value, child) {
-            return ListView.builder(
-              itemCount: value.length,
-              itemBuilder: (context, index) {
-                final data = value.values.toList()[index];
-                return DiaryEntryCard(data);
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: ValueListenableBuilder(
+              valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+              builder: (context, value, child) {
+                return ListView.builder(
+                  itemCount: value.length,
+                  itemBuilder: (context, index) {
+                    final data = value.values.toList()[index];
+                    return DiaryEntryCard(data, index);
+                  },
+                );
               },
-            );
-          },
+            ),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -103,8 +115,9 @@ class MyDiaryScreen extends StatelessWidget {
                     ),
                     childCurrent: this));
           },
-          backgroundColor: Color.fromARGB(255, 150, 186, 222),
-          child: const Icon(Icons.create_outlined),
+          backgroundColor: Color.fromARGB(255, 255, 254, 254),
+          child: customIcon(),
+          elevation: 3,
         ),
       ),
     );
@@ -113,8 +126,9 @@ class MyDiaryScreen extends StatelessWidget {
 
 class DiaryEntryCard extends StatelessWidget {
   final DiaryEntry entry;
+  final int index;
 
-  DiaryEntryCard(this.entry, {super.key});
+  DiaryEntryCard(this.entry,this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +163,7 @@ class DiaryEntryCard extends StatelessWidget {
         children: [
           SlidableAction(
             // An action can be bigger than the others.
-            onPressed:(context) => deleteDiaryEntry(entry, context),
+            onPressed:(context) => deleteDiaryEntry(entry),
 
             backgroundColor: Color(0xFFFE4A49),
             foregroundColor: Colors.white,
@@ -161,10 +175,11 @@ class DiaryEntryCard extends StatelessWidget {
 
       child: InkWell(
         onTap: () {
-       Navigator.push(context, MaterialPageRoute(builder: (context)=> DiaryDetailPage(entry: entry,)));
+      //  Navigator.push(context, MaterialPageRoute(builder: (context)=> DiaryDetailPage(entry: entry,)));
+        Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: DiaryDetailPage(entry: entry,)));
         },
         child: Padding(
-          padding:  EdgeInsets.fromLTRB(8, 4, 8, 4),
+          padding:  EdgeInsets.fromLTRB(0, 4, 0, 4),
           child: Container(
             padding:  EdgeInsets.all(16.0),
             decoration: BoxDecoration(
@@ -192,10 +207,7 @@ class DiaryEntryCard extends StatelessWidget {
                       ),
                     ),Spacer(),
                      InkWell(child: Icon(Icons.delete), onTap: () {
-                        if (entry.id != null) {
-    DbFunctions().deleteDiary(entry.id!); // Pass the entry's id to delete
-  }
-                      
+                        print(entry.id);
                      },)
                   ],
                 ),
@@ -217,8 +229,7 @@ class DiaryEntryCard extends StatelessWidget {
                         color: Colors.grey,
                       ),
                     ),
-                    // You can add additional icons or buttons here if needed
-                    // For example, an edit button or a delete button
+                  
                   ],
                 ),
               ],
@@ -232,10 +243,18 @@ class DiaryEntryCard extends StatelessWidget {
 
 void doNothing(BuildContext context) {}
 
-void deleteDiaryEntry(DiaryEntry entry, BuildContext context) async {
- 
-    final dbFunctions = DbFunctions();
-    await dbFunctions.deleteDiary(entry.id!); // Delete from Hive box
-    dbFunctions.diaryEntryNotifier.remove(entry); // Remove from local list
-    diaryEntriesNotifier.notifyListeners(); // Notify listeners
+void deleteDiaryEntry(DiaryEntry entry) async {
+ final box = Hive.box<DiaryEntry>('_boxName');
+  if (entry.id != null) {
+    await box.delete(entry.id!);
+    print('Entry deleted successfully');
+  }
+}
+
+Widget customIcon() {
+  return Image.asset(
+    'images/start_writing.png',
+    width: 40,
+    height: 40,
+  );
 }

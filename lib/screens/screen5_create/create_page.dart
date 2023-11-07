@@ -13,10 +13,11 @@ import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' as foundation;
+import 'package:sizer/sizer.dart';
 
 class CreatePage extends StatefulWidget {
-  // late  DateTime selectedDate;
-  final Changer changer; // Inject Changer here
+ 
+  final Changer changer; 
 
   CreatePage({Key? key, required this.changer}) : super(key: key);
 
@@ -99,14 +100,16 @@ class _CreatePageState extends State<CreatePage> {
 
               await DbFunctions().addDiaryEntry(entry).then((value) async {
                 log("Function completed: $value");
-                // Print all data in the Hive box
+               
                 var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
                 final allData = hiveBox.values.toList();
                 log(allData.length.toString());
                 for (var data in allData) {
-                  log("Diary Entry: Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");
+                  log("Diary Entry: key=${data.id} Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");
                 }
-              });
+              }).catchError((error) {
+  log("Error adding DiaryEntry: $error");
+});
             }
             Navigator.pop(context);
           },
@@ -131,85 +134,94 @@ class _CreatePageState extends State<CreatePage> {
     ),
       ),
       body: Container(
-    margin: EdgeInsets.only(left: 20, right: 20),
+    
     child: Column(
       children: [
-        SizedBox(height: 15),
-        Row(
-          children: [
-            TextButton(
-              onPressed: () async {
-                final pickedDate = await showDatePicker(
-                  context: context,
-                  initialDate: widget.changer.selectedDate,
-                  firstDate: DateTime(2023),
-                  lastDate: DateTime(2029),
-                );
-                if (pickedDate != null) {
-                  widget.changer.selectDate(pickedDate);
-                  print(widget.changer.selectedDate);
-                  var selectedate = widget.changer.selectedDate;
-                }
-              },
-              child: Row(
-                children: [
-                  Consumer<Changer>(
-                    builder: (context, changer, child) {
-                      return Text(
-                        DateFormat('d MMMM,y').format(changer.selectedDate),
-                        style: TextStyle(color: Colors.black),
-                      );
-                    },
-                  ),
-                  const Icon(
-                    Ionicons.caret_down_outline,
-                    color: Colors.black,
-                  )
-                ],
+        SizedBox(height: 2.h),
+        Padding(
+         padding: EdgeInsets.fromLTRB(10,0,10,0),
+          child: Row(
+            children: [
+              TextButton(
+                onPressed: () async {
+                  final pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: widget.changer.selectedDate,
+                    firstDate: DateTime(2023),
+                    lastDate: DateTime(2029),
+                  );
+                  if (pickedDate != null) {
+                    widget.changer.selectDate(pickedDate);
+                    print(widget.changer.selectedDate);
+                    var selectedate = widget.changer.selectedDate;
+                  }
+                },
+                child: Row(
+                  children: [
+                    Consumer<Changer>(
+                      builder: (context, changer, child) {
+                        return Text(
+                          DateFormat('d MMMM,y').format(changer.selectedDate),
+                          style: TextStyle(color: Colors.black),
+                        );
+                      },
+                    ),
+                    const Icon(
+                      Ionicons.caret_down_outline,
+                      color: Colors.black,
+                    )
+                  ],
+                ),
               ),
-            ),
-            Spacer(),
-          ],
-        ),
-        TextField(
-          controller: titleController,
-          decoration: const InputDecoration(
-            hintText: ' Title',
-            hintStyle: TextStyle(fontSize: 28),
-            border: InputBorder.none,
+              Spacer(),
+            ],
           ),
-          cursorColor: Colors.green[900],
-          cursorHeight: 28,
-          style: const TextStyle(fontSize: 28),
-          textCapitalization: TextCapitalization.sentences,
+        ),
+        Padding(
+          padding: EdgeInsets.fromLTRB(10,0,10,0),
+          child: TextField(
+            controller: titleController,
+            decoration: const InputDecoration(
+              hintText: ' Title',
+              hintStyle: TextStyle(fontSize: 28),
+              border: InputBorder.none,
+            ),
+            cursorColor: Colors.green[900],
+            cursorHeight: 28,
+            style: const TextStyle(fontSize: 28),
+            textCapitalization: TextCapitalization.sentences,
+          ),
         ),
         Container(
           child: _image != null
               ? ClipRRect(
                   borderRadius: BorderRadius.circular(
-                      10), // Adjust the border radius as needed
+                      10), 
                   child: Image.file(
                     _image!,
-                    height: 200, // Adjust the height as needed
+                    height: 200, 
                   ),
                 )
-              : Container(), // Placeholder or empty container if _image is null
+              : Container(), 
         ),
         Expanded(
-          child: TextField(
-            maxLines: null,
-            minLines: null,
-            expands: true,
-            controller: contentController,
-            decoration: const InputDecoration(
-              hintText: '  Start typing here',
-              hintStyle: TextStyle(fontSize: 18),
-              border: InputBorder.none,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(10,0,10,0),
+            child: TextField(
+              maxLines: null,
+              minLines: null,
+              expands: true,
+              controller: contentController,
+              decoration: const InputDecoration(
+                hintText: '  Start typing here',
+                hintStyle: TextStyle(fontSize: 18),
+                border: InputBorder.none,
+              ),
+              cursorColor: Colors.red[900],
+              cursorHeight: 18,
+              style: TextStyle(fontSize: 18),
+              textCapitalization: TextCapitalization.sentences,
             ),
-            cursorColor: Colors.red[900],
-            cursorHeight: 18,
-            style: TextStyle(fontSize: 18),
-            textCapitalization: TextCapitalization.sentences,
           ),
         ),
         Offstage(

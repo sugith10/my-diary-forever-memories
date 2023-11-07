@@ -135,10 +135,4 @@ class CalendarScreen extends StatelessWidget {
   }
 }
 
-Widget customIcon() {
-  return Image.asset(
-    'images/start_writing.png',
-    width: 64,
-    height: 64,
-  );
-}
+

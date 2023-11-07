@@ -6,37 +6,39 @@ import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/intl.dart';
 
-
 class AccountScreen extends StatelessWidget {
-   AccountScreen({super.key});
+  AccountScreen({super.key});
 
-   String getCurrentTime() {
-  var now = DateTime.now();
-  var formatter = DateFormat('hh:mm a');
-  return formatter.format(now);
-}
+  String getCurrentTime() {
+    var now = DateTime.now();
+    var formatter = DateFormat('hh:mm a');
+    return formatter.format(now);
+  }
 
-  List<String> greeting = ['Good morning', 'Good afternoon', 'How was your day?'];
-  
-
+  List<String> greeting = [
+    '🤓 Good morning',
+    '😏 Good afternoon',
+    '😍 How was your day?'
+  ];
+ 
 
   @override
   Widget build(BuildContext context) {
     String greetingTitle = '';
-switch (getCurrentTime()) {
-  case '00:00 - 11:59 AM':
-    greetingTitle = greeting[0];
-    break;
-  case '12:00 - 05:59 PM':
-    greetingTitle = greeting[1];
-    break;
-  default:
-    greetingTitle = greeting[2];
-}
+    String currentTime = getCurrentTime();
+    if (currentTime.compareTo('00:00 AM') >= 0 &&
+        currentTime.compareTo('11:59 AM') <= 0) {
+      greetingTitle = greeting[0];
+    } else if (currentTime.compareTo('12:00 PM') >= 0 &&
+        currentTime.compareTo('05:59 PM') <= 0) {
+      greetingTitle = greeting[1];
+    } else {
+      greetingTitle = greeting[2];
+    }
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-          title: Text(greetingTitle, style: TextStyle(color: Colors.black)),
+        title: Text(greetingTitle, style: TextStyle(color: Colors.black)),
         actions: [
           IconButton(
               onPressed: () {
@@ -47,7 +49,6 @@ switch (getCurrentTime()) {
                 color: Color.fromARGB(255, 197, 60, 50),
               ))
         ],
-
         elevation: 0,
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(0),
@@ -110,7 +111,7 @@ switch (getCurrentTime()) {
                           context,
                           PageTransition(
                               type: PageTransitionType.rightToLeftJoined,
-                              child:  NotificationPage(),
+                              child: NotificationPage(),
                               childCurrent: this));
                     },
                     child: const Row(
@@ -137,13 +138,13 @@ switch (getCurrentTime()) {
                   SizedBox(
                     height: 1.2.h,
                   ),
-                   InkWell(
-                  onTap: ()=> Navigator.push(
-                          context,
-                          PageTransition(
-                              type: PageTransitionType.rightToLeftJoined,
-                              child:  CustomizationPage(),
-                              childCurrent: this)),  
+                  InkWell(
+                    onTap: () => Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.rightToLeftJoined,
+                            child: CustomizationPage(),
+                            childCurrent: this)),
                     child: const Row(
                       children: [
                         CircleAvatar(
