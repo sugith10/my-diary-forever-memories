@@ -10,8 +10,8 @@ class DbFunctions {
   final box = Hive.box<DiaryEntry>('_boxName');
   Future addDiaryEntry(DiaryEntry entry) async {
     final box = Hive.box<DiaryEntry>('_boxName');
-    final boxId = await box.add(entry);
-    entry.id = boxId;
+    await box.put(entry.id, entry);
+   
     diaryEntryNotifier.add(entry);
 
     // diaryEntriesNotifier.notifyListeners();
@@ -24,7 +24,7 @@ class DbFunctions {
     // diaryEntriesNotifier.notifyListeners();
   }
 
-  Future<void> deleteDiary(int id) async {
+  Future<void> deleteDiary(String id) async {
   final box = Hive.box<DiaryEntry>('_boxName');
   if (box.containsKey(id)) {
     box.delete(id);

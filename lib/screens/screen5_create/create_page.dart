@@ -16,8 +16,7 @@ import 'package:flutter/foundation.dart' as foundation;
 import 'package:sizer/sizer.dart';
 
 class CreatePage extends StatefulWidget {
- 
-  final Changer changer; 
+  final Changer changer;
 
   CreatePage({Key? key, required this.changer}) : super(key: key);
 
@@ -70,263 +69,263 @@ class _CreatePageState extends State<CreatePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-    backgroundColor: Colors.white,
-    leading: IconButton(
-      onPressed: () {
-        Navigator.pop(context);
-      },
-      icon: Icon(Ionicons.chevron_back_outline,
-          color: Colors.black, size: 25),
-    ),
-    actions: [
-      Center(
-        child: TextButton(
-          onPressed: () async {
-            final title = titleController.text;
-            final content = contentController.text;
-
-            String? imagePath;
-            if (_image != null) {
-              imagePath = await saveImage(_image!);
-            }
-
-            if (title.isNotEmpty) {
-              final entry = DiaryEntry(
-                date: widget.changer.selectedDate,
-                title: title,
-                content: content,
-                imagePath: imagePath,
-              );
-
-              await DbFunctions().addDiaryEntry(entry).then((value) async {
-                log("Function completed: $value");
-               
-                var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
-                final allData = hiveBox.values.toList();
-                log(allData.length.toString());
-                for (var data in allData) {
-                  log("Diary Entry: key=${data.id} Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");
-                }
-              }).catchError((error) {
-  log("Error adding DiaryEntry: $error");
-});
-            }
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
             Navigator.pop(context);
           },
-          child: Text(
-            'Save',
-            style: TextStyle(color: Colors.black, fontSize: 20),
-          ),
+          icon: Icon(Ionicons.chevron_back_outline,
+              color: Colors.black, size: 25),
         ),
-      ),
-    ],
-    elevation: 0,
-    bottom: PreferredSize(
-      preferredSize: Size.fromHeight(0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Color.fromARGB(255, 0, 0, 0),
-            width: 0.1,
-          ),
-        ),
-      ),
-    ),
-      ),
-      body: Container(
-    
-    child: Column(
-      children: [
-        SizedBox(height: 2.h),
-        Padding(
-         padding: EdgeInsets.fromLTRB(10,0,10,0),
-          child: Row(
-            children: [
-              TextButton(
-                onPressed: () async {
-                  final pickedDate = await showDatePicker(
-                    context: context,
-                    initialDate: widget.changer.selectedDate,
-                    firstDate: DateTime(2023),
-                    lastDate: DateTime(2029),
-                  );
-                  if (pickedDate != null) {
-                    widget.changer.selectDate(pickedDate);
-                    print(widget.changer.selectedDate);
-                    var selectedate = widget.changer.selectedDate;
-                  }
-                },
-                child: Row(
-                  children: [
-                    Consumer<Changer>(
-                      builder: (context, changer, child) {
-                        return Text(
-                          DateFormat('d MMMM,y').format(changer.selectedDate),
-                          style: TextStyle(color: Colors.black),
-                        );
-                      },
-                    ),
-                    const Icon(
-                      Ionicons.caret_down_outline,
-                      color: Colors.black,
-                    )
-                  ],
-                ),
-              ),
-              Spacer(),
-            ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.fromLTRB(10,0,10,0),
-          child: TextField(
-            controller: titleController,
-            decoration: const InputDecoration(
-              hintText: ' Title',
-              hintStyle: TextStyle(fontSize: 28),
-              border: InputBorder.none,
-            ),
-            cursorColor: Colors.green[900],
-            cursorHeight: 28,
-            style: const TextStyle(fontSize: 28),
-            textCapitalization: TextCapitalization.sentences,
-          ),
-        ),
-        Container(
-          child: _image != null
-              ? ClipRRect(
-                  borderRadius: BorderRadius.circular(
-                      10), 
-                  child: Image.file(
-                    _image!,
-                    height: 200, 
-                  ),
-                )
-              : Container(), 
-        ),
-        Expanded(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(10,0,10,0),
-            child: TextField(
-              maxLines: null,
-              minLines: null,
-              expands: true,
-              controller: contentController,
-              decoration: const InputDecoration(
-                hintText: '  Start typing here',
-                hintStyle: TextStyle(fontSize: 18),
-                border: InputBorder.none,
-              ),
-              cursorColor: Colors.red[900],
-              cursorHeight: 18,
-              style: TextStyle(fontSize: 18),
-              textCapitalization: TextCapitalization.sentences,
-            ),
-          ),
-        ),
-        Offstage(
-          offstage: !_isEmojiKeyboardVisible,
-          child: SizedBox(
-            height: 250,
-            width: double.infinity,
-            child: EmojiPicker(
-              textEditingController: contentController,
-              onBackspacePressed: _onBackspacePressed,
-              onEmojiSelected: (Category? category, Emoji? emoji) {
-                if (emoji != null) {
-                  // Handle the selected emoji (e.g., add it to the text field)
-                  contentController.text += emoji.emoji;
+        actions: [
+          Center(
+            child: TextButton(
+              onPressed: () async {
+                final title = titleController.text;
+                final content = contentController.text;
+
+                String? imagePath;
+                if (_image != null) {
+                  imagePath = await saveImage(_image!);
                 }
+
+                if (title.isNotEmpty) {
+                    final entry = DiaryEntry(
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    date: widget.changer.selectedDate,
+                    title: title,
+                    content: content,
+                    imagePath: imagePath,
+                  );
+
+                  await DbFunctions().addDiaryEntry(entry).then((value) async {
+                    log("Function completed: $value");
+
+                    var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
+                    final allData = hiveBox.values.toList();
+                    log(allData.length.toString());
+                    for (var data in allData) {
+                      log("Diary Entry: key=${data.id} Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");
+                    }
+                  }).catchError((error) {
+                    log("Error adding DiaryEntry: $error");
+                  });
+                }
+                Navigator.pop(context);
               },
-              config: Config(
-                columns: 8,
-                emojiSizeMax: 32 *
-                    (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                        ? 1.30
-                        : 1.0),
-                verticalSpacing: 0,
-                horizontalSpacing: 0,
-                gridPadding: EdgeInsets.zero,
-                initCategory: Category.RECENT,
-                bgColor: const Color(0xFFF2F2F2),
-                indicatorColor: Colors.blue,
-                iconColor: Colors.grey,
-                iconColorSelected: Colors.blue,
-                backspaceColor: Colors.blue,
-                skinToneDialogBgColor: Colors.white,
-                skinToneIndicatorColor: Colors.grey,
-                enableSkinTones: true,
-                recentTabBehavior: RecentTabBehavior.RECENT,
-                recentsLimit: 28,
-                replaceEmojiOnLimitExceed: false,
-                noRecents: const Text(
-                  'No Recents',
-                  style: TextStyle(fontSize: 20, color: Colors.black26),
-                  textAlign: TextAlign.center,
-                ),
-                loadingIndicator: const SizedBox.shrink(),
-                tabIndicatorAnimDuration: kTabScrollDuration,
-                categoryIcons: const CategoryIcons(),
-                buttonMode: ButtonMode.MATERIAL,
-                checkPlatformCompatibility: true,
+              child: Text(
+                'Save',
+                style: TextStyle(color: Colors.black, fontSize: 20),
               ),
             ),
-          ),
-        )
-      ],
-    ),
-      ),
-      bottomNavigationBar: Consumer<CreatePageProvider>(
-    builder: (context, bottomNavigationProvider, child) {
-      return BottomNavigationBar(
-        showUnselectedLabels: false,
-        showSelectedLabels: false,
-        type: BottomNavigationBarType.fixed,
-        currentIndex: bottomNavigationProvider
-            .selectedIndex, // Use the selected index from the provider
-        onTap: (index) {
-          // Update the selected index using the provider
-          switch (index) {
-            case 0:
-              break;
-            case 1:
-              //Emoji
-              //  openEmojiPicker(context);
-              toggleEmojiKeyboard();
-              print(_isEmojiKeyboardVisible);
-              break;
-            case 2:
-              //Gallery
-              getImage();
-              break;
-            case 3:
-              //Color
-              break;
-          }
-          bottomNavigationProvider.setSelectedIndex(index);
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Ionicons.text_outline,
-            ),
-            label: 'Font',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Ionicons.happy_outline),
-            label: 'Emoji',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Ionicons.image_outline),
-            label: 'Gallery',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Ionicons.color_palette_outline),
-            label: 'Color',
           ),
         ],
-      );
-    },
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 0.1,
+              ),
+            ),
+          ),
+        ),
+      ),
+      body: Container(
+        child: Column(
+          children: [
+            SizedBox(height: 2.h),
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: Row(
+                children: [
+                  TextButton(
+                    onPressed: () async {
+                      final pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: widget.changer.selectedDate,
+                        firstDate: DateTime(2023),
+                        lastDate: DateTime(2029),
+                      );
+                      if (pickedDate != null) {
+                        widget.changer.selectDate(pickedDate);
+                        print(widget.changer.selectedDate);
+                        var selectedate = widget.changer.selectedDate;
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        Consumer<Changer>(
+                          builder: (context, changer, child) {
+                            return Text(
+                              DateFormat('d MMMM,y')
+                                  .format(changer.selectedDate),
+                              style: TextStyle(color: Colors.black),
+                            );
+                          },
+                        ),
+                        const Icon(
+                          Ionicons.caret_down_outline,
+                          color: Colors.black,
+                        )
+                      ],
+                    ),
+                  ),
+                  Spacer(),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: TextField(
+                controller: titleController,
+                decoration: const InputDecoration(
+                  hintText: ' Title',
+                  hintStyle: TextStyle(fontSize: 28),
+                  border: InputBorder.none,
+                ),
+                cursorColor: Colors.green[900],
+                cursorHeight: 28,
+                style: const TextStyle(fontSize: 28),
+                textCapitalization: TextCapitalization.sentences,
+              ),
+            ),
+            Container(
+              child: _image != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        _image!,
+                        height: 200,
+                      ),
+                    )
+                  : Container(),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: TextField(
+                  maxLines: null,
+                  minLines: null,
+                  expands: true,
+                  controller: contentController,
+                  decoration: const InputDecoration(
+                    hintText: '  Start typing here',
+                    hintStyle: TextStyle(fontSize: 18),
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.red[900],
+                  cursorHeight: 18,
+                  style: TextStyle(fontSize: 18),
+                  textCapitalization: TextCapitalization.sentences,
+                ),
+              ),
+            ),
+            Offstage(
+              offstage: !_isEmojiKeyboardVisible,
+              child: SizedBox(
+                height: 250,
+                width: double.infinity,
+                child: EmojiPicker(
+                  textEditingController: contentController,
+                  onBackspacePressed: _onBackspacePressed,
+                  onEmojiSelected: (Category? category, Emoji? emoji) {
+                    if (emoji != null) {
+                      // Handle the selected emoji (e.g., add it to the text field)
+                      contentController.text += emoji.emoji;
+                    }
+                  },
+                  config: Config(
+                    columns: 8,
+                    emojiSizeMax: 32 *
+                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
+                            ? 1.30
+                            : 1.0),
+                    verticalSpacing: 0,
+                    horizontalSpacing: 0,
+                    gridPadding: EdgeInsets.zero,
+                    initCategory: Category.RECENT,
+                    bgColor: const Color(0xFFF2F2F2),
+                    indicatorColor: Colors.blue,
+                    iconColor: Colors.grey,
+                    iconColorSelected: Colors.blue,
+                    backspaceColor: Colors.blue,
+                    skinToneDialogBgColor: Colors.white,
+                    skinToneIndicatorColor: Colors.grey,
+                    enableSkinTones: true,
+                    recentTabBehavior: RecentTabBehavior.RECENT,
+                    recentsLimit: 28,
+                    replaceEmojiOnLimitExceed: false,
+                    noRecents: const Text(
+                      'No Recents',
+                      style: TextStyle(fontSize: 20, color: Colors.black26),
+                      textAlign: TextAlign.center,
+                    ),
+                    loadingIndicator: const SizedBox.shrink(),
+                    tabIndicatorAnimDuration: kTabScrollDuration,
+                    categoryIcons: const CategoryIcons(),
+                    buttonMode: ButtonMode.MATERIAL,
+                    checkPlatformCompatibility: true,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+      bottomNavigationBar: Consumer<CreatePageProvider>(
+        builder: (context, bottomNavigationProvider, child) {
+          return BottomNavigationBar(
+            showUnselectedLabels: false,
+            showSelectedLabels: false,
+            type: BottomNavigationBarType.fixed,
+            currentIndex: bottomNavigationProvider
+                .selectedIndex, // Use the selected index from the provider
+            onTap: (index) {
+              // Update the selected index using the provider
+              switch (index) {
+                case 0:
+                  break;
+                case 1:
+                  //Emoji
+                  //  openEmojiPicker(context);
+                  toggleEmojiKeyboard();
+                  print(_isEmojiKeyboardVisible);
+                  break;
+                case 2:
+                  //Gallery
+                  getImage();
+                  break;
+                case 3:
+                  //Color
+                  break;
+              }
+              bottomNavigationProvider.setSelectedIndex(index);
+            },
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Ionicons.text_outline,
+                ),
+                label: 'Font',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Ionicons.happy_outline),
+                label: 'Emoji',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Ionicons.image_outline),
+                label: 'Gallery',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Ionicons.color_palette_outline),
+                label: 'Color',
+              ),
+            ],
+          );
+        },
       ),
     );
   }

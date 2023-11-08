@@ -6,7 +6,7 @@ part 'diary_entry.g.dart';
 class DiaryEntry { 
 
   @HiveField(0)
-  int? id;
+  String? id;
 
   @HiveField(1)
   DateTime date;
