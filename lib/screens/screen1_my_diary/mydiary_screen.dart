@@ -197,19 +197,12 @@ class DiaryEntryCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      entry.title,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),Spacer(),
-                     InkWell(child: Icon(Icons.delete), onTap: () {
-                        print(entry.id);
-                     },)
-                  ],
+                Text(
+                  entry.title,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 8.0),
                 Text(
@@ -244,11 +237,10 @@ class DiaryEntryCard extends StatelessWidget {
 void doNothing(BuildContext context) {}
 
 void deleteDiaryEntry(DiaryEntry entry) async {
- final box = Hive.box<DiaryEntry>('_boxName');
   if (entry.id != null) {
-    await box.delete(entry.id!);
-    print('Entry deleted successfully');
-  }
+            DbFunctions().deleteDiary(entry.id!);
+          }
+          print(entry.id);
 }
 
 Widget customIcon() {

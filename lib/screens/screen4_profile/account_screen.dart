@@ -9,32 +9,28 @@ import 'package:intl/intl.dart';
 class AccountScreen extends StatelessWidget {
   AccountScreen({super.key});
 
-  String getCurrentTime() {
-    var now = DateTime.now();
-    var formatter = DateFormat('hh:mm a');
-    return formatter.format(now);
+   String getGreeting() {
+  var now = DateTime.now();
+  if (now.isAfter(DateTime(now.year, now.month, now.day, 0, 0)) &&
+      now.isBefore(DateTime(now.year, now.month, now.day, 12, 0))) {
+    return '🤓 Good morning';
+  } else if (now.isAfter(DateTime(now.year, now.month, now.day, 12, 0)) &&
+      now.isBefore(DateTime(now.year, now.month, now.day, 18, 0))) {
+    return '😏 Good afternoon';
+  } else if (now.isAfter(DateTime(now.year, now.month, now.day, 18, 0)) &&
+      now.isBefore(DateTime(now.year, now.month, now.day, 20, 0))) {
+    return '😊 Good evening';
+  } else {
+    return '😍 How was your day?';
   }
+}
 
-  List<String> greeting = [
-    '🤓 Good morning',
-    '😏 Good afternoon',
-    '😍 How was your day?'
-  ];
- 
+
 
   @override
   Widget build(BuildContext context) {
-    String greetingTitle = '';
-    String currentTime = getCurrentTime();
-    if (currentTime.compareTo('00:00 AM') >= 0 &&
-        currentTime.compareTo('11:59 AM') <= 0) {
-      greetingTitle = greeting[0];
-    } else if (currentTime.compareTo('12:00 PM') >= 0 &&
-        currentTime.compareTo('05:59 PM') <= 0) {
-      greetingTitle = greeting[1];
-    } else {
-      greetingTitle = greeting[2];
-    }
+    String greetingTitle = getGreeting();
+   
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,

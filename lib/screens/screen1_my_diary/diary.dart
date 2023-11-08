@@ -123,7 +123,7 @@ class DiaryDetailPage extends StatelessWidget {
           if (entry.id != null) {
             DbFunctions().deleteDiary(entry.id!);
           }
-          // Navigator.pop(context);
+          Navigator.pop(context);
         },
         backgroundColor: Colors.red, // Twitter red color
         icon: Icon(Icons.delete, color: Colors.white),
