@@ -1,5 +1,5 @@
 import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/screen1_my_diary/mydiary_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:numberpicker/numberpicker.dart';

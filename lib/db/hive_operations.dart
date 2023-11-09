@@ -30,9 +30,9 @@ class DbFunctions {
   final box = Hive.box<DiaryEntry>('_boxName');
   if (box.containsKey(id)) {
     box.delete(id);
-    print('Deleted entry with ID: $id');
+    log('Deleted entry with ID: $id');
   } else {
-    print('Entry with ID $id not found');
+    log('Entry with ID $id not found');
   }
 }
 

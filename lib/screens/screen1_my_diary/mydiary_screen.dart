@@ -21,128 +21,127 @@ class MyDiaryScreen extends StatefulWidget {
 }
 
 class _MyDiaryScreenState extends State<MyDiaryScreen> {
-  
   String selectedSortOption = 'Newest First';
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text('My Diary', style: TextStyle(color: Colors.black)),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade,
-                        child: MySearchAppBar()));
-              },
-              icon: const Icon(Icons.search, color: Colors.black),
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade, child: WatchList()));
-              },
-              icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
-            ),
-            IconButton(
-              onPressed: () {
-                showMenu(
-                  context: context,
-                  position: RelativeRect.fromLTRB(1, 0, 0, 5),
-                  items: <PopupMenuEntry>[
-                    const PopupMenuItem(
-                      value: 'Newest First',
-                      child: Text('Newest First'),
-                    ),
-                    const PopupMenuItem(
-                      value: 'Oldest First',
-                      child: Text('Oldest First'),
-                    ),
-                  ],
-                ).then((value) {
-                  if (value == 'Newest First') {
-                    setState(() {
-                      selectedSortOption = value as String;
-                    });
-                  } else if (value == 'Oldest First') {
-                    setState(() {
-                      selectedSortOption = value as String;
-                    });
-                  }
-                });
-              },
-              icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                  color: Colors.black),
-            ),
-          ],
-          elevation: 0,
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 0.1,
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: const Text('My Diary', style: TextStyle(color: Colors.black)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade, child: MySearchAppBar()));
+            },
+            icon: const Icon(Icons.search, color: Colors.black),
+          ),
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.fade, child: WatchList()));
+            },
+            icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
+          ),
+          IconButton(
+            onPressed: () {
+              showMenu(
+                context: context,
+                position: RelativeRect.fromLTRB(1, 0, 0, 5),
+                items: <PopupMenuEntry>[
+                  const PopupMenuItem(
+                    value: 'Newest First',
+                    child: Text('Newest First'),
+                  ),
+                  const PopupMenuItem(
+                    value: 'Oldest First',
+                    child: Text('Oldest First'),
+                  ),
+                ],
+              ).then((value) {
+                if (value == 'Newest First') {
+                  setState(() {
+                    selectedSortOption = value as String;
+                  });
+                } else if (value == 'Oldest First') {
+                  setState(() {
+                    selectedSortOption = value as String;
+                  });
+                }
+              });
+            },
+            icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                color: Colors.black),
+          ),
+        ],
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 0.1,
               ),
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            child: ValueListenableBuilder(
-              valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-              builder: (context, value, child) {
-                var sortedEntries = value.values.toList();
-                switch (selectedSortOption) {
-                  case 'Newest First':
-                    sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                    break;
-                  case 'Oldest First':
-                    sortedEntries.sort((a, b) => a.date.compareTo(b.date));
-                    break;
-                  default:
-                    sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                    break;
-                }
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          child: ValueListenableBuilder(
+            valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+            builder: (context, value, child) {
+              var sortedEntries = value.values.toList();
+              switch (selectedSortOption) {
+                case 'Newest First':
+                  sortedEntries.sort((a, b) => b.date.compareTo(a.date));
+                  break;
+                case 'Oldest First':
+                  sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+                  break;
+                default:
+                  sortedEntries.sort((a, b) => b.date.compareTo(a.date));
+                  break;
+              }
 
-                return ListView.builder(
-                  itemCount: sortedEntries.length,
-                  itemBuilder: (context, index) {
-                    final data = sortedEntries[index];
-                    return DiaryEntryCard(data, index);
-                  },
-                );
-              },
-            ),
+              return ListView.builder(
+                itemCount: sortedEntries.length,
+                itemBuilder: (context, index) {
+                  final data = sortedEntries[index];
+                  return DiaryEntryCard(data, index);
+                },
+              );
+            },
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            final changer = Provider.of<Changer>(context, listen: false);
-            // Navigator.push(
-            //     context,
-            //     PageTransition(
-            //         type: PageTransitionType.rightToLeftJoined,
-            //         child: CreatePage(
-            //           changer: changer,
-            //         ),
-            //         childCurrent: this));
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> CreatePage(
-                      changer: changer,
-                    )));
-          },
-          backgroundColor: Color.fromARGB(255, 255, 254, 254),
-          child: customIcon(),
-          elevation: 3,
-        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          final changer = Provider.of<Changer>(context, listen: false);
+          // Navigator.push(
+          //     context,
+          //     PageTransition(
+          //         type: PageTransitionType.rightToLeftJoined,
+          //         child: CreatePage(
+          //           changer: changer,
+          //         ),
+          //         childCurrent: this));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CreatePage(
+                        changer: changer,
+                      )));
+        },
+        backgroundColor: Color.fromARGB(255, 255, 254, 254),
+        child: customIcon(),
+        elevation: 3,
       ),
     );
   }
@@ -158,18 +157,12 @@ class DiaryEntryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(0),
-
-      
       startActionPane: ActionPane(
-        
         motion: const ScrollMotion(),
-
-       
-        dismissible: DismissiblePane(onDismissed: () {}),
-
-      
+        dismissible: DismissiblePane(onDismissed: () {
+          print('Start Action Dismissed');
+        }),
         children: const [
-        
           SlidableAction(
             onPressed: doNothing,
             backgroundColor: Color(0xFF7BC043),
@@ -179,16 +172,20 @@ class DiaryEntryCard extends StatelessWidget {
           ),
         ],
       ),
-
-    
       endActionPane: ActionPane(
-        motion: BehindMotion(),
-        dismissible: DismissiblePane(onDismissed: () {}),
+        motion: ScrollMotion(),
+        dismissible: DismissiblePane(onDismissed: () {
+
+          if (entry.id != null) {
+                DbFunctions().deleteDiary(entry.id!);
+                 diaryEntriesNotifier.notifyListeners();
+              }else{
+                print('no data found');
+              }
+        }),
         children: [
           SlidableAction(
-            
-            onPressed: (context) => deleteDiaryEntry(entry),
-
+            onPressed: doNothing,
             backgroundColor: Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -196,7 +193,6 @@ class DiaryEntryCard extends StatelessWidget {
           ),
         ],
       ),
-
       child: InkWell(
         onTap: () {
           //  Navigator.push(context, MaterialPageRoute(builder: (context)=> DiaryDetailPage(entry: entry,)));
@@ -266,12 +262,7 @@ class DiaryEntryCard extends StatelessWidget {
 
 void doNothing(BuildContext context) {}
 
-void deleteDiaryEntry(DiaryEntry entry) async {
-  if (entry.id != null) {
-    DbFunctions().deleteDiary(entry.id!);
-  }
-  print(entry.id);
-}
+
 
 Widget customIcon() {
   return Image.asset(
@@ -280,4 +271,3 @@ Widget customIcon() {
     height: 40,
   );
 }
-

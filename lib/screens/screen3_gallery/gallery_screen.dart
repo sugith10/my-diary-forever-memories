@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:diary/db/hive_operations.dart';
+
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen1_my_diary/diary.dart';
-import 'package:diary/screens/screen1_my_diary/mydiary_screen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
