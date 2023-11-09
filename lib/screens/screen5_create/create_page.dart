@@ -190,6 +190,7 @@ class _CreatePageState extends State<CreatePage> {
                 cursorHeight: 28,
                 style: const TextStyle(fontSize: 28),
                 textCapitalization: TextCapitalization.sentences,
+                autofocus: true,
               ),
             ),
             Container(

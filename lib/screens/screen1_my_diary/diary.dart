@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/screen1_my_diary/mydiary_screen.dart';
+import 'package:diary/screens/screen1_my_diary/editScreen.dart';
+
 import 'package:flutter/material.dart';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
@@ -11,7 +12,7 @@ import 'package:sizer/sizer.dart';
 class DiaryDetailPage extends StatefulWidget {
   final DiaryEntry entry;
 
-  DiaryDetailPage({required this.entry, Key? key}) : super(key: key);
+  const DiaryDetailPage({required this.entry, Key? key}) : super(key: key);
 
   @override
   State<DiaryDetailPage> createState() => _DiaryDetailPageState();
@@ -55,17 +56,17 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
               onPressed: () {
                 showMenu(
                   context: context,
-                  position: RelativeRect.fromLTRB(1, 0, 0, 5),
+                  position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[
                     PopupMenuItem(
                       value: 'Edit',
                       child: Row(
                         children: [
-                          Icon(Icons.edit_outlined),
+                          const Icon(Icons.edit_outlined),
                           SizedBox(
                             width: 3.w,
                           ),
-                          Text('Edit'),
+                          const Text('Edit'),
                         ],
                       ),
                     ),
@@ -73,7 +74,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                       value: 'Delete',
                       child: Row(
                         children: [
-                          Icon(Icons.delete_outline_rounded),
+                          const Icon(Icons.delete_outline_rounded),
                           SizedBox(
                             width: 3.w,
                           ),
@@ -84,8 +85,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                   ],
                 ).then((value) {
                   if (value == 'Edit') {
-                  
-                   
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=>  EditDiaryEntryScreen(entry: widget.entry)));
                   } else if (value == 'Delete') {
                     _showDeleteConfirmationDialog(context, widget.entry);
                   }
@@ -96,11 +96,11 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
             )
           ],
           bottom: PreferredSize(
-            preferredSize: Size.fromHeight(0),
+            preferredSize: const Size.fromHeight(0),
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Color.fromARGB(255, 0, 0, 0),
+                  color: const Color.fromARGB(255, 0, 0, 0),
                   width: 0.1,
                 ),
               ),
@@ -159,20 +159,21 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
             ),
           ],
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            if (widget.entry.id != null) {
-              DbFunctions().deleteDiary(widget.entry.id!);
-            }
-            Navigator.pop(context);
-          },
-          backgroundColor: Colors.red, // Twitter red color
-          icon: Icon(Icons.delete, color: Colors.white),
-          label: const Text(
-            'Delete',
-            style: TextStyle(color: Colors.white),
-          ),
-        ));
+        // floatingActionButton: FloatingActionButton.extended(
+        //   onPressed: () {
+        //     if (widget.entry.id != null) {
+        //       DbFunctions().deleteDiary(widget.entry.id!);
+        //     }
+        //     Navigator.pop(context);
+        //   },
+        //   backgroundColor: Colors.red, // Twitter red color
+        //   icon: Icon(Icons.delete, color: Colors.white),
+        //   label: const Text(
+        //     'Delete',
+        //     style: TextStyle(color: Colors.white),
+        //   ),
+        // ),
+        );
   }
 }
 
@@ -203,19 +204,13 @@ void _showDeleteConfirmationDialog(BuildContext context, DiaryEntry entry) {
             onPressed: () {
               if (entry.id != null) {
                 DbFunctions().deleteDiary(entry.id!);
-                // Navigator.push(context, MaterialPageRoute(builder: (context)=> MyDiaryScreen()));
-                // //asdkfjhakjhnfjkhnskdhjnfhasdkhjfjhakjsdjfhdsfhnbnvfbnsvnbjandhnfdsbnbn 
-                // Navigator.pushAndRemoveUntil(context, /main, (route) => false)
-              Navigator.pushAndRemoveUntil(
-  context,
-  MaterialPageRoute(builder: (context) => MainScreen()),
-  ModalRoute.withName('/main'),
-);
-
-
-                
+               
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  ModalRoute.withName('/main'),
+                );
               }
-             
             },
           ),
         ],
@@ -223,4 +218,3 @@ void _showDeleteConfirmationDialog(BuildContext context, DiaryEntry entry) {
     },
   );
 }
-

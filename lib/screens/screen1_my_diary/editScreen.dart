@@ -1,0 +1,174 @@
+import 'dart:io';
+
+import 'package:diary/db/hive_operations.dart';
+import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/home/mainscreen.dart';
+import 'package:flutter/material.dart';
+import 'package:ionicons/ionicons.dart';
+
+class EditDiaryEntryScreen extends StatefulWidget {
+  final DiaryEntry entry;
+
+  EditDiaryEntryScreen({required this.entry, Key? key}) : super(key: key);
+
+  @override
+  State<EditDiaryEntryScreen> createState() => _EditDiaryEntryScreenState();
+}
+
+class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
+  final TextEditingController titleController;
+  final TextEditingController contentController;
+
+  File? _image;
+
+  _EditDiaryEntryScreenState()
+      : titleController = TextEditingController(),
+        contentController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    titleController.text = widget.entry.title;
+    contentController.text = widget.entry.content;
+  }
+
+  // ... Rest of your code for image selection, save, and emoji handling.
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Ionicons.chevron_back_outline,
+              color: Colors.black, size: 25),
+        ),
+        actions: [
+          Center(
+            child: TextButton(
+              onPressed: () async {
+                final title = titleController.text;
+                final content = contentController.text;
+
+                String? imagePath;
+                if (_image != null) {
+                  imagePath = await saveImage(_image!);
+                }
+
+                if (title.isNotEmpty) {
+                  final updatedEntry = DiaryEntry(
+                    id: widget.entry.id,
+                    date: widget.entry.date,
+                    title: title,
+                    content: content,
+                    imagePath: imagePath,
+                  );
+
+                  await DbFunctions()
+                      .updateDiaryEntry(updatedEntry)
+                      .then((value) {
+                    print("Function completed: ");
+                  }).catchError((error) {
+                    print("Error updating DiaryEntry: $error");
+                  });
+                }
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'Save',
+                style: TextStyle(color: Colors.black, fontSize: 20),
+              ),
+            ),
+          ),
+        ],
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 0.1,
+              ),
+            ),
+          ),
+        ),
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
+                hintText: 'Title',
+                hintStyle: TextStyle(fontSize: 24),
+              ),
+              style: TextStyle(fontSize: 24),
+            ),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: TextField(
+                controller: contentController,
+                maxLines: null, // Allows for multiple lines
+                decoration: const InputDecoration(
+                  hintText: 'Content',
+                  hintStyle: TextStyle(fontSize: 18),
+                ),
+                style: TextStyle(fontSize: 18),
+              ),
+            ),
+          ),
+          // Add image selection and emoji handling widgets here if needed.
+        ],
+      ),
+    );
+  }
+
+  saveImage(File file) {}
+
+  // ... Rest of your methods for image selection, emoji handling, and backspace pressed.
+}
+
+void _showPopupDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text(
+          'Edit Confirmation',
+          style: TextStyle(
+            fontSize: 27,
+          ),
+        ),
+        content: const Text(
+          'Are you sure about editing this record?',
+          style: TextStyle(fontSize: 17),
+        ),
+        actions: [
+          TextButton(
+            child: const Text('Cancel', style: TextStyle(color: Colors.black)),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          TextButton(
+            child: const Text('Save', style: TextStyle(color: Colors.red)),
+            onPressed: () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => MainScreen()),
+                ModalRoute.withName('/main'),
+              );
+            },
+          ),
+        ],
+      );
+    },
+  );
+}

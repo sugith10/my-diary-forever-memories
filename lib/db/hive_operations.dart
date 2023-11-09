@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/foundation.dart';
@@ -33,6 +35,16 @@ class DbFunctions {
     print('Entry with ID $id not found');
   }
 }
+
+Future<void> updateDiaryEntry(DiaryEntry entry) async {
+    final box = Hive.box<DiaryEntry>('_boxName');
+    if (box.containsKey(entry.id)) {
+      await box.put(entry.id, entry);
+      log('Updated entry with ID: ${entry.id}');
+    } else {
+      log('Entry with ID ${entry.id} not found, cannot update.');
+    }
+  }
 
 
 }
