@@ -135,6 +135,9 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
             //           changer: changer,
             //         ),
             //         childCurrent: this));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> CreatePage(
+                      changer: changer,
+                    )));
           },
           backgroundColor: Color.fromARGB(255, 255, 254, 254),
           child: customIcon(),
@@ -156,17 +159,17 @@ class DiaryEntryCard extends StatelessWidget {
     return Slidable(
       key: ValueKey(0),
 
-      // The start action pane is the one at the left or the top side.
+      
       startActionPane: ActionPane(
-        // A motion is a widget used to control how the pane animates.
+        
         motion: const ScrollMotion(),
 
-        // A pane can dismiss the Slidable.
+       
         dismissible: DismissiblePane(onDismissed: () {}),
 
-        // All actions are defined in the children parameter.
+      
         children: const [
-          // A SlidableAction can have an icon and/or a label.
+        
           SlidableAction(
             onPressed: doNothing,
             backgroundColor: Color(0xFF7BC043),
@@ -177,13 +180,13 @@ class DiaryEntryCard extends StatelessWidget {
         ],
       ),
 
-      // The end action pane is the one at the right or the bottom side.
+    
       endActionPane: ActionPane(
         motion: BehindMotion(),
         dismissible: DismissiblePane(onDismissed: () {}),
         children: [
           SlidableAction(
-            // An action can be bigger than the others.
+            
             onPressed: (context) => deleteDiaryEntry(entry),
 
             backgroundColor: Color(0xFFFE4A49),
@@ -277,3 +280,4 @@ Widget customIcon() {
     height: 40,
   );
 }
+

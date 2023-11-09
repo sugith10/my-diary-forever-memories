@@ -4,37 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
-import 'package:intl/intl.dart';
 
 class AccountScreen extends StatelessWidget {
   AccountScreen({super.key});
 
-   String getGreeting() {
-  var now = DateTime.now();
-  if (now.isAfter(DateTime(now.year, now.month, now.day, 0, 0)) &&
-      now.isBefore(DateTime(now.year, now.month, now.day, 12, 0))) {
-    return '🤓 Good morning';
-  } else if (now.isAfter(DateTime(now.year, now.month, now.day, 12, 0)) &&
-      now.isBefore(DateTime(now.year, now.month, now.day, 18, 0))) {
-    return '😏 Good afternoon';
-  } else if (now.isAfter(DateTime(now.year, now.month, now.day, 18, 0)) &&
-      now.isBefore(DateTime(now.year, now.month, now.day, 20, 0))) {
-    return '😊 Good evening';
-  } else {
-    return '😍 How was your day?';
+  String getGreeting() {
+    var now = DateTime.now();
+    if (now.isAfter(DateTime(now.year, now.month, now.day, 0, 0)) &&
+        now.isBefore(DateTime(now.year, now.month, now.day, 12, 0))) {
+      return '🤓 Good morning';
+    } else if (now.isAfter(DateTime(now.year, now.month, now.day, 12, 0)) &&
+        now.isBefore(DateTime(now.year, now.month, now.day, 18, 0))) {
+      return '😏 Good afternoon';
+    } else if (now.isAfter(DateTime(now.year, now.month, now.day, 18, 0)) &&
+        now.isBefore(DateTime(now.year, now.month, now.day, 20, 0))) {
+      return '😊 Good evening';
+    } else {
+      return '😍 How was your day?';
+    }
   }
-}
-
-
 
   @override
   Widget build(BuildContext context) {
     String greetingTitle = getGreeting();
-   
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(greetingTitle, style: TextStyle(color: Colors.black)),
+        title: Text(greetingTitle, style: const TextStyle(color: Colors.black)),
         actions: [
           IconButton(
               onPressed: () {
