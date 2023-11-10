@@ -1,5 +1,6 @@
 import 'package:diary/screens/screen4_profile/item_1_notifications.dart';
 import 'package:diary/screens/screen4_profile/item_2_customization.dart';
+import 'package:diary/screens/screen4_profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
@@ -34,56 +35,51 @@ class AccountScreen extends StatelessWidget {
         title: Text(greetingTitle, style: const TextStyle(color: Colors.black)),
         actions: [
           IconButton(
-              onPressed: () {
-                showMenu(
-                  context: context,
-                  position: const RelativeRect.fromLTRB(1, 0, 0, 5),
-                  items: <PopupMenuEntry>[
-                    PopupMenuItem(
-                      value: 'Edit',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.edit_outlined),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          const Text('Edit'),
-                        ],
-                      ),
+            onPressed: () {
+              showMenu(
+                context: context,
+                position: const RelativeRect.fromLTRB(1, 0, 0, 5),
+                items: <PopupMenuEntry>[
+                 PopupMenuItem(
+                    value: 'Edit Profile',
+                    child: Row(
+                      children: [
+                        const Icon(Icons.edit_outlined),
+                        SizedBox(
+                          width: 3.w,
+                        ),
+                        const Text('Edit Profile'),
+                      ],
                     ),
-                    PopupMenuItem(
-                      value: 'Delete',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.delete_outline_rounded),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          Text('Delete'),
-                        ],
-                      ),
+                  ),
+                 PopupMenuItem(
+                    value: 'Logout',
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.power_settings_new_outlined,
+                          color: Color.fromARGB(255, 197, 60, 50),
+                        ),
+                        SizedBox(
+                           width: 3.w,
+                        ),
+                        const Text('Logout'),
+                      ],
                     ),
-                  ],
-                ).then((value) {
-                  if (value == 'Edit') {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>  EditDiaryEntryScreen(entry: widget.entry)));
-                  } else if (value == 'Delete') {
-                    // _showDeleteConfirmationDialog(context, widget.entry);
-                  }
-                });
-              },
-              icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                  color: Colors.black),
-            )
-         ,
-          IconButton(
-              onPressed: () {
-                _showPopupDialog(context);
-              },
-              icon: const Icon(
-                Icons.power_settings_new_outlined,
-                color: Color.fromARGB(255, 197, 60, 50),
-              ))
+                  ),
+                ],
+              ).then((value) {
+                if (value == 'Edit Profile') {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage()));
+                } else if (value == 'Logout') {
+                 _showPopupDialog(context);
+                }
+              });
+            },
+            icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                color: Colors.black),
+          ),
+         
         ],
         elevation: 0,
         bottom: PreferredSize(

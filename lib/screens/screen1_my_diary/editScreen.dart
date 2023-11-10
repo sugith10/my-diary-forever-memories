@@ -5,7 +5,9 @@ import 'package:diary/screens/home/mainscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:path_provider/path_provider.dart';
 
 class EditDiaryEntryScreen extends StatefulWidget {
   final DiaryEntry entry;
@@ -21,7 +23,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   final TextEditingController contentController;
   File? _image;
 
-  _EditDiaryEntryScreenState() 
+  _EditDiaryEntryScreenState()
       : titleController = TextEditingController(),
         contentController = TextEditingController();
 
@@ -36,7 +38,33 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
     }
   }
 
-  // ... Rest of your code for image selection, save, and emoji handling.
+  Future getImage() async {
+  final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  if (image == null) return;
+
+  final imageTemporary = File(image.path);
+
+    setState(() {
+      _image = imageTemporary;
+    });
+  }
+
+   Future<String?> saveImage(File image) async {
+    try {
+      final appDocDir = await getApplicationDocumentsDirectory();
+      final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+      final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
+      await image.copy(imagePath);
+      return imagePath;
+    } catch (e) {
+      print("Error saving image: $e");
+      return null;
+    }
+  }
+
+
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -116,31 +144,21 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
             ),
           ),
           Container(
-  height: 200,
-  child: _image != null
-      ? FocusedMenuHolder(
-        menuItems: [FocusedMenuItem(
-            title: Text('Favourite'),
-            trailingIcon: Icon(Icons.favorite_border),
-            onPressed: () => null,
+            height: 200,
+            child: _image != null
+                ? InkWell(
+                  onTap: (){
+                     getImage();
+                  },
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        _image!,
+                      ),
+                    ),
+                )
+                : Container(),
           ),
-           FocusedMenuItem(
-            title: Text('Delete', style: TextStyle(color: Colors.white)),
-            trailingIcon: Icon(Icons.delete_forever, color: Colors.white),
-            backgroundColor: Colors.red,
-            onPressed: () =>null,
-          ),
-          ],
-        onPressed: (){},
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.file(
-              _image!,
-            ),
-          ),
-      )
-      : Container(),
-),
 
           Expanded(
             child: Padding(
@@ -151,21 +169,20 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                 decoration: const InputDecoration(
                   hintText: 'Content',
                   hintStyle: TextStyle(fontSize: 18),
-                   border: InputBorder.none,
-
+                  border: InputBorder.none,
                 ),
                 style: TextStyle(fontSize: 18),
                 autofocus: true,
               ),
             ),
           ),
-          // Add image selection and emoji handling widgets 
+          // Add image selection and emoji handling widgets
         ],
       ),
     );
   }
 
-  saveImage(File file) {}
+  
 
   // ... Rest of your methods for image selection, emoji handling, and backspace pressed.
 }
@@ -207,3 +224,7 @@ void _showPopupDialog(BuildContext context) {
     },
   );
 }
+
+
+
+
