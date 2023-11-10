@@ -103,16 +103,32 @@ class AccountScreen extends StatelessWidget {
             height: 30.h,
             width: 100.w,
             // color: Colors.amber,
-            child: const Column(
+            child: Column(
               children: [
                 Spacer(),
-                CircleAvatar(
-                  backgroundImage: AssetImage(
-                    'images/profile.png',
-                  ),
-                  backgroundColor: Color(0xFFF1F5FF),
-                  maxRadius: 40,
-                ),
+                Container(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: const DecorationImage(
+                          image: AssetImage('images/profile.png'),
+                          fit: BoxFit.cover,
+                        ),
+                        border: Border.all(
+                          width: 4,
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1),
+                            // offset: Offset(6, 8),
+                          ),
+                        ],
+                      ),
+                    ),
                 SizedBox(
                   height: 10,
                 ),

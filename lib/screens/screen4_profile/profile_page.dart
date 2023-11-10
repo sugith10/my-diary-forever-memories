@@ -12,8 +12,10 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  String _name = '';
-  String _email = '';
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _locationController = TextEditingController();
+  
   File? _profilePicture;
 
   @override
@@ -32,7 +34,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Center(
             child: TextButton(
               onPressed: () async {
-                // Your save logic here
+                Navigator.pop(context);
               },
               child: const Text(
                 'Save',
@@ -54,82 +56,147 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ),
       ),
-      body: Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  'Edit Profile',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-            Stack(
-              children: [
-                Container(
-                  width: 130,
-                  height: 130,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      image: AssetImage('images/profile.png'),
-                      fit: BoxFit.cover,
-                    ),
-                    border: Border.all(
-                      width: 4,
-                      color: Theme.of(context).scaffoldBackgroundColor,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        spreadRadius: 2,
-                        blurRadius: 10,
-                        color: Colors.black.withOpacity(0.1),
-                        // offset: Offset(6, 8),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  bottom: 0
-                  ,
-                  right: 0,
-                  child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      width: 3.5,
-                      color: Theme.of(context).scaffoldBackgroundColor
-                      
-                    ),
-                    color: Color(0xFF835DF1)
-                  ),
-                  child: Icon(Icons.edit, color:Color.fromARGB(255, 255, 255, 255) ,),
-                ))
-              ],
-            ),
-            SizedBox(height: 5.h,),
-            TextFormField(
-              
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(bottom: 3),
-                labelText: 'Name',
-                // floatingLabelBehavior: FloatingLabelBehavior.always,
-                hintText: 'Name',
-                hintStyle: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold,
-                  color: Colors.black,
-
-                )
-
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          padding: EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            children: [
+              SizedBox(
+                height: 6.h,
               ),
-            )
-          ],
+              const Row(
+                children: [
+                  Text(
+                    'Edit Profile',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 3.h,
+              ),
+              GestureDetector(
+                onTap: () => null,
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: const DecorationImage(
+                          image: AssetImage('images/profile.png'),
+                          fit: BoxFit.cover,
+                        ),
+                        border: Border.all(
+                          width: 4,
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1),
+                            // offset: Offset(6, 8),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                  width: 3.5,
+                                  color: Theme.of(context)
+                                      .scaffoldBackgroundColor),
+                              color: Color(0xFF835DF1)),
+                          child: const Icon(
+                            Icons.edit,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                        ))
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 5.h,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF835DF1))),
+                      contentPadding: EdgeInsets.only(left: 0, bottom: 3),
+                      labelText: "Name",
+                      labelStyle: TextStyle(color: Colors.grey),
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      hintText: "Name cannot be blank",
+                      hintStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      )),
+                      textCapitalization: TextCapitalization.words,
+                      controller: _nameController ,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF835DF1))),
+                      contentPadding: EdgeInsets.only(left: 0, bottom: 3),
+                      labelText: "E-mail",
+                      labelStyle: TextStyle(color: Colors.grey),
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      hintText: "sample@gmail.com",
+                      hintStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      )),
+                      controller: _emailController ,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 35.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xFF835DF1))),
+                      contentPadding: EdgeInsets.only(left: 0, bottom: 3),
+                      labelText: "Location",
+                      labelStyle: TextStyle(color: Colors.grey),
+                      floatingLabelBehavior: FloatingLabelBehavior.always,
+                      hintText: "Location",
+                      hintStyle: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      )),
+                      textCapitalization: TextCapitalization.words,
+                      controller: _locationController ,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+// Widget buildTextField(
+//   String labelText,
+//   String placeholder,
+// ) {
+//   return 
+// }
