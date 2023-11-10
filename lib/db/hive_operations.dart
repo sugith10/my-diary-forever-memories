@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/foundation.dart';

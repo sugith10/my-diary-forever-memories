@@ -62,10 +62,6 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
     }
   }
 
-
-
-  
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -283,9 +283,9 @@ class _CreatePageState extends State<CreatePage> {
             showSelectedLabels: false,
             type: BottomNavigationBarType.fixed,
             currentIndex: bottomNavigationProvider
-                .selectedIndex, // Use the selected index from the provider
+                .selectedIndex, 
             onTap: (index) {
-              // Update the selected index using the provider
+             
               switch (index) {
                 case 0:
                   break;

@@ -1,7 +1,10 @@
+import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -17,6 +20,30 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _locationController = TextEditingController();
   
   File? _profilePicture;
+
+  Future getImage() async {
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
+
+    final imageTemporary = File(image.path);
+
+    setState(() {
+      this. _profilePicture = imageTemporary;
+    });
+  }
+
+   Future<String?> saveImage(File image) async {
+    try {
+      final appDocDir = await getApplicationDocumentsDirectory();
+      final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
+      final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
+      await image.copy(imagePath);
+      return imagePath;
+    } catch (e) {
+      log("Error saving image: $e");
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +84,7 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
       ),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         child: Container(
           padding: EdgeInsets.only(left: 20, right: 20),
           child: Column(
@@ -77,7 +104,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 3.h,
               ),
               GestureDetector(
-                onTap: () => null,
+                onTap: (){
+                  getImage();
+                },
                 child: Stack(
                   children: [
                     Container(
@@ -85,10 +114,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 130,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        image: const DecorationImage(
-                          image: AssetImage('images/profile.png'),
-                          fit: BoxFit.cover,
-                        ),
+                         image: _profilePicture != null
+                            ? DecorationImage(
+                                image: FileImage(_profilePicture!),
+                                fit: BoxFit.cover,
+                              )
+                            : const DecorationImage(
+                                image: AssetImage('images/profile.png'),
+                                fit: BoxFit.cover,
+                              ),
                         border: Border.all(
                           width: 4,
                           color: Theme.of(context).scaffoldBackgroundColor,
@@ -145,6 +179,11 @@ class _ProfilePageState extends State<ProfilePage> {
                       )),
                       textCapitalization: TextCapitalization.words,
                       controller: _nameController ,
+                       inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r'^[a-zA-Z ]+$'), 
+                    ),
+                  ],
                 ),
               ),
               Padding(
@@ -164,6 +203,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         color: Colors.black,
                       )),
                       controller: _emailController ,
+                      keyboardType: TextInputType.emailAddress,
+                   
                 ),
               ),
               Padding(
