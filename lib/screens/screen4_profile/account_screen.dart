@@ -35,6 +35,49 @@ class AccountScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+                showMenu(
+                  context: context,
+                  position: const RelativeRect.fromLTRB(1, 0, 0, 5),
+                  items: <PopupMenuEntry>[
+                    PopupMenuItem(
+                      value: 'Edit',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.edit_outlined),
+                          SizedBox(
+                            width: 3.w,
+                          ),
+                          const Text('Edit'),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      value: 'Delete',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.delete_outline_rounded),
+                          SizedBox(
+                            width: 3.w,
+                          ),
+                          Text('Delete'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ).then((value) {
+                  if (value == 'Edit') {
+                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>  EditDiaryEntryScreen(entry: widget.entry)));
+                  } else if (value == 'Delete') {
+                    // _showDeleteConfirmationDialog(context, widget.entry);
+                  }
+                });
+              },
+              icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                  color: Colors.black),
+            )
+         ,
+          IconButton(
+              onPressed: () {
                 _showPopupDialog(context);
               },
               icon: const Icon(

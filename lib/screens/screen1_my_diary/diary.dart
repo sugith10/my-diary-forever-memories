@@ -58,6 +58,19 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                   context: context,
                   position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[
+                    
+                    PopupMenuItem(
+                      value: 'Delete',
+                      child: Row(
+                        children: [
+                          const Icon(Icons.delete_outline_rounded),
+                          SizedBox(
+                            width: 3.w,
+                          ),
+                          Text('Delete'),
+                        ],
+                      ),
+                    ),
                     PopupMenuItem(
                       value: 'Edit',
                       child: Row(
@@ -71,14 +84,14 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                       ),
                     ),
                     PopupMenuItem(
-                      value: 'Delete',
+                      value: 'Share',
                       child: Row(
                         children: [
-                          const Icon(Icons.delete_outline_rounded),
+                          const Icon(Icons.share_outlined),
                           SizedBox(
                             width: 3.w,
                           ),
-                          Text('Delete'),
+                          const Text('Share'),
                         ],
                       ),
                     ),

@@ -1,9 +1,10 @@
 import 'dart:io';
-
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:ionicons/ionicons.dart';
 
 class EditDiaryEntryScreen extends StatefulWidget {
@@ -18,10 +19,9 @@ class EditDiaryEntryScreen extends StatefulWidget {
 class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   final TextEditingController titleController;
   final TextEditingController contentController;
-
   File? _image;
 
-  _EditDiaryEntryScreenState()
+  _EditDiaryEntryScreenState() 
       : titleController = TextEditingController(),
         contentController = TextEditingController();
 
@@ -30,6 +30,10 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
     super.initState();
     titleController.text = widget.entry.title;
     contentController.text = widget.entry.content;
+
+    if (widget.entry.imagePath != null) {
+      _image = File(widget.entry.imagePath!);
+    }
   }
 
   // ... Rest of your code for image selection, save, and emoji handling.
@@ -106,10 +110,38 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
               decoration: const InputDecoration(
                 hintText: 'Title',
                 hintStyle: TextStyle(fontSize: 24),
+                border: InputBorder.none,
               ),
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
           ),
+          Container(
+  height: 200,
+  child: _image != null
+      ? FocusedMenuHolder(
+        menuItems: [FocusedMenuItem(
+            title: Text('Favourite'),
+            trailingIcon: Icon(Icons.favorite_border),
+            onPressed: () => null,
+          ),
+           FocusedMenuItem(
+            title: Text('Delete', style: TextStyle(color: Colors.white)),
+            trailingIcon: Icon(Icons.delete_forever, color: Colors.white),
+            backgroundColor: Colors.red,
+            onPressed: () =>null,
+          ),
+          ],
+        onPressed: (){},
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.file(
+              _image!,
+            ),
+          ),
+      )
+      : Container(),
+),
+
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -119,12 +151,15 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                 decoration: const InputDecoration(
                   hintText: 'Content',
                   hintStyle: TextStyle(fontSize: 18),
+                   border: InputBorder.none,
+
                 ),
                 style: TextStyle(fontSize: 18),
+                autofocus: true,
               ),
             ),
           ),
-          // Add image selection and emoji handling widgets here if needed.
+          // Add image selection and emoji handling widgets 
         ],
       ),
     );
