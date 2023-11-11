@@ -1,10 +1,15 @@
+import 'dart:io';
+import 'package:diary/db/hive_profile_operations.dart';
+import 'package:diary/models/profile_details.dart';
 import 'package:diary/screens/screen4_profile/item_1_notifications.dart';
 import 'package:diary/screens/screen4_profile/item_2_customization.dart';
 import 'package:diary/screens/screen4_profile/profile_page.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
+
 
 class AccountScreen extends StatelessWidget {
   AccountScreen({super.key});
@@ -28,6 +33,7 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String greetingTitle = getGreeting();
+    
 
     return Scaffold(
       appBar: AppBar(
@@ -98,6 +104,7 @@ class AccountScreen extends StatelessWidget {
       //bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
       body: Column(
         children: [
+          //profile start
           Container(
             margin: const EdgeInsets.only(left: 20, right: 20),
             height: 30.h,
@@ -106,47 +113,77 @@ class AccountScreen extends StatelessWidget {
             child: Column(
               children: [
                 Spacer(),
-                Container(
-                      width: 100,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        image: const DecorationImage(
-                          image: AssetImage('images/profile.png'),
-                          fit: BoxFit.cover,
+                ValueListenableBuilder(
+                  valueListenable: Hive.box<ProfileDetails>('_profileBoxName')
+                      .listenable(),
+                  builder: (context, box, child) {
+                    final profileFunctions = ProfileFunctions();
+                    final List<ProfileDetails> profileDetailsList =
+                        profileFunctions.getAllProfileDetails();
+
+                    if (profileDetailsList.isNotEmpty) {
+                      final ProfileDetails profileDetails =
+                          profileDetailsList.first;
+
+                      return Container(
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 100,
+                              height: 100,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: profileDetails.profilePicturePath != null
+                                    ? DecorationImage(
+                                        image: FileImage(
+                                          File(profileDetails.profilePicturePath!),
+                                        ),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : const DecorationImage(
+                                        image:
+                                            AssetImage('images/profile.png'),
+                                        fit: BoxFit.cover,
+                                      ),
+                                border: Border.all(
+                                  width: 4,
+                                  color: Theme.of(context)
+                                      .scaffoldBackgroundColor,
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                    spreadRadius: 2,
+                                    blurRadius: 10,
+                                    color: Colors.black.withOpacity(0.1),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              profileDetails.name,
+                              style: TextStyle(fontSize: 24),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              profileDetails.email,
+                              style: TextStyle(
+                                  color: Colors.black26, fontSize: 15),
+                            ),
+                          ],
                         ),
-                        border: Border.all(
-                          width: 4,
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 2,
-                            blurRadius: 10,
-                            color: Colors.black.withOpacity(0.1),
-                            // offset: Offset(6, 8),
-                          ),
-                        ],
-                      ),
-                    ),
-                SizedBox(
-                  height: 10,
+                      );
+                    } else {
+                      return SizedBox.shrink();
+                    }
+                  },
                 ),
-                Text(
-                  'Name',
-                  style: TextStyle(fontSize: 24),
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  'user email',
-                  style: TextStyle(color: Colors.black26, fontSize: 15),
-                ),
+              
                 Spacer(),
               ],
             ),
           ),
+          //profile end
           Expanded(
             child: Container(
               margin: EdgeInsets.only(left: 20, right: 20),

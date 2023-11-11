@@ -61,6 +61,10 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                     value: 'Oldest First',
                     child: Text('Oldest First'),
                   ),
+                   const PopupMenuItem(
+                    value: 'Range Pick',
+                    child: Text('Range Pick'),
+                  ),
                 ],
               ).then((value) {
                 if (value == 'Newest First') {
@@ -71,6 +75,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                   setState(() {
                     selectedSortOption = value as String;
                   });
+                }else if (value == 'Range Pick'){
+                 handleDateRangePick(context);
                 }
               });
             },
@@ -262,7 +268,28 @@ class DiaryEntryCard extends StatelessWidget {
 
 void doNothing(BuildContext context) {}
 
+void handleDateRangePick(BuildContext context) async {
+  final DateTimeRange? pickedDateRange = await showDateRangePicker(
+    context: context,
+   firstDate: DateTime(DateTime.now().year - 5),
+    lastDate: DateTime(DateTime.now().year + 5),
+    initialDateRange: DateTimeRange(
+            end: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 13),
+            start: DateTime.now(),
+          ),
+    locale: Localizations.localeOf(context),
+     saveText: 'Done',
+  );
+  
+  if (pickedDateRange != null) {
+    final startDate = pickedDateRange.start;
+    final endDate = pickedDateRange.end;
+    final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
+    final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
 
+    print('Selected date range: ${formattedStartDate} - ${formattedEndDate}');
+  }
+}
 
 Widget customIcon() {
   return Image.asset(

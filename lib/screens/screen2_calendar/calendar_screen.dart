@@ -80,7 +80,7 @@ class CalendarScreen extends StatelessWidget {
                   selectedDayPredicate: (day) =>
                       isSameDay(day, changer.selectedDate),
                   firstDay: DateTime(2000, 10, 1),
-                  lastDay: DateTime(2025, 12, 31),
+                  lastDay: DateTime.now(),
                   focusedDay: changer.selectedDate,
                   daysOfWeekStyle: DaysOfWeekStyle(
                     weekendStyle: TextStyle(color: Colors.red),

@@ -1,5 +1,6 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/models/profile_details.dart';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/home/provider_mainscreen.dart';
 
@@ -23,6 +24,11 @@ Future<void> main() async {
     Hive.registerAdapter(DiaryEntryAdapter());
   }
   await Hive.openBox<DiaryEntry>('_boxName');
+
+  if (!Hive.isAdapterRegistered(ProfileDetailsAdapter().typeId)) {
+    Hive.registerAdapter(ProfileDetailsAdapter());
+  }
+  await Hive.openBox<ProfileDetails>('_profileBoxName');
 
   runApp(
     MultiProvider(

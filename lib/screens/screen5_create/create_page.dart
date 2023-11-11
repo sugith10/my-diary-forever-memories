@@ -6,6 +6,7 @@ import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/provider_create.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -64,9 +65,58 @@ class _CreatePageState extends State<CreatePage> {
     }
   }
 
+  Color _selectedColor = Colors.white;// Initial background color
+
+  
+
+ void _showColorPickerDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Choose Background Color'),
+        
+        content: SingleChildScrollView(
+          child: ColorPicker(
+            pickerColor: _selectedColor,
+            onColorChanged: (color) {
+              setState(() {
+                _selectedColor = color;
+              });
+            },
+            enableAlpha: true,
+            showLabel: false,
+            pickerAreaHeightPercent: 0.8,
+            
+          ),
+        ),
+        
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              
+            },
+            child: Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: _selectedColor,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -90,13 +140,14 @@ class _CreatePageState extends State<CreatePage> {
                 }
 
                 if (title.isNotEmpty) {
-                    final entry = DiaryEntry(
+                  final entry = DiaryEntry(
                     id: DateTime.now().millisecondsSinceEpoch.toString(),
                     date: widget.changer.selectedDate,
                     title: title,
                     content: content,
                     imagePath: imagePath,
                   );
+                  widget.changer.selectDate(DateTime.now());
 
                   await DbFunctions().addDiaryEntry(entry).then((value) async {
                     log("Function completed: $value");
@@ -147,7 +198,7 @@ class _CreatePageState extends State<CreatePage> {
                         context: context,
                         initialDate: widget.changer.selectedDate,
                         firstDate: DateTime(2023),
-                        lastDate: DateTime(2029),
+                        lastDate: DateTime.now(),
                       );
                       if (pickedDate != null) {
                         widget.changer.selectDate(pickedDate);
@@ -282,25 +333,21 @@ class _CreatePageState extends State<CreatePage> {
             showUnselectedLabels: false,
             showSelectedLabels: false,
             type: BottomNavigationBarType.fixed,
-            currentIndex: bottomNavigationProvider
-                .selectedIndex, 
+            currentIndex: bottomNavigationProvider.selectedIndex,
             onTap: (index) {
-             
               switch (index) {
                 case 0:
                   break;
                 case 1:
-                  //Emoji
-                  //  openEmojiPicker(context);
                   toggleEmojiKeyboard();
                   print(_isEmojiKeyboardVisible);
                   break;
                 case 2:
-                  //Gallery
+                
                   getImage();
                   break;
                 case 3:
-                  //Color
+                 _showColorPickerDialog();
                   break;
               }
               bottomNavigationProvider.setSelectedIndex(index);
@@ -329,6 +376,7 @@ class _CreatePageState extends State<CreatePage> {
         },
       ),
     );
+    
   }
 
   void toggleEmojiKeyboard() {
@@ -337,3 +385,4 @@ class _CreatePageState extends State<CreatePage> {
     });
   }
 }
+

@@ -24,6 +24,6 @@ class ProfileDetails {
     required this.name,
     required this.email,
     this.location,
-    this.profilePicturePath,
+    this.profilePicturePath, String? imagePath,
   });
 }

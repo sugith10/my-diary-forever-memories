@@ -1,11 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:diary/models/profile_details.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../db/hive_profile_operations.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -18,7 +20,6 @@ class _ProfilePageState extends State<ProfilePage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  
   File? _profilePicture;
 
   Future getImage() async {
@@ -28,11 +29,11 @@ class _ProfilePageState extends State<ProfilePage> {
     final imageTemporary = File(image.path);
 
     setState(() {
-      this. _profilePicture = imageTemporary;
+      this._profilePicture = imageTemporary;
     });
   }
 
-   Future<String?> saveImage(File image) async {
+  Future<String?> saveImage(File image) async {
     try {
       final appDocDir = await getApplicationDocumentsDirectory();
       final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -42,6 +43,31 @@ class _ProfilePageState extends State<ProfilePage> {
     } catch (e) {
       log("Error saving image: $e");
       return null;
+    }
+  }
+
+  Future<void> saveProfileDetails() async {
+    final String name = _nameController.text.trim();
+    final String email = _emailController.text.trim();
+
+    if (name.isNotEmpty && email.isNotEmpty) {
+      final String? imagePath =
+          _profilePicture != null ? await saveImage(_profilePicture!) : null;
+
+      final ProfileDetails details = ProfileDetails(
+        id: '1',
+        name: name,
+        email: email,
+        location: _locationController.text.trim(),
+        profilePicturePath: imagePath,
+      );
+
+      await ProfileFunctions().addProfileDetails(details);
+
+      // log('Profile details added: $details');
+      log("Diary Entry: key=${details.id}  Name=${details.name}, Email=${details.email}, ImagePath=${details.profilePicturePath}");
+    } else {
+      log('something missing');
     }
   }
 
@@ -61,6 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
           Center(
             child: TextButton(
               onPressed: () async {
+                await saveProfileDetails();
                 Navigator.pop(context);
               },
               child: const Text(
@@ -104,7 +131,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 height: 3.h,
               ),
               GestureDetector(
-                onTap: (){
+                onTap: () {
                   getImage();
                 },
                 child: Stack(
@@ -114,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 130,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                         image: _profilePicture != null
+                        image: _profilePicture != null
                             ? DecorationImage(
                                 image: FileImage(_profilePicture!),
                                 fit: BoxFit.cover,
@@ -177,13 +204,13 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
-                      textCapitalization: TextCapitalization.words,
-                      controller: _nameController ,
-                       inputFormatters: [
-                    FilteringTextInputFormatter.allow(
-                      RegExp(r'^[a-zA-Z ]+$'), 
-                    ),
-                  ],
+                  textCapitalization: TextCapitalization.words,
+                  controller: _nameController,
+                  // inputFormatters: [
+                  //   FilteringTextInputFormatter.allow(
+                  //     RegExp(r'^[a-zA-Z ]+$'),
+                  //   ),
+                  // ],
                 ),
               ),
               Padding(
@@ -202,9 +229,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
-                      controller: _emailController ,
-                      keyboardType: TextInputType.emailAddress,
-                   
+                  controller: _emailController,
+                  keyboardType: TextInputType.emailAddress,
                 ),
               ),
               Padding(
@@ -223,8 +249,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
                       )),
-                      textCapitalization: TextCapitalization.words,
-                      controller: _locationController ,
+                  textCapitalization: TextCapitalization.words,
+                  controller: _locationController,
                 ),
               ),
             ],
@@ -234,10 +260,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-// Widget buildTextField(
-//   String labelText,
-//   String placeholder,
-// ) {
-//   return 
-// }
