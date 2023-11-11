@@ -10,9 +10,8 @@ import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
-
 class AccountScreen extends StatelessWidget {
-  AccountScreen({super.key});
+  AccountScreen({Key? key});
 
   String getGreeting() {
     var now = DateTime.now();
@@ -33,7 +32,6 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String greetingTitle = getGreeting();
-    
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +44,7 @@ class AccountScreen extends StatelessWidget {
                 context: context,
                 position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                 items: <PopupMenuEntry>[
-                 PopupMenuItem(
+                  PopupMenuItem(
                     value: 'Edit Profile',
                     child: Row(
                       children: [
@@ -58,7 +56,7 @@ class AccountScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                 PopupMenuItem(
+                  PopupMenuItem(
                     value: 'Logout',
                     child: Row(
                       children: [
@@ -67,7 +65,7 @@ class AccountScreen extends StatelessWidget {
                           color: Color.fromARGB(255, 197, 60, 50),
                         ),
                         SizedBox(
-                           width: 3.w,
+                          width: 3.w,
                         ),
                         const Text('Logout'),
                       ],
@@ -76,16 +74,16 @@ class AccountScreen extends StatelessWidget {
                 ],
               ).then((value) {
                 if (value == 'Edit Profile') {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
                 } else if (value == 'Logout') {
-                 _showPopupDialog(context);
+                  _showPopupDialog(context);
                 }
               });
             },
             icon: const Icon(Ionicons.ellipsis_vertical_outline,
                 color: Colors.black),
           ),
-         
         ],
         elevation: 0,
         bottom: PreferredSize(
@@ -101,95 +99,116 @@ class AccountScreen extends StatelessWidget {
         ),
       ),
 
-      //bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+      // bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
       body: Column(
         children: [
-          //profile start
+          // profile start
           Container(
             margin: const EdgeInsets.only(left: 20, right: 20),
             height: 30.h,
             width: 100.w,
-            // color: Colors.amber,
-            child: Column(
-              children: [
-                Spacer(),
-                ValueListenableBuilder(
-                  valueListenable: Hive.box<ProfileDetails>('_profileBoxName')
-                      .listenable(),
-                  builder: (context, box, child) {
-                    final profileFunctions = ProfileFunctions();
-                    final List<ProfileDetails> profileDetailsList =
-                        profileFunctions.getAllProfileDetails();
-
-                    if (profileDetailsList.isNotEmpty) {
-                      final ProfileDetails profileDetails =
-                          profileDetailsList.first;
-
-                      return Container(
-                        child: Column(
-                          children: [
-                            Container(
-                              width: 100,
-                              height: 100,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: profileDetails.profilePicturePath != null
-                                    ? DecorationImage(
-                                        image: FileImage(
-                                          File(profileDetails.profilePicturePath!),
-                                        ),
-                                        fit: BoxFit.cover,
-                                      )
-                                    : const DecorationImage(
-                                        image:
-                                            AssetImage('images/profile.png'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                border: Border.all(
-                                  width: 4,
-                                  color: Theme.of(context)
-                                      .scaffoldBackgroundColor,
-                                ),
-                                boxShadow: [
-                                  BoxShadow(
-                                    spreadRadius: 2,
-                                    blurRadius: 10,
-                                    color: Colors.black.withOpacity(0.1),
-                                  ),
-                                ],
+           
+            child: Center(
+              child: GestureDetector(
+                onTap: () {
+                   Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                },
+                child: Container(
+                  height: 20.h,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color.fromARGB(255, 80, 80, 80).withOpacity(0.2),
+                        spreadRadius: 5,
+                        blurRadius: 10,
+                        offset: const Offset(0, 3),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.white,
+                  ),
+                  child: ValueListenableBuilder(
+                      valueListenable: Hive.box<ProfileDetails>('_profileBoxName')
+                          .listenable(),
+                      builder: (context, box, child) {
+                        final profileFunctions = ProfileFunctions();
+                        final List<ProfileDetails> profileDetailsList =
+                            profileFunctions.getAllProfileDetails();
+                          
+                        if (profileDetailsList.isNotEmpty) {
+                          final ProfileDetails profileDetails =
+                              profileDetailsList.first;
+                          
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                               Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                     Text(
+                                profileDetails.name,
+                                style: TextStyle(fontSize: 18.sp),
                               ),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              profileDetails.name,
-                              style: TextStyle(fontSize: 24),
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              profileDetails.email,
-                              style: TextStyle(
-                                  color: Colors.black26, fontSize: 15),
-                            ),
-                          ],
-                        ),
-                      );
-                    } else {
-                      return SizedBox.shrink();
-                    }
-                  },
+                                Text(
+                                profileDetails.email,
+                                style: const TextStyle(
+                                    color: Colors.black26, fontSize: 15),
+                              ),
+                                  ],
+                                ),
+                                 SizedBox(width: 10.w),
+                              Container(
+                                  width: 100,
+                                height: 100,
+                                 decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: profileDetails.profilePicturePath != null
+                                      ? DecorationImage(
+                                          image: FileImage(
+                                            File(profileDetails.profilePicturePath!),
+                                          ),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : const DecorationImage(
+                                          image:
+                                              AssetImage('images/profile.png'),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        border: Border.all(
+                                    width: 4,
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                      color: Colors.black.withOpacity(0.1),
+                                    ),
+                                  ],
+                                        )
+                              ),
+                               
+                               
+                            ],
+                          );
+                        }else {
+                        return const SizedBox.shrink();
+                      }
+                    
+                      }),
                 ),
-              
-                Spacer(),
-              ],
+              ),
             ),
           ),
-          //profile end
+          // profile end
           Expanded(
             child: Container(
               margin: EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
-                  Spacer(),
                   InkWell(
                     onTap: () {
                       Navigator.push(
