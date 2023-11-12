@@ -110,7 +110,7 @@ class AccountScreen extends StatelessWidget {
            
             child: Center(
               child: GestureDetector(
-                onTap: () {
+                onDoubleTap: () {
                    Navigator.push(context,
                       MaterialPageRoute(builder: (context) => ProfilePage()));
                 },
