@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Widget> _mainScreens = [
@@ -14,6 +15,20 @@ class MainScreen extends StatelessWidget {
     CalendarScreen(),
     GalleryScreen(),
     AccountScreen(),
+  ];
+
+   final List<IconData> listOfIcons = [
+    Icons.menu_book_rounded,
+    Icons.calendar_month_outlined,
+    Ionicons.images_outline,
+    Icons.person_outline_sharp,
+  ];
+
+   final List<String> listOfStrings = [
+    'My Diary',
+    'Calendar',
+    'Gallery',
+    'Account',
   ];
 
   MainScreen({super.key});
@@ -96,10 +111,10 @@ class MainScreen extends StatelessWidget {
                               curve: Curves.fastLinearToSlowEaseIn,
                               child: Text(
                                 isSelected ? listOfStrings[index] : '',
-                                style: const TextStyle(
+                                style:  TextStyle(
                                   color: Colors.black87,
                                   fontWeight: FontWeight.w600,
-                                  fontSize: 15,
+                                  fontSize: 10.sp,
                                 ),
                               ),
                             ),
@@ -132,17 +147,5 @@ class MainScreen extends StatelessWidget {
     );
   }
 
-  List<IconData> listOfIcons = [
-    Icons.menu_book_rounded,
-    Icons.calendar_month_outlined,
-    Ionicons.images_outline,
-    Icons.person_outline_sharp,
-  ];
-
-  List<String> listOfStrings = [
-    'My Diary',
-    'Calendar',
-    'Gallery',
-    'Account',
-  ];
+  
 }

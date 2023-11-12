@@ -184,7 +184,7 @@ class DiaryEntryCard extends StatelessWidget {
 
           if (entry.id != null) {
                 DbFunctions().deleteDiary(entry.id!);
-                 diaryEntriesNotifier.notifyListeners();
+                //  diaryEntriesNotifier.notifyListeners();
               }else{
                 print('no data found');
               }

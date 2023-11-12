@@ -8,11 +8,12 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatelessWidget {
+  
+
+  final DateTime today = DateTime.now();
+
+  // final int currentIndex = 0;
    CalendarScreen({super.key});
-
-  DateTime today = DateTime.now();
-
-  var currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
