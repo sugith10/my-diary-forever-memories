@@ -1,5 +1,4 @@
 import 'package:diary/screens/home/provider_mainscreen.dart';
-
 import 'package:diary/screens/screen1_my_diary/mydiary_screen.dart';
 import 'package:diary/screens/screen2_calendar/calendar_screen.dart';
 import 'package:diary/screens/screen3_gallery/gallery_screen.dart';

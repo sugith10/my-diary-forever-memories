@@ -1,4 +1,3 @@
-import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/models/profile_details.dart';
 import 'package:diary/screens/home/mainscreen.dart';
@@ -32,25 +31,25 @@ Future<void> main() async {
 
   runApp(
     MultiProvider(
-  providers: [
-     ChangeNotifierProvider(
-      create: (context) => CreatePageProvider(),
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => CreatePageProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => Changer(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => OnboardingState(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => MainScreenProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        )
+      ],
+      child: MyApp(),
     ),
-    ChangeNotifierProvider(
-      create: (context) => Changer(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => OnboardingState(),
-    ),
-    ChangeNotifierProvider(
-      create: (context) => MainScreenProvider(),
-    ),
-    ChangeNotifierProvider(
-  create: (context) => AuthProvider(),
-    )
-  ],
-  child: MyApp(),
-),
   );
 }
 
@@ -74,7 +73,6 @@ class MyApp extends StatelessWidget {
                 onboardingState: Provider.of<OnboardingState>(context),
               ),
           '/main': (context) => MainScreen(),
-          
         },
       ),
     );

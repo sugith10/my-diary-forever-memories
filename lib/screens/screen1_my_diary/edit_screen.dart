@@ -3,8 +3,7 @@ import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:flutter/material.dart';
-import 'package:focused_menu/focused_menu.dart';
-import 'package:focused_menu/modals.dart';
+
 import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/screen1_my_diary/editScreen.dart';
+import 'package:diary/screens/screen1_my_diary/edit_screen.dart';
 
 import 'package:flutter/material.dart';
 import 'package:diary/db/hive_operations.dart';
