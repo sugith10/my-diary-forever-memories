@@ -10,6 +10,7 @@ import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
+
 class AccountScreen extends StatelessWidget {
   AccountScreen({Key? key});
 
@@ -36,7 +37,7 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(greetingTitle, style: const TextStyle(color: Colors.black)),
+        title: Text(greetingTitle, style:  TextStyle(color: Colors.black, fontSize: 17.sp)),
         actions: [
           IconButton(
             onPressed: () {

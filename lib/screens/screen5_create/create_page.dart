@@ -19,7 +19,7 @@ import 'package:sizer/sizer.dart';
 class CreatePage extends StatefulWidget {
   final Changer changer;
 
-  CreatePage({Key? key, required this.changer}) : super(key: key);
+  const CreatePage({Key? key, required this.changer}) : super(key: key);
 
   @override
   State<CreatePage> createState() => _CreatePageState();
@@ -203,7 +203,7 @@ class _CreatePageState extends State<CreatePage> {
                       if (pickedDate != null) {
                         widget.changer.selectDate(pickedDate);
                         print(widget.changer.selectedDate);
-                        var selectedate = widget.changer.selectedDate;
+                        // var selectedate = widget.changer.selectedDate;
                       }
                     },
                     child: Row(

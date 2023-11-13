@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         icon: const Icon(Ionicons.chevron_back_outline, color: Colors.black, size: 30),
       ),
       elevation: 0,
-      centerTitle: true,
+   
       bottom: PreferredSize(
         preferredSize: Size.fromHeight(0),
         child: Container(

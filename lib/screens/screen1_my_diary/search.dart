@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:diary/screens/screen1_my_diary/diary.dart';
+import 'package:sizer/sizer.dart';
 
 class MySearchAppBar extends StatefulWidget {
   @override
@@ -23,7 +24,6 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
       searchResults = [];
     });
   } else {
-
     setState(() {
       searchResults = diaryBox.values.where((entry) {
         return entry.title.toLowerCase().contains(query);
@@ -57,9 +57,9 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
               searchDiaryEntries(query);
             },
             autofocus: true,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: 'Search...',
-              hintStyle: TextStyle(fontSize: 20),
+              hintStyle: TextStyle(fontSize: 16.sp),
               border: InputBorder.none,
             ),
             cursorColor: Color.fromARGB(115, 95, 95, 95),

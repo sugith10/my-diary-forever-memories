@@ -8,12 +8,11 @@ import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatelessWidget {
-  
+  CalendarScreen({super.key});
 
   final DateTime today = DateTime.now();
 
   // final int currentIndex = 0;
-   CalendarScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +31,7 @@ class CalendarScreen extends StatelessWidget {
             },
             child: Row(
               children: [
-               Consumer<Changer>(
+                Consumer<Changer>(
                   builder: (context, changer, child) {
                     return Text(
                       DateFormat('d MMMM,y').format(changer.selectedDate),
@@ -44,8 +43,7 @@ class CalendarScreen extends StatelessWidget {
                 Icon(
                   changer.isCalendarVisible
                       ? Ionicons.chevron_down_outline
-                      : Ionicons
-                          .chevron_up_outline, 
+                      : Ionicons.chevron_up_outline,
                   color: Colors.black,
                 ),
               ],
@@ -97,8 +95,14 @@ class CalendarScreen extends StatelessWidget {
           const Spacer(),
           InkWell(
             onTap: () {
-             Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: CreatePage(changer: changer,)));
-
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.size,
+                      alignment: Alignment.bottomCenter,
+                      child: CreatePage(
+                        changer: changer,
+                      )));
             },
             child: Container(
               margin: EdgeInsets.only(left: 20, right: 20),
@@ -135,5 +139,3 @@ class CalendarScreen extends StatelessWidget {
     );
   }
 }
-
-

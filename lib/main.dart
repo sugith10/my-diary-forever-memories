@@ -2,7 +2,6 @@ import 'package:diary/models/diary_entry.dart';
 import 'package:diary/models/profile_details.dart';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/home/provider_mainscreen.dart';
-
 import 'package:diary/screens/screen0.1_auth/provider_auth.dart';
 import 'package:diary/screens/screen0_welcome/onboarding.dart';
 import 'package:diary/screens/screen0_welcome/provider_onboarding.dart';
@@ -11,6 +10,7 @@ import 'package:diary/screens/screen0_welcome/splash.dart';
 import 'package:diary/screens/screen5_create/provider_create.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -28,6 +28,8 @@ Future<void> main() async {
     Hive.registerAdapter(ProfileDetailsAdapter());
   }
   await Hive.openBox<ProfileDetails>('_profileBoxName');
+
+
 
   runApp(
     MultiProvider(

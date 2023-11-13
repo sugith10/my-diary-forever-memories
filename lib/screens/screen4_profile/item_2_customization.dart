@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 
 class CustomizationPage extends StatelessWidget {
-   CustomizationPage({super.key});
+   const CustomizationPage({super.key});
 
   @override
   Widget build(BuildContext context) {

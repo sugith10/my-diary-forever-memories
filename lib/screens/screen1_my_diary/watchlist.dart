@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:sizer/sizer.dart';
 
 class WatchList extends StatelessWidget {
   const WatchList({super.key});
@@ -14,8 +15,13 @@ class WatchList extends StatelessWidget {
           },
           icon: const Icon(Ionicons.chevron_back_outline,
               color: Colors.black, size: 30),
+              
         ),
+        title: Text('Saved', style: TextStyle(color: Colors.black, fontSize: 17.sp),),
         elevation: 0,
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.add, color: Colors.black, size: 32,))
+        ],
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(0),
           child: Container(

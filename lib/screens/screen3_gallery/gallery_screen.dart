@@ -1,12 +1,10 @@
 import 'dart:io';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen1_my_diary/diary.dart';
-
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:sizer/sizer.dart';
 
 class GalleryScreen extends StatelessWidget {
   const GalleryScreen({Key? key});
@@ -19,9 +17,9 @@ class GalleryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text(
+        title:  Text(
           'Gallery',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black, fontSize: 17.sp),
         ),
         elevation: 0,
         bottom: PreferredSize(
