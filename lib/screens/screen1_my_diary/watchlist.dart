@@ -1,3 +1,4 @@
+import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
@@ -20,19 +21,9 @@ class WatchList extends StatelessWidget {
         title: Text('Saved', style: TextStyle(color: Colors.black, fontSize: 17.sp),),
         elevation: 0,
         actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.add, color: Colors.black, size: 32,))
+          IconButton(onPressed: (){}, icon: Icon(Icons.add, color: Colors.black, size: 30,))
         ],
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 0, 0, 0),
-                width: 0.1,
-              ),
-            ),
-          ),
-        ),
+        bottom:  const BottomBorderWidget()
       ),
     );
   }

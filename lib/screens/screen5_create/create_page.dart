@@ -4,6 +4,7 @@ import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/provider_create.dart';
+import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -125,7 +126,7 @@ class _CreatePageState extends State<CreatePage> {
             Navigator.pop(context);
           },
           icon: Icon(Ionicons.chevron_back_outline,
-              color: Colors.black, size: 25),
+              color: Colors.black, size: 30),
         ),
         actions: [
           Center(
@@ -172,17 +173,7 @@ class _CreatePageState extends State<CreatePage> {
           ),
         ],
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 0, 0, 0),
-                width: 0.1,
-              ),
-            ),
-          ),
-        ),
+        bottom:  const BottomBorderWidget()
       ),
       body: Container(
         child: Column(

@@ -12,7 +12,6 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class MyDiaryScreen extends StatefulWidget {
   const MyDiaryScreen({Key? key}) : super(key: key);
@@ -22,145 +21,131 @@ class MyDiaryScreen extends StatefulWidget {
 }
 
 class _MyDiaryScreenState extends State<MyDiaryScreen> {
+  
   String selectedSortOption = 'Newest First';
   @override
   Widget build(BuildContext context) {
-       return SafeArea(
-         child: Scaffold(
-             body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              automaticallyImplyLeading: false,
-              title: Text(
-                'My Diary',
-                style: TextStyle(color: Colors.black, fontSize: 17.sp),
-              ),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageTransition(
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: const Text('My Diary', style: TextStyle(color: Colors.black)),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
                         type: PageTransitionType.fade,
-                        child: MySearchAppBar(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.search, color: Colors.black),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.topToBottom,
-                            child: WatchList()));
-                  },
-                  icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
-                ),
-                IconButton(
-                  onPressed: () {
-                    showMenu(
-                      context: context,
-                      position: RelativeRect.fromLTRB(1, 0, 0, 5),
-                      items: <PopupMenuEntry>[
-                        const PopupMenuItem(
-                          value: 'Newest First',
-                          child: Text('Newest First'),
-                        ),
-                        const PopupMenuItem(
-                          value: 'Oldest First',
-                          child: Text('Oldest First'),
-                        ),
-                        const PopupMenuItem(
-                          value: 'Range Pick',
-                          child: Text('Range Pick'),
-                        ),
-                      ],
-                    ).then((value) {
-                      if (value == 'Newest First') {
-                        setState(() {
-                          selectedSortOption = value as String;
-                        });
-                      } else if (value == 'Oldest First') {
-                        setState(() {
-                          selectedSortOption = value as String;
-                        });
-                      } else if (value == 'Range Pick') {
-                        handleDateRangePick(context);
-                      }
+                        child: MySearchAppBar()));
+              },
+              icon: const Icon(Icons.search, color: Colors.black),
+            ),
+            IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.fade, child: WatchList()));
+              },
+              icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
+            ),
+            IconButton(
+              onPressed: () {
+                showMenu(
+                  context: context,
+                  position: RelativeRect.fromLTRB(1, 0, 0, 5),
+                  items: <PopupMenuEntry>[
+                    const PopupMenuItem(
+                      value: 'Newest First',
+                      child: Text('Newest First'),
+                    ),
+                    const PopupMenuItem(
+                      value: 'Oldest First',
+                      child: Text('Oldest First'),
+                    ),
+                  ],
+                ).then((value) {
+                  if (value == 'Newest First') {
+                    setState(() {
+                      selectedSortOption = value as String;
                     });
-                  },
-                  icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                      color: Colors.black),
+                  } else if (value == 'Oldest First') {
+                    setState(() {
+                      selectedSortOption = value as String;
+                    });
+                  }
+                });
+              },
+              icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                  color: Colors.black),
+            ),
+          ],
+          elevation: 0,
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 0.1,
                 ),
-              ],
-              bottom: PreferredSize(
-        preferredSize: Size.fromHeight(0),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              width: 0.1,
+              ),
             ),
           ),
         ),
-      ),
-              elevation: 0,
-              pinned: false, // Keep the app bar pinned
-              floating: true, // Make the app bar float
-              snap: false,
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: ValueListenableBuilder(
+              valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+              builder: (context, value, child) {
+                var sortedEntries = value.values.toList();
+                switch (selectedSortOption) {
+                  case 'Newest First':
+                    sortedEntries.sort((a, b) => b.date.compareTo(a.date));
+                    break;
+                  case 'Oldest First':
+                    sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+                    break;
+                  default:
+                    sortedEntries.sort((a, b) => b.date.compareTo(a.date));
+                    break;
+                }
+
+                return ListView.builder(
+                  itemCount: sortedEntries.length,
+                  itemBuilder: (context, index) {
+                    final data = sortedEntries[index];
+                    return DiaryEntryCard(data, index);
+                  },
+                );
+              },
             ),
-            SliverPadding(
-              padding: const EdgeInsets.all(8.0),
-              sliver: ValueListenableBuilder(
-                valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-                builder: (context, value, child) {
-                  var sortedEntries = value.values.toList();
-                  switch (selectedSortOption) {
-                    case 'Newest First':
-                      sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                      break;
-                    case 'Oldest First':
-                      sortedEntries.sort((a, b) => a.date.compareTo(b.date));
-                      break;
-                    default:
-                      sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                      break;
-                  }
-       
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        final data = sortedEntries[index];
-                        return DiaryEntryCard(data, index);
-                      },
-                      childCount: sortedEntries.length,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-             ),
-             floatingActionButton: FloatingActionButton(
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             final changer = Provider.of<Changer>(context, listen: false);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreatePage(
-                  changer: changer,
-                ),
-              ),
-            );
+            // Navigator.push(
+            //     context,
+            //     PageTransition(
+            //         type: PageTransitionType.rightToLeftJoined,
+            //         child: CreatePage(
+            //           changer: changer,
+            //         ),
+            //         childCurrent: this));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> CreatePage(
+                      changer: changer,
+                    )));
           },
           backgroundColor: Color.fromARGB(255, 255, 254, 254),
           child: customIcon(),
           elevation: 3,
-             ),
-           ),
-       ); }
+        ),
+      ),
+    );
+  }
 }
 
 class DiaryEntryCard extends StatelessWidget {
@@ -173,12 +158,18 @@ class DiaryEntryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(0),
+
+      
       startActionPane: ActionPane(
+        
         motion: const ScrollMotion(),
-        dismissible: DismissiblePane(onDismissed: () {
-          print('Start Action Dismissed');
-        }),
+
+       
+        dismissible: DismissiblePane(onDismissed: () {}),
+
+      
         children: const [
+        
           SlidableAction(
             onPressed: doNothing,
             backgroundColor: Color(0xFF7BC043),
@@ -188,20 +179,16 @@ class DiaryEntryCard extends StatelessWidget {
           ),
         ],
       ),
-      endActionPane: ActionPane(
-        motion: ScrollMotion(),
-        dismissible: DismissiblePane(onDismissed: () {
 
-          if (entry.id != null) {
-                DbFunctions().deleteDiary(entry.id!);
-                //  diaryEntriesNotifier.notifyListeners();
-              }else{
-                print('no data found');
-              }
-        }),
+    
+      endActionPane: ActionPane(
+        motion: BehindMotion(),
+        dismissible: DismissiblePane(onDismissed: () {}),
         children: [
           SlidableAction(
-            onPressed: doNothing,
+            
+            onPressed: (context) => deleteDiaryEntry(entry),
+
             backgroundColor: Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -209,6 +196,7 @@ class DiaryEntryCard extends StatelessWidget {
           ),
         ],
       ),
+
       child: InkWell(
         onTap: () {
           //  Navigator.push(context, MaterialPageRoute(builder: (context)=> DiaryDetailPage(entry: entry,)));
@@ -278,27 +266,11 @@ class DiaryEntryCard extends StatelessWidget {
 
 void doNothing(BuildContext context) {}
 
-void handleDateRangePick(BuildContext context) async {
-  final DateTimeRange? pickedDateRange = await showDateRangePicker(
-    context: context,
-   firstDate: DateTime(DateTime.now().year - 5),
-    lastDate: DateTime(DateTime.now().year + 5),
-    initialDateRange: DateTimeRange(
-            end: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 13),
-            start: DateTime.now(),
-          ),
-    locale: Localizations.localeOf(context),
-     saveText: 'Done',
-  );
-  
-  if (pickedDateRange != null) {
-    final startDate = pickedDateRange.start;
-    final endDate = pickedDateRange.end;
-    final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
-    final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
-
-    print('Selected date range: ${formattedStartDate} - ${formattedEndDate}');
+void deleteDiaryEntry(DiaryEntry entry) async {
+  if (entry.id != null) {
+    DbFunctions().deleteDiary(entry.id!);
   }
+  print(entry.id);
 }
 
 Widget customIcon() {

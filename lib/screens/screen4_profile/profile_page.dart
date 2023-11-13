@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/models/profile_details.dart';
+import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -86,17 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 0, 0, 0),
-                width: 0.1,
-              ),
-            ),
-          ),
-        ),
+        bottom:  const BottomBorderWidget()
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
