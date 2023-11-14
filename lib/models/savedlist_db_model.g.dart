@@ -19,7 +19,7 @@ class SavedListAdapter extends TypeAdapter<SavedList> {
     return SavedList(
       id: fields[0] as String,
       date: fields[1] as DateTime,
-      listname: fields[2] as String,
+      listName: fields[2] as String,
       diaryEntryIds: (fields[3] as List?)?.cast<String>(),
     );
   }
@@ -33,7 +33,7 @@ class SavedListAdapter extends TypeAdapter<SavedList> {
       ..writeByte(1)
       ..write(obj.date)
       ..writeByte(2)
-      ..write(obj.listname)
+      ..write(obj.listName)
       ..writeByte(3)
       ..write(obj.diaryEntryIds);
   }

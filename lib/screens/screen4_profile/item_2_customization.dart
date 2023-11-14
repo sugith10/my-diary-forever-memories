@@ -1,4 +1,4 @@
-import 'package:diary/screens/widgets/appbar.dart';
+import 'package:diary/screens/widgets/appbar_bottom.dart';
 import 'package:diary/screens/widgets/info_container.dart';
 import 'package:flutter/material.dart';
 

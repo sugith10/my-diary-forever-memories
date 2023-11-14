@@ -1,5 +1,6 @@
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
+import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -34,10 +35,7 @@ class CalendarScreen extends StatelessWidget {
               children: [
                 Consumer<Changer>(
                   builder: (context, changer, child) {
-                    return Text(
-                      DateFormat('d MMMM,y').format(changer.selectedDate),
-                      style: TextStyle(color: Colors.black),
-                    );
+                    return AppbarTitleWidget(text: DateFormat('d MMMM,y').format(changer.selectedDate),);
                   },
                 ),
                 SizedBox(width: 10),

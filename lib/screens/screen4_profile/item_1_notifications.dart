@@ -1,5 +1,5 @@
 import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/widgets/appbar.dart';
+import 'package:diary/screens/widgets/appbar_bottom.dart';
 import 'package:diary/screens/widgets/info_container.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';

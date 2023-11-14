@@ -4,20 +4,21 @@ part 'profile_details.g.dart';
 
 @HiveType(typeId: 1)
 class ProfileDetails {
+
   @HiveField(0)
-  String? id;
+  final String? id;
 
   @HiveField(1)
-  String name;
+  final String name;
 
   @HiveField(2)
-  String email;
+  final String email;
 
   @HiveField(3)
-  String? location;
+  final String? location;
 
   @HiveField(4)
-  String? profilePicturePath;
+  final String? profilePicturePath;
 
   ProfileDetails({
     this.id,
@@ -26,4 +27,5 @@ class ProfileDetails {
     this.location,
     this.profilePicturePath, 
   });
+  
 }

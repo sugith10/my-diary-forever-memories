@@ -1,10 +1,11 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen1_my_diary/diary.dart';
-import 'package:diary/screens/screen1_my_diary/watchlist.dart';
+import 'package:diary/screens/screen1_my_diary/saved_list/saved_list.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
+import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -32,10 +33,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
           slivers: [
             SliverAppBar(
               automaticallyImplyLeading: false,
-              title: Text(
-                'My Diary',
-                style: TextStyle(color: Colors.black, fontSize: 17.sp),
-              ),
+              title:const AppbarTitleWidget(text: 'My Diary'),
               actions: [
                 IconButton(
                   onPressed: () {
@@ -55,7 +53,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                         context,
                         PageTransition(
                             type: PageTransitionType.topToBottom,
-                            child: WatchList()));
+                            child: const SavedListScreen()));
                   },
                   icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
                 ),

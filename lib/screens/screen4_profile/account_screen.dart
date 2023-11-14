@@ -4,6 +4,7 @@ import 'package:diary/models/profile_details.dart';
 import 'package:diary/screens/screen4_profile/item_1_notifications.dart';
 import 'package:diary/screens/screen4_profile/item_2_customization.dart';
 import 'package:diary/screens/screen4_profile/profile_page.dart';
+import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -38,7 +39,7 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text(greetingTitle, style:  TextStyle(color: Colors.black, fontSize: 17.sp)),
+        title: AppbarTitleWidget(text: greetingTitle,),
         actions: [
           IconButton(
             onPressed: () {
@@ -77,7 +78,7 @@ class AccountScreen extends StatelessWidget {
               ).then((value) {
                 if (value == 'Edit Profile') {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                      MaterialPageRoute(builder: (context) => const ProfilePage()));
                 } else if (value == 'Logout') {
                   _showPopupDialog(context);
                 }

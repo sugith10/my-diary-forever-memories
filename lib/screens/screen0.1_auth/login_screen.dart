@@ -135,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                           EdgeInsets.symmetric(horizontal: 5.w, vertical: .3.h),
                       decoration: BoxDecoration(
                           color:
-                              isFocusedEmail ? Colors.white : Color(0xFFF1F0F5),
+                              isFocusedEmail ? Colors.white : const Color(0xFFF1F0F5),
                           border:
                               Border.all(width: 1, color: Color(0xFFD2D2D4)),
                           borderRadius: BorderRadius.circular(12),

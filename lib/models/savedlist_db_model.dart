@@ -4,6 +4,7 @@ part 'savedlist_db_model.g.dart';
 
 @HiveType(typeId: 2)
 class SavedList {
+
   @HiveField(0)
   String id;
 
@@ -11,7 +12,7 @@ class SavedList {
   DateTime date;
 
   @HiveField(2)
-  String listname;
+  String listName;
 
   @HiveField(3)
   List<String> diaryEntryIds;
@@ -19,7 +20,8 @@ class SavedList {
   SavedList({
     required this.id,
     required this.date,
-    required this.listname,
+    required this.listName,
     List<String>? diaryEntryIds,
   }) : diaryEntryIds = diaryEntryIds ?? [];
+  
 }

@@ -44,6 +44,4 @@ Future<void> updateDiaryEntry(DiaryEntry entry) async {
       log('Entry with ID ${entry.id} not found, cannot update.');
     }
   }
-
-
 }

@@ -92,7 +92,7 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
                       );
                     },
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
+                      padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
                       child: Container(
                         padding: EdgeInsets.all(16.0),
                         decoration: BoxDecoration(

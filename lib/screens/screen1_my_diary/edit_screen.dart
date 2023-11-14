@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sizer/sizer.dart';
 
 class EditDiaryEntryScreen extends StatefulWidget {
   final DiaryEntry entry;
@@ -105,9 +106,9 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                 }
                 Navigator.pop(context);
               },
-              child: const Text(
+              child: Text(
                 'Save',
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                style: TextStyle(color: Colors.black, fontSize: 15.sp),
               ),
             ),
           ),
