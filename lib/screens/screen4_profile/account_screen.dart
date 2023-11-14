@@ -4,10 +4,7 @@ import 'package:diary/models/profile_details.dart';
 import 'package:diary/screens/screen4_profile/item_1_notifications.dart';
 import 'package:diary/screens/screen4_profile/item_2_customization.dart';
 import 'package:diary/screens/screen4_profile/profile_page.dart';
-<<<<<<< HEAD
-=======
 import 'package:diary/screens/widgets/bottomborder.dart';
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:ionicons/ionicons.dart';
@@ -91,24 +88,10 @@ class AccountScreen extends StatelessWidget {
           ),
         ],
         elevation: 0,
-<<<<<<< HEAD
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 0, 0, 0),
-                width: 0.1,
-              ),
-            ),
-          ),
-        ),
-=======
-        bottom:  const BottomBorderWidget()
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
+        bottom: const BottomBorderWidget()
       ),
 
-      // bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+      
       body: Column(
         children: [
           // profile start
@@ -297,7 +280,7 @@ class AccountScreen extends StatelessWidget {
                   SizedBox(
                     height: 1.2.h,
                   ),
-                  Divider(),
+                 const Divider(),
                   SizedBox(
                     height: 1.2.h,
                   ),
@@ -318,7 +301,7 @@ class AccountScreen extends StatelessWidget {
                   SizedBox(
                     height: 1.2.h,
                   ),
-                  Divider(),
+                  const Divider(),
                   SizedBox(
                     height: 1.2.h,
                   ),
@@ -337,7 +320,7 @@ class AccountScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Spacer()
+                 const  Spacer()
                 ],
               ),
             ),

@@ -21,23 +21,16 @@ class WatchList extends StatelessWidget {
         title: Text('Saved', style: TextStyle(color: Colors.black, fontSize: 17.sp),),
         elevation: 0,
         actions: [
-<<<<<<< HEAD
           IconButton(onPressed: (){
             _showCreateListDialog(context);
           }, icon: Icon(Icons.add, color: Colors.black, size: 32,))
         ],
         bottom: const BottomBorderWidget(),
         
-=======
-          IconButton(onPressed: (){}, icon: Icon(Icons.add, color: Colors.black, size: 30,))
-        ],
-        bottom:  const BottomBorderWidget()
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
       ),
     );
   }
 }
-<<<<<<< HEAD
 
 
 
@@ -96,5 +89,3 @@ void _solkhowCreateListDialog(BuildContext context) {
     );
   }
 
-=======
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228

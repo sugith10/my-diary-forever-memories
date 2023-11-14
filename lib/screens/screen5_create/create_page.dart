@@ -4,10 +4,6 @@ import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/provider_create.dart';
-<<<<<<< HEAD
-=======
-import 'package:diary/screens/widgets/bottomborder.dart';
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -52,7 +48,7 @@ class _CreatePageState extends State<CreatePage> {
     final imageTemporary = File(image.path);
 
     setState(() {
-      this._image = imageTemporary;
+      _image = imageTemporary;
     });
   }
 
@@ -78,7 +74,7 @@ class _CreatePageState extends State<CreatePage> {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text('Choose Background Color'),
+        title: const Text('Choose Background Color'),
         
         content: SingleChildScrollView(
           child: ColorPicker(
@@ -100,14 +96,14 @@ class _CreatePageState extends State<CreatePage> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Cancel'),
+            child: const Text('Cancel'),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(context).pop();
               
             },
-            child: Text('OK'),
+            child:const  Text('OK'),
           ),
         ],
       );
@@ -128,12 +124,8 @@ class _CreatePageState extends State<CreatePage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Ionicons.chevron_back_outline,
-<<<<<<< HEAD
+          icon: const Icon(Ionicons.chevron_back_outline,
               color: Colors.black, size: 25),
-=======
-              color: Colors.black, size: 30),
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
         ),
         actions: [
           Center(
@@ -170,9 +162,10 @@ class _CreatePageState extends State<CreatePage> {
                     log("Error adding DiaryEntry: $error");
                   });
                 }
+                // ignore: use_build_context_synchronously
                 Navigator.pop(context);
               },
-              child: Text(
+              child: const Text(
                 'Save',
                 style: TextStyle(color: Colors.black, fontSize: 20),
               ),
@@ -180,28 +173,23 @@ class _CreatePageState extends State<CreatePage> {
           ),
         ],
         elevation: 0,
-<<<<<<< HEAD
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
+          preferredSize: const Size.fromHeight(0),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: const Color.fromARGB(255, 0, 0, 0),
                 width: 0.1,
               ),
             ),
           ),
         ),
-=======
-        bottom:  const BottomBorderWidget()
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
       ),
-      body: Container(
-        child: Column(
+      body:  Column(
           children: [
             SizedBox(height: 2.h),
             Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Row(
                 children: [
                   TextButton(
@@ -214,7 +202,7 @@ class _CreatePageState extends State<CreatePage> {
                       );
                       if (pickedDate != null) {
                         widget.changer.selectDate(pickedDate);
-                        print(widget.changer.selectedDate);
+                        log(widget.changer.selectedDate as String);
                         // var selectedate = widget.changer.selectedDate;
                       }
                     },
@@ -225,7 +213,7 @@ class _CreatePageState extends State<CreatePage> {
                             return Text(
                               DateFormat('d MMMM,y')
                                   .format(changer.selectedDate),
-                              style: TextStyle(color: Colors.black),
+                              style: const TextStyle(color: Colors.black),
                             );
                           },
                         ),
@@ -236,12 +224,12 @@ class _CreatePageState extends State<CreatePage> {
                       ],
                     ),
                   ),
-                  Spacer(),
+                 const Spacer(),
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: TextField(
                 controller: titleController,
                 decoration: const InputDecoration(
@@ -269,7 +257,7 @@ class _CreatePageState extends State<CreatePage> {
             ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                 child: TextField(
                   maxLines: null,
                   minLines: null,
@@ -282,7 +270,7 @@ class _CreatePageState extends State<CreatePage> {
                   ),
                   cursorColor: Colors.red[900],
                   cursorHeight: 18,
-                  style: TextStyle(fontSize: 18),
+                  style: const TextStyle(fontSize: 18),
                   textCapitalization: TextCapitalization.sentences,
                 ),
               ),
@@ -338,7 +326,7 @@ class _CreatePageState extends State<CreatePage> {
             )
           ],
         ),
-      ),
+      
       bottomNavigationBar: Consumer<CreatePageProvider>(
         builder: (context, bottomNavigationProvider, child) {
           return BottomNavigationBar(
@@ -352,7 +340,7 @@ class _CreatePageState extends State<CreatePage> {
                   break;
                 case 1:
                   toggleEmojiKeyboard();
-                  print(_isEmojiKeyboardVisible);
+                  log(_isEmojiKeyboardVisible as String);
                   break;
                 case 2:
                 

@@ -116,7 +116,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           decoration: BoxDecoration(
                               color: timeFormat == "AM"
                                   ? Colors.grey.shade800
-                                  : Color.fromARGB(255, 186, 183, 183),
+                                  : const Color.fromARGB(255, 186, 183, 183),
                               border: Border.all(color: Colors.black)),
                           child: const Text(
                             "AM",
@@ -133,7 +133,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             timeFormat = "PM";
                           });
 
-                          print('pm');
+                        
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
@@ -141,7 +141,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           decoration: BoxDecoration(
                             color: timeFormat == "PM"
                                 ? Colors.grey.shade800
-                                : Color.fromARGB(255, 186, 183, 183),
+                                : const Color.fromARGB(255, 186, 183, 183),
                             border: Border.all(color: Colors.black),
                           ),
                           child: const Text(
@@ -158,16 +158,16 @@ class _NotificationPageState extends State<NotificationPage> {
             SizedBox(
               height: 2.h,
             ),
-            Spacer(),
+            const Spacer(),
             Container(
               height: 55,
-              margin: EdgeInsets.all(20),
+              margin:const EdgeInsets.all(20),
               width: double.infinity,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(40)),
+                borderRadius: const BorderRadius.all(Radius.circular(40)),
                 border: Border.all(
                   width: 2,
-                  color: Color(0xFFE2E8F0),
+                  color: const Color(0xFFE2E8F0),
                 ),
               ),
               child: ElevatedButton(
@@ -181,7 +181,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'Satoshi'),
-                    backgroundColor: Color(0xFF835DF1),
+                    backgroundColor: const Color(0xFF835DF1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
@@ -193,7 +193,7 @@ class _NotificationPageState extends State<NotificationPage> {
                 ),
               ),
             ),
-            Spacer(),
+           const Spacer(),
           ],
         ),
       ),

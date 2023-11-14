@@ -1,10 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/models/profile_details.dart';
-<<<<<<< HEAD
-=======
-import 'package:diary/screens/widgets/bottomborder.dart';
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -90,26 +86,22 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
         elevation: 0,
-<<<<<<< HEAD
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
+          preferredSize: const Size.fromHeight(0),
           child: Container(
             decoration: BoxDecoration(
               border: Border.all(
-                color: Color.fromARGB(255, 0, 0, 0),
+                color: const Color.fromARGB(255, 0, 0, 0),
                 width: 0.1,
               ),
             ),
           ),
         ),
-=======
-        bottom:  const BottomBorderWidget()
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           child: ValueListenableBuilder(
             valueListenable:
                 Hive.box<ProfileDetails>('_profileBoxName').listenable(),
@@ -185,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       width: 3.5,
                                       color: Theme.of(context)
                                           .scaffoldBackgroundColor),
-                                  color: Color(0xFF835DF1)),
+                                  color: const Color(0xFF835DF1)),
                               child: const Icon(
                                 Icons.edit,
                                 color: Color.fromARGB(255, 255, 255, 255),

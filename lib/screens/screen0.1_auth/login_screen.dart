@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                     duration: const Duration(milliseconds: 1000),
                     child: IconButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> WelcomePage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const WelcomePage()));
                         },
                         icon: Icon(
                           IconlyBroken.arrow_left,
@@ -149,8 +149,8 @@ class _LoginPageState extends State<LoginPage> {
                                   )
                           ]),
                       child: TextField(
-                        style: TextStyle(fontWeight: FontWeight.w500),
-                        decoration: InputDecoration(
+                        style: const TextStyle(fontWeight: FontWeight.w500),
+                        decoration: const InputDecoration(
                             border: InputBorder.none, hintText: 'Your Email'),
                         focusNode: focusNodeEmail,
                       ),
@@ -180,14 +180,14 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: BoxDecoration(
                           color: isFocusedPassword
                               ? Colors.white
-                              : Color(0xFFF1F0F5),
+                              : const Color(0xFFF1F0F5),
                           border:
-                              Border.all(width: 1, color: Color(0xFFD2D2D4)),
+                              Border.all(width: 1, color: const Color(0xFFD2D2D4)),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             if (isFocusedPassword)
                               BoxShadow(
-                                  color: Color(0xFF835DF1).withOpacity(.3),
+                                  color: const Color(0xFF835DF1).withOpacity(.3),
                                   blurRadius: 4.0,
                                   spreadRadius: 2.0
                                   // Glow Color
@@ -221,10 +221,6 @@ class _LoginPageState extends State<LoginPage> {
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context)=> MainScreen()));
                             },
-                            child: FadeInUp(
-                                delay: const Duration(milliseconds: 700),
-                                duration: const Duration(milliseconds: 800),
-                                child: Text('Log In')),
                             style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 textStyle: const TextStyle(
@@ -235,7 +231,11 @@ class _LoginPageState extends State<LoginPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 16)),
+                                padding: const EdgeInsets.symmetric(vertical: 16)),
+                            child: FadeInUp(
+                                delay: const Duration(milliseconds: 700),
+                                duration: const Duration(milliseconds: 800),
+                                child: const  Text('Log In')),
                           ),
                         )
                       ],

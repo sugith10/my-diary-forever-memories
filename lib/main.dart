@@ -65,7 +65,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Satoshi',
           primaryColor: Colors.grey[300],
-          appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
         ),
         debugShowCheckedModeBanner: false,
         initialRoute: '/splash',

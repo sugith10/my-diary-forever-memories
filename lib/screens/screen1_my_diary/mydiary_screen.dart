@@ -5,10 +5,7 @@ import 'package:diary/screens/screen1_my_diary/watchlist.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
-<<<<<<< HEAD
 import 'package:diary/screens/widgets/bottomborder.dart';
-=======
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -16,10 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-<<<<<<< HEAD
 import 'package:sizer/sizer.dart';
-=======
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 
 class MyDiaryScreen extends StatefulWidget {
   const MyDiaryScreen({Key? key}) : super(key: key);
@@ -29,7 +23,6 @@ class MyDiaryScreen extends StatefulWidget {
 }
 
 class _MyDiaryScreenState extends State<MyDiaryScreen> {
-<<<<<<< HEAD
   String selectedSortOption = 'Newest First';
   @override
   Widget build(BuildContext context) {
@@ -103,7 +96,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       color: Colors.black),
                 ),
               ],
-              bottom: BottomBorderWidget(),
+              bottom: const BottomBorderWidget(),
               elevation: 0,
               pinned: false, // Keep the app bar pinned
               floating: true, // Make the app bar float
@@ -152,139 +145,13 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                 ),
               ),
             );
-=======
-  
-  String selectedSortOption = 'Newest First';
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: const Text('My Diary', style: TextStyle(color: Colors.black)),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade,
-                        child: MySearchAppBar()));
-              },
-              icon: const Icon(Icons.search, color: Colors.black),
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade, child: WatchList()));
-              },
-              icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
-            ),
-            IconButton(
-              onPressed: () {
-                showMenu(
-                  context: context,
-                  position: RelativeRect.fromLTRB(1, 0, 0, 5),
-                  items: <PopupMenuEntry>[
-                    const PopupMenuItem(
-                      value: 'Newest First',
-                      child: Text('Newest First'),
-                    ),
-                    const PopupMenuItem(
-                      value: 'Oldest First',
-                      child: Text('Oldest First'),
-                    ),
-                  ],
-                ).then((value) {
-                  if (value == 'Newest First') {
-                    setState(() {
-                      selectedSortOption = value as String;
-                    });
-                  } else if (value == 'Oldest First') {
-                    setState(() {
-                      selectedSortOption = value as String;
-                    });
-                  }
-                });
-              },
-              icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                  color: Colors.black),
-            ),
-          ],
-          elevation: 0,
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(0),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color.fromARGB(255, 0, 0, 0),
-                  width: 0.1,
-                ),
-              ),
-            ),
-          ),
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Container(
-            child: ValueListenableBuilder(
-              valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-              builder: (context, value, child) {
-                var sortedEntries = value.values.toList();
-                switch (selectedSortOption) {
-                  case 'Newest First':
-                    sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                    break;
-                  case 'Oldest First':
-                    sortedEntries.sort((a, b) => a.date.compareTo(b.date));
-                    break;
-                  default:
-                    sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                    break;
-                }
-
-                return ListView.builder(
-                  itemCount: sortedEntries.length,
-                  itemBuilder: (context, index) {
-                    final data = sortedEntries[index];
-                    return DiaryEntryCard(data, index);
-                  },
-                );
-              },
-            ),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            final changer = Provider.of<Changer>(context, listen: false);
-            // Navigator.push(
-            //     context,
-            //     PageTransition(
-            //         type: PageTransitionType.rightToLeftJoined,
-            //         child: CreatePage(
-            //           changer: changer,
-            //         ),
-            //         childCurrent: this));
-            Navigator.push(context, MaterialPageRoute(builder: (context)=> CreatePage(
-                      changer: changer,
-                    )));
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
           },
           backgroundColor: Color.fromARGB(255, 255, 254, 254),
           child: customIcon(),
           elevation: 3,
-<<<<<<< HEAD
              ),
            ),
        ); }
-=======
-        ),
-      ),
-    );
-  }
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 }
 
 class DiaryEntryCard extends StatelessWidget {
@@ -297,27 +164,12 @@ class DiaryEntryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Slidable(
       key: ValueKey(0),
-<<<<<<< HEAD
       startActionPane: ActionPane(
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {
           print('Start Action Dismissed');
         }),
         children: const [
-=======
-
-      
-      startActionPane: ActionPane(
-        
-        motion: const ScrollMotion(),
-
-       
-        dismissible: DismissiblePane(onDismissed: () {}),
-
-      
-        children: const [
-        
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
           SlidableAction(
             onPressed: doNothing,
             backgroundColor: Color(0xFF7BC043),
@@ -327,7 +179,6 @@ class DiaryEntryCard extends StatelessWidget {
           ),
         ],
       ),
-<<<<<<< HEAD
       endActionPane: ActionPane(
         motion: ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {
@@ -342,18 +193,6 @@ class DiaryEntryCard extends StatelessWidget {
         children: [
           SlidableAction(
             onPressed: doNothing,
-=======
-
-    
-      endActionPane: ActionPane(
-        motion: BehindMotion(),
-        dismissible: DismissiblePane(onDismissed: () {}),
-        children: [
-          SlidableAction(
-            
-            onPressed: (context) => deleteDiaryEntry(entry),
-
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
             backgroundColor: Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -361,10 +200,6 @@ class DiaryEntryCard extends StatelessWidget {
           ),
         ],
       ),
-<<<<<<< HEAD
-=======
-
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
       child: InkWell(
         onTap: () {
           //  Navigator.push(context, MaterialPageRoute(builder: (context)=> DiaryDetailPage(entry: entry,)));
@@ -434,7 +269,6 @@ class DiaryEntryCard extends StatelessWidget {
 
 void doNothing(BuildContext context) {}
 
-<<<<<<< HEAD
 void handleDateRangePick(BuildContext context) async {
   final DateTimeRange? pickedDateRange = await showDateRangePicker(
     context: context,
@@ -456,13 +290,6 @@ void handleDateRangePick(BuildContext context) async {
 
     print('Selected date range: ${formattedStartDate} - ${formattedEndDate}');
   }
-=======
-void deleteDiaryEntry(DiaryEntry entry) async {
-  if (entry.id != null) {
-    DbFunctions().deleteDiary(entry.id!);
-  }
-  print(entry.id);
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 }
 
 Widget customIcon() {
@@ -471,8 +298,4 @@ Widget customIcon() {
     width: 40,
     height: 40,
   );
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228

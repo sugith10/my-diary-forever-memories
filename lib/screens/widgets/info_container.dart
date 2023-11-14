@@ -14,7 +14,7 @@ class InfoContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.only(left: 20, right: 20),
+      margin: const  EdgeInsets.only(left: 20, right: 20),
       height: 30.h,
       width: 100.w,
       child: Center(

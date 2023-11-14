@@ -124,7 +124,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  Spacer(),
+                 const Spacer(),
                   Text(
                     DateFormat('d MMMM,y').format(widget.entry.date),
                     style: const TextStyle(

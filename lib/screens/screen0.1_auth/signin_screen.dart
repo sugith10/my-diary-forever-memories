@@ -252,7 +252,7 @@ class InputField extends StatelessWidget {
             children: [
               Text(
                 labelText,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),

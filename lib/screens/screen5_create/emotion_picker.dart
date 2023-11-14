@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class EmojiPicker extends StatefulWidget {
   final Function(IconData) onEmojiSelected;
 
-  EmojiPicker({required this.onEmojiSelected, required TextEditingController textEditingController});
+  const EmojiPicker({super.key, required this.onEmojiSelected, required TextEditingController textEditingController});
 
   @override
   _EmojiPickerState createState() => _EmojiPickerState();
@@ -14,11 +14,11 @@ class _EmojiPickerState extends State<EmojiPicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
+    return 
+       Column(
         children: [
-          SizedBox(height: 25,),
-          Text(
+          const SizedBox(height: 25,),
+          const Text(
             'How are you feeling?',
             style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
           ),
@@ -43,7 +43,7 @@ class _EmojiPickerState extends State<EmojiPicker> {
                             ? Colors.blue.withOpacity(0.5)
                             : Colors.transparent,
                       ),
-                      padding: EdgeInsets.all(10),
+                      padding: const EdgeInsets.all(10),
                       child: Icon(
                         emojiIcon,
                         size: 40,
@@ -61,11 +61,11 @@ class _EmojiPickerState extends State<EmojiPicker> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text('Save'),
+            child: const Text('Save'),
           ),
         ],
-      ),
-    );
+      );
+    
   }
 
   IconData getEmojiIconForIndex(int index) {
