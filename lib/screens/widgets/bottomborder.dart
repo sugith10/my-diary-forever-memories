@@ -17,4 +17,8 @@ class BottomBorderWidget extends StatelessWidget implements PreferredSizeWidget 
       ),
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228

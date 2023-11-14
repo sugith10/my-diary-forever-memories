@@ -17,7 +17,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       elevation: 0,
    
+<<<<<<< HEAD
       bottom: const BottomBorderWidget()
+=======
+      bottom:  const BottomBorderWidget()
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
     );
   }
 

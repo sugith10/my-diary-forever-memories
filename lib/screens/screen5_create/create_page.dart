@@ -4,6 +4,10 @@ import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/provider_create.dart';
+<<<<<<< HEAD
+=======
+import 'package:diary/screens/widgets/bottomborder.dart';
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -125,7 +129,11 @@ class _CreatePageState extends State<CreatePage> {
             Navigator.pop(context);
           },
           icon: Icon(Ionicons.chevron_back_outline,
+<<<<<<< HEAD
               color: Colors.black, size: 25),
+=======
+              color: Colors.black, size: 30),
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
         ),
         actions: [
           Center(
@@ -172,6 +180,7 @@ class _CreatePageState extends State<CreatePage> {
           ),
         ],
         elevation: 0,
+<<<<<<< HEAD
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(0),
           child: Container(
@@ -183,6 +192,9 @@ class _CreatePageState extends State<CreatePage> {
             ),
           ),
         ),
+=======
+        bottom:  const BottomBorderWidget()
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
       ),
       body: Container(
         child: Column(

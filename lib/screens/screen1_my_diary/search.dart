@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import 'package:diary/screens/widgets/bottomborder.dart';
+=======
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
@@ -6,7 +9,10 @@ import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:diary/screens/screen1_my_diary/diary.dart';
+<<<<<<< HEAD
 import 'package:sizer/sizer.dart';
+=======
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 
 class MySearchAppBar extends StatefulWidget {
   @override
@@ -25,6 +31,10 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
       searchResults = [];
     });
   } else {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
     setState(() {
       searchResults = diaryBox.values.where((entry) {
         return entry.title.toLowerCase().contains(query);
@@ -58,9 +68,15 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
               searchDiaryEntries(query);
             },
             autofocus: true,
+<<<<<<< HEAD
             decoration: InputDecoration(
               hintText: 'Search...',
               hintStyle: TextStyle(fontSize: 16.sp),
+=======
+            decoration: const InputDecoration(
+              hintText: 'Search...',
+              hintStyle: TextStyle(fontSize: 20),
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
               border: InputBorder.none,
             ),
             cursorColor: Color.fromARGB(115, 95, 95, 95),
@@ -69,7 +85,21 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
             textCapitalization: TextCapitalization.sentences,
           ),
           elevation: 0,
+<<<<<<< HEAD
           bottom: BottomBorderWidget()
+=======
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(0),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  width: 0.1,
+                ),
+              ),
+            ),
+          ),
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
         ),
         body: Column(
           children: [
@@ -150,4 +180,8 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
       ),
     );
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228

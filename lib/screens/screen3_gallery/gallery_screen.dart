@@ -1,4 +1,8 @@
 import 'dart:io';
+<<<<<<< HEAD
+=======
+import 'package:diary/screens/widgets/bottomborder.dart';
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen1_my_diary/diary.dart';
@@ -22,6 +26,7 @@ class GalleryScreen extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 17.sp),
         ),
         elevation: 0,
+<<<<<<< HEAD
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(0),
           child: Container(
@@ -33,6 +38,9 @@ class GalleryScreen extends StatelessWidget {
             ),
           ),
         ),
+=======
+        bottom:  const BottomBorderWidget()
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

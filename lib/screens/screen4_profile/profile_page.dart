@@ -1,6 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/models/profile_details.dart';
+<<<<<<< HEAD
+=======
+import 'package:diary/screens/widgets/bottomborder.dart';
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -86,6 +90,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
         ],
         elevation: 0,
+<<<<<<< HEAD
         bottom: PreferredSize(
           preferredSize: Size.fromHeight(0),
           child: Container(
@@ -97,6 +102,9 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ),
+=======
+        bottom:  const BottomBorderWidget()
+>>>>>>> 5d7969395996f0ec0322a5bc2933da2e53486228
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
