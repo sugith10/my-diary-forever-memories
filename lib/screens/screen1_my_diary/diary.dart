@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/screen1_my_diary/edit_screen.dart';
+import 'package:diary/screens/widgets/bottomborder.dart';
 
 import 'package:flutter/material.dart';
 import 'package:diary/db/hive_operations.dart';
@@ -108,17 +109,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                   color: Colors.black),
             )
           ],
-          bottom: PreferredSize(
-            preferredSize: const Size.fromHeight(0),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color.fromARGB(255, 0, 0, 0),
-                  width: 0.1,
-                ),
-              ),
-            ),
-          ),
+          bottom: const BottomBorderWidget()
         ),
         body: ListView(
           children: [

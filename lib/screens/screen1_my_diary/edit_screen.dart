@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/home/mainscreen.dart';
+import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -112,17 +113,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
           ),
         ],
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Color.fromARGB(255, 0, 0, 0),
-                width: 0.1,
-              ),
-            ),
-          ),
-        ),
+        bottom: const BottomBorderWidget()
       ),
       body: Column(
         children: [

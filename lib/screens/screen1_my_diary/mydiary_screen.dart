@@ -5,6 +5,7 @@ import 'package:diary/screens/screen1_my_diary/watchlist.dart';
 import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
 import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
+import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -95,17 +96,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       color: Colors.black),
                 ),
               ],
-              bottom: PreferredSize(
-        preferredSize: Size.fromHeight(0),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              width: 0.1,
-            ),
-          ),
-        ),
-      ),
+              bottom: BottomBorderWidget(),
               elevation: 0,
               pinned: false, // Keep the app bar pinned
               floating: true, // Make the app bar float
