@@ -1,3 +1,4 @@
+import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -16,17 +17,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       elevation: 0,
    
-      bottom: PreferredSize(
-        preferredSize: Size.fromHeight(0),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              width: 0.1,
-            ),
-          ),
-        ),
-      ),
+      bottom: const BottomBorderWidget()
     );
   }
 
