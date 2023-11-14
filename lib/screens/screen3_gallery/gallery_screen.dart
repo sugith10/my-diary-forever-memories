@@ -1,0 +1,97 @@
+import 'dart:io';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/screen1_my_diary/diary.dart';
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:sizer/sizer.dart';
+
+class GalleryScreen extends StatelessWidget {
+  const GalleryScreen({Key? key});
+
+  @override
+  Widget build(BuildContext context) {
+    final box = Hive.box<DiaryEntry>('_boxName');
+    final imageCount =
+        box.values.where((entry) => entry.imagePath != null).length;
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title:  Text(
+          'Gallery',
+          style: TextStyle(color: Colors.black, fontSize: 17.sp),
+        ),
+        elevation: 0,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0),
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Color.fromARGB(255, 0, 0, 0),
+                width: 0.1,
+              ),
+            ),
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          child: ValueListenableBuilder(
+            valueListenable: box.listenable(),
+            builder: (context, value, child) {
+              return StaggeredGridView.countBuilder(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8.0, 
+                crossAxisSpacing: 6.0, 
+                itemCount: imageCount,
+                itemBuilder: (context, index) {
+                  final imageEntries =
+                      box.values.where((entry) => entry.imagePath != null);
+                  final data = imageEntries.elementAt(index);
+                  return DiaryGalleryEntryCard(data);
+                },
+                staggeredTileBuilder: (index) {
+                  return StaggeredTile.fit(1);
+                  // return StaggeredTile.count((index % 3 == 0) ? 3 : 1, (index % 3 == 0) ? 2 : 1, );
+                  // return StaggeredTile.count(1, 2); 
+                },
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class DiaryGalleryEntryCard extends StatelessWidget {
+  final DiaryEntry entry;
+
+  DiaryGalleryEntryCard(this.entry, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DiaryDetailPage(
+              entry: entry,
+            ),
+          ),
+        );
+      },
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: Image.file(
+          File(entry.imagePath!),
+          // fit: BoxFit.cover,
+          // height:double.infinity, // Adjust the height as needed
+          // width: double.infinity, // Adjust the width as needed
+        ),
+      ),
+    );
+  }
+}
