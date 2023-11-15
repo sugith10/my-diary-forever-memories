@@ -1,3 +1,4 @@
+import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
@@ -9,12 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
-      leading: IconButton(
-        onPressed: () {
-          Navigator.pop(context);
-        },
-        icon: const Icon(Ionicons.chevron_back_outline, color: Colors.black, size: 30),
-      ),
+      leading: const BackButtonWidget(),
       elevation: 0,
       bottom: const BottomBorderWidget()
     );

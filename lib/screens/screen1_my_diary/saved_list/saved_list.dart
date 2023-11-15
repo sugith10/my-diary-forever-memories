@@ -3,6 +3,7 @@ import 'package:diary/db/hive_savedlist_db_ops.dart';
 import 'package:diary/models/savedlist_db_model.dart';
 
 import 'package:diary/screens/screen1_my_diary/saved_list/saved_item.dart';
+import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -16,14 +17,7 @@ class SavedListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Ionicons.chevron_back_outline,
-              color: Colors.black, size: 29),
-              
-        ),
+        leading: const BackButtonWidget(),
         title: Text('Saved', style: TextStyle(color: Colors.black, fontSize: 15.sp),),
         elevation: 0,
         actions: [

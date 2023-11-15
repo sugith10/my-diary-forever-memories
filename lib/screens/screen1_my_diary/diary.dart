@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/screen1_my_diary/edit_screen.dart';
+import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 
 import 'package:flutter/material.dart';
@@ -42,16 +43,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          leading: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(Ionicons.chevron_back_outline,
-                  color: Colors.black, size: 30),
-            ),
-          ),
+          leading: const BackButtonWidget(),
           actions: [
             IconButton(
               onPressed: () {

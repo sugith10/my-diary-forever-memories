@@ -11,7 +11,7 @@ class CustomizationPage extends StatelessWidget {
     
     return SafeArea(
       child: Scaffold(
-        appBar:  CustomAppBar(),
+        appBar:  const CustomAppBar(),
         body: Column(
           children: [
             InfoContainer(

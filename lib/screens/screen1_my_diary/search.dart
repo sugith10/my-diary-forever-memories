@@ -1,3 +1,4 @@
+import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -40,18 +41,7 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          leading: Center(
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Ionicons.chevron_back_outline,
-                color: Colors.black,
-                size: 30,
-              ),
-            ),
-          ),
+          leading: const BackButtonWidget(),
           title: TextField(
             controller: _searchController,
             onChanged: (query) {

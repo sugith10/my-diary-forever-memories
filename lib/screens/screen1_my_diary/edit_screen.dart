@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/home/mainscreen.dart';
+import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 
@@ -68,13 +69,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          icon: const Icon(Ionicons.chevron_back_outline,
-              color: Colors.black, size: 25),
-        ),
+        leading: const BackButtonWidget(),
         actions: [
           Center(
             child: TextButton(
