@@ -8,6 +8,7 @@ final ValueNotifier<List<SavedList>> savedListsNotifier =
     ValueNotifier<List<SavedList>>([]);
 
 class SavedListDbFunctions {
+
  final box = Hive.box<SavedList>('_savedListBoxName');
 
   Future<void> createSavedList(String listname) async {
@@ -15,14 +16,11 @@ class SavedListDbFunctions {
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       date: DateTime.now(),
       listName: listname,
-      diaryEntryIds: [], // Initial diary entry IDs, can be null or empty as needed
+      diaryEntryIds: [], // Initial diary entry IDs, can be null or empty
     );
-
      await box.put(newSavedList.id, newSavedList);
      log('Created saved list successfully');
 
-
-    // Notify listeners about the change in saved lists
     savedListsNotifier.value = box.values.toList();
     
      log('Updated List: ${box.values.toList()}');
@@ -30,6 +28,17 @@ class SavedListDbFunctions {
 
    List<SavedList> getAllSavedLists() {
     return box.values.toList();
+  }
+
+    Future<void> addDiaryToSavedList(String savedListId, String diaryEntryId) async {
+    final savedList = box.get(savedListId);
+    if (savedList != null) {
+      savedList.diaryEntryIds.add(diaryEntryId);
+      await box.put(savedListId, savedList);
+      print('Added diary entry ID to the SavedList: $diaryEntryId');
+    } else {
+      print('SavedList with ID $savedListId not found.');
+    }
   }
 
 

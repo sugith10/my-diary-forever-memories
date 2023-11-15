@@ -324,7 +324,7 @@ class _CreatePageState extends State<CreatePage> {
                   break;
                 case 1:
                   toggleEmojiKeyboard();
-                  log(_isEmojiKeyboardVisible as String);
+                  // log(_isEmojiKeyboardVisible as String);
                   break;
                 case 2:
                 

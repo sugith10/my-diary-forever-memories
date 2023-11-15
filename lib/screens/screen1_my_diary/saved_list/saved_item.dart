@@ -10,10 +10,12 @@ class SavedItems extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButtonWidget(),
-        title: Text('Saved Items'),
-        bottom:  BottomBorderWidget(),
+        elevation: 0,
+        bottom:  const BottomBorderWidget(),
       ),
-
+      body: Container(
+        
+      ),
     );
   }
 }

@@ -13,7 +13,7 @@ class BackButtonWidget extends StatelessWidget {
       icon: const Icon(
         Ionicons.chevron_back_outline,
         color: Colors.black,
-        size: 29,
+        size: 25,
       ),
     );
   }
