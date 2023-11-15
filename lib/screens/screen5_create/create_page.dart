@@ -67,51 +67,52 @@ class _CreatePageState extends State<CreatePage> {
     }
   }
 
-  Color _selectedColor = Colors.white;// Initial background color
+  Color _selectedColor = Colors.white; // Initial background color
 
-  
-
- void _showColorPickerDialog() {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Choose Background Color'),
-        
-        content: SingleChildScrollView(
-          child: ColorPicker(
-            pickerColor: _selectedColor,
-            onColorChanged: (color) {
-              setState(() {
-                _selectedColor = color;
-              });
-            },
-            enableAlpha: true,
-            showLabel: false,
-            pickerAreaHeightPercent: 0.8,
-            
+  void _showColorPickerDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Choose Background Color'),
+          content: SingleChildScrollView(
+            child: ColorPicker(
+              pickerColor: _selectedColor,
+              onColorChanged: (color) {
+                setState(() {
+                  _selectedColor = color;
+                });
+              },
+              enableAlpha: true,
+              showLabel: false,
+              pickerAreaHeightPercent: 0.8,
+            ),
           ),
-        ),
-        
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              
-            },
-            child:const  Text('OK'),
-          ),
-        ],
-      );
-    },
-  );
-}
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child:
+                  const Text('Cancel', style: TextStyle(color: Colors.black)),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                String hex =
+                    _selectedColor.value.toRadixString(16).toUpperCase();
+                print('Selected Color: #$hex');
+              },
+              child: const Text(
+                'OK',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -119,198 +120,212 @@ class _CreatePageState extends State<CreatePage> {
       backgroundColor: _selectedColor,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading:const BackButtonWidget(),
-        actions: [
-          Center(
-            child: TextButton(
-              onPressed: () async {
-                final title = titleController.text;
-                final content = contentController.text;
+          backgroundColor: Colors.white,
+          leading: const BackButtonWidget(),
+          actions: [
+            Center(
+              child: TextButton(
+                onPressed: () async {
+                  final title = titleController.text;
+                  final content = contentController.text;
 
-                String? imagePath;
-                if (_image != null) {
-                  imagePath = await saveImage(_image!);
-                }
+                  String? imagePath;
+                  if (_image != null) {
+                    imagePath = await saveImage(_image!);
+                  }
 
-                if (title.isNotEmpty) {
-                  final entry = DiaryEntry(
-                    id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    date: widget.changer.selectedDate,
-                    title: title,
-                    content: content,
-                    imagePath: imagePath,
-                  );
-                  widget.changer.selectDate(DateTime.now());
+                  if (title.isNotEmpty) {
+                    final entry = DiaryEntry(
+                      id: DateTime.now().millisecondsSinceEpoch.toString(),
+                      date: widget.changer.selectedDate,
+                      title: title,
+                      content: content,
+                      imagePath: imagePath,
+                      background:
+                          '#${_selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                    );
+                    widget.changer.selectDate(DateTime.now());
 
-                  await DbFunctions().addDiaryEntry(entry).then((value) async {
-                    log("Function completed: $value");
+                    await DbFunctions()
+                        .addDiaryEntry(entry)
+                        .then((value) async {
+                      log("Function completed: $value");
 
-                    var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
-                    final allData = hiveBox.values.toList();
-                    log(allData.length.toString());
-                    for (var data in allData) {
-                      log("Diary Entry: key=${data.id} Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}");
+                      var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
+                      final allData = hiveBox.values.toList();
+                      log(allData.length.toString());
+                      for (var data in allData) {
+                        log("Diary Entry: key=${data.id} Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}, Background=${data.background}");
+                      }
+                    }).catchError((error) {
+                      log("Error adding DiaryEntry: $error");
+                    });
+                  }
+                  // ignore: use_build_context_synchronously
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Save',
+                  style: TextStyle(color: Colors.black, fontSize: 20),
+                ),
+              ),
+            ),
+          ],
+          elevation: 0,
+          bottom: const BottomBorderWidget()),
+      body: Column(
+        children: [
+          SizedBox(height: 2.h),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: Row(
+              children: [
+                TextButton(
+                  onPressed: () async {
+                    final pickedDate = await showDatePicker(
+                      context: context,
+                      initialDate: widget.changer.selectedDate,
+                      firstDate: DateTime(2023),
+                      lastDate: DateTime.now(),
+                      builder: (BuildContext context, Widget? child) {
+                        return Theme(
+                          data: ThemeData.light().copyWith(
+                            primaryColor: const Color(0xFF835DF1),
+                            colorScheme: const ColorScheme.light(
+                                primary: Color(0xFF835DF1)),
+                            buttonTheme: const ButtonThemeData(
+                                textTheme: ButtonTextTheme.primary),
+                          ),
+                          child: child ?? Container(),
+                        );
+                      },
+                    );
+
+                    if (pickedDate != null) {
+                      widget.changer.selectDate(pickedDate);
+
+                      // var selectedate = widget.changer.selectedDate;
                     }
-                  }).catchError((error) {
-                    log("Error adding DiaryEntry: $error");
-                  });
-                }
-                // ignore: use_build_context_synchronously
-                Navigator.pop(context);
-              },
-              child: const Text(
-                'Save',
-                style: TextStyle(color: Colors.black, fontSize: 20),
+                  },
+                  child: Row(
+                    children: [
+                      Consumer<Changer>(
+                        builder: (context, changer, child) {
+                          return Text(
+                            DateFormat('d MMMM,y').format(changer.selectedDate),
+                            style: const TextStyle(color: Colors.black),
+                          );
+                        },
+                      ),
+                      const Icon(
+                        Ionicons.caret_down_outline,
+                        color: Colors.black,
+                      )
+                    ],
+                  ),
+                ),
+                const Spacer(),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            child: TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
+                hintText: ' Title',
+                hintStyle: TextStyle(fontSize: 28),
+                border: InputBorder.none,
+              ),
+              cursorColor: Colors.green[900],
+              cursorHeight: 28,
+              style: const TextStyle(fontSize: 28),
+              textCapitalization: TextCapitalization.sentences,
+              autofocus: true,
+            ),
+          ),
+          Container(
+            child: _image != null
+                ? ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.file(
+                      _image!,
+                      height: 200,
+                    ),
+                  )
+                : Container(),
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: TextField(
+                maxLines: null,
+                minLines: null,
+                expands: true,
+                controller: contentController,
+                decoration: const InputDecoration(
+                  hintText: '  Start typing here',
+                  hintStyle: TextStyle(fontSize: 18),
+                  border: InputBorder.none,
+                ),
+                cursorColor: Colors.red[900],
+                cursorHeight: 18,
+                style: const TextStyle(fontSize: 18),
+                textCapitalization: TextCapitalization.sentences,
               ),
             ),
           ),
+          Offstage(
+            offstage: !_isEmojiKeyboardVisible,
+            child: SizedBox(
+              height: 250,
+              width: double.infinity,
+              child: EmojiPicker(
+                textEditingController: contentController,
+                onBackspacePressed: _onBackspacePressed,
+                onEmojiSelected: (Category? category, Emoji? emoji) {
+                  if (emoji != null) {
+                    // Handle the selected emoji (e.g., add it to the text field)
+                    contentController.text += emoji.emoji;
+                  }
+                },
+                config: Config(
+                  columns: 8,
+                  emojiSizeMax: 32 *
+                      (foundation.defaultTargetPlatform == TargetPlatform.iOS
+                          ? 1.30
+                          : 1.0),
+                  verticalSpacing: 0,
+                  horizontalSpacing: 0,
+                  gridPadding: EdgeInsets.zero,
+                  initCategory: Category.RECENT,
+                  bgColor: const Color(0xFFF2F2F2),
+                  indicatorColor: Colors.blue,
+                  iconColor: Colors.grey,
+                  iconColorSelected: Colors.blue,
+                  backspaceColor: Colors.blue,
+                  skinToneDialogBgColor: Colors.white,
+                  skinToneIndicatorColor: Colors.grey,
+                  enableSkinTones: true,
+                  recentTabBehavior: RecentTabBehavior.RECENT,
+                  recentsLimit: 28,
+                  replaceEmojiOnLimitExceed: false,
+                  noRecents: const Text(
+                    'No Recents',
+                    style: TextStyle(fontSize: 20, color: Colors.black26),
+                    textAlign: TextAlign.center,
+                  ),
+                  loadingIndicator: const SizedBox.shrink(),
+                  tabIndicatorAnimDuration: kTabScrollDuration,
+                  categoryIcons: const CategoryIcons(),
+                  buttonMode: ButtonMode.MATERIAL,
+                  checkPlatformCompatibility: true,
+                ),
+              ),
+            ),
+          )
         ],
-        elevation: 0,
-        bottom: const BottomBorderWidget()
       ),
-      body:  Column(
-          children: [
-            SizedBox(height: 2.h),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: Row(
-                children: [
-                  TextButton(
-                    onPressed: () async {
-                      final pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: widget.changer.selectedDate,
-                        firstDate: DateTime(2023),
-                        lastDate: DateTime.now(),
-                      );
-                      if (pickedDate != null) {
-                        widget.changer.selectDate(pickedDate);
-                       
-                        // var selectedate = widget.changer.selectedDate;
-                      }
-                    },
-                    child: Row(
-                      children: [
-                        Consumer<Changer>(
-                          builder: (context, changer, child) {
-                            return Text(
-                              DateFormat('d MMMM,y')
-                                  .format(changer.selectedDate),
-                              style: const TextStyle(color: Colors.black),
-                            );
-                          },
-                        ),
-                        const Icon(
-                          Ionicons.caret_down_outline,
-                          color: Colors.black,
-                        )
-                      ],
-                    ),
-                  ),
-                 const Spacer(),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-              child: TextField(
-                controller: titleController,
-                decoration: const InputDecoration(
-                  hintText: ' Title',
-                  hintStyle: TextStyle(fontSize: 28),
-                  border: InputBorder.none,
-                ),
-                cursorColor: Colors.green[900],
-                cursorHeight: 28,
-                style: const TextStyle(fontSize: 28),
-                textCapitalization: TextCapitalization.sentences,
-                autofocus: true,
-              ),
-            ),
-            Container(
-              child: _image != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.file(
-                        _image!,
-                        height: 200,
-                      ),
-                    )
-                  : Container(),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                child: TextField(
-                  maxLines: null,
-                  minLines: null,
-                  expands: true,
-                  controller: contentController,
-                  decoration: const InputDecoration(
-                    hintText: '  Start typing here',
-                    hintStyle: TextStyle(fontSize: 18),
-                    border: InputBorder.none,
-                  ),
-                  cursorColor: Colors.red[900],
-                  cursorHeight: 18,
-                  style: const TextStyle(fontSize: 18),
-                  textCapitalization: TextCapitalization.sentences,
-                ),
-              ),
-            ),
-            Offstage(
-              offstage: !_isEmojiKeyboardVisible,
-              child: SizedBox(
-                height: 250,
-                width: double.infinity,
-                child: EmojiPicker(
-                  textEditingController: contentController,
-                  onBackspacePressed: _onBackspacePressed,
-                  onEmojiSelected: (Category? category, Emoji? emoji) {
-                    if (emoji != null) {
-                      // Handle the selected emoji (e.g., add it to the text field)
-                      contentController.text += emoji.emoji;
-                    }
-                  },
-                  config: Config(
-                    columns: 8,
-                    emojiSizeMax: 32 *
-                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                            ? 1.30
-                            : 1.0),
-                    verticalSpacing: 0,
-                    horizontalSpacing: 0,
-                    gridPadding: EdgeInsets.zero,
-                    initCategory: Category.RECENT,
-                    bgColor: const Color(0xFFF2F2F2),
-                    indicatorColor: Colors.blue,
-                    iconColor: Colors.grey,
-                    iconColorSelected: Colors.blue,
-                    backspaceColor: Colors.blue,
-                    skinToneDialogBgColor: Colors.white,
-                    skinToneIndicatorColor: Colors.grey,
-                    enableSkinTones: true,
-                    recentTabBehavior: RecentTabBehavior.RECENT,
-                    recentsLimit: 28,
-                    replaceEmojiOnLimitExceed: false,
-                    noRecents: const Text(
-                      'No Recents',
-                      style: TextStyle(fontSize: 20, color: Colors.black26),
-                      textAlign: TextAlign.center,
-                    ),
-                    loadingIndicator: const SizedBox.shrink(),
-                    tabIndicatorAnimDuration: kTabScrollDuration,
-                    categoryIcons: const CategoryIcons(),
-                    buttonMode: ButtonMode.MATERIAL,
-                    checkPlatformCompatibility: true,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
-      
       bottomNavigationBar: Consumer<CreatePageProvider>(
         builder: (context, bottomNavigationProvider, child) {
           return BottomNavigationBar(
@@ -327,11 +342,10 @@ class _CreatePageState extends State<CreatePage> {
                   // log(_isEmojiKeyboardVisible as String);
                   break;
                 case 2:
-                
                   getImage();
                   break;
                 case 3:
-                 _showColorPickerDialog();
+                  _showColorPickerDialog();
                   break;
               }
               bottomNavigationProvider.setSelectedIndex(index);
@@ -360,7 +374,6 @@ class _CreatePageState extends State<CreatePage> {
         },
       ),
     );
-    
   }
 
   void toggleEmojiKeyboard() {
@@ -369,4 +382,3 @@ class _CreatePageState extends State<CreatePage> {
     });
   }
 }
-

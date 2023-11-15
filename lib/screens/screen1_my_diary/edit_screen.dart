@@ -82,23 +82,24 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                   imagePath = await saveImage(_image!);
                 }
 
-                if (title.isNotEmpty) {
-                  final updatedEntry = DiaryEntry(
-                    id: widget.entry.id,
-                    date: widget.entry.date,
-                    title: title,
-                    content: content,
-                    imagePath: imagePath,
-                  );
+                // if (title.isNotEmpty) {
+                //   final updatedEntry = DiaryEntry(
+                //     id: widget.entry.id,
+                //     date: widget.entry.date,
+                //     title: title,
+                //     content: content,
+                //     imagePath: imagePath,
+                //     background: '#${_selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                //   );
 
-                  await DbFunctions()
-                      .updateDiaryEntry(updatedEntry)
-                      .then((value) {
-                    print("Function completed: ");
-                  }).catchError((error) {
-                    print("Error updating DiaryEntry: $error");
-                  });
-                }
+                //   await DbFunctions()
+                //       .updateDiaryEntry(updatedEntry)
+                //       .then((value) {
+                //     print("Function completed: ");
+                //   }).catchError((error) {
+                //     print("Error updating DiaryEntry: $error");
+                //   });
+                // }
                 Navigator.pop(context);
               },
               child: Text(

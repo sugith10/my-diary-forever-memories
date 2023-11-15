@@ -21,7 +21,7 @@ class DiaryEntry {
   String? imagePath; 
 
   @HiveField(5) 
-  String? newField;
+  String background;
 
   DiaryEntry({
     this.id,
@@ -29,7 +29,7 @@ class DiaryEntry {
     required this.title,
     required this.content,
     this.imagePath, 
-    this.newField,
+    required this.background,
   });
 }
 

@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatelessWidget {
@@ -21,24 +22,23 @@ class CalendarScreen extends StatelessWidget {
     final changer = Provider.of<Changer>(context);
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white,
-        title: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: InkWell(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.white,
+          title: InkWell(
             onTap: () {
               changer.toggleCalendarVisibility();
             },
             child: Row(
+              
               children: [
                 Consumer<Changer>(
                   builder: (context, changer, child) {
-                    return AppbarTitleWidget(text: DateFormat('d MMMM,y').format(changer.selectedDate),);
+                    return AppbarTitleWidget(
+                      text: DateFormat('d MMMM,y').format(changer.selectedDate),
+                    );
                   },
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Icon(
                   changer.isCalendarVisible
                       ? Ionicons.chevron_down_outline
@@ -48,35 +48,81 @@ class CalendarScreen extends StatelessWidget {
               ],
             ),
           ),
-        ),
-        elevation: 0,
-        bottom: const BottomBorderWidget()
-      ),
+          actions: [
+           
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Center(
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.black)
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    DateFormat.d().format(today), // Display only the current day
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15.sp,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          ],
+          elevation: 0,
+          bottom: const BottomBorderWidget()),
       body: Column(
         children: [
           Container(
             // color: Color.fromARGB(255, 237, 237, 237),
             child: Container(
               // color: Color.fromARGB(255, 237, 237, 237),
-              margin: EdgeInsets.only(left: 10, right: 10),
+              margin: const EdgeInsets.only(left: 10, right: 10),
               child: Visibility(
                 visible: changer.isCalendarVisible,
                 child: TableCalendar(
                   headerStyle: HeaderStyle(
-                      formatButtonVisible: false, titleCentered: true),
+                    formatButtonVisible: false,
+                    titleCentered: true,
+                    // decoration: BoxDecoration(
+                    //   color: Colors.blueGrey[50], // Change the header background color
+                    // ),
+                    titleTextStyle: TextStyle(
+                      color: Colors.blueGrey[900], // Change header text color
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   availableGestures: AvailableGestures.all,
                   selectedDayPredicate: (day) =>
                       isSameDay(day, changer.selectedDate),
                   firstDay: DateTime(2000, 10, 1),
                   lastDay: DateTime.now(),
                   focusedDay: changer.selectedDate,
-                  daysOfWeekStyle: DaysOfWeekStyle(
+                  daysOfWeekStyle: const DaysOfWeekStyle(
                     weekendStyle: TextStyle(color: Colors.red),
                   ),
-                  weekendDays: [DateTime.sunday],
+                  weekendDays: const [DateTime.sunday],
                   onDaySelected: (day, focusedDay) {
                     changer.selectDate(day);
                   },
+                  calendarStyle: const CalendarStyle(
+                    todayDecoration: BoxDecoration(
+                      color: Color(0xFF835DF1),
+                      shape: BoxShape.circle,
+                    ),
+                    todayTextStyle: TextStyle(color: Colors.white),
+                    selectedDecoration: BoxDecoration(
+                        color: Color(0xFF835DF1),
+                        shape: BoxShape.circle),
+                    selectedTextStyle:
+                        TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                    weekendTextStyle: TextStyle(color: Colors.red),
+                  ),
                 ),
               ),
             ),
@@ -94,7 +140,7 @@ class CalendarScreen extends StatelessWidget {
                       )));
             },
             child: Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
                   Container(
@@ -111,10 +157,10 @@ class CalendarScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 7,
                   ),
-                  Text(
+                  const Text(
                     'Click this text to create your personal diary',
                     style: TextStyle(color: Colors.black26, fontSize: 12),
                   ),
@@ -122,7 +168,7 @@ class CalendarScreen extends StatelessWidget {
               ),
             ),
           ),
-          Spacer(),
+          const Spacer(),
         ],
       ),
     );

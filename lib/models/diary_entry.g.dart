@@ -22,7 +22,7 @@ class DiaryEntryAdapter extends TypeAdapter<DiaryEntry> {
       title: fields[2] as String,
       content: fields[3] as String,
       imagePath: fields[4] as String?,
-      newField: fields[5] as String?,
+      background: fields[5] as String,
     );
   }
 
@@ -41,7 +41,7 @@ class DiaryEntryAdapter extends TypeAdapter<DiaryEntry> {
       ..writeByte(4)
       ..write(obj.imagePath)
       ..writeByte(5)
-      ..write(obj.newField);
+      ..write(obj.background);
   }
 
   @override

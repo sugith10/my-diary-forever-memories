@@ -14,7 +14,6 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class MyDiaryScreen extends StatefulWidget {
   const MyDiaryScreen({Key? key}) : super(key: key);
@@ -27,13 +26,13 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
   String selectedSortOption = 'Newest First';
   @override
   Widget build(BuildContext context) {
-       return SafeArea(
-         child: Scaffold(
-             body: CustomScrollView(
+    return SafeArea(
+      child: Scaffold(
+        body: CustomScrollView(
           slivers: [
             SliverAppBar(
               automaticallyImplyLeading: false,
-              title:const AppbarTitleWidget(text: 'My Diary'),
+              title: const AppbarTitleWidget(text: 'My Diary'),
               actions: [
                 IconButton(
                   onPressed: () {
@@ -55,7 +54,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                             type: PageTransitionType.topToBottom,
                             child: const SavedListScreen()));
                   },
-                  icon: const Icon(Ionicons.bookmarks_outline, color: Colors.black),
+                  icon: const Icon(Ionicons.bookmarks_outline,
+                      color: Colors.black),
                 ),
                 IconButton(
                   onPressed: () {
@@ -117,7 +117,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       sortedEntries.sort((a, b) => b.date.compareTo(a.date));
                       break;
                   }
-       
+
                   return SliverList(
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
@@ -131,8 +131,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
               ),
             ),
           ],
-             ),
-             floatingActionButton: FloatingActionButton(
+        ),
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             final changer = Provider.of<Changer>(context, listen: false);
             Navigator.push(
@@ -147,9 +147,10 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
           backgroundColor: Color.fromARGB(255, 255, 254, 254),
           child: customIcon(),
           elevation: 3,
-             ),
-           ),
-       ); }
+        ),
+      ),
+    );
+  }
 }
 
 class DiaryEntryCard extends StatelessWidget {
@@ -180,13 +181,12 @@ class DiaryEntryCard extends StatelessWidget {
       endActionPane: ActionPane(
         motion: ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {
-
           if (entry.id != null) {
-                DbFunctions().deleteDiary(entry.id!);
-                //  diaryEntriesNotifier.notifyListeners();
-              }else{
-                print('no data found');
-              }
+            DbFunctions().deleteDiary(entry.id!);
+            //  diaryEntriesNotifier.notifyListeners();
+          } else {
+            print('no data found');
+          }
         }),
         children: [
           SlidableAction(
@@ -267,19 +267,27 @@ class DiaryEntryCard extends StatelessWidget {
 
 void doNothing(BuildContext context) {}
 
-void handleDateRangePick(BuildContext context) async {
+Future<void> handleDateRangePick(BuildContext context) async {
   final DateTimeRange? pickedDateRange = await showDateRangePicker(
     context: context,
-   firstDate: DateTime(DateTime.now().year - 5),
-    lastDate: DateTime(DateTime.now().year + 5),
-    initialDateRange: DateTimeRange(
-            end: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 13),
-            start: DateTime.now(),
-          ),
+    firstDate: DateTime(DateTime.now().day),
+    lastDate: DateTime.now(),
+    // initialDateRange: DateTimeRange(
+    //   end: DateTime.now(), // Set the initial end date to DateTime.now()
+    //   start: DateTime.now(),
+    // ),
     locale: Localizations.localeOf(context),
-     saveText: 'Done',
+    saveText: 'Done',
+    builder: (BuildContext context, Widget? child) {
+      return Theme(
+        data: ThemeData.light().copyWith(
+          colorScheme: ColorScheme.light(primary: Color(0xFF835DF1)),
+        ),
+        child: child ?? Container(),
+      );
+    },
   );
-  
+
   if (pickedDateRange != null) {
     final startDate = pickedDateRange.start;
     final endDate = pickedDateRange.end;

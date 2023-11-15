@@ -84,7 +84,7 @@ class MainScreen extends StatelessWidget {
                       width: isSelected ? displayWidth * 0.32 : 0,
                       decoration: BoxDecoration(
                         color: isSelected
-                            ? const Color(0xFF5B6ABF).withOpacity(0.2)
+                            ? const Color(0xFF5B6ABF).withOpacity(0.3)
                             : Colors.transparent,
                         borderRadius: BorderRadius.circular(50),
                       ),

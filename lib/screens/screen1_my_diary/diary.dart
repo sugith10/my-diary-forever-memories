@@ -3,7 +3,6 @@ import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/screen1_my_diary/edit_screen.dart';
 import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
-
 import 'package:flutter/material.dart';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
@@ -103,57 +102,60 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
           ],
           bottom: const BottomBorderWidget()
         ),
-        body: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Text(
-                    widget.entry.title,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
+        body: Container(
+         color: hexToColor(widget.entry.background),
+          child: ListView(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Text(
+                      widget.entry.title,
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                 const Spacer(),
-                  Text(
-                    DateFormat('d MMMM,y').format(widget.entry.date),
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
+                   const Spacer(),
+                    Text(
+                      DateFormat('d MMMM,y').format(widget.entry.date),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            if (widget.entry.imagePath != null)
-              GestureDetector(
-                onTap: () {
-                  _showOriginalImage(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.file(
-                      File(widget.entry.imagePath!),
-                      fit: BoxFit.cover,
-                      height: 500,
+              if (widget.entry.imagePath != null)
+                GestureDetector(
+                  onTap: () {
+                    _showOriginalImage(context);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        File(widget.entry.imagePath!),
+                        fit: BoxFit.cover,
+                        height: 500,
+                      ),
                     ),
                   ),
                 ),
-              ),
-            Padding(
-              padding: const EdgeInsets.all(16),
-              child: Text(
-                widget.entry.content,
-                style: TextStyle(
-                  fontSize: 18,
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  widget.entry.content,
+                  style: TextStyle(
+                    fontSize: 18,
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         // floatingActionButton: FloatingActionButton.extended(
         //   onPressed: () {
@@ -172,7 +174,9 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
         );
   }
 }
-
+Color hexToColor(String code) {
+  return Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+}
 void _showDeleteConfirmationDialog(BuildContext context, DiaryEntry entry) {
   showDialog(
     context: context,

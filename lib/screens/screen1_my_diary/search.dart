@@ -2,7 +2,7 @@ import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
+
 import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:page_transition/page_transition.dart';
