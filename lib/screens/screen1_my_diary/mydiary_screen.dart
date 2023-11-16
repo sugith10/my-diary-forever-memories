@@ -28,110 +28,131 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-             
-              automaticallyImplyLeading: false,
-              title: const AppbarTitleWidget(text: 'My Diary'),
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.fade,
-                        child: MySearchAppBar(),
+        body: ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(
+            physics: BouncingScrollPhysics()
+          ),
+          child: CustomScrollView(
+            slivers: [
+              SliverAppBar(
+               
+                automaticallyImplyLeading: false,
+                title: const AppbarTitleWidget(text: 'My Diary'),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          child: MySearchAppBar(),
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.search, color: Colors.black),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.topToBottom,
+                              child: const SavedListScreen()));
+                    },
+                    icon: const Icon(Ionicons.bookmarks_outline,
+                        color: Colors.black),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      showMenu(
+                        context: context,
+                        position: const RelativeRect.fromLTRB(1, 0, 0, 5),
+                        items: <PopupMenuEntry>[
+                          const PopupMenuItem(
+                            value: 'Newest First',
+                            child: Text('Newest First'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'Oldest First',
+                            child: Text('Oldest First'),
+                          ),
+                          const PopupMenuItem(
+                            value: 'Range Pick',
+                            child: Text('Range Pick'),
+                          ),
+                        ],
+                      ).then((value) {
+                        if (value == 'Newest First') {
+                          setState(() {
+                            selectedSortOption = value as String;
+                          });
+                        } else if (value == 'Oldest First') {
+                          setState(() {
+                            selectedSortOption = value as String;
+                          });
+                        } else if (value == 'Range Pick') {
+                          handleDateRangePick(context);
+                        }
+                      });
+                    },
+                    icon: const Icon(Ionicons.ellipsis_vertical_outline,
+                        color: Colors.black),
+                  ),
+                ],
+                bottom: const BottomBorderWidget(),
+                elevation: 0,
+                pinned: false, // Keep the app bar pinned
+                floating: true, // Make the app bar float
+                snap: false,
+              ),
+              SliverPadding(
+                padding: const EdgeInsets.all(8.0),
+        
+                sliver: ValueListenableBuilder(
+                                 valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+                  builder: (context, box, child) {
+                    var sortedEntries = box.values.toList();
+                     print('Sorted Entries Length: ${sortedEntries.length}');
+                    switch (selectedSortOption) {
+                      case 'Newest First':
+                        sortedEntries.sort((a, b) => b.date.compareTo(a.date));
+                        break;
+                      case 'Oldest First':
+                        sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+                        break;
+                      default:
+                        sortedEntries.sort((a, b) => b.date.compareTo(a.date));
+                        break;
+                    }
+        
+                    Map<String, List<DiaryEntry>> groupedEntries = {};
+                    for (var entry in sortedEntries) {
+                      final dateKey = DateFormat('y-MM-dd').format(entry.date);
+                      groupedEntries.putIfAbsent(dateKey, () => []);
+                      groupedEntries[dateKey]!.add(entry);
+                    }
+                      print('Grouped Entries Length: ${groupedEntries.length}');
+        
+                    return SliverList(
+                      
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                            if (index >= groupedEntries.length) {
+            print('Index out of bounds: $index');
+            return const SizedBox(); // or return an empty container/widget
+          }
+                         final dateKey = groupedEntries.keys.toList()[index];
+                         final entries = groupedEntries[dateKey]!;
+                          return buildGroupedDiaryEntries(entries, dateKey);
+                        },
+                        childCount: sortedEntries.length,
                       ),
                     );
                   },
-                  icon: const Icon(Icons.search, color: Colors.black),
                 ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.topToBottom,
-                            child: const SavedListScreen()));
-                  },
-                  icon: const Icon(Ionicons.bookmarks_outline,
-                      color: Colors.black),
-                ),
-                IconButton(
-                  onPressed: () {
-                    showMenu(
-                      context: context,
-                      position: RelativeRect.fromLTRB(1, 0, 0, 5),
-                      items: <PopupMenuEntry>[
-                        const PopupMenuItem(
-                          value: 'Newest First',
-                          child: Text('Newest First'),
-                        ),
-                        const PopupMenuItem(
-                          value: 'Oldest First',
-                          child: Text('Oldest First'),
-                        ),
-                        const PopupMenuItem(
-                          value: 'Range Pick',
-                          child: Text('Range Pick'),
-                        ),
-                      ],
-                    ).then((value) {
-                      if (value == 'Newest First') {
-                        setState(() {
-                          selectedSortOption = value as String;
-                        });
-                      } else if (value == 'Oldest First') {
-                        setState(() {
-                          selectedSortOption = value as String;
-                        });
-                      } else if (value == 'Range Pick') {
-                        handleDateRangePick(context);
-                      }
-                    });
-                  },
-                  icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                      color: Colors.black),
-                ),
-              ],
-              bottom: const BottomBorderWidget(),
-              elevation: 0,
-              pinned: false, // Keep the app bar pinned
-              floating: true, // Make the app bar float
-              snap: false,
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.all(8.0),
-              sliver: ValueListenableBuilder(
-                valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-                builder: (context, value, child) {
-                  var sortedEntries = value.values.toList();
-                  switch (selectedSortOption) {
-                    case 'Newest First':
-                      sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                      break;
-                    case 'Oldest First':
-                      sortedEntries.sort((a, b) => a.date.compareTo(b.date));
-                      break;
-                    default:
-                      sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                      break;
-                  }
-
-                  return SliverList(
-                    delegate: SliverChildBuilderDelegate(
-                      (BuildContext context, int index) {
-                        final data = sortedEntries[index];
-                        return DiaryEntryCard(data, index);
-                      },
-                      childCount: sortedEntries.length,
-                    ),
-                  );
-                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
@@ -145,11 +166,35 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
               ),
             );
           },
-          backgroundColor: Color.fromARGB(255, 255, 254, 254),
-          child: customIcon(),
+          backgroundColor: const Color.fromARGB(255, 255, 254, 254),
           elevation: 3,
+          child: customIcon(),
         ),
       ),
+    );
+  }
+  
+  Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            date, // Show the date as a header
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 18.0,
+            ),
+          ),
+        ),
+        Column(
+          children: entries.map((entry) {
+            return DiaryEntryCard(entry, entries.indexOf(entry), key: ValueKey(entry.id));
+          }).toList(),
+        ),
+      ],
     );
   }
 }

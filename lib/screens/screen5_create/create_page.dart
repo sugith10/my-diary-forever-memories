@@ -96,14 +96,19 @@ class _CreatePageState extends State<CreatePage> {
                 });
               },
               availableColors: const [
-                Colors.white,
+                Color.fromARGB(255, 248, 248, 248),
+                Color.fromARGB(255, 250, 240, 248),
                 Color.fromARGB(255, 223, 244, 255),
-                Colors.greenAccent,
-                Color.fromARGB(255, 68, 216, 145),
+                Color.fromARGB(255, 229, 215, 162),
+                Color.fromARGB(255, 243, 215, 116),
+                Color.fromARGB(255, 200, 194, 151),
+                Color.fromARGB(255, 244, 181, 104),
+               
+                Color.fromARGB(255, 200, 216, 145),
+                 Color.fromARGB(255, 187, 240, 214),
                 Color.fromARGB(255, 122, 236, 198),
                 Color.fromARGB(255, 113, 184, 150),
-                Colors.green,
-                Color.fromARGB(255, 181, 255, 61),
+                Color.fromARGB(255, 107, 213, 111),
                 Colors.blueGrey,
                 Colors.grey,
                 Color.fromARGB(255, 164, 151, 200),
@@ -116,10 +121,6 @@ class _CreatePageState extends State<CreatePage> {
                 Color.fromARGB(255, 108, 107, 99),
                 Color.fromARGB(255, 140, 113, 80),
                 Color.fromARGB(255, 76, 75, 88),
-                Color.fromARGB(255, 229, 215, 162),
-                Color.fromARGB(255, 243, 215, 116),
-                Color.fromARGB(255, 200, 194, 151),
-                Color.fromARGB(255, 244, 181, 104),
               ],
               // enableAlpha: true,
 
@@ -155,8 +156,9 @@ class _CreatePageState extends State<CreatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       resizeToAvoidBottomInset: false, 
       backgroundColor: _selectedColor,
-      resizeToAvoidBottomInset: false,
+    
       appBar: AppBar(
           backgroundColor: Colors.white,
           leading: const BackButtonWidget(),
@@ -338,10 +340,10 @@ class _CreatePageState extends State<CreatePage> {
                   gridPadding: EdgeInsets.zero,
                   initCategory: Category.RECENT,
                   bgColor: const Color(0xFFF2F2F2),
-                  indicatorColor: Colors.blue,
+                  indicatorColor:  Color(0xFF835DF1),
                   iconColor: Colors.grey,
-                  iconColorSelected: Colors.blue,
-                  backspaceColor: Colors.blue,
+                  iconColorSelected:  Color(0xFF835DF1),
+                  backspaceColor:  Color(0xFF835DF1),
                   skinToneDialogBgColor: Colors.white,
                   skinToneIndicatorColor: Colors.grey,
                   enableSkinTones: true,
@@ -367,6 +369,7 @@ class _CreatePageState extends State<CreatePage> {
       bottomNavigationBar: Consumer<CreatePageProvider>(
         builder: (context, bottomNavigationProvider, child) {
           return BottomNavigationBar(
+            selectedItemColor:  Color(0xFF835DF1),
             showUnselectedLabels: false,
             showSelectedLabels: false,
             type: BottomNavigationBarType.fixed,
@@ -374,6 +377,7 @@ class _CreatePageState extends State<CreatePage> {
             onTap: (index) {
               switch (index) {
                 case 0:
+                showTimePicker(context: context, initialTime: TimeOfDay.now());
                   break;
                 case 1:
                   toggleEmojiKeyboard();

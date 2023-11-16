@@ -93,6 +93,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                     Navigator.push(context, MaterialPageRoute(builder: (context)=>  EditDiaryEntryScreen(entry: widget.entry)));
                   } else if (value == 'Delete') {
                     _showDeleteConfirmationDialog(context, widget.entry);
+                   
                   }
                 });
               },
