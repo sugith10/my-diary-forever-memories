@@ -7,6 +7,7 @@ import 'package:diary/screens/screen5_create/create_page.dart';
 import 'package:diary/screens/screen1_my_diary/search.dart';
 import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
+import 'package:diary/screens/widgets/custom_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -168,7 +169,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
           },
           backgroundColor: const Color.fromARGB(255, 255, 254, 254),
           elevation: 3,
-          child: customIcon(),
+          child: CustomIconWidget(),
         ),
       ),
     );
@@ -348,10 +349,3 @@ Future<void> handleDateRangePick(BuildContext context) async {
   }
 }
 
-Widget customIcon() {
-  return Image.asset(
-    'images/start_writing.png',
-    width: 40,
-    height: 40,
-  );
-}

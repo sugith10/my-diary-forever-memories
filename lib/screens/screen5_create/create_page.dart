@@ -377,7 +377,20 @@ class _CreatePageState extends State<CreatePage> {
             onTap: (index) {
               switch (index) {
                 case 0:
-                showTimePicker(context: context, initialTime: TimeOfDay.now());
+                showTimePicker(context: context, initialTime: TimeOfDay.now()).then((pickedTime) {
+                  if (pickedTime != null) {
+        print('Selected Time: ${pickedTime.format(context)}');
+         String formattedTime = pickedTime.format(context);
+         setState(() {
+        contentController.text = formattedTime + '\n'; // Display selected time and a newline
+        contentController.selection = TextSelection.fromPosition(
+          TextPosition(offset: contentController.text.length),
+        );
+      });
+      }
+                }
+                
+                );
                   break;
                 case 1:
                   toggleEmojiKeyboard();
