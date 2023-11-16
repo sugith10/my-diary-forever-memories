@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/db/hive_operations.dart';
+
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/widgets/back_button.dart';
@@ -7,7 +7,7 @@ import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
-import 'package:ionicons/ionicons.dart';
+
 import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -112,55 +112,63 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
         elevation: 0,
         bottom: const BottomBorderWidget()
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              controller: titleController,
-              decoration: const InputDecoration(
-                hintText: 'Title',
-                hintStyle: TextStyle(fontSize: 24),
-                border: InputBorder.none,
-              ),
-              style: const TextStyle(fontSize: 24),
-            ),
-          ),
-          Container(
-            height: 200,
-            child: _image != null
-                ? InkWell(
-                  onTap: (){
-                     getImage();
-                  },
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.file(
-                        _image!,
-                      ),
-                    ),
-                )
-                : Container(),
-          ),
-
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: TextField(
-                controller: contentController,
-                maxLines: null, // Allows for multiple lines
-                decoration: const InputDecoration(
-                  hintText: 'Content',
-                  hintStyle: TextStyle(fontSize: 18),
-                  border: InputBorder.none,
+      body: Container(
+        height:  MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    hintText: 'Title',
+                    hintStyle: TextStyle(fontSize: 24),
+                    border: InputBorder.none,
+                  ),
+                  style: const TextStyle(fontSize: 24),
                 ),
-                style: TextStyle(fontSize: 18),
-                autofocus: true,
               ),
-            ),
+              SizedBox(
+                // height: 200,
+                child: _image != null
+                    ? Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: InkWell(
+                        onTap: (){
+                           getImage();
+                        },
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(
+                              _image!,
+                            ),
+                          ),
+                      ),
+                    )
+                    :  Container(),
+              ),
+          
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: TextField(
+                  controller: contentController,
+                  maxLines: null, // Allows for multiple lines
+                  decoration: const InputDecoration(
+                    hintText: 'Content',
+                    hintStyle: TextStyle(fontSize: 18),
+                    border: InputBorder.none,
+                  ),
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(fontSize: 18),
+                  autofocus: true,
+                ),
+              ),
+              // Add image selection and emoji handling widgets
+            ],
           ),
-          // Add image selection and emoji handling widgets
-        ],
+        ),
       ),
     );
   }

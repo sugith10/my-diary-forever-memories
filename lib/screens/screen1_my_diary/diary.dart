@@ -106,25 +106,36 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
          color: hexToColor(widget.entry.background),
           child: ListView(
             children: [
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                alignment: Alignment.bottomRight,
+                child:
+                 Text(
+                        DateFormat('d MMMM,y').format(widget.entry.date),
+                        style:  TextStyle(
+                          fontSize: 11.sp,
+                          // color: Colors.grey,
+                        ),
+                      ),
+              ),
+            ),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: Row(
                   children: [
-                    Text(
-                      widget.entry.title,
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                    Expanded(
+                      child: Text(
+                        widget.entry.title,
+                        style: const TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
+
                     ),
-                   const Spacer(),
-                    Text(
-                      DateFormat('d MMMM,y').format(widget.entry.date),
-                      style: const TextStyle(
-                        fontSize: 16,
-                        color: Colors.grey,
-                      ),
-                    ),
+                   
+                   
                   ],
                 ),
               ),

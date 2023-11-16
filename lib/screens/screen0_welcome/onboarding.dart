@@ -25,7 +25,7 @@ class Onbording extends StatelessWidget {
         },
         child: Column(
           children: [
-          Spacer(),
+         const Spacer(),
             Lottie.asset(
               'images/animation-1697987169484.json',
               width: double.infinity,

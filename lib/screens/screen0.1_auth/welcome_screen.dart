@@ -86,7 +86,7 @@ class WelcomePage extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => LoginPage(),
+                                    builder: (context) => const LoginPage(),
                                   ));
                             },
                             style: ElevatedButton.styleFrom(
@@ -99,7 +99,7 @@ class WelcomePage extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 16)),
+                                padding: const EdgeInsets.symmetric(vertical: 16)),
                             child: FadeInUp(
                                 delay: const Duration(milliseconds: 1100),
                                 duration: const Duration(milliseconds: 1200),
@@ -125,7 +125,7 @@ class WelcomePage extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=> SignInPage()));
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignInPage()));
                             },
                             child: const Text(
                               'Register',

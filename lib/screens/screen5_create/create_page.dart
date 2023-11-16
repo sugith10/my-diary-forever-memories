@@ -74,18 +74,56 @@ class _CreatePageState extends State<CreatePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Choose Background Color'),
+          title: Center(
+              child: ShaderMask(
+            blendMode: BlendMode.srcIn,
+            shaderCallback: (Rect bounds) => const LinearGradient(
+              colors: [Colors.red, Colors.blue],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ).createShader(bounds),
+            child: const Text(
+              'Choose Background Color',
+              style: TextStyle(fontSize: 24),
+            ),
+          )),
           content: SingleChildScrollView(
-            child: ColorPicker(
+            child: BlockPicker(
               pickerColor: _selectedColor,
               onColorChanged: (color) {
                 setState(() {
                   _selectedColor = color;
                 });
               },
-              enableAlpha: true,
-              showLabel: false,
-              pickerAreaHeightPercent: 0.8,
+              availableColors: const [
+                Colors.white,
+                Color.fromARGB(255, 223, 244, 255),
+                Colors.greenAccent,
+                Color.fromARGB(255, 68, 216, 145),
+                Color.fromARGB(255, 122, 236, 198),
+                Color.fromARGB(255, 113, 184, 150),
+                Colors.green,
+                Color.fromARGB(255, 181, 255, 61),
+                Colors.blueGrey,
+                Colors.grey,
+                Color.fromARGB(255, 164, 151, 200),
+                Color.fromARGB(255, 61, 190, 255),
+                Color.fromARGB(255, 244, 104, 104),
+                Color.fromARGB(255, 250, 105, 48),
+                Color.fromARGB(255, 217, 130, 217),
+                Color.fromARGB(255, 224, 153, 181),
+                Color.fromARGB(255, 111, 98, 98),
+                Color.fromARGB(255, 108, 107, 99),
+                Color.fromARGB(255, 140, 113, 80),
+                Color.fromARGB(255, 76, 75, 88),
+                Color.fromARGB(255, 229, 215, 162),
+                Color.fromARGB(255, 243, 215, 116),
+                Color.fromARGB(255, 200, 194, 151),
+                Color.fromARGB(255, 244, 181, 104),
+              ],
+              // enableAlpha: true,
+
+              // pickerAreaHeightPercent: 0.8,
             ),
           ),
           actions: <Widget>[

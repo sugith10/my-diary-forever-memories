@@ -31,6 +31,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
+             
               automaticallyImplyLeading: false,
               title: const AppbarTitleWidget(text: 'My Diary'),
               actions: [
@@ -179,7 +180,7 @@ class DiaryEntryCard extends StatelessWidget {
         ],
       ),
       endActionPane: ActionPane(
-        motion: ScrollMotion(),
+        motion: const ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {
           if (entry.id != null) {
             DbFunctions().deleteDiary(entry.id!);
@@ -188,7 +189,7 @@ class DiaryEntryCard extends StatelessWidget {
             print('no data found');
           }
         }),
-        children: [
+        children: const [
           SlidableAction(
             onPressed: doNothing,
             backgroundColor: Color(0xFFFE4A49),
@@ -222,19 +223,27 @@ class DiaryEntryCard extends StatelessWidget {
                   color: Colors.grey.withOpacity(0.1),
                   spreadRadius: 2,
                   blurRadius: 5,
-                  offset: Offset(0, 3),
+                  offset: const Offset(0, 3),
                 ),
               ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  entry.title,
-                  style: const TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        entry.title,
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 8.0),
                 Text(
@@ -272,10 +281,6 @@ Future<void> handleDateRangePick(BuildContext context) async {
     context: context,
     firstDate: DateTime(DateTime.now().day),
     lastDate: DateTime.now(),
-    // initialDateRange: DateTimeRange(
-    //   end: DateTime.now(), // Set the initial end date to DateTime.now()
-    //   start: DateTime.now(),
-    // ),
     locale: Localizations.localeOf(context),
     saveText: 'Done',
     builder: (BuildContext context, Widget? child) {

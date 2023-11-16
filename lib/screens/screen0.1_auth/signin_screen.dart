@@ -72,48 +72,46 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(
                       height: 2.h,
                     ),
-                    Container(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FadeInDown(
-                            delay: const Duration(milliseconds: 800),
-                            duration: const Duration(milliseconds: 900),
-                            child: Text(
-                              'Welcome to the club!',
-                              style: TextStyle(
-                                fontSize: 25.sp,
-                                fontWeight: FontWeight.w600,
-                              ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FadeInDown(
+                          delay: const Duration(milliseconds: 800),
+                          duration: const Duration(milliseconds: 900),
+                          child: Text(
+                            'Welcome to the club!',
+                            style: TextStyle(
+                              fontSize: 25.sp,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
-                          FadeInDown(
-                            delay: const Duration(milliseconds: 700),
-                            duration: const Duration(milliseconds: 800),
-                            child: Text(
-                              'Excited to have you as',
-                              style: TextStyle(
-                                fontSize: 25.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
+                        ),
+                        SizedBox(
+                          height: 1.h,
+                        ),
+                        FadeInDown(
+                          delay: const Duration(milliseconds: 700),
+                          duration: const Duration(milliseconds: 800),
+                          child: Text(
+                            'Excited to have you as',
+                            style: TextStyle(
+                              fontSize: 25.sp,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-                          FadeInDown(
-                            delay: const Duration(milliseconds: 600),
-                            duration: const Duration(milliseconds: 700),
-                            child: Text(
-                              'Part of our community...',
-                              style: TextStyle(
-                                fontSize: 25.sp,
-                                fontWeight: FontWeight.w400,
-                              ),
+                        ),
+                        FadeInDown(
+                          delay: const Duration(milliseconds: 600),
+                          duration: const Duration(milliseconds: 700),
+                          child: Text(
+                            'Part of our community...',
+                            style: TextStyle(
+                              fontSize: 25.sp,
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: 5.h,
@@ -170,7 +168,7 @@ class _SignInPageState extends State<SignInPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                padding: EdgeInsets.symmetric(vertical: 16),
+                                padding: const EdgeInsets.symmetric(vertical: 16),
                               ),
                               child: FadeInUp(
                                 delay: const Duration(milliseconds: 700),

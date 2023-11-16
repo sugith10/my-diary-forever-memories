@@ -91,7 +91,7 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                   AnimatedContainer(
-                    duration: Duration(seconds: 1),
+                    duration: const Duration(seconds: 1),
                     curve: Curves.fastLinearToSlowEaseIn,
                     width:
                         isSelected ? displayWidth * 0.31 : displayWidth * 0.18,
@@ -101,13 +101,13 @@ class MainScreen extends StatelessWidget {
                         Row(
                           children: [
                             AnimatedContainer(
-                              duration: Duration(seconds: 1),
+                              duration: const Duration(seconds: 1),
                               curve: Curves.fastLinearToSlowEaseIn,
                               width: isSelected ? displayWidth * 0.13 : 0,
                             ),
                             AnimatedOpacity(
                               opacity: isSelected ? 1 : 0,
-                              duration: Duration(seconds: 1),
+                              duration: const Duration(seconds: 1),
                               curve: Curves.fastLinearToSlowEaseIn,
                               child: Text(
                                 isSelected ? listOfStrings[index] : '',

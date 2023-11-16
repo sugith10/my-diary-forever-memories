@@ -1,7 +1,7 @@
 import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({Key? key}) : super(key: key);
