@@ -346,6 +346,6 @@ Future<void> handleDateRangePick(BuildContext context) async {
     final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
     final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
 
-    // print('Selected date range: ${formattedStartDate} - ${formattedEndDate}');
+    print('Selected date range: ${formattedStartDate} - ${formattedEndDate}');
   }
 }

@@ -112,7 +112,7 @@ class CalendarScreen extends StatelessWidget {
                   },
                   calendarStyle: const CalendarStyle(
                     todayDecoration: BoxDecoration(
-                      color: Color(0xFF835DF1),
+                      color: Color.fromARGB(255, 77, 76, 78),
                       shape: BoxShape.circle,
                     ),
                     todayTextStyle: TextStyle(color: Colors.white),
