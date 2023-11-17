@@ -1,10 +1,11 @@
+import 'dart:developer';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/screens/screen1_my_diary/diary.dart';
-import 'package:diary/screens/screen1_my_diary/saved_list/saved_list.dart';
-import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
-import 'package:diary/screens/screen5_create/create_page.dart';
-import 'package:diary/screens/screen1_my_diary/search.dart';
+import 'package:diary/screens/screen_1_my_diary/diary.dart';
+import 'package:diary/screens/screen_1_my_diary/saved_list/saved_list.dart';
+import 'package:diary/screens/screen_2_calendar/provider_calendar.dart';
+import 'package:diary/screens/screen_5_create/create_page.dart';
+import 'package:diary/screens/screen_1_my_diary/search.dart';
 import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:diary/screens/widgets/custom_icon.dart';
@@ -30,13 +31,11 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
     return SafeArea(
       child: Scaffold(
         body: ScrollConfiguration(
-          behavior: ScrollConfiguration.of(context).copyWith(
-            physics: BouncingScrollPhysics()
-          ),
+          behavior: ScrollConfiguration.of(context)
+              .copyWith(physics: const BouncingScrollPhysics()),
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
-               
                 automaticallyImplyLeading: false,
                 title: const AppbarTitleWidget(text: 'My Diary'),
                 actions: [
@@ -108,12 +107,12 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
               ),
               SliverPadding(
                 padding: const EdgeInsets.all(8.0),
-        
                 sliver: ValueListenableBuilder(
-                                 valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+                  valueListenable:
+                      Hive.box<DiaryEntry>('_boxName').listenable(),
                   builder: (context, box, child) {
                     var sortedEntries = box.values.toList();
-                     print('Sorted Entries Length: ${sortedEntries.length}');
+                    //  print('Sorted Entries Length: ${sortedEntries.length}');
                     switch (selectedSortOption) {
                       case 'Newest First':
                         sortedEntries.sort((a, b) => b.date.compareTo(a.date));
@@ -125,25 +124,24 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                         sortedEntries.sort((a, b) => b.date.compareTo(a.date));
                         break;
                     }
-        
+
                     Map<String, List<DiaryEntry>> groupedEntries = {};
                     for (var entry in sortedEntries) {
                       final dateKey = DateFormat('y-MM-dd').format(entry.date);
                       groupedEntries.putIfAbsent(dateKey, () => []);
                       groupedEntries[dateKey]!.add(entry);
                     }
-                      print('Grouped Entries Length: ${groupedEntries.length}');
-        
+                    log('Grouped Entries Length: ${groupedEntries.length}');
+
                     return SliverList(
-                      
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                            if (index >= groupedEntries.length) {
-            print('Index out of bounds: $index');
-            return const SizedBox(); // or return an empty container/widget
-          }
-                         final dateKey = groupedEntries.keys.toList()[index];
-                         final entries = groupedEntries[dateKey]!;
+                          if (index >= groupedEntries.length) {
+                            log('Index out of bounds: $index');
+                            return const SizedBox(); 
+                          }
+                          final dateKey = groupedEntries.keys.toList()[index];
+                          final entries = groupedEntries[dateKey]!;
                           return buildGroupedDiaryEntries(entries, dateKey);
                         },
                         childCount: sortedEntries.length,
@@ -169,30 +167,30 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
           },
           backgroundColor: const Color.fromARGB(255, 255, 254, 254),
           elevation: 3,
-          child: CustomIconWidget(),
+          child: const CustomIconWidget(),
         ),
       ),
     );
   }
-  
-  Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
 
+  Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            date, // Show the date as a header
+            date, 
             style: const TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 18.0,
+              fontSize: 15.0,
             ),
           ),
         ),
         Column(
           children: entries.map((entry) {
-            return DiaryEntryCard(entry, entries.indexOf(entry), key: ValueKey(entry.id));
+            return DiaryEntryCard(entry, entries.indexOf(entry),
+                key: ValueKey(entry.id));
           }).toList(),
         ),
       ],
@@ -204,16 +202,16 @@ class DiaryEntryCard extends StatelessWidget {
   final DiaryEntry entry;
   final int index;
 
-  DiaryEntryCard(this.entry, this.index, {super.key});
+  const DiaryEntryCard(this.entry, this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      key: ValueKey(0),
+      key: const ValueKey(0),
       startActionPane: ActionPane(
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {
-          print('Start Action Dismissed');
+          // print('Start Action Dismissed');
         }),
         children: const [
           SlidableAction(
@@ -232,7 +230,7 @@ class DiaryEntryCard extends StatelessWidget {
             DbFunctions().deleteDiary(entry.id!);
             //  diaryEntriesNotifier.notifyListeners();
           } else {
-            print('no data found');
+            // print('no data found');
           }
         }),
         children: const [
@@ -258,9 +256,9 @@ class DiaryEntryCard extends StatelessWidget {
                   )));
         },
         child: Padding(
-          padding: EdgeInsets.fromLTRB(0, 4, 0, 4),
+          padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
           child: Container(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(12.0),
@@ -294,23 +292,26 @@ class DiaryEntryCard extends StatelessWidget {
                 const SizedBox(height: 8.0),
                 Text(
                   entry.content,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontSize: 16.0,
+                    color: Color.fromARGB(255, 105, 105, 105)
                   ),
                 ),
                 const SizedBox(height: 12.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      DateFormat('d MMMM, y').format(entry.date),
-                      style: const TextStyle(
-                        fontSize: 14.0,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       DateFormat('d MMMM, y').format(entry.date),
+                //       style: const TextStyle(
+                //         fontSize: 14.0,
+                //         color: Colors.grey,
+                //       ),
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
@@ -332,7 +333,7 @@ Future<void> handleDateRangePick(BuildContext context) async {
     builder: (BuildContext context, Widget? child) {
       return Theme(
         data: ThemeData.light().copyWith(
-          colorScheme: ColorScheme.light(primary: Color(0xFF835DF1)),
+          colorScheme: const ColorScheme.light(primary: Color(0xFF835DF1)),
         ),
         child: child ?? Container(),
       );
@@ -345,7 +346,6 @@ Future<void> handleDateRangePick(BuildContext context) async {
     final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
     final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
 
-    print('Selected date range: ${formattedStartDate} - ${formattedEndDate}');
+    // print('Selected date range: ${formattedStartDate} - ${formattedEndDate}');
   }
 }
-

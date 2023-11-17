@@ -6,11 +6,11 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Timer(Duration(seconds: 1), () {
+    Timer(const Duration(seconds: 1), () {
       Navigator.pushReplacementNamed(context, '/onboarding');
     });
 
-    return Scaffold(
+    return const Scaffold(
         backgroundColor: Colors.white,
         body: Center(
             child: Image(image: AssetImage('images/first-img.png'))));

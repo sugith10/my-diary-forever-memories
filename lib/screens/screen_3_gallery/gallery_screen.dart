@@ -3,7 +3,7 @@ import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/screens/screen1_my_diary/diary.dart';
+import 'package:diary/screens/screen_1_my_diary/diary.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -24,7 +24,7 @@ class GalleryScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
+       
           child: ValueListenableBuilder(
             valueListenable: box.listenable(),
             builder: (context, value, child) {
@@ -40,14 +40,14 @@ class GalleryScreen extends StatelessWidget {
                   return DiaryGalleryEntryCard(data);
                 },
                 staggeredTileBuilder: (index) {
-                  return StaggeredTile.fit(1);
+                  return const StaggeredTile.fit(1);
                   // return StaggeredTile.count((index % 3 == 0) ? 3 : 1, (index % 3 == 0) ? 2 : 1, );
                   // return StaggeredTile.count(1, 2); 
                 },
               );
             },
           ),
-        ),
+        
       ),
     );
   }

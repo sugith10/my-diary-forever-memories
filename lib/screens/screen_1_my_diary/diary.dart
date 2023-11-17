@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/screen1_my_diary/edit_screen.dart';
+import 'package:diary/screens/screen_1_my_diary/edit_screen.dart';
 import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                           SizedBox(
                             width: 3.w,
                           ),
-                          Text('Delete'),
+                          const Text('Delete'),
                         ],
                       ),
                     ),
@@ -161,7 +161,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                 padding: const EdgeInsets.all(16),
                 child: Text(
                   widget.entry.content,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                   ),
                 ),

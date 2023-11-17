@@ -1,6 +1,6 @@
 import 'package:diary/db/hive_savedlist_db_ops.dart';
 import 'package:diary/models/savedlist_db_model.dart';
-import 'package:diary/screens/screen1_my_diary/saved_list/saved_item.dart';
+import 'package:diary/screens/screen_1_my_diary/saved_list/saved_item.dart';
 import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
@@ -16,7 +16,7 @@ class SavedListScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButtonWidget(),
-        title: AppbarTitleWidget(
+        title: const AppbarTitleWidget(
           text: 'Saved',
         ),
         elevation: 0,
@@ -63,18 +63,18 @@ class SavedListScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SavedItems()));
+                                  builder: (context) => const SavedItems()));
                         },
                         child: Container(
                           height: 16.h,
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 213, 212, 212),
+                              color: const Color.fromARGB(255, 213, 212, 212),
                               borderRadius: BorderRadius.circular(8)),
                         ),
                       ),
                       Text(
                         savedList.listName,
-                        style: TextStyle(fontSize: 18.0),
+                        style: const TextStyle(fontSize: 18.0),
                       )
                     ],
                   ),
@@ -103,7 +103,7 @@ void _showCreateListDialog(BuildContext context) {
               controller: listNameController,
               cursorColor: const Color(0xFF835DF1),
               decoration: const InputDecoration(
-                labelStyle: const TextStyle(color: Colors.grey),
+                labelStyle:  TextStyle(color: Colors.grey),
                 labelText: 'List Name',
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -126,11 +126,11 @@ void _showCreateListDialog(BuildContext context) {
                 }
                 Navigator.pop(context);
               },
-              child: Text('Create List'),
               style: ButtonStyle(
                 backgroundColor:
-                    MaterialStateProperty.all<Color>(Color(0xFF835DF1)),
+                    MaterialStateProperty.all<Color>(const Color(0xFF835DF1)),
               ),
+              child: const Text('Create List'),
             ),
           ],
         ),

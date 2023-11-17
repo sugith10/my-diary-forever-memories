@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/screen0.1_auth/login_screen.dart';
-import 'package:diary/screens/screen0.1_auth/welcome_screen.dart';
+import 'package:diary/screens/screen_0_2_authorization/login_screen.dart';
+import 'package:diary/screens/screen_0_2_authorization/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:sizer/sizer.dart';
@@ -47,7 +47,7 @@ class _SignInPageState extends State<SignInPage> {
               physics: const BouncingScrollPhysics(),
               child: Container(
                 height: 100.h,
-                decoration: BoxDecoration(color: Colors.white),
+                decoration: const BoxDecoration(color: Colors.white),
                 padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +61,7 @@ class _SignInPageState extends State<SignInPage> {
                       duration: const Duration(milliseconds: 1000),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> WelcomePage()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const WelcomePage()));
                         },
                         icon: Icon(
                           IconlyBroken.arrow_left,
@@ -164,7 +164,7 @@ class _SignInPageState extends State<SignInPage> {
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'Satoshi',
                                 ),
-                                backgroundColor: Color(0xFF835DF1),
+                                backgroundColor: const Color(0xFF835DF1),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -173,7 +173,7 @@ class _SignInPageState extends State<SignInPage> {
                               child: FadeInUp(
                                 delay: const Duration(milliseconds: 700),
                                 duration: const Duration(milliseconds: 800),
-                                child: Text('Sign Up'),
+                                child: const Text('Sign Up'),
                               ),
                             ),
                           ),
@@ -196,7 +196,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         TextButton(
                             onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=> LoginPage()));
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginPage()));
                             },
                             child: const Text(
                               'Login',
@@ -212,7 +212,7 @@ class _SignInPageState extends State<SignInPage> {
                       ],
                     ),
                   ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                   ],
@@ -232,7 +232,7 @@ class InputField extends StatelessWidget {
   final bool isFocused;
   final TextEditingController controller;
 
-  InputField({
+  const InputField({super.key, 
     required this.labelText,
     required this.focusNode,
     required this.isFocused,
@@ -261,20 +261,20 @@ class InputField extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 0.8.h),
             padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: .3.h),
             decoration: BoxDecoration(
-              color: isFocused ? Colors.white : Color(0xFFF1F0F5),
-              border: Border.all(width: 1, color: Color(0xFFD2D2D4)),
+              color: isFocused ? Colors.white : const Color(0xFFF1F0F5),
+              border: Border.all(width: 1, color: const Color(0xFFD2D2D4)),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 if (isFocused)
                   BoxShadow(
-                    color: Color(0xFF835DF1).withOpacity(.3),
+                    color: const Color(0xFF835DF1).withOpacity(.3),
                     blurRadius: 4.0,
                     spreadRadius: 2.0,
                   ),
               ],
             ),
             child: TextField(
-              style: TextStyle(fontWeight: FontWeight.w500),
+              style: const TextStyle(fontWeight: FontWeight.w500),
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: labelText,

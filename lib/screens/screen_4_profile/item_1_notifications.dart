@@ -7,7 +7,7 @@ import 'package:sizer/sizer.dart';
 import 'package:animate_do/animate_do.dart';
 
 class NotificationPage extends StatefulWidget {
-  NotificationPage({super.key});
+  const NotificationPage({super.key});
 
   @override
   State<NotificationPage> createState() => _NotificationPageState();
@@ -25,7 +25,7 @@ class _NotificationPageState extends State<NotificationPage> {
         appBar: const CustomAppBar(),
         body: Column(
           children: [
-            InfoContainer(
+            const InfoContainer(
               title: "Notifications",
               description:
                   "Let us know when you'd like to receive reminders to jot down your daily moments, and we'll make sure it's precisely when you want.",
@@ -41,8 +41,8 @@ class _NotificationPageState extends State<NotificationPage> {
             SizedBox(
               height: 2.h,
             ),
-            Container(
-              child: Row(
+           
+               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
@@ -154,7 +154,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   )
                 ],
               ),
-            ),
+        
             SizedBox(
               height: 2.h,
             ),

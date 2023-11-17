@@ -2,8 +2,8 @@ import 'package:animate_do/animate_do.dart';
 
 import 'package:diary/models/content_model.dart';
 import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/screen0.1_auth/welcome_screen.dart';
-import 'package:diary/screens/screen0_welcome/provider_onboarding.dart';
+import 'package:diary/screens/screen_0_2_authorization/welcome_screen.dart';
+import 'package:diary/screens/screen_0_1_welcome/provider_onboarding.dart';
 import 'package:flutter/material.dart';
 
 import 'package:lottie/lottie.dart';
@@ -129,13 +129,13 @@ class Onbording extends StatelessWidget {
               child: FadeInUp(
                 delay: const Duration(milliseconds: 1000),
                 duration: const Duration(milliseconds: 1000),
-                child: Text(
+                child: const Text(
                   'Skip',
                   style: TextStyle(color: Color.fromARGB(255, 150, 169, 194)),
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),

@@ -35,9 +35,9 @@ class SavedListDbFunctions {
     if (savedList != null) {
       savedList.diaryEntryIds.add(diaryEntryId);
       await box.put(savedListId, savedList);
-      print('Added diary entry ID to the SavedList: $diaryEntryId');
+      log('Added diary entry ID to the SavedList: $diaryEntryId');
     } else {
-      print('SavedList with ID $savedListId not found.');
+      log('SavedList with ID $savedListId not found.');
     }
   }
 

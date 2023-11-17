@@ -14,7 +14,7 @@ import 'package:sizer/sizer.dart';
 class EditDiaryEntryScreen extends StatefulWidget {
   final DiaryEntry entry;
 
-  EditDiaryEntryScreen({required this.entry, Key? key}) : super(key: key);
+  const EditDiaryEntryScreen({required this.entry, Key? key}) : super(key: key);
 
   @override
   State<EditDiaryEntryScreen> createState() => _EditDiaryEntryScreenState();
@@ -59,7 +59,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       await image.copy(imagePath);
       return imagePath;
     } catch (e) {
-      print("Error saving image: $e");
+      // print("Error saving image: $e");
       return null;
     }
   }
@@ -74,13 +74,13 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
           Center(
             child: TextButton(
               onPressed: () async {
-                final title = titleController.text;
-                final content = contentController.text;
+                // final title = titleController.text;
+                // final content = contentController.text;
 
-                String? imagePath;
-                if (_image != null) {
-                  imagePath = await saveImage(_image!);
-                }
+                // String? imagePath;
+                // if (_image != null) {
+                //   imagePath = await saveImage(_image!);
+                // }
 
                 // if (title.isNotEmpty) {
                 //   final updatedEntry = DiaryEntry(
@@ -112,10 +112,10 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
         elevation: 0,
         bottom: const BottomBorderWidget()
       ),
-      body: Container(
+      body: SizedBox(
         height:  MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               Padding(

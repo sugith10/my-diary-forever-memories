@@ -1,8 +1,8 @@
 import 'package:diary/screens/home/provider_mainscreen.dart';
-import 'package:diary/screens/screen1_my_diary/mydiary_screen.dart';
-import 'package:diary/screens/screen2_calendar/calendar_screen.dart';
-import 'package:diary/screens/screen3_gallery/gallery_screen.dart';
-import 'package:diary/screens/screen4_profile/account_screen.dart';
+import 'package:diary/screens/screen_1_my_diary/mydiary_screen.dart';
+import 'package:diary/screens/screen_2_calendar/calendar_screen.dart';
+import 'package:diary/screens/screen_3_gallery/gallery_screen.dart';
+import 'package:diary/screens/screen_4_profile/account_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
@@ -11,10 +11,10 @@ import 'package:sizer/sizer.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Widget> _mainScreens = [
-    MyDiaryScreen(),
-    CalendarScreen(),
-    GalleryScreen(),
-    AccountScreen(),
+    const MyDiaryScreen(),
+          CalendarScreen(),
+    const GalleryScreen(),
+    const AccountScreen(),
   ];
 
    final List<IconData> listOfIcons = [
@@ -53,7 +53,7 @@ class MainScreen extends StatelessWidget {
             BoxShadow(
               color: const Color(0xFF835DF1).withOpacity(0.1),
               blurRadius: 38,
-              offset: Offset(0, 10),
+              offset: const Offset(0, 10),
             ),
           ],
           borderRadius: BorderRadius.circular(20),
@@ -72,7 +72,7 @@ class MainScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   AnimatedContainer(
-                    duration: Duration(seconds: 1),
+                    duration: const Duration(seconds: 1),
                     curve: Curves.fastLinearToSlowEaseIn,
                     width:
                         isSelected ? displayWidth * 0.32 : displayWidth * 0.18,
@@ -123,7 +123,7 @@ class MainScreen extends StatelessWidget {
                         Row(
                           children: [
                             AnimatedContainer(
-                              duration: Duration(seconds: 1),
+                              duration: const Duration(seconds: 1),
                               curve: Curves.fastLinearToSlowEaseIn,
                               width: isSelected ? displayWidth * 0.03 : 20,
                             ),

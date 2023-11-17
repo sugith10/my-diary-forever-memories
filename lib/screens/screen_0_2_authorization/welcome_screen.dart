@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:diary/screens/screen0.1_auth/login_screen.dart';
-import 'package:diary/screens/screen0.1_auth/signin_screen.dart';
+import 'package:diary/screens/screen_0_2_authorization/login_screen.dart';
+import 'package:diary/screens/screen_0_2_authorization/signin_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -67,7 +67,7 @@ class WelcomePage extends StatelessWidget {
                               'In the book of your heart, every chapter is a memory to rember forever.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 15.sp, fontWeight: FontWeight.w400, color: Color.fromARGB(244, 44, 44, 44)),
+                                  fontSize: 15.sp, fontWeight: FontWeight.w400, color: const Color.fromARGB(244, 44, 44, 44)),
                             ),
                           ),
                         ]),
@@ -95,7 +95,7 @@ class WelcomePage extends StatelessWidget {
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'Satoshi'),
-                                backgroundColor: Color(0xFF835DF1),
+                                backgroundColor: const Color(0xFF835DF1),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -103,7 +103,7 @@ class WelcomePage extends StatelessWidget {
                             child: FadeInUp(
                                 delay: const Duration(milliseconds: 1100),
                                 duration: const Duration(milliseconds: 1200),
-                                child: Text('Log In')),
+                                child: const Text('Log In')),
                           ),
                         )
                       ],

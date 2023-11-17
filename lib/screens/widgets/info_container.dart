@@ -5,7 +5,7 @@ class InfoContainer extends StatelessWidget {
   final String title;
   final String description;
 
-  InfoContainer({
+  const InfoContainer({super.key, 
     required this.title,
     required this.description,
   });

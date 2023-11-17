@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/screen0.1_auth/signin_screen.dart';
-import 'package:diary/screens/screen0.1_auth/welcome_screen.dart';
+import 'package:diary/screens/screen_0_2_authorization/signin_screen.dart';
+import 'package:diary/screens/screen_0_2_authorization/welcome_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:sizer/sizer.dart';
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             physics: const BouncingScrollPhysics(),
             child: Container(
               height: 100.h,
-              decoration: BoxDecoration(color: Colors.white),
+              decoration: const BoxDecoration(color: Colors.white),
               padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -69,8 +69,8 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  Container(
-                    child: Column(
+           
+                 Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         FadeInDown(
@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                         )
                       ],
                     ),
-                  ),
+                  
                   SizedBox(
                     height: 5.h,
                   ),
@@ -137,12 +137,12 @@ class _LoginPageState extends State<LoginPage> {
                           color:
                               isFocusedEmail ? Colors.white : const Color(0xFFF1F0F5),
                           border:
-                              Border.all(width: 1, color: Color(0xFFD2D2D4)),
+                              Border.all(width: 1, color: const Color(0xFFD2D2D4)),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             if (isFocusedEmail)
                               BoxShadow(
-                                  color: Color(0xFF835DF1).withOpacity(.3),
+                                  color: const Color(0xFF835DF1).withOpacity(.3),
                                   blurRadius: 4.0,
                                   spreadRadius: 2.0
                                   // Glow Color
@@ -227,7 +227,7 @@ class _LoginPageState extends State<LoginPage> {
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                     fontFamily: 'Satoshi'),
-                                backgroundColor: Color(0xFF835DF1),
+                                backgroundColor: const Color(0xFF835DF1),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -257,7 +257,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextButton(
                             onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=> SignInPage()));
+                               Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignInPage()));
                             },
                             child: const Text(
                               'Register',

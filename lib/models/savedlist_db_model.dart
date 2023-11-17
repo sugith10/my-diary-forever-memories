@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-
 part 'savedlist_db_model.g.dart';
 
 @HiveType(typeId: 2)

@@ -1,5 +1,5 @@
-import 'package:diary/screens/screen5_create/create_page.dart';
-import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
+import 'package:diary/screens/screen_5_create/create_page.dart';
+import 'package:diary/screens/screen_2_calendar/provider_calendar.dart';
 import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
@@ -77,9 +77,9 @@ class CalendarScreen extends StatelessWidget {
           bottom: const BottomBorderWidget()),
       body: Column(
         children: [
-          Container(
+        
             // color: Color.fromARGB(255, 237, 237, 237),
-            child: Container(
+            Container(
               // color: Color.fromARGB(255, 237, 237, 237),
               margin: const EdgeInsets.only(left: 10, right: 10),
               child: Visibility(
@@ -126,7 +126,7 @@ class CalendarScreen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          
           const Spacer(),
           InkWell(
             onTap: () {
@@ -141,10 +141,10 @@ class CalendarScreen extends StatelessWidget {
             },
             child: Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
-              child: Column(
+              child: const Column(
                 children: [
-                  Container(
-                    child: const Row(
+                 
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
@@ -156,11 +156,11 @@ class CalendarScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(
+                 
+                  SizedBox(
                     height: 7,
                   ),
-                  const Text(
+                  Text(
                     'Click this text to create your personal diary',
                     style: TextStyle(color: Colors.black26, fontSize: 12),
                   ),

@@ -30,7 +30,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final imageTemporary = File(image.path);
 
     setState(() {
-      this._profilePicture = imageTemporary;
+      _profilePicture = imageTemporary;
     });
   }
 
@@ -76,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: TextButton(
               onPressed: () async {
                 await saveProfileDetails();
-                Navigator.pop(context);
+                // Navigator.pop(context);
               },
               child: const Text(
                 'Save',

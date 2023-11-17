@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:diary/screens/screen1_my_diary/diary.dart';
+import 'package:diary/screens/screen_1_my_diary/diary.dart';
 import 'package:sizer/sizer.dart';
 
 class MySearchAppBar extends StatefulWidget {
@@ -15,7 +15,7 @@ class MySearchAppBar extends StatefulWidget {
 }
 
 class _MySearchAppBarState extends State<MySearchAppBar> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   final Box<DiaryEntry> diaryBox = Hive.box<DiaryEntry>('_boxName');
   List<DiaryEntry> searchResults = [];
 
@@ -53,9 +53,9 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
               hintStyle: TextStyle(fontSize: 16.sp),
               border: InputBorder.none,
             ),
-            cursorColor: Color.fromARGB(115, 95, 95, 95),
+            cursorColor: const Color.fromARGB(115, 95, 95, 95),
             cursorHeight: 22,
-            style: TextStyle(fontSize: 20),
+            style: const TextStyle(fontSize: 20),
             textCapitalization: TextCapitalization.sentences,
           ),
           elevation: 0,
@@ -82,9 +82,9 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
                       );
                     },
                     child: Padding(
-                      padding: EdgeInsets.fromLTRB(8, 8, 8, 0),
+                      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
                       child: Container(
-                        padding: EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12.0),
@@ -93,7 +93,7 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
                               color: Colors.grey.withOpacity(0.1),
                               spreadRadius: 2,
                               blurRadius: 5,
-                              offset: Offset(0, 3),
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),

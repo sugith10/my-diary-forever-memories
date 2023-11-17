@@ -9,9 +9,9 @@ class CustomizationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
-        appBar:  const CustomAppBar(),
+        appBar:  CustomAppBar(),
         body: Column(
           children: [
             InfoContainer(

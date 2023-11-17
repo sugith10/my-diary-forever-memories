@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:diary/db/hive_profile_operations.dart';
 import 'package:diary/models/profile_details.dart';
-import 'package:diary/screens/screen4_profile/item_1_notifications.dart';
-import 'package:diary/screens/screen4_profile/item_2_customization.dart';
-import 'package:diary/screens/screen4_profile/profile_page.dart';
+import 'package:diary/screens/screen_4_profile/item_1_notifications.dart';
+import 'package:diary/screens/screen_4_profile/item_2_customization.dart';
+import 'package:diary/screens/screen_4_profile/profile_page.dart';
 import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +14,7 @@ import 'package:sizer/sizer.dart';
 
 
 class AccountScreen extends StatelessWidget {
-  AccountScreen({Key? key});
+  const AccountScreen({Key? key});
 
   String getGreeting() {
     var now = DateTime.now();
@@ -105,7 +105,7 @@ class AccountScreen extends StatelessWidget {
               child: GestureDetector(
                 onDoubleTap: () {
                    Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                      MaterialPageRoute(builder: (context) => const ProfilePage()));
                 },
                 child: Container(
                   height: 20.h,
@@ -199,7 +199,7 @@ class AccountScreen extends StatelessWidget {
           // profile end
           Expanded(
             child: Container(
-              margin: EdgeInsets.only(left: 20, right: 20),
+              margin: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
                   InkWell(
@@ -208,7 +208,7 @@ class AccountScreen extends StatelessWidget {
                           context,
                           PageTransition(
                               type: PageTransitionType.rightToLeftJoined,
-                              child: NotificationPage(),
+                              child: const NotificationPage(),
                               childCurrent: this));
                     },
                     child: const Row(
@@ -231,7 +231,7 @@ class AccountScreen extends StatelessWidget {
                   SizedBox(
                     height: 1.2.h,
                   ),
-                  Divider(),
+                  const Divider(),
                   SizedBox(
                     height: 1.2.h,
                   ),
@@ -240,7 +240,7 @@ class AccountScreen extends StatelessWidget {
                         context,
                         PageTransition(
                             type: PageTransitionType.rightToLeftJoined,
-                            child: CustomizationPage(),
+                            child: const CustomizationPage(),
                             childCurrent: this)),
                     child: const Row(
                       children: [
@@ -259,7 +259,7 @@ class AccountScreen extends StatelessWidget {
                   SizedBox(
                     height: 1.2.h,
                   ),
-                  Divider(),
+                  const Divider(),
                   SizedBox(
                     height: 1.2.h,
                   ),

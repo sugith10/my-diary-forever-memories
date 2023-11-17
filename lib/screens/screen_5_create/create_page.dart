@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/screens/screen2_calendar/provider_calendar.dart';
-import 'package:diary/screens/screen5_create/provider_create.dart';
+import 'package:diary/screens/screen_2_calendar/provider_calendar.dart';
+import 'package:diary/screens/screen_5_create/provider_create.dart';
 import 'package:diary/screens/widgets/back_button.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
@@ -137,9 +137,9 @@ class _CreatePageState extends State<CreatePage> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                String hex =
-                    _selectedColor.value.toRadixString(16).toUpperCase();
-                print('Selected Color: #$hex');
+                // String hex =
+                //     _selectedColor.value.toRadixString(16).toUpperCase();
+                // // print('Selected Color: #$hex');
               },
               child: const Text(
                 'OK',
@@ -338,10 +338,10 @@ class _CreatePageState extends State<CreatePage> {
                   gridPadding: EdgeInsets.zero,
                   initCategory: Category.RECENT,
                   bgColor: const Color(0xFFF2F2F2),
-                  indicatorColor: Color(0xFF835DF1),
+                  indicatorColor: const Color(0xFF835DF1),
                   iconColor: Colors.grey,
-                  iconColorSelected: Color(0xFF835DF1),
-                  backspaceColor: Color(0xFF835DF1),
+                  iconColorSelected: const Color(0xFF835DF1),
+                  backspaceColor: const Color(0xFF835DF1),
                   skinToneDialogBgColor: Colors.white,
                   skinToneIndicatorColor: Colors.grey,
                   enableSkinTones: true,
@@ -367,7 +367,7 @@ class _CreatePageState extends State<CreatePage> {
       bottomNavigationBar: Consumer<CreatePageProvider>(
         builder: (context, bottomNavigationProvider, child) {
           return BottomNavigationBar(
-            selectedItemColor: Color(0xFF835DF1),
+            selectedItemColor: const Color(0xFF835DF1),
             showUnselectedLabels: false,
             showSelectedLabels: false,
             type: BottomNavigationBarType.fixed,
@@ -381,18 +381,36 @@ class _CreatePageState extends State<CreatePage> {
                       String formattedTime = pickedTime.format(context);
                       String existingText = contentController.text;
 
-                      // Concatenate existing text with selected time in a new line
-                      String newText = existingText.isNotEmpty
-                          ? '$existingText\n$formattedTime'
-                          : formattedTime;
+                      // Create different TextSpans for time and remaining text
+                      // TextSpan timeTextSpan = TextSpan(
+                      //   text: '$formattedTime\n',
+                      //   style: TextStyle(
+                      //       color: Colors.grey), // Set the grey color here
+                      // );
 
-                      setState(() {
-                        contentController.text = newText;
-                        contentController.selection =
-                            TextSelection.fromPosition(
-                          TextPosition(offset: contentController.text.length),
-                        );
-                      });
+                      // TextSpan remainingTextSpan = TextSpan(
+                      //   text: existingText.isNotEmpty ? existingText : '',
+                      //   style: TextStyle(
+                      //       color: Colors.black), // Set the black color here
+                      // );
+
+                      // Create a RichText widget to display both text spans
+                      contentController.value = const TextEditingValue(
+                        text: '',
+                        selection: TextSelection.collapsed(offset: 0),
+                        composing: TextRange.empty,
+                      );
+
+                      contentController.text = '';
+                      contentController.value = TextEditingValue(
+                        text:
+                            '$formattedTime\n${existingText.isNotEmpty ? existingText : ''}',
+                        selection: TextSelection.collapsed(
+                          offset: ('$formattedTime\n$existingText').length,
+                        ),
+                      );
+
+                      setState(() {});
                     }
                   });
                   break;
