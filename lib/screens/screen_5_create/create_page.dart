@@ -404,9 +404,9 @@ class _CreatePageState extends State<CreatePage> {
                       contentController.text = '';
                       contentController.value = TextEditingValue(
                         text:
-                            '$formattedTime\n${existingText.isNotEmpty ? existingText : ''}',
+                            '$formattedTime\n\n${existingText.isNotEmpty ? existingText : ''}',
                         selection: TextSelection.collapsed(
-                          offset: ('$formattedTime\n$existingText').length,
+                          offset: ('$formattedTime\n\n$existingText').length,
                         ),
                       );
 
