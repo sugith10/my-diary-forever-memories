@@ -381,36 +381,15 @@ class _CreatePageState extends State<CreatePage> {
                       String formattedTime = pickedTime.format(context);
                       String existingText = contentController.text;
 
-                      // Create different TextSpans for time and remaining text
-                      // TextSpan timeTextSpan = TextSpan(
-                      //   text: '$formattedTime\n',
-                      //   style: TextStyle(
-                      //       color: Colors.grey), // Set the grey color here
-                      // );
+                      String newText = existingText.isNotEmpty
+                          ? '$existingText\n\n\n$formattedTime\n\n'
+                          : '$formattedTime\n\n';
 
-                      // TextSpan remainingTextSpan = TextSpan(
-                      //   text: existingText.isNotEmpty ? existingText : '',
-                      //   style: TextStyle(
-                      //       color: Colors.black), // Set the black color here
-                      // );
-
-                      // Create a RichText widget to display both text spans
-                      contentController.value = const TextEditingValue(
-                        text: '',
-                        selection: TextSelection.collapsed(offset: 0),
-                        composing: TextRange.empty,
-                      );
-
-                      contentController.text = '';
                       contentController.value = TextEditingValue(
-                        text:
-                            '$formattedTime\n\n${existingText.isNotEmpty ? existingText : ''}',
-                        selection: TextSelection.collapsed(
-                          offset: ('$formattedTime\n\n$existingText').length,
-                        ),
+                        text: newText,
+                        selection:
+                            TextSelection.collapsed(offset: newText.length),
                       );
-
-                      setState(() {});
                     }
                   });
                   break;
@@ -431,9 +410,9 @@ class _CreatePageState extends State<CreatePage> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(
-                  Ionicons.text_outline,
+                  Ionicons.time_outline,
                 ),
-                label: 'Font',
+                label: 'Time',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Ionicons.happy_outline),

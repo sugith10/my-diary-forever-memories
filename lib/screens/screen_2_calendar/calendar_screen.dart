@@ -1,10 +1,13 @@
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/screens/screen_1_my_diary/mydiary_screen.dart';
 import 'package:diary/screens/screen_5_create/create_page.dart';
 import 'package:diary/screens/screen_2_calendar/provider_calendar.dart';
 import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
@@ -25,8 +28,8 @@ class CalendarScreen extends StatelessWidget {
     List<DiaryEntry> diaryEntries = dbFunctions.diaryEntryNotifier;
 
     // Find the diary entry for the selected date
-      diaryEntryForSelectedDate = null;
-      bool foundEntry = false;
+    diaryEntryForSelectedDate = null;
+    bool foundEntry = false;
     for (var entry in diaryEntries) {
       if (entry.date == selectedDate) {
         foundEntry = true;
@@ -35,11 +38,10 @@ class CalendarScreen extends StatelessWidget {
         print('Date: ${diaryEntryForSelectedDate!.date}');
       }
     }
-
     if (foundEntry == false) {
-     print('No diary entry found for selected date.');
+      print('No diary entry found for selected date.');
       // Handle if there's no diary entry for the selected date
-    } 
+    }
   }
 
   // final int currentIndex = 0;
@@ -150,49 +152,49 @@ class CalendarScreen extends StatelessWidget {
               ),
             ),
           ),
+       Expanded(
+            child: ValueListenableBuilder<Box<DiaryEntry>>(
+              valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+              builder: (context, box, child) {
+                final diaryEntries = box.values.toList();
+                return ListView.builder(
+                  itemCount: diaryEntries.length,
+                  itemBuilder: (context, index) {
+                    final entry = diaryEntries[index];
 
-          const Spacer(),
-          InkWell(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  PageTransition(
-                      type: PageTransitionType.size,
-                      alignment: Alignment.bottomCenter,
-                      child: CreatePage(
-                        changer: changer,
-                      )));
-            },
-            child: Container(
-              margin: const EdgeInsets.only(left: 20, right: 20),
-              child: const Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Start writing about your day...',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 31, 31, 31),
-                          fontSize: 20,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 7,
-                  ),
-                  Text(
-                    'Click this text to create your personal diary',
-                    style: TextStyle(color: Colors.black26, fontSize: 12),
-                  ),
-                ],
-              ),
+                    return DiaryEntryCard(entry, index, key: ValueKey(entry.id));
+                  },
+                );
+              },
             ),
           ),
-          const Spacer(),
         ],
       ),
+    );
+  }
+
+  Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            date,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.amber,
+              fontSize: 20.0,
+            ),
+          ),
+        ),
+        Column(
+          children: entries.map((entry) {
+            return DiaryEntryCard(entry, entries.indexOf(entry),
+                key: ValueKey(entry.id));
+          }).toList(),
+        ),
+      ],
     );
   }
 }
