@@ -1,3 +1,5 @@
+import 'package:diary/db/hive_operations.dart';
+import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/screen_5_create/create_page.dart';
 import 'package:diary/screens/screen_2_calendar/provider_calendar.dart';
 import 'package:diary/screens/widgets/appbar_titlestyle.dart';
@@ -15,7 +17,39 @@ class CalendarScreen extends StatelessWidget {
 
   final DateTime today = DateTime.now();
 
+   bool diaryFound = false;
+
+    DiaryEntry? diaryEntryForSelectedDate;
+
   // final int currentIndex = 0;
+   Future<void> fetchDiaryEntryForDate(DateTime selectedDate) async {
+    final dbFunctions = DbFunctions();
+    await dbFunctions.getAllDiary(); // Fetch all diary entries
+    List<DiaryEntry> diaryEntries = dbFunctions.diaryEntryNotifier;
+
+    // Find the diary entry for the selected date
+   
+    for (var entry in diaryEntries) {
+      if (entry.date.year == selectedDate.year &&
+          entry.date.month == selectedDate.month &&
+          entry.date.day == selectedDate.day) {
+        diaryEntryForSelectedDate = entry;
+        break;
+      }
+    }
+
+    if (diaryEntryForSelectedDate != null) {
+      // If a diary entry exists for the selected date, print it
+      print('Diary entry found: ${diaryEntryForSelectedDate!.title}');
+      print('Content: ${diaryEntryForSelectedDate!.content}');
+      // Display or use this information as needed
+     diaryFound = true;
+    } else {
+      diaryFound = false;
+      print('No diary entry found for selected date.');
+      // Handle if there's no diary entry for the selected date
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +59,8 @@ class CalendarScreen extends StatelessWidget {
           automaticallyImplyLeading: false,
           backgroundColor: Colors.white,
           title: InkWell(
-            onTap: () {
+            onTap: ()  {
+         
               changer.toggleCalendarVisibility();
             },
             child: Row(
@@ -53,19 +88,22 @@ class CalendarScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Center(
-              child: Container(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.black)
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    DateFormat.d().format(today), // Display only the current day
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.sp,
-                      color: Colors.black,
+              child: InkWell(
+                onTap: (){},
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: Colors.black)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      DateFormat.d().format(today), // Display only the current day
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15.sp,
+                        color: Colors.black,
+                      ),
                     ),
                   ),
                 ),
@@ -98,7 +136,8 @@ class CalendarScreen extends StatelessWidget {
                     ),
                   ),
                   availableGestures: AvailableGestures.all,
-                  selectedDayPredicate: (day) =>
+                  selectedDayPredicate: (day) => 
+
                       isSameDay(day, changer.selectedDate),
                   firstDay: DateTime(2000, 10, 1),
                   lastDay: DateTime.now(),
@@ -107,7 +146,8 @@ class CalendarScreen extends StatelessWidget {
                     weekendStyle: TextStyle(color: Colors.red),
                   ),
                   weekendDays: const [DateTime.sunday],
-                  onDaySelected: (day, focusedDay) {
+                  onDaySelected: (day, focusedDay)async {
+                         await fetchDiaryEntryForDate(changer.selectedDate);
                     changer.selectDate(day);
                   },
                   calendarStyle: const CalendarStyle(
@@ -129,7 +169,7 @@ class CalendarScreen extends StatelessWidget {
           
           const Spacer(),
           InkWell(
-            onTap: () {
+            onTap: () async {
               Navigator.push(
                   context,
                   PageTransition(
@@ -141,9 +181,70 @@ class CalendarScreen extends StatelessWidget {
             },
             child: Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
-              child: const Column(
+              child: diaryFound == true ?  Column(
                 children: [
-                 
+             Container(
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12.0),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.1),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
+                ),
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                     diaryEntryForSelectedDate!.title,
+                        style: const TextStyle(
+                          fontSize: 18.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8.0),
+                Text(
+                  diaryEntryForSelectedDate!.content,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                    color: Color.fromARGB(255, 105, 105, 105)
+                  ),
+                ),
+                const SizedBox(height: 12.0),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       DateFormat('d MMMM, y').format(entry.date),
+                //       style: const TextStyle(
+                //         fontSize: 14.0,
+                //         color: Colors.grey,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+              ],
+            ),
+          ),
+       
+                ],
+              ) : const  Column(
+                children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -166,6 +267,8 @@ class CalendarScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              // child: const 
+            
             ),
           ),
           const Spacer(),
