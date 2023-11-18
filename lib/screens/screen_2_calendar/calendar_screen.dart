@@ -12,13 +12,17 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalendarScreen extends StatelessWidget {
+class CalendarScreen extends StatefulWidget {
   CalendarScreen({super.key});
 
+  @override
+  State<CalendarScreen> createState() => _CalendarScreenState();
+}
+
+class _CalendarScreenState extends State<CalendarScreen> {
   final DateTime today = DateTime.now();
 
    bool diaryFound = false;
-
     DiaryEntry? diaryEntryForSelectedDate;
 
   // final int currentIndex = 0;
