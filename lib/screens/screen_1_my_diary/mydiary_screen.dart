@@ -29,8 +29,10 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
   String selectedSortOption = 'Newest First';
   @override
   Widget build(BuildContext context) {
+    bool isFabVisible = true;
     return SafeArea(
       child: Scaffold(
+        //  floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
         body: ScrollConfiguration(
           behavior: ScrollConfiguration.of(context)
               .copyWith(physics: const BouncingScrollPhysics()),
@@ -106,7 +108,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                 elevation: 0,
                 pinned: false, // Keep the app bar pinned
                 floating: true, // Make the app bar float
-                snap: false,
+                snap: true,
               ),
               SliverPadding(
                 padding: const EdgeInsets.all(8.0),
@@ -156,7 +158,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
             ],
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: isFabVisible ? FloatingActionButton(
+          shape: const CircleBorder(),
           onPressed: () {
             final changer = Provider.of<Changer>(context, listen: false);
             Navigator.push(
@@ -171,7 +174,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
           backgroundColor: const Color.fromARGB(255, 255, 254, 254),
           elevation: 3,
           child: const CustomIconWidget(),
-        ),
+        ) : null,
       ),
     );
   }
