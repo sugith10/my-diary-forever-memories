@@ -114,6 +114,7 @@ class MainScreen extends StatelessWidget {
                                 style:  TextStyle(
                                   color: Colors.black87,
                                   fontWeight: FontWeight.w600,
+                                   fontFamily: 'Poppins',
                                   fontSize: 10.sp,
                                 ),
                               ),

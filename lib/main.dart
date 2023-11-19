@@ -35,8 +35,6 @@ Future<void> main() async {
   }
   await Hive.openBox<SavedList>('_savedListBoxName');
 
-
-
   runApp(
     MultiProvider(
       providers: [
@@ -68,21 +66,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-        theme: ThemeData(
-          fontFamily: 'Satoshi',
-          primaryColor: Colors.grey[300],
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
-        ),
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/',
-routes: {
-  '/': (context) => const Splash(),
-  '/onboarding': (context) => Onbording(
-    onboardingState: Provider.of<OnboardingState>(context),
-  ),
-  '/main': (context) => MainScreen(),
-}
-      ),
+          theme: ThemeData(
+            fontFamily: 'SFPRO',
+            primaryColor: Colors.grey[300],
+            appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+          ),
+          debugShowCheckedModeBanner: false,
+          initialRoute: '/',
+          routes: {
+            '/': (context) => const Splash(),
+            '/onboarding': (context) => Onbording(
+                  onboardingState: Provider.of<OnboardingState>(context),
+                ),
+            '/main': (context) => MainScreen(),
+          }),
     );
   }
 }

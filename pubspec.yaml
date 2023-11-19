@@ -118,6 +118,26 @@ flutter:
           weight: 400
         - asset: assets/fonts/Satoshi-Bold.ttf
           weight: 500
+    
+    - family: SFPRO
+      fonts:
+        - asset: assets/fonts/sfpro/SFPRODISPLAYREGULAR.otf
+          weight: 300
+        - asset: assets/fonts/sfpro/SFPRODISPLAYMEDIUM.otf
+          weight: 400
+        - asset: assets/fonts/sfpro/SFPRODISPLAYBOLD.otf
+          weight: 500
+
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins/Poppins-Light.ttf
+     
+        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
+         
+        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
+      
+        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
+         
 
 
   #         style: italic

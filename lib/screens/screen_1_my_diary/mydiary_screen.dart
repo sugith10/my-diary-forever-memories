@@ -16,6 +16,7 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class MyDiaryScreen extends StatefulWidget {
   const MyDiaryScreen({Key? key}) : super(key: key);
@@ -37,7 +38,9 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                title: const AppbarTitleWidget(text: 'My Diary'),
+                title: const AppbarTitleWidget(
+                  text: 'My Diary',
+                ),
                 actions: [
                   IconButton(
                     onPressed: () {
@@ -138,7 +141,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                         (BuildContext context, int index) {
                           if (index >= groupedEntries.length) {
                             log('Index out of bounds: $index');
-                            return const SizedBox(); 
+                            return const SizedBox();
                           }
                           final dateKey = groupedEntries.keys.toList()[index];
                           final entries = groupedEntries[dateKey]!;
@@ -180,9 +183,9 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            date, 
+            date,
             style: const TextStyle(
-              fontWeight: FontWeight.bold,
+              // fontWeight: FontWeight.normal,
               fontSize: 15.0,
             ),
           ),
@@ -279,27 +282,26 @@ class DiaryEntryCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         entry.title,
-                        style: const TextStyle(
-                          fontSize: 18.0,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: TextStyle(
+                            fontSize: 15.sp,
+                            // fontFamily: "Satoshi",
+
+                            fontWeight: FontWeight.w500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 8.0),
-                Text(
-                  entry.content,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontSize: 16.0,
-                    color: Color.fromARGB(255, 105, 105, 105)
-                  ),
-                ),
-                const SizedBox(height: 12.0),
+                SizedBox(height: 5.sp),
+                Text(entry.content,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                        fontSize: 13.sp,
+                        color: Color.fromARGB(255, 105, 105, 105)),
+                    textAlign: TextAlign.justify),
+                SizedBox(height: 5.sp),
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 //   children: [

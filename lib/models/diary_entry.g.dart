@@ -22,14 +22,18 @@ class DiaryEntryAdapter extends TypeAdapter<DiaryEntry> {
       title: fields[2] as String,
       content: fields[3] as String,
       imagePath: fields[4] as String?,
-      background: fields[5] as String,
+      imagePathTwo: fields[5] as String?,
+      imagePathThree: fields[6] as String?,
+      imagePathFour: fields[7] as String?,
+      imagePathFive: fields[8] as String?,
+      background: fields[9] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, DiaryEntry obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,6 +45,14 @@ class DiaryEntryAdapter extends TypeAdapter<DiaryEntry> {
       ..writeByte(4)
       ..write(obj.imagePath)
       ..writeByte(5)
+      ..write(obj.imagePathTwo)
+      ..writeByte(6)
+      ..write(obj.imagePathThree)
+      ..writeByte(7)
+      ..write(obj.imagePathFour)
+      ..writeByte(8)
+      ..write(obj.imagePathFive)
+      ..writeByte(9)
       ..write(obj.background);
   }
 

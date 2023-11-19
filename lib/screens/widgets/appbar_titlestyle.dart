@@ -11,8 +11,10 @@ class AppbarTitleWidget extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        color: Colors.black,
+         fontFamily: 'SFPRO',
+        color: Color.fromARGB(255, 0, 0, 0),
         fontSize: 15.sp,
+        fontWeight: FontWeight.w600
       ),
     );
   }

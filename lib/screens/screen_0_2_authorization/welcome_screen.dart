@@ -94,7 +94,7 @@ class WelcomePage extends StatelessWidget {
                                 textStyle: const TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
-                                    fontFamily: 'Satoshi'),
+                                   ),
                                 backgroundColor: const Color(0xFF835DF1),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),

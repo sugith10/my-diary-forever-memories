@@ -40,7 +40,12 @@ class InfoContainer extends StatelessWidget {
               alignment: AlignmentDirectional.centerStart,
               child: Text(
                 description,
-                style: TextStyle(color: Colors.black54, fontSize: 11.sp),
+                style: TextStyle(color: Colors.black54, fontSize: 13.sp,
+                fontFamily: 'Satoshi',
+                
+                ),
+              textAlign: TextAlign.justify
+              
               ),
             ),
           ],
