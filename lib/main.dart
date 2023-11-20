@@ -3,7 +3,6 @@ import 'package:diary/models/profile_details.dart';
 import 'package:diary/models/savedlist_db_model.dart';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/home/provider_mainscreen.dart';
-
 import 'package:diary/screens/screen_0_1_welcome/onboarding.dart';
 import 'package:diary/screens/screen_0_1_welcome/provider_onboarding.dart';
 import 'package:diary/screens/screen_0_1_welcome/splash.dart';

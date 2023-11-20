@@ -61,9 +61,12 @@ class SavedListScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SavedItems()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  SavedItems(savedList: savedList),
+                            ),
+                          );
                         },
                         child: Container(
                           height: 16.h,
@@ -103,7 +106,7 @@ void _showCreateListDialog(BuildContext context) {
               controller: listNameController,
               cursorColor: const Color(0xFF835DF1),
               decoration: const InputDecoration(
-                labelStyle:  TextStyle(color: Colors.grey),
+                labelStyle: TextStyle(color: Colors.grey),
                 labelText: 'List Name',
                 focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(
@@ -115,7 +118,7 @@ void _showCreateListDialog(BuildContext context) {
               textCapitalization: TextCapitalization.words,
             ),
             const SizedBox(height: 15),
-            ElevatedButton( 
+            ElevatedButton(
               onPressed: () async {
                 String listName = listNameController.text;
                 if (listName.isNotEmpty) {

@@ -20,7 +20,9 @@ class SavedListAdapter extends TypeAdapter<SavedList> {
       id: fields[0] as String,
       date: fields[1] as DateTime,
       listName: fields[2] as String,
-      diaryEntryIds: (fields[3] as List?)?.cast<String>(),
+      diaryEntryIds: (fields[3] as List?)
+          ?.map((dynamic e) => (e as Map).cast<String, bool>())
+          ?.toList(),
     );
   }
 

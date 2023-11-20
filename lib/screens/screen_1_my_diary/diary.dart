@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:diary/db/hive_savedlist_db_ops.dart';
 import 'package:diary/models/savedlist_db_model.dart';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/screen_1_my_diary/edit_screen.dart';
@@ -15,7 +16,6 @@ import 'package:sizer/sizer.dart';
 
 class DiaryDetailPage extends StatefulWidget {
   final DiaryEntry entry;
-
   const DiaryDetailPage({required this.entry, Key? key}) : super(key: key);
 
   @override
@@ -112,7 +112,8 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                   } else if (value == 'Delete') {
                     _showDeleteConfirmationDialog(context, widget.entry);
                   } else if (value == 'Save') {
-                    _displayBottomSheet(context);
+                    //hfhkjasdhjkfhkldhkjhsgldfkjkgljfhssssslhhsdhafhdhasbjkdbfhdhbkjfbhdkfhnksajkfkjsdbjhfvbjsdnvjnskabfdkdhfldjiokshfiakadhnbsdjnasjdgfh
+                    _displayBottomSheet(context, widget.entry.id!);
                   }
                 });
               },
@@ -251,7 +252,7 @@ void _showDeleteConfirmationDialog(BuildContext context, DiaryEntry entry) {
   );
 }
 
-Future _displayBottomSheet(BuildContext context) {
+Future _displayBottomSheet(BuildContext context, String entryId) {
   return showModalBottomSheet(
     context: context,
     shape: RoundedRectangleBorder(
@@ -287,35 +288,36 @@ Future _displayBottomSheet(BuildContext context) {
                 Hive.box<SavedList>('_savedListBoxName').listenable(),
             builder: (context, box, child) {
               List<SavedList> savedList = box.values.toList();
-
               return ListView.builder(
-                shrinkWrap: true, // Add this line
+                shrinkWrap: true,
                 itemCount: savedList.length,
                 itemBuilder: (context, index) {
                   String listName = savedList[index].listName;
-
-                  return Row(
-                    children: [
-                      Row(
-                        children: [
-                          Checkbox(
-                              value: false,
-                              onChanged: (newBool) {
-                                setState() {}
-                              }),
-                          Text(
-                            listName,
-                            style: TextStyle(fontSize: 16.5.sp),
-                          ),
-                        ],
-                      ),
-                    ],
+                  String listId = savedList[index].id;
+                  return InkWell(
+                    onTap: () {
+                      print(listId);
+                      print(entryId);
+                       SavedListDbFunctions().addMapToDiaryEntryIds(listId, {entryId : true});
+                    },
+                    child: Row(
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              listName,
+                              style: TextStyle(fontSize: 16.5.sp),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   );
                 },
               );
             },
           ),
-         const Divider(
+          const Divider(
             thickness: 1.5,
           ),
           InkWell(

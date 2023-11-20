@@ -305,18 +305,7 @@ class DiaryEntryCard extends StatelessWidget {
                         color: Color.fromARGB(255, 105, 105, 105)),
                     textAlign: TextAlign.justify),
                 SizedBox(height: 5.sp),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     Text(
-                //       DateFormat('d MMMM, y').format(entry.date),
-                //       style: const TextStyle(
-                //         fontSize: 14.0,
-                //         color: Colors.grey,
-                //       ),
-                //     ),
-                //   ],
-                // ),
+                
               ],
             ),
           ),

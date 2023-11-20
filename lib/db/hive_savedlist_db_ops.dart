@@ -8,8 +8,7 @@ final ValueNotifier<List<SavedList>> savedListsNotifier =
     ValueNotifier<List<SavedList>>([]);
 
 class SavedListDbFunctions {
-
- final box = Hive.box<SavedList>('_savedListBoxName');
+  final box = Hive.box<SavedList>('_savedListBoxName');
 
   Future<void> createSavedList(String listname) async {
     final newSavedList = SavedList(
@@ -18,28 +17,27 @@ class SavedListDbFunctions {
       listName: listname,
       diaryEntryIds: [], // Initial diary entry IDs, can be null or empty
     );
-     await box.put(newSavedList.id, newSavedList);
-     log('Created saved list successfully');
+    await box.put(newSavedList.id, newSavedList);
+    log('Created saved list successfully');
 
     savedListsNotifier.value = box.values.toList();
-    
-     log('Updated List: ${box.values.toList()}');
+
+    log('Updated List: ${box.values.toList()}');
   }
 
-   List<SavedList> getAllSavedLists() {
+  List<SavedList> getAllSavedLists() {
     return box.values.toList();
   }
 
-    Future<void> addDiaryToSavedList(String savedListId, String diaryEntryId) async {
+  Future<void> addMapToDiaryEntryIds(
+      String savedListId, Map<String, bool> entryMap) async {
     final savedList = box.get(savedListId);
     if (savedList != null) {
-      savedList.diaryEntryIds.add(diaryEntryId);
+      savedList.diaryEntryIds.add(entryMap);
       await box.put(savedListId, savedList);
-      log('Added diary entry ID to the SavedList: $diaryEntryId');
+      print('Added map to diaryEntryIds in SavedList: $entryMap');
     } else {
-      log('SavedList with ID $savedListId not found.');
+      print('SavedList with ID $savedListId not found.');
     }
   }
-
-
 }

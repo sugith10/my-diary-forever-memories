@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
-
 import '../../db/hive_profile_operations.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -76,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
             child: TextButton(
               onPressed: () async {
                 await saveProfileDetails();
-                // Navigator.pop(context);
+                Navigator.pop(context);
               },
               child: const Text(
                 'Save',
