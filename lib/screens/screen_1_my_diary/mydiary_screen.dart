@@ -40,9 +40,30 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                title: const AppbarTitleWidget(
-                  text: 'My Diary',
-                ),
+                title:  RichText(
+    text: TextSpan(
+      style: DefaultTextStyle.of(context).style,
+      children:  <TextSpan>[
+        TextSpan(
+          text: 'My ',
+          style: TextStyle( fontFamily: 'SFPRO',
+        color: Color.fromARGB(255, 0, 0, 0),
+        fontSize: 15.sp,
+        fontWeight: FontWeight.w600, 
+          ),
+        ),
+        TextSpan(
+          text: 'Diary',
+          style: TextStyle(
+            fontFamily: 'SFPRO',
+            color: Color(0xFF835DF1),
+             fontSize: 13.sp,
+        fontWeight: FontWeight.w600, 
+          ),
+        ),
+      ],
+    ),
+  ),
                 actions: [
                   IconButton(
                     onPressed: () {

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/home/mainscreen.dart';
 import 'package:diary/screens/widgets/back_button.dart';
@@ -59,7 +60,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       await image.copy(imagePath);
       return imagePath;
     } catch (e) {
-      // print("Error saving image: $e");
+      print("Error saving image: $e");
       return null;
     }
   }
@@ -74,33 +75,37 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
           Center(
             child: TextButton(
               onPressed: () async {
-                // final title = titleController.text;
-                // final content = contentController.text;
+                final title = titleController.text;
+                final content = contentController.text;
 
-                // String? imagePath;
-                // if (_image != null) {
-                //   imagePath = await saveImage(_image!);
-                // }
+                String? imagePath;
+                if (_image != null) {
+                  imagePath = await saveImage(_image!);
+                }
 
-                // if (title.isNotEmpty) {
-                //   final updatedEntry = DiaryEntry(
-                //     id: widget.entry.id,
-                //     date: widget.entry.date,
-                //     title: title,
-                //     content: content,
-                //     imagePath: imagePath,
-                //     background: '#${_selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
-                //   );
+                if (title.isNotEmpty) {
+                  final updatedEntry = DiaryEntry(
+                    id: widget.entry.id,
+                    date: widget.entry.date,
+                    title: title,
+                    content: content,
+                    imagePath: imagePath,
+                    background: widget.entry.background,
+                  );
 
-                //   await DbFunctions()
-                //       .updateDiaryEntry(updatedEntry)
-                //       .then((value) {
-                //     print("Function completed: ");
-                //   }).catchError((error) {
-                //     print("Error updating DiaryEntry: $error");
-                //   });
-                // }
-                Navigator.pop(context);
+                  await DbFunctions()
+                      .updateDiaryEntry(updatedEntry)
+                      .then((value) {
+                    print("Function completed: ");
+                  }).catchError((error) {
+                    print("Error updating DiaryEntry: $error");
+                  });
+                }
+                Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => MainScreen()),
+                ModalRoute.withName('/main'),
+              );
               },
               child: Text(
                 'Save',

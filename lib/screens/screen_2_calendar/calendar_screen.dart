@@ -18,7 +18,7 @@ class CalendarScreen extends StatelessWidget {
   CalendarScreen({super.key});
 
   final DateTime today = DateTime.now();
-   bool diaryFound = false;
+  bool diaryFound = false;
   DiaryEntry? diaryEntryForSelectedDate;
 
 // Future<void> fetchDiaryEntryForDate(DateTime selectedDate) async {
@@ -42,14 +42,12 @@ class CalendarScreen extends StatelessWidget {
 //   }
 // }
 
-
-
   // final int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final changer = Provider.of<Changer>(context);
-  
+
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -78,37 +76,39 @@ class CalendarScreen extends StatelessWidget {
             ),
           ),
           actions: [
-           Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 15.0),
-    child: Center(
-      child: Material(
-        shape: CircleBorder(),
-        clipBehavior: Clip.antiAlias, // Clip the splash to a circular shape
-        child: InkWell(
-          onTap: () {
-            // Change the selected date to the current date
-            changer.selectDate(DateTime.now());
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.black)),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                DateFormat.d().format(today),
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.sp,
-                  color: Colors.black,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Center(
+                child: Material(
+                  shape: CircleBorder(),
+                  clipBehavior:
+                      Clip.antiAlias, // Clip the splash to a circular shape
+                  child: InkWell(
+                    onTap: () {
+                      // Change the selected date to the current date
+                      changer.selectDate(DateTime.now());
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.all(color: Colors.black)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          DateFormat.d().format(today),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15.sp,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-        ),
-      ),
-    ),
-  ),  ],
+          ],
           elevation: 0,
           bottom: const BottomBorderWidget()),
       body: Column(
@@ -164,106 +164,99 @@ class CalendarScreen extends StatelessWidget {
             ),
           ),
 
-         Expanded(
-  child: Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: ValueListenableBuilder<Box<DiaryEntry>>(
-      valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-      builder: (context, box, child) {
-        // Fetch all diary entries
-        List<DiaryEntry> diaryEntries = box.values.toList();
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ValueListenableBuilder<Box<DiaryEntry>>(
+                valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+                builder: (context, box, child) {
+                  // Fetch all diary entries
+                  List<DiaryEntry> diaryEntries = box.values.toList();
 
-        // Filter entries for the selected date
-        final selectedEntries = diaryEntries
-            .where((entry) =>
-                isSameDay(entry.date, changer.selectedDate))
-            .toList();
+                  final selectedEntries = diaryEntries
+                      .where((entry) =>
+                          isSameDay(entry.date, changer.selectedDate))
+                      .toList();
 
-        if (selectedEntries.isNotEmpty) {
-          return ListView.builder(
-            physics: const AlwaysScrollableScrollPhysics(),
-            itemCount: selectedEntries.length,
-            itemBuilder: (context, index) {
-              return DiaryEntryCard(selectedEntries[index], index);
-            },
-          );
-        } else {
-          // You can display a message or widget when there are no entries
-          return Center(
-            child: GestureDetector(
-            onTap: () {
-            Navigator.push(
-                context,
-                PageTransition(
-                    type: PageTransitionType.size,
-                    alignment: Alignment.bottomCenter,
-                    child: CreatePage(
-                      changer: changer,
-                    )));
-            },
-            child: Container(
-            margin: const EdgeInsets.only(left: 20, right: 20),
-            
-            child:  Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                 Text(
-                        'Start writing about your day...',
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 31, 31, 31),
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w500,
-                          // fontFamily: "Poppins"
+                  if (selectedEntries.isNotEmpty) {
+                    return ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      itemCount: selectedEntries.length,
+                      itemBuilder: (context, index) {
+                        return DiaryEntryCard(selectedEntries[index], index);
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              PageTransition(
+                                  type: PageTransitionType.size,
+                                  alignment: Alignment.bottomCenter,
+                                  child: CreatePage(
+                                    changer: changer,
+                                  )));
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.only(left: 20, right: 20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Start writing about your day...',
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 31, 31, 31),
+                                  fontSize: 18.sp,
+                                  fontWeight: FontWeight.w500,
+                                  // fontFamily: "Poppins"
+                                ),
+                              ),
+                              Text(
+                                'Click this text to create your personal diary',
+                                style: TextStyle(
+                                    color: Colors.black26,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 12.sp),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                       Text(
-                  'Click this text to create your personal diary',
-                  style: TextStyle(color: Colors.black26, 
-                  fontWeight: FontWeight.w400,
-                  fontSize: 12.sp),
-                ),
-               
-                  
-               
-               
-              ],
-            ),
+                    );
+                  }
+                },
+              ),
             ),
           ),
-          );
-        }
-      },
-    ),
-  ),
-),
-
         ],
       ),
     );
   }
 
-  Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            date,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.amber,
-              fontSize: 20.0,
-            ),
-          ),
-        ),
-        Column(
-          children: entries.map((entry) {
-            return DiaryEntryCard(entry, entries.indexOf(entry),
-                key: ValueKey(entry.id));
-          }).toList(),
-        ),
-      ],
-    );
-  }
+  // Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
+  //   return Column(
+  //     crossAxisAlignment: CrossAxisAlignment.start,
+  //     children: [
+  //       Padding(
+  //         padding: const EdgeInsets.all(8.0),
+  //         child: Text(
+  //           date,
+  //           style: const TextStyle(
+  //             fontWeight: FontWeight.bold,
+  //             color: Colors.amber,
+  //             fontSize: 20.0,
+  //           ),
+  //         ),
+  //       ),
+  //       Column(
+  //         children: entries.map((entry) {
+  //           return DiaryEntryCard(entry, entries.indexOf(entry),
+  //               key: ValueKey(entry.id));
+  //         }).toList(),
+  //       ),
+  //     ],
+  //   );
+  // }
 }

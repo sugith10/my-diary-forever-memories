@@ -294,16 +294,22 @@ Future _displayBottomSheet(BuildContext context, String entryId) {
                 itemBuilder: (context, index) {
                   String listName = savedList[index].listName;
                   String listId = savedList[index].id;
+                  bool _isChecked = false;
                   return InkWell(
                     onTap: () {
                       print(listId);
                       print(entryId);
                        SavedListDbFunctions().addMapToDiaryEntryIds(listId, entryId );
+                       Navigator.pop(context);
                     },
                     child: Row(
                       children: [
                         Row(
                           children: [
+
+                           Checkbox(value: _isChecked, onChanged: (bool? newValue){
+                            
+                           }),
                             Text(
                               listName,
                               style: TextStyle(fontSize: 16.5.sp),
