@@ -29,15 +29,41 @@ class SavedListDbFunctions {
     return box.values.toList();
   }
 
-  Future<void> addMapToDiaryEntryIds(
-      String savedListId, Map<String, bool> entryMap) async {
+  Future<void> addMapToDiaryEntryIds(String savedListId , String diary) async {
     final savedList = box.get(savedListId);
     if (savedList != null) {
-      savedList.diaryEntryIds.add(entryMap);
+      savedList.diaryEntryIds.add(diary);
       await box.put(savedListId, savedList);
-      print('Added map to diaryEntryIds in SavedList: $entryMap');
+      print('Added map to diaryEntryIds in SavedList: $diary');
     } else {
       print('SavedList with ID $savedListId not found.');
     }
   }
+
+   Future<void> deleteDiaryEntry(String savedListId, String diaryEntryId) async {
+    final savedList = box.get(savedListId);
+    if (savedList != null) {
+      savedList.diaryEntryIds.remove(diaryEntryId);
+      print('Deleted diary entry $diaryEntryId from SavedList: $savedListId');
+    } else {
+      print('SavedList with ID $savedListId not found.');
+    }
+  }
+
+  Future<void> deleteSavedList(String savedListId) async {
+  final savedList = box.get(savedListId);
+  if (savedList != null) {
+    // Delete the saved list from the Hive box
+    await box.delete(savedListId);
+    print('Deleted saved list: $savedListId');
+
+    // Notify listeners about the change in the saved lists
+    savedListsNotifier.value = box.values.toList();
+  } else {
+    print('SavedList with ID $savedListId not found.');
+  }
+}
+
+
+
 }

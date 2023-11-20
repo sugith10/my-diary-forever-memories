@@ -282,9 +282,9 @@ class _ProfilePageState extends State<ProfilePage> {
       await ProfileFunctions().addProfileDetails(details);
 
       // log('Profile details added: $details');
-      log("Diary Entry: key=${details.id}  Name=${details.name}, Email=${details.email}, ImagePath=${details.profilePicturePath}");
+      print("Diary Entry: key=${details.id}  Name=${details.name}, Email=${details.email}, ImagePath=${details.profilePicturePath}");
     } else {
-      log('something missing');
+      print('something missing');
     }
   }
 }

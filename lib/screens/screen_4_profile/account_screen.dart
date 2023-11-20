@@ -3,7 +3,7 @@ import 'package:diary/db/hive_profile_operations.dart';
 import 'package:diary/models/profile_details.dart';
 import 'package:diary/screens/screen_4_profile/item_1_notifications.dart';
 import 'package:diary/screens/screen_4_profile/item_2_customization.dart';
-import 'package:diary/screens/screen_4_profile/profile_page.dart';
+import 'package:diary/screens/screen_4_profile/edit_profile.dart';
 import 'package:diary/screens/widgets/appbar_titlestyle.dart';
 import 'package:diary/screens/widgets/bottomborder.dart';
 import 'package:flutter/material.dart';
@@ -146,8 +146,11 @@ class AccountScreen extends StatelessWidget {
                                 children: [
                                   Text(
                                     profileDetails.name,
-                                    style: TextStyle(fontSize: 18.sp),
+                                    style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
+                                    maxLines: 1,
+                                     overflow: TextOverflow.ellipsis,
                                   ),
+                                  SizedBox(height: .5.h,),
                                   Text(
                                     profileDetails.email,
                                     style: const TextStyle(

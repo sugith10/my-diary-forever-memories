@@ -14,13 +14,13 @@ class SavedList {
   String listName;
 
   @HiveField(3)
-   List<Map<String, bool>> diaryEntryIds;
+  List<String> diaryEntryIds;
 
   SavedList({
     required this.id,
     required this.date,
     required this.listName,
-    List<Map<String, bool>>? diaryEntryIds,
+    List<String>? diaryEntryIds,
   }) : diaryEntryIds = diaryEntryIds ?? [];
   
 }

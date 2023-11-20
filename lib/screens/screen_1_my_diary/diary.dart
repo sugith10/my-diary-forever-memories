@@ -298,7 +298,7 @@ Future _displayBottomSheet(BuildContext context, String entryId) {
                     onTap: () {
                       print(listId);
                       print(entryId);
-                       SavedListDbFunctions().addMapToDiaryEntryIds(listId, {entryId : true});
+                       SavedListDbFunctions().addMapToDiaryEntryIds(listId, entryId );
                     },
                     child: Row(
                       children: [

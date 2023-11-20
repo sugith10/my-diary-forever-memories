@@ -21,27 +21,26 @@ class CalendarScreen extends StatelessWidget {
    bool diaryFound = false;
   DiaryEntry? diaryEntryForSelectedDate;
 
-Future<void> fetchDiaryEntryForDate(DateTime selectedDate) async {
-  final                                                                                                diaryEntries = Hive.box<DiaryEntry>('_boxName').values.toList();
+// Future<void> fetchDiaryEntryForDate(DateTime selectedDate) async {
+//   final                                                                                                diaryEntries = Hive.box<DiaryEntry>('_boxName').values.toList();
+//   // Find the diary entry for the selected date
+//   bool diaryFound = false;
+//   DiaryEntry? diaryEntryForSelectedDate;
 
-  // Find the diary entry for the selected date
-  bool diaryFound = false;
-  DiaryEntry? diaryEntryForSelectedDate;
+//   for (var entry in diaryEntries) {
+//     if (entry.date == selectedDate) {
+//       diaryFound = true;
+//       diaryEntryForSelectedDate = entry;
+//       print('Diary entry found: ${diaryEntryForSelectedDate!.title}');
+//       print('Date: ${diaryEntryForSelectedDate!.date}');
+//     }
+//   }
 
-  for (var entry in diaryEntries) {
-    if (entry.date == selectedDate) {
-      diaryFound = true;
-      diaryEntryForSelectedDate = entry;
-      print('Diary entry found: ${diaryEntryForSelectedDate!.title}');
-      print('Date: ${diaryEntryForSelectedDate!.date}');
-    }
-  }
-
-  if (!diaryFound) {
-    print('No diary entry found for selected date.');
-    // Handle if there's no diary entry for the selected date
-  }
-}
+//   if (!diaryFound) {
+//     print('No diary entry found for selected date.');
+//     // Handle if there's no diary entry for the selected date
+//   }
+// }
 
 
 
@@ -50,7 +49,7 @@ Future<void> fetchDiaryEntryForDate(DateTime selectedDate) async {
   @override
   Widget build(BuildContext context) {
     final changer = Provider.of<Changer>(context);
-    fetchDiaryEntryForDate(changer.selectedDate);
+  
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -165,32 +164,79 @@ Future<void> fetchDiaryEntryForDate(DateTime selectedDate) async {
             ),
           ),
 
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ValueListenableBuilder<Box<DiaryEntry>>(
-                valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
-                builder: (context, box, child) {
-                  // Fetch all diary entries
-                  List<DiaryEntry> diaryEntries = box.values.toList();
+         Expanded(
+  child: Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: ValueListenableBuilder<Box<DiaryEntry>>(
+      valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+      builder: (context, box, child) {
+        // Fetch all diary entries
+        List<DiaryEntry> diaryEntries = box.values.toList();
 
-                  // Filter entries for the selected date
-                  final selectedEntries = diaryEntries
-                      .where((entry) =>
-                          isSameDay(entry.date, changer.selectedDate))
-                      .toList();
+        // Filter entries for the selected date
+        final selectedEntries = diaryEntries
+            .where((entry) =>
+                isSameDay(entry.date, changer.selectedDate))
+            .toList();
 
-                  return ListView.builder(
-                    physics: AlwaysScrollableScrollPhysics(),
-                    itemCount: selectedEntries.length,
-                    itemBuilder: (context, index) {
-                      return DiaryEntryCard(selectedEntries[index], index);
-                    },
-                  );
-                },
-              ),
+        if (selectedEntries.isNotEmpty) {
+          return ListView.builder(
+            physics: const AlwaysScrollableScrollPhysics(),
+            itemCount: selectedEntries.length,
+            itemBuilder: (context, index) {
+              return DiaryEntryCard(selectedEntries[index], index);
+            },
+          );
+        } else {
+          // You can display a message or widget when there are no entries
+          return Center(
+            child: GestureDetector(
+            onTap: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.size,
+                    alignment: Alignment.bottomCenter,
+                    child: CreatePage(
+                      changer: changer,
+                    )));
+            },
+            child: Container(
+            margin: const EdgeInsets.only(left: 20, right: 20),
+            
+            child:  Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                 Text(
+                        'Start writing about your day...',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 31, 31, 31),
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.w500,
+                          // fontFamily: "Poppins"
+                        ),
+                      ),
+                       Text(
+                  'Click this text to create your personal diary',
+                  style: TextStyle(color: Colors.black26, 
+                  fontWeight: FontWeight.w400,
+                  fontSize: 12.sp),
+                ),
+               
+                  
+               
+               
+              ],
+            ),
             ),
           ),
+          );
+        }
+      },
+    ),
+  ),
+),
+
         ],
       ),
     );
