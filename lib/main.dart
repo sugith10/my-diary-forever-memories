@@ -1,14 +1,13 @@
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/models/profile_details.dart';
 import 'package:diary/models/savedlist_db_model.dart';
-import 'package:diary/screens/home/mainscreen.dart';
-import 'package:diary/screens/home/provider_mainscreen.dart';
-import 'package:diary/screens/screen_0_1_welcome/onboarding.dart';
-import 'package:diary/screens/screen_0_1_welcome/provider_onboarding.dart';
-import 'package:diary/screens/screen_0_1_welcome/splash.dart';
-import 'package:diary/screens/screen_0_2_authorization/provider_auth.dart';
-import 'package:diary/screens/screen_2_calendar/provider_calendar.dart';
-import 'package:diary/screens/screen_5_create/provider_create.dart';
+import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:diary/providers/provider_mainscreen.dart';
+import 'package:diary/screens/splash_screen/onboarding.dart';
+import 'package:diary/providers/provider_onboarding.dart';
+import 'package:diary/screens/splash_screen/splash.dart';
+import 'package:diary/providers/provider_calendar.dart';
+import 'package:diary/providers/provider_create.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -49,9 +48,7 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => MainScreenProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => AuthProvider(),
-        )
+        
       ],
       child: const MyApp(),
     ),
