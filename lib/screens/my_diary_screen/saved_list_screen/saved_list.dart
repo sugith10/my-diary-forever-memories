@@ -1,6 +1,6 @@
 import 'package:diary/db/hive_savedlist_db_ops.dart';
 import 'package:diary/models/savedlist_db_model.dart';
-import 'package:diary/screens/my_diary_screen/saved_list/saved_item.dart';
+import 'package:diary/screens/my_diary_screen/saved_list_screen/saved_item.dart';
 import 'package:diary/screens/widget/appbar_titlestyle.dart';
 import 'package:diary/screens/widget/back_button.dart';
 import 'package:diary/screens/widget/bottomborder.dart';

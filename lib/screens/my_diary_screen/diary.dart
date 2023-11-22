@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:diary/db/hive_savedlist_db_ops.dart';
 import 'package:diary/models/savedlist_db_model.dart';
 import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
-import 'package:diary/screens/my_diary_screen/edit_screen.dart';
+import 'package:diary/screens/my_diary_screen/edit_screen/edit_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
 import 'package:flutter/material.dart';
@@ -177,7 +177,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
               padding: const EdgeInsets.all(16),
               child: Text(widget.entry.content,
                   style: const TextStyle(
-                    fontFamily: "SFPRO",
+                
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
                     // wordSpacing: .2,
@@ -188,20 +188,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
           ],
         ),
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () {
-      //     if (widget.entry.id != null) {
-      //       DbFunctions().deleteDiary(widget.entry.id!);
-      //     }
-      //     Navigator.pop(context);
-      //   },
-      //   backgroundColor: Colors.red, // Twitter red color
-      //   icon: Icon(Icons.delete, color: Colors.white),
-      //   label: const Text(
-      //     'Delete',
-      //     style: TextStyle(color: Colors.white),
-      //   ),
-      // ),
+    
     );
   }
 }

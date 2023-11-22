@@ -14,7 +14,7 @@ class MainScreen extends StatelessWidget {
     const MyDiaryScreen(),
           CalendarScreen(),
     const GalleryScreen(),
-    const AccountScreen(),
+     AccountScreen(),
   ];
 
    final List<IconData> listOfIcons = [
@@ -25,10 +25,10 @@ class MainScreen extends StatelessWidget {
   ];
 
    final List<String> listOfStrings = [
-    'My Diary',
-    'Calendar',
-    'Gallery',
-    'Account',
+    'My Diary ',
+    'Calendar ',
+    'Gallery ',
+    'Account ',
   ];
 
   MainScreen({super.key});
@@ -56,7 +56,7 @@ class MainScreen extends StatelessWidget {
               offset: const Offset(0, 10),
             ),
           ],
-          borderRadius: BorderRadius.circular(20),
+          
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

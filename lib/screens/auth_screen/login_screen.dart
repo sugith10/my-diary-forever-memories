@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:diary/screens/auth_screen/signin_screen.dart';
 import 'package:diary/screens/auth_screen/welcome_screen.dart';
+import 'package:diary/screens/auth_screen/widget/navigation_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:sizer/sizer.dart';
@@ -59,7 +60,10 @@ class _LoginPageState extends State<LoginPage> {
                     duration: const Duration(milliseconds: 1000),
                     child: IconButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const WelcomePage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const WelcomePage()));
                         },
                         icon: Icon(
                           IconlyBroken.arrow_left,
@@ -69,49 +73,47 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 2.h,
                   ),
-           
-                 Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FadeInDown(
-                          delay: const Duration(milliseconds: 800),
-                          duration: const Duration(milliseconds: 900),
-                          child: Text(
-                            'Let\'s Sign You In',
-                            style: TextStyle(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FadeInDown(
+                        delay: const Duration(milliseconds: 800),
+                        duration: const Duration(milliseconds: 900),
+                        child: Text(
+                          'Let\'s Sign You In',
+                          style: TextStyle(
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        FadeInDown(
-                          delay: const Duration(milliseconds: 700),
-                          duration: const Duration(milliseconds: 800),
-                          child: Text(
-                            'Welcome Back.',
-                            style: TextStyle(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
+                      ),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      FadeInDown(
+                        delay: const Duration(milliseconds: 700),
+                        duration: const Duration(milliseconds: 800),
+                        child: Text(
+                          'Welcome Back.',
+                          style: TextStyle(
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w400,
                           ),
                         ),
-                        FadeInDown(
-                          delay: const Duration(milliseconds: 600),
-                          duration: const Duration(milliseconds: 700),
-                          child: Text(
-                            'You\'ve been missed!',
-                            style: TextStyle(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
+                      ),
+                      FadeInDown(
+                        delay: const Duration(milliseconds: 600),
+                        duration: const Duration(milliseconds: 700),
+                        child: Text(
+                          'You\'ve been missed!',
+                          style: TextStyle(
+                            fontSize: 25.sp,
+                            fontWeight: FontWeight.w400,
                           ),
-                        )
-                      ],
-                    ),
-                  
+                        ),
+                      )
+                    ],
+                  ),
                   SizedBox(
                     height: 5.h,
                   ),
@@ -134,15 +136,17 @@ class _LoginPageState extends State<LoginPage> {
                       padding:
                           EdgeInsets.symmetric(horizontal: 5.w, vertical: .3.h),
                       decoration: BoxDecoration(
-                          color:
-                              isFocusedEmail ? Colors.white : const Color(0xFFF1F0F5),
-                          border:
-                              Border.all(width: 1, color: const Color(0xFFD2D2D4)),
+                          color: isFocusedEmail
+                              ? Colors.white
+                              : const Color(0xFFF1F0F5),
+                          border: Border.all(
+                              width: 1, color: const Color(0xFFD2D2D4)),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             if (isFocusedEmail)
                               BoxShadow(
-                                  color: const Color(0xFF835DF1).withOpacity(.3),
+                                  color:
+                                      const Color(0xFF835DF1).withOpacity(.3),
                                   blurRadius: 4.0,
                                   spreadRadius: 2.0
                                   // Glow Color
@@ -181,13 +185,14 @@ class _LoginPageState extends State<LoginPage> {
                           color: isFocusedPassword
                               ? Colors.white
                               : const Color(0xFFF1F0F5),
-                          border:
-                              Border.all(width: 1, color: const Color(0xFFD2D2D4)),
+                          border: Border.all(
+                              width: 1, color: const Color(0xFFD2D2D4)),
                           borderRadius: BorderRadius.circular(12),
                           boxShadow: [
                             if (isFocusedPassword)
                               BoxShadow(
-                                  color: const Color(0xFF835DF1).withOpacity(.3),
+                                  color:
+                                      const Color(0xFF835DF1).withOpacity(.3),
                                   blurRadius: 4.0,
                                   spreadRadius: 2.0
                                   // Glow Color
@@ -217,25 +222,14 @@ class _LoginPageState extends State<LoginPage> {
                     child: Row(
                       children: [
                         Expanded(
-                          child: ElevatedButton(
+                          child: NavigationElevatedButton(
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=> MainScreen()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MainScreen()));
                             },
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                textStyle: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                    fontFamily: 'Satoshi'),
-                                backgroundColor: const Color(0xFF835DF1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                padding: const EdgeInsets.symmetric(vertical: 16)),
-                            child: FadeInUp(
-                                delay: const Duration(milliseconds: 700),
-                                duration: const Duration(milliseconds: 800),
-                                child: const  Text('Log In')),
+                            buttonText: 'Log In',
                           ),
                         )
                       ],
@@ -256,25 +250,27 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignInPage()));
-                            },
-                            child: const Text(
-                              'Register',
-                              style: TextStyle(
-                                color: Color(0xFF835DF1),
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const SignInPage()));
+                          },
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(
+                              color: Color(0xFF835DF1),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
                             ),
-                            
-                            ),
-                           
+                          ),
+                        ),
                       ],
                     ),
                   ),
-                   const SizedBox(
-                    height: 10,)
+                  const SizedBox(
+                    height: 10,
+                  )
                 ],
               ),
             ),

@@ -1,7 +1,10 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:diary/screens/auth_screen/widget/input_field.dart';
+import 'package:diary/screens/auth_screen/widget/navigation_text_button.dart';
 import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:diary/screens/auth_screen/login_screen.dart';
 import 'package:diary/screens/auth_screen/welcome_screen.dart';
+import 'package:diary/screens/auth_screen/widget/navigation_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:sizer/sizer.dart';
@@ -61,7 +64,10 @@ class _SignInPageState extends State<SignInPage> {
                       duration: const Duration(milliseconds: 1000),
                       child: IconButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=> const WelcomePage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const WelcomePage()));
                         },
                         icon: Icon(
                           IconlyBroken.arrow_left,
@@ -116,17 +122,6 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(
                       height: 5.h,
                     ),
-                    // Row(
-                    //   children: [
-                    //      InputField(
-                    //   labelText: 'Email',
-                    //   focusNode: focusNodeEmail,
-                    //   isFocused: isFocusedEmail,
-                    //   controller: emailController,
-                    // ),
-                    
-                    //   ],
-                    // ),
                     InputField(
                       labelText: 'Email',
                       focusNode: focusNodeEmail,
@@ -153,65 +148,33 @@ class _SignInPageState extends State<SignInPage> {
                       child: Row(
                         children: [
                           Expanded(
-                            child: ElevatedButton(
+                            child: NavigationElevatedButton(
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=> MainScreen()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MainScreen()));
                               },
-                              style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                textStyle: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: 'Satoshi',
-                                ),
-                                backgroundColor: const Color(0xFF835DF1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                padding: const EdgeInsets.symmetric(vertical: 16),
-                              ),
-                              child: FadeInUp(
-                                delay: const Duration(milliseconds: 700),
-                                duration: const Duration(milliseconds: 800),
-                                child: const Text('Sign Up'),
-                              ),
+                              buttonText: 'Sign Up',
                             ),
                           ),
                         ],
                       ),
                     ),
-                     FadeInUp(
-                    delay: const Duration(milliseconds: 800),
-                    duration: const Duration(milliseconds: 900),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Have an account?',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        TextButton(
-                            onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=> const LoginPage()));
-                            },
-                            child: const Text(
-                              'Login',
-                              style: TextStyle(
-                                color: Color(0xFF835DF1),
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            
-                            ),
-                           
-                      ],
+                    FadeInUp(
+                      delay: const Duration(milliseconds: 800),
+                      duration: const Duration(milliseconds: 900),
+                      child: NavigationTextButtonRow(
+                        leadingText: 'Have an account?',
+                        buttonText: 'Login',
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const LoginPage()));
+                        },
+                      ),
                     ),
-                  ),
                     const SizedBox(
                       height: 10,
                     ),
@@ -226,65 +189,3 @@ class _SignInPageState extends State<SignInPage> {
   }
 }
 
-class InputField extends StatelessWidget {
-  final String labelText;
-  final FocusNode focusNode;
-  final bool isFocused;
-  final TextEditingController controller;
-
-  const InputField({super.key, 
-    required this.labelText,
-    required this.focusNode,
-    required this.isFocused,
-    required this.controller,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return FadeInDown(
-      delay: const Duration(milliseconds: 700),
-      duration: const Duration(milliseconds: 800),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                labelText,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ],
-          ),
-          Container(
-            margin: EdgeInsets.symmetric(vertical: 0.8.h),
-            padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: .3.h),
-            decoration: BoxDecoration(
-              color: isFocused ? Colors.white : const Color(0xFFF1F0F5),
-              border: Border.all(width: 1, color: const Color(0xFFD2D2D4)),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                if (isFocused)
-                  BoxShadow(
-                    color: const Color(0xFF835DF1).withOpacity(.3),
-                    blurRadius: 4.0,
-                    spreadRadius: 2.0,
-                  ),
-              ],
-            ),
-            child: TextField(
-              style: const TextStyle(fontWeight: FontWeight.w500),
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                hintText: labelText,
-              ),
-              focusNode: focusNode,
-              controller: controller,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}

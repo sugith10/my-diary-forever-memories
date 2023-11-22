@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/my_diary_screen/diary.dart';
-import 'package:diary/screens/my_diary_screen/saved_list/saved_list.dart';
+import 'package:diary/screens/my_diary_screen/saved_list_screen/saved_list.dart';
 import 'package:diary/providers/provider_calendar.dart';
 import 'package:diary/screens/create_screen/create_page.dart';
 import 'package:diary/screens/my_diary_screen/search.dart';

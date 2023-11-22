@@ -1,22 +1,23 @@
-import 'dart:io';
-import 'package:diary/db/hive_profile_operations.dart';
-import 'package:diary/models/profile_details.dart';
-import 'package:diary/screens/profile_screen/item_1_notifications.dart';
-import 'package:diary/screens/profile_screen/item_2_customization.dart';
-import 'package:diary/screens/profile_screen/edit_profile.dart';
+
+import 'package:diary/screens/profile_screen/notifications_screen.dart';
+import 'package:diary/screens/profile_screen/customization_screen.dart';
+import 'package:diary/screens/profile_screen/edit_profile_screen.dart';
+import 'package:diary/screens/profile_screen/widget/account_screen_contents.dart';
 import 'package:diary/screens/profile_screen/widget/profile_card.dart';
 import 'package:diary/screens/profile_screen/widget/profile_options.dart';
 import 'package:diary/screens/widget/appbar_titlestyle.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/util/profile_screen_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/adapters.dart';
+
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({Key? key});
+   AccountScreen({Key? key});
+  
 
   String _getGreeting() {
     var now = DateTime.now();
@@ -103,98 +104,8 @@ class AccountScreen extends StatelessWidget {
           Expanded(
             child: Container(
               margin: const EdgeInsets.only(left: 20, right: 20),
-              child: Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              type: PageTransitionType.rightToLeftJoined,
-                              child: const NotificationPage(),
-                              childCurrent: this));
-                    },
-                    child: 
-                    const ProfileOptions(item: 'Notifications', icon: Icons.notifications_none,)
-                    ,
-                  ),
-                  SizedBox(
-                    height: 1.2.h,
-                  ),
-                  const Divider(),
-                  SizedBox(
-                    height: 1.2.h,
-                  ),
-                  InkWell(
-                    onTap: () => Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.rightToLeftJoined,
-                            child: const CustomizationPage(),
-                            childCurrent: this)),
-                    child: const ProfileOptions(item: 'Customization', icon: Ionicons.color_palette_outline,)
-                    
-                    
-                  ),
-                  SizedBox(
-                    height: 1.2.h,
-                  ),
-                  const Divider(),
-                  SizedBox(
-                    height: 1.2.h,
-                  ),
-                  const InkWell(
-                    child: ProfileOptions(item: 'Backup', icon: Icons.backup_outlined,)
-                    
-                  
-                  ),
-                  SizedBox(
-                    height: 1.2.h,
-                  ),
-                  const Divider(),
-                  SizedBox(
-                    height: 1.2.h,
-                  ),
-                  const InkWell(
-                    child: ProfileOptions(item: 'Restore', icon: Icons.restore,)
-                    
-                  
-                  ),
-                  SizedBox(
-                    height: 1.2.h,
-                  ),
-                  const Divider(),
-                  SizedBox(
-                    height: 1.2.h,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      const String emailAddress = 'dayproductionltd@gmail.com';
-                      const String emailSubject = 'Help_me';
-                      const String emailBody = 'Need_help';
-
-                      final Uri emailUri = Uri(
-                        scheme: 'mailto',
-                        path: emailAddress,
-                        queryParameters: {
-                          'subject': emailSubject,
-                          'body': emailBody,
-                        },
-                      );
-                      try {
-                        await launchUrl(emailUri);
-                      } catch (e) {
-                        print('Error launching email: $e');
-                      }
-                    },
-                    child: const ProfileOptions(item: 'Feedback', icon: Icons.feedback_outlined,)
-                    
-                   
-                  ),
-                  const Spacer()
-                ],
-              ),
-            ),
+              child: AccountScreenContents()
+            )
           )
         ],
       ),

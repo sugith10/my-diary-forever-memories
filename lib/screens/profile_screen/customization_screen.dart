@@ -1,5 +1,5 @@
 import 'package:diary/screens/widget/appbar_bottom.dart';
-import 'package:diary/screens/widget/info_container.dart';
+import 'package:diary/screens/profile_screen/widget/info_container.dart';
 import 'package:flutter/material.dart';
 
 

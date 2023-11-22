@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/screens/auth_screen/login_screen.dart';
 import 'package:diary/screens/auth_screen/signin_screen.dart';
+import 'package:diary/screens/auth_screen/widget/navigation_elevated_button.dart';
 
 import 'package:flutter/material.dart';
 
@@ -53,7 +54,8 @@ class WelcomePage extends StatelessWidget {
                                 'Forever memories',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 25.sp, fontWeight: FontWeight.w600),
+                                    fontSize: 25.sp,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
                           ),
@@ -67,7 +69,9 @@ class WelcomePage extends StatelessWidget {
                               'In the book of your heart, every chapter is a memory to rember forever.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 15.sp, fontWeight: FontWeight.w400, color: const Color.fromARGB(244, 44, 44, 44)),
+                                  fontSize: 15.sp,
+                                  fontWeight: FontWeight.w400,
+                                  color: const Color.fromARGB(244, 44, 44, 44)),
                             ),
                           ),
                         ]),
@@ -81,7 +85,7 @@ class WelcomePage extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: ElevatedButton(
+                          child: NavigationElevatedButton(
                             onPressed: () {
                               Navigator.push(
                                   context,
@@ -89,21 +93,7 @@ class WelcomePage extends StatelessWidget {
                                     builder: (context) => const LoginPage(),
                                   ));
                             },
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                textStyle: const TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500,
-                                   ),
-                                backgroundColor: const Color(0xFF835DF1),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
-                                ),
-                                padding: const EdgeInsets.symmetric(vertical: 16)),
-                            child: FadeInUp(
-                                delay: const Duration(milliseconds: 1100),
-                                duration: const Duration(milliseconds: 1200),
-                                child: const Text('Log In')),
+                            buttonText: 'Log In',
                           ),
                         )
                       ],
@@ -125,7 +115,11 @@ class WelcomePage extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(builder: (context)=> const SignInPage()));
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const SignInPage()));
                             },
                             child: const Text(
                               'Register',

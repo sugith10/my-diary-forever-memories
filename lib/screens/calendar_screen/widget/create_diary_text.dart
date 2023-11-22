@@ -16,9 +16,9 @@ class CreateDiaryText extends StatelessWidget {
                                 'Start writing about your day...',
                                 style: TextStyle(
                                   color: const Color.fromARGB(255, 31, 31, 31),
-                                  fontSize: 18.sp,
+                                  fontSize: 15.sp,
                                   fontWeight: FontWeight.w500,
-                                  // fontFamily: "Poppins"
+                                  fontFamily: "Satoshi"
                                 ),
                               ),
                               SizedBox(height: 0.1.h,),
@@ -27,7 +27,9 @@ class CreateDiaryText extends StatelessWidget {
                                 style: TextStyle(
                                     color: AppColor.secondary.color,
                                     fontWeight: FontWeight.w400,
-                                    fontSize: 12.sp),
+                                    fontSize: 9.sp,
+                                    fontFamily: "Satoshi"
+                                    ),
                               ),
                             ],
                           ),
