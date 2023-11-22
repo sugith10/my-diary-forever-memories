@@ -48,34 +48,33 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => MainScreenProvider(),
         ),
-        
       ],
-      child: const MyApp(),
+      child:  MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-          theme: ThemeData(
-            fontFamily: 'SFPRO',
-            primaryColor: Colors.grey[300],
-            appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
-          ),
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/',
-          routes: {
-            '/': (context) => const Splash(),
-            '/onboarding': (context) => Onbording(
-                  onboardingState: Provider.of<OnboardingState>(context),
-                ),
-            '/main': (context) => MainScreen(),
-          }),
+        theme: ThemeData(
+          fontFamily: 'SFPRO',
+          primaryColor: Colors.grey[300],
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: Splash(),
+        initialRoute: '/splash',
+        routes: {
+          '/splash': (context) => const Splash(),
+         
+          '/main': (context) => MainScreen(),
+        },
+      ),
     );
   }
 }

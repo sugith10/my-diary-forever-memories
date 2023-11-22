@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:diary/screens/auth_screen/welcome_screen.dart';
+import 'package:diary/screens/splash_screen/onboarding.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
@@ -7,7 +9,7 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 1), () {
-      Navigator.pushReplacementNamed(context, '/onboarding');
+     Navigator.push(context, MaterialPageRoute(builder: (context)=> WelcomePage()));
     });
 
     return const Scaffold(

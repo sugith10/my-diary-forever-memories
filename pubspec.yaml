@@ -81,9 +81,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/first-img.png
-    - images/oval-one.png
-    - images/oval-two.png
-    - images/oval-three.png
     - images/date.png
     - images/start_writing.png
     - images/profile.png
@@ -92,7 +89,7 @@ flutter:
     - images/smile.png
     - images/art-gallery.png
     - images/clock.png
-    - assets/images/loginImage.png
+    - assets/images/Animation-gallery.json
      
 
      
