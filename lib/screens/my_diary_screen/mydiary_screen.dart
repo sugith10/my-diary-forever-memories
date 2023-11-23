@@ -1,8 +1,9 @@
 import 'dart:developer';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/screens/individual_diary_screen/diary.dart';
-import 'package:diary/screens/my_diary_screen/saved_list_screen/saved_list.dart';
+import 'package:diary/screens/individual_diary_screen/individual_diary_screen.dart';
+import 'package:diary/screens/saved_list_screen/saved_list_screen.dart';
 import 'package:diary/providers/provider_calendar.dart';
 import 'package:diary/screens/create_screen/create_page.dart';
 import 'package:diary/screens/my_diary_screen/search.dart';
@@ -39,30 +40,31 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
             slivers: [
               SliverAppBar(
                 automaticallyImplyLeading: false,
-                title:  RichText(
-    text: TextSpan(
-      style: DefaultTextStyle.of(context).style,
-      children:  <TextSpan>[
-        TextSpan(
-          text: 'My ',
-          style: TextStyle( fontFamily: 'SFPRO',
-        color: Color.fromARGB(255, 0, 0, 0),
-        fontSize: 15.sp,
-        fontWeight: FontWeight.w600, 
-          ),
-        ),
-        TextSpan(
-          text: 'Diary',
-          style: TextStyle(
-            fontFamily: 'SFPRO',
-            color: const Color(0xFF835DF1),
-             fontSize: 13.sp,
-        fontWeight: FontWeight.w600, 
-          ),
-        ),
-      ],
-    ),
-  ),
+                title: RichText(
+                  text: TextSpan(
+                    style: DefaultTextStyle.of(context).style,
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'My ',
+                        style: TextStyle(
+                          fontFamily: 'SFPRO',
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      TextSpan(
+                        text: 'Diary',
+                        style: TextStyle(
+                          fontFamily: 'SFPRO',
+                          color: const Color(0xFF835DF1),
+                          fontSize: 13.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 actions: [
                   IconButton(
                     onPressed: () {
@@ -178,24 +180,26 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
             ],
           ),
         ),
-        floatingActionButton: isFabVisible ? FloatingActionButton(
-          shape: const CircleBorder(),
-          onPressed: () {
-            final changer = Provider.of<Changer>(context, listen: false);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreatePage(
-                  changer: changer,
-                ),
-              ),
-            );
-          },
-          backgroundColor: const Color.fromARGB(255, 255, 254, 254),
-          elevation: 3,
-          child: const CustomIconWidget(),
-        // ignore: dead_code
-        ) : null,
+        floatingActionButton: isFabVisible
+            ? FloatingActionButton(
+                shape: const CircleBorder(),
+                onPressed: () {
+                  final changer = Provider.of<Changer>(context, listen: false);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CreatePage(
+                        changer: changer,
+                      ),
+                    ),
+                  );
+                },
+                backgroundColor: const Color.fromARGB(255, 255, 254, 254),
+                elevation: 3,
+                child: const CustomIconWidget(),
+                // ignore: dead_code
+              )
+            : null,
       ),
     );
   }
@@ -229,14 +233,14 @@ class DiaryEntryCard extends StatelessWidget {
   final DiaryEntry entry;
   final int index;
 
-  const DiaryEntryCard(this.entry, this.index, {super.key});
+  DiaryEntryCard(this.entry, this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
-      key: const ValueKey(0),
+      key: ValueKey(0),
       startActionPane: ActionPane(
-        motion: const ScrollMotion(),
+        motion: ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {
           // print('Start Action Dismissed');
         }),
@@ -256,13 +260,41 @@ class DiaryEntryCard extends StatelessWidget {
           if (entry.id != null) {
             DbFunctions().deleteDiary(entry.id!);
             //  diaryEntriesNotifier.notifyListeners();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text("Successfully Deleted"),
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.all(2.h),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 2),
+              ),
+            );
           } else {
-            // print('no data found');
+            log('no data found');
           }
         }),
-        children: const [
+        children: [
           SlidableAction(
-            onPressed: doNothing,
+            onPressed: (BuildContext context) {
+              if (entry.id != null) {
+                DbFunctions().deleteDiary(entry.id!);
+                final snackBar = SnackBar(
+                  elevation: 0,
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  content: AwesomeSnackbarContent(
+                    title: 'Successfully Deleted...',
+                    message:
+                        'This is an example error message that will be shown in the body of snackbar!',
+                    contentType: ContentType.failure,
+                  ),
+                );
+
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
+              }
+            },
             backgroundColor: Color(0xFFFE4A49),
             foregroundColor: Colors.white,
             icon: Icons.delete,
@@ -308,8 +340,6 @@ class DiaryEntryCard extends StatelessWidget {
                         entry.title,
                         style: TextStyle(
                             fontSize: 15.sp,
-                            // fontFamily: "Satoshi",
-
                             fontWeight: FontWeight.w500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -326,7 +356,6 @@ class DiaryEntryCard extends StatelessWidget {
                         color: const Color.fromARGB(255, 105, 105, 105)),
                     textAlign: TextAlign.justify),
                 SizedBox(height: 5.sp),
-                
               ],
             ),
           ),
@@ -354,13 +383,11 @@ Future<void> handleDateRangePick(BuildContext context) async {
       );
     },
   );
-
   if (pickedDateRange != null) {
     final startDate = pickedDateRange.start;
     final endDate = pickedDateRange.end;
     final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
     final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
-
     print('Selected date range: ${formattedStartDate} - ${formattedEndDate}');
   }
 }

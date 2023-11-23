@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:diary/screens/individual_diary_screen/diary.dart';
+import 'package:diary/screens/individual_diary_screen/individual_diary_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class MySearchAppBar extends StatefulWidget {

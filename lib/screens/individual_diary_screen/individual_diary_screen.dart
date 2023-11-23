@@ -1,15 +1,13 @@
 import 'dart:io';
-import 'package:diary/db/hive_savedlist_db_ops.dart';
-import 'package:diary/models/savedlist_db_model.dart';
 import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:diary/screens/my_diary_screen/edit_screen/edit_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/util/diary_screen_functions.dart';
+import 'package:diary/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:diary/db/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
-
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
@@ -113,7 +111,8 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                     _showDeleteConfirmationDialog(context, widget.entry);
                   } else if (value == 'Save') {
                     //hfhkjasdhjkfhkldhkjhsgldfkjkgljfhssssslhhsdhafhdhasbjkdbfhdhbkjfbhdkfhnksajkfkjsdbjhfvbjsdnvjnskabfdkdhfldjiokshfiakadhnbsdjnasjdgfh
-                    _displayBottomSheet(context, widget.entry.id!);
+                    SavedScreenFunctions()
+                        .displayBottomSheet(context, widget.entry.id!);
                   }
                 });
               },
@@ -123,7 +122,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
           ],
           bottom: const BottomBorderWidget()),
       body: Container(
-        color: hexToColor(widget.entry.background),
+        color: DiaryScreenFunctions().hexToColor(widget.entry.background),
         child: ListView(
           children: [
             Padding(
@@ -177,7 +176,6 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
               padding: const EdgeInsets.all(16),
               child: Text(widget.entry.content,
                   style: const TextStyle(
-                
                     fontWeight: FontWeight.w500,
                     fontSize: 18,
                     // wordSpacing: .2,
@@ -188,13 +186,8 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
           ],
         ),
       ),
-    
     );
   }
-}
-
-Color hexToColor(String code) {
-  return Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
 }
 
 void _showDeleteConfirmationDialog(BuildContext context, DiaryEntry entry) {
@@ -236,104 +229,5 @@ void _showDeleteConfirmationDialog(BuildContext context, DiaryEntry entry) {
         ],
       );
     },
-  );
-}
-
-Future _displayBottomSheet(BuildContext context, String entryId) {
-  return showModalBottomSheet(
-    context: context,
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-    ),
-    builder: (context) =>  Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 10),
-            child: Container(
-              width: 10.w,
-              height: 4,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.black, // Change the color as needed
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Row(
-              children: [
-                Text('Save diary to...', style: TextStyle(fontSize: 17.sp))
-              ],
-            ),
-          ),
-          const Divider(
-            thickness: 1.5,
-          ),
-          ValueListenableBuilder(
-            valueListenable:
-                Hive.box<SavedList>('_savedListBoxName').listenable(),
-            builder: (context, box, child) {
-              List<SavedList> savedList = box.values.toList();
-              return ListView.builder(
-                shrinkWrap: true,
-                itemCount: savedList.length,
-                itemBuilder: (context, index) {
-                  String listName = savedList[index].listName;
-                  String listId = savedList[index].id;
-                  bool _isChecked = false;
-                  return InkWell(
-                    onTap: () {
-                      print(listId);
-                      print(entryId);
-                       SavedListDbFunctions().addMapToDiaryEntryIds(listId, entryId );
-                       Navigator.pop(context);
-                    },
-                    child: Row(
-                      children: [
-                        Row(
-                          children: [
-
-                           Checkbox(value: _isChecked, onChanged: (bool? newValue){
-                            
-                           }),
-                            Text(
-                              listName,
-                              style: TextStyle(fontSize: 16.5.sp),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              );
-            },
-          ),
-          const Divider(
-            thickness: 1.5,
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(13.0),
-              child: Row(
-                children: [
-                  const Icon(Icons.check_rounded),
-                  SizedBox(
-                    width: 9.sp,
-                  ),
-                  Text(
-                    'Done',
-                    style: TextStyle(fontSize: 16.5.sp),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
-      ),
-    
   );
 }

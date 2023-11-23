@@ -1,3 +1,5 @@
+import 'package:diary/screens/auth_screen/welcome_screen.dart';
+import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreenFunctions {
@@ -50,7 +52,41 @@ class ProfileScreenFunctions {
     }
   }
 
-
+   void _showPopupDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Logout Confirmation',
+            style: TextStyle(
+              fontSize: 27,
+            ),
+          ),
+          content: const Text(
+            'Are you sure you want to log out?',
+            style: TextStyle(fontSize: 17),
+          ),
+          actions: [
+            TextButton(
+              child:
+                  const Text('Cancel', style: TextStyle(color: Colors.black)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Logout', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WelcomePage()));
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   // Public function to be used from other classes
   Future<void> launchEmail() async {
@@ -63,5 +99,9 @@ class ProfileScreenFunctions {
 
   String getGreeting(){
     return _getGreeting();
+  }
+
+  void showPopupDialog(BuildContext context){
+    _showPopupDialog(context);
   }
 }

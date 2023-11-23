@@ -60,7 +60,6 @@ class _SavedItemsState extends State<SavedItems> {
           builder: (context, box, child) {
             // Fetch all diary entries
             // List<DiaryEntry> diaryEntries = box.values.toList();
-      
             final selectedDiaryEntries = getDiaryEntries(diaryEntryIds);
       
             if (selectedDiaryEntries.isNotEmpty) {
@@ -71,7 +70,7 @@ class _SavedItemsState extends State<SavedItems> {
                 },
               );
             } else {
-              return Center(
+              return const Center(
                 child: Text(
                   'No diary entries found for this list.',
                   style: TextStyle(

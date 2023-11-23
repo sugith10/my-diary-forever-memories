@@ -1,6 +1,6 @@
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/calendar_screen/widget/create_diary_text.dart';
-import 'package:diary/screens/color/primary_colors.dart';
+import 'package:diary/color/primary_colors.dart';
 import 'package:diary/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/screens/create_screen/create_page.dart';
 import 'package:diary/providers/provider_calendar.dart';

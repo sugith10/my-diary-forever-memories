@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
       builder: (context, orientation, deviceType) => MaterialApp(
         theme: ThemeData(
           fontFamily: 'SFPRO',
-          primaryColor: Colors.grey[300],
+          primaryColor: Colors.white,
           appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
         ),
         debugShowCheckedModeBanner: false,

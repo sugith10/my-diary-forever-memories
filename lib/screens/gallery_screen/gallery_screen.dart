@@ -3,7 +3,7 @@ import 'package:diary/screens/widget/appbar_titlestyle.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/screens/individual_diary_screen/diary.dart';
+import 'package:diary/screens/individual_diary_screen/individual_diary_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
