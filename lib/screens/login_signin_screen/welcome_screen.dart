@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:diary/screens/auth_screen/login_screen.dart';
-import 'package:diary/screens/auth_screen/signin_screen.dart';
-import 'package:diary/screens/auth_screen/widget/navigation_elevated_button.dart';
+import 'package:diary/screens/login_signin_screen/login_screen.dart';
+import 'package:diary/screens/login_signin_screen/signin_screen.dart';
+import 'package:diary/screens/login_signin_screen/widget/navigation_elevated_button.dart';
 
 import 'package:flutter/material.dart';
 

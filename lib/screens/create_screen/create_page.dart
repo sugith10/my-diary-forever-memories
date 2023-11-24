@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:diary/db/hive_operations.dart';
+import 'package:diary/controllers/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/providers/provider_calendar.dart';
 import 'package:diary/providers/provider_create.dart';

@@ -1,4 +1,4 @@
-import 'package:diary/db/hive_savedlist_db_ops.dart';
+import 'package:diary/controllers/hive_savedlist_db_ops.dart';
 import 'package:flutter/material.dart';
 
 import 'package:diary/models/savedlist_db_model.dart';

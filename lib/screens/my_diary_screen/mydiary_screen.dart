@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:diary/db/hive_operations.dart';
+import 'package:diary/controllers/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/individual_diary_screen/individual_diary_screen.dart';
 import 'package:diary/screens/saved_list_screen/saved_list_screen.dart';

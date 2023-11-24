@@ -1,12 +1,12 @@
 import 'dart:io';
-import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:diary/screens/main_screen/main_screen.dart';
 import 'package:diary/screens/my_diary_screen/edit_screen/edit_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
 import 'package:diary/util/diary_screen_functions.dart';
 import 'package:diary/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:diary/db/hive_operations.dart';
+import 'package:diary/controllers/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';

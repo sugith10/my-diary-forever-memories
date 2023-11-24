@@ -1,12 +1,13 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:diary/screens/auth_screen/widget/input_field.dart';
-import 'package:diary/screens/auth_screen/widget/navigation_text_button.dart';
-import 'package:diary/screens/auth_screen/widget/social_login.dart';
-import 'package:diary/screens/auth_screen/widget/welcome_text_widget.dart';
-import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
-import 'package:diary/screens/auth_screen/signin_screen.dart';
-import 'package:diary/screens/auth_screen/welcome_screen.dart';
-import 'package:diary/screens/auth_screen/widget/navigation_elevated_button.dart';
+import 'package:diary/screens/login_signin_screen/widget/input_field.dart';
+import 'package:diary/screens/login_signin_screen/widget/navigation_text_button.dart';
+import 'package:diary/screens/login_signin_screen/widget/social_login.dart';
+import 'package:diary/screens/login_signin_screen/widget/welcome_text_widget.dart';
+import 'package:diary/screens/main_screen/main_screen.dart';
+import 'package:diary/screens/login_signin_screen/signin_screen.dart';
+import 'package:diary/screens/login_signin_screen/welcome_screen.dart';
+import 'package:diary/screens/login_signin_screen/widget/navigation_elevated_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 import 'package:sizer/sizer.dart';
@@ -24,8 +25,16 @@ class _LoginPageState extends State<LoginPage> {
   bool isFocusedEmail = false;
   bool isFocusedPassword = false;
 
+  // sign user in method
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  void signUserIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+  }
 
   @override
   void initState() {
@@ -131,7 +140,6 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  //Googleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 
                   FadeInDown(
                     delay: const Duration(milliseconds: 600),
@@ -141,10 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                         Expanded(
                           child: NavigationElevatedButton(
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => MainScreen()));
+                              signUserIn() {}
                             },
                             buttonText: 'Log In',
                           ),

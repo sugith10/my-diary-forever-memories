@@ -1,4 +1,4 @@
-import 'package:diary/screens/auth_screen/welcome_screen.dart';
+import 'package:diary/screens/login_signin_screen/welcome_screen.dart';
 import 'package:diary/screens/profile_screen/notifications_screen.dart';
 import 'package:diary/screens/profile_screen/customization_screen.dart';
 import 'package:diary/screens/profile_screen/edit_profile_screen.dart';

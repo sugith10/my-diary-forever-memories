@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:diary/db/hive_operations.dart';
+import 'package:diary/controllers/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
+import 'package:diary/screens/main_screen/main_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
 import 'package:flutter/material.dart';
