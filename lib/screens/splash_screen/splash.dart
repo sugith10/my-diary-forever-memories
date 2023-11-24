@@ -9,12 +9,12 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 1), () {
-     Navigator.push(context, MaterialPageRoute(builder: (context)=> WelcomePage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => WelcomePage()));
     });
 
     return const Scaffold(
         backgroundColor: Colors.white,
-        body: Center(
-            child: Image(image: AssetImage('images/first-img.png'))));
+        body: Center(child: Image(image: AssetImage('images/first-img.png'))));
   }
 }

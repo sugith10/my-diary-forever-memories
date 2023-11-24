@@ -3,7 +3,6 @@ import 'package:diary/models/profile_details.dart';
 import 'package:diary/models/savedlist_db_model.dart';
 import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:diary/providers/provider_mainscreen.dart';
-import 'package:diary/screens/splash_screen/onboarding.dart';
 import 'package:diary/providers/provider_onboarding.dart';
 import 'package:diary/screens/splash_screen/splash.dart';
 import 'package:diary/providers/provider_calendar.dart';
@@ -53,7 +52,7 @@ Future<void> main() async {
     ),
   );
 }
-
+ 
 class MyApp extends StatelessWidget {
    MyApp({super.key});
 
@@ -62,6 +61,7 @@ class MyApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
         theme: ThemeData(
+        
           fontFamily: 'SFPRO',
           primaryColor: Colors.white,
           appBarTheme: const AppBarTheme(backgroundColor: Colors.white),

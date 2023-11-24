@@ -13,9 +13,6 @@ class MainScreenProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  // final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
-  //     ValueNotifier<List<DiaryEntry>>([]);
-
 
 }
 

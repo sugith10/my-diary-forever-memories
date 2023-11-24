@@ -51,11 +51,13 @@ class WelcomePage extends StatelessWidget {
                               delay: const Duration(milliseconds: 700),
                               duration: const Duration(milliseconds: 800),
                               child: Text(
-                                'Forever memories',
+                                'Forever Memories',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                    fontSize: 25.sp,
-                                    fontWeight: FontWeight.w600),
+                                  fontSize: 28.sp,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: "Satoshi"
+                                ),
                               ),
                             ),
                           ),
@@ -69,7 +71,7 @@ class WelcomePage extends StatelessWidget {
                               'In the book of your heart, every chapter is a memory to rember forever.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 15.sp,
+                                  fontSize: 18.sp,
                                   fontWeight: FontWeight.w400,
                                   color: const Color.fromARGB(244, 44, 44, 44)),
                             ),

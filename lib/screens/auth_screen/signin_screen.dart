@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/screens/auth_screen/widget/input_field.dart';
 import 'package:diary/screens/auth_screen/widget/navigation_text_button.dart';
+import 'package:diary/screens/auth_screen/widget/welcome_text_widget.dart';
 import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:diary/screens/auth_screen/login_screen.dart';
 import 'package:diary/screens/auth_screen/welcome_screen.dart';
@@ -21,7 +22,6 @@ class _SignInPageState extends State<SignInPage> {
   var focusNodePassword = FocusNode();
   bool isFocusedEmail = false;
   bool isFocusedPassword = false;
-
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -78,46 +78,10 @@ class _SignInPageState extends State<SignInPage> {
                     SizedBox(
                       height: 2.h,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        FadeInDown(
-                          delay: const Duration(milliseconds: 800),
-                          duration: const Duration(milliseconds: 900),
-                          child: Text(
-                            'Welcome to the club!',
-                            style: TextStyle(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 1.h,
-                        ),
-                        FadeInDown(
-                          delay: const Duration(milliseconds: 700),
-                          duration: const Duration(milliseconds: 800),
-                          child: Text(
-                            'Excited to have you as',
-                            style: TextStyle(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                        FadeInDown(
-                          delay: const Duration(milliseconds: 600),
-                          duration: const Duration(milliseconds: 700),
-                          child: Text(
-                            'Part of our community...',
-                            style: TextStyle(
-                              fontSize: 25.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ),
-                      ],
+                    const WelcomeTextWidget(
+                      firstLine: 'Welcome to the club!',
+                      secondLine: 'Excited to have you as',
+                      thirdLine: 'Part of our community...',
                     ),
                     SizedBox(
                       height: 5.h,
@@ -127,6 +91,7 @@ class _SignInPageState extends State<SignInPage> {
                       focusNode: focusNodeEmail,
                       isFocused: isFocusedEmail,
                       controller: emailController,
+                      obscureText: false,
                     ),
                     SizedBox(
                       height: 2.h,
@@ -136,6 +101,7 @@ class _SignInPageState extends State<SignInPage> {
                       focusNode: focusNodePassword,
                       isFocused: isFocusedPassword,
                       controller: passwordController,
+                      obscureText: true,
                     ),
                     const Expanded(
                       child: SizedBox(
@@ -188,4 +154,3 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 }
-

@@ -1,4 +1,8 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:diary/screens/auth_screen/widget/input_field.dart';
+import 'package:diary/screens/auth_screen/widget/navigation_text_button.dart';
+import 'package:diary/screens/auth_screen/widget/social_login.dart';
+import 'package:diary/screens/auth_screen/widget/welcome_text_widget.dart';
 import 'package:diary/screens/bottom_navigation_bar/bottom_navigation_bar.dart';
 import 'package:diary/screens/auth_screen/signin_screen.dart';
 import 'package:diary/screens/auth_screen/welcome_screen.dart';
@@ -19,6 +23,9 @@ class _LoginPageState extends State<LoginPage> {
   var focusNodePassword = FocusNode();
   bool isFocusedEmail = false;
   bool isFocusedPassword = false;
+
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
@@ -73,150 +80,60 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 2.h,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      FadeInDown(
-                        delay: const Duration(milliseconds: 800),
-                        duration: const Duration(milliseconds: 900),
-                        child: Text(
-                          'Let\'s Sign You In',
-                          style: TextStyle(
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 1.h,
-                      ),
-                      FadeInDown(
-                        delay: const Duration(milliseconds: 700),
-                        duration: const Duration(milliseconds: 800),
-                        child: Text(
-                          'Welcome Back.',
-                          style: TextStyle(
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      FadeInDown(
-                        delay: const Duration(milliseconds: 600),
-                        duration: const Duration(milliseconds: 700),
-                        child: Text(
-                          'You\'ve been missed!',
-                          style: TextStyle(
-                            fontSize: 25.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      )
-                    ],
+                  const WelcomeTextWidget(
+                    firstLine: 'Let\'s Sign You In',
+                    secondLine: 'Welcome back.',
+                    thirdLine: 'You\'ve been missed!',
                   ),
                   SizedBox(
                     height: 5.h,
                   ),
+                  InputField(
+                    labelText: 'Email',
+                    focusNode: focusNodeEmail,
+                    isFocused: isFocusedEmail,
+                    controller: emailController,
+                    obscureText: false,
+                  ),
+                  SizedBox(
+                    height: 2.h,
+                  ),
+                  InputField(
+                    labelText: 'Password',
+                    focusNode: focusNodePassword,
+                    isFocused: isFocusedPassword,
+                    controller: passwordController,
+                    obscureText: true,
+                  ),
+                  SizedBox(
+                    height: 1.h,
+                  ),
+                  //forgot passworddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
                   FadeInDown(
                     delay: const Duration(milliseconds: 700),
                     duration: const Duration(milliseconds: 800),
-                    child: const Text(
-                      'Email',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  FadeInDown(
-                    delay: const Duration(milliseconds: 600),
-                    duration: const Duration(milliseconds: 700),
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 0.8.h),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 5.w, vertical: .3.h),
-                      decoration: BoxDecoration(
-                          color: isFocusedEmail
-                              ? Colors.white
-                              : const Color(0xFFF1F0F5),
-                          border: Border.all(
-                              width: 1, color: const Color(0xFFD2D2D4)),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            if (isFocusedEmail)
-                              BoxShadow(
-                                  color:
-                                      const Color(0xFF835DF1).withOpacity(.3),
-                                  blurRadius: 4.0,
-                                  spreadRadius: 2.0
-                                  // Glow Color
-                                  )
-                          ]),
-                      child: TextField(
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                        decoration: const InputDecoration(
-                            border: InputBorder.none, hintText: 'Your Email'),
-                        focusNode: focusNodeEmail,
+                    child: InkWell(
+                      onTap: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Forgot Password?',
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontSize: 15,
+                            ),
+                          )
+                        ],
                       ),
                     ),
                   ),
                   SizedBox(
                     height: 2.h,
                   ),
+                  //Googleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
                   FadeInDown(
-                    delay: const Duration(milliseconds: 500),
-                    duration: const Duration(milliseconds: 600),
-                    child: const Text(
-                      'Password',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  FadeInDown(
-                    delay: const Duration(milliseconds: 400),
-                    duration: const Duration(milliseconds: 500),
-                    child: Container(
-                      margin: EdgeInsets.symmetric(vertical: 0.8.h),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 5.w, vertical: .3.h),
-                      decoration: BoxDecoration(
-                          color: isFocusedPassword
-                              ? Colors.white
-                              : const Color(0xFFF1F0F5),
-                          border: Border.all(
-                              width: 1, color: const Color(0xFFD2D2D4)),
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: [
-                            if (isFocusedPassword)
-                              BoxShadow(
-                                  color:
-                                      const Color(0xFF835DF1).withOpacity(.3),
-                                  blurRadius: 4.0,
-                                  spreadRadius: 2.0
-                                  // Glow Color
-                                  )
-                          ]),
-                      child: TextField(
-                        style: const TextStyle(fontWeight: FontWeight.w500),
-                        decoration: InputDecoration(
-                            suffixIcon: Icon(
-                              Icons.visibility_off_outlined,
-                              color: Colors.grey,
-                              size: 16.sp,
-                            ),
-                            border: InputBorder.none,
-                            hintText: 'Password'),
-                        focusNode: focusNodePassword,
-                      ),
-                    ),
-                  ),
-                  const Expanded(
-                      child: SizedBox(
-                    height: 10,
-                  )),
-                  FadeInUp(
                     delay: const Duration(milliseconds: 600),
                     duration: const Duration(milliseconds: 700),
                     child: Row(
@@ -235,37 +152,23 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                   ),
+                  const Spacer(),
+                  //googleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                  SocialLoginDivider(),
+                  //google endddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
+                  const Spacer(),
                   FadeInUp(
                     delay: const Duration(milliseconds: 800),
                     duration: const Duration(milliseconds: 900),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Don\'t have an account?',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const SignInPage()));
-                          },
-                          child: const Text(
-                            'Register',
-                            style: TextStyle(
-                              color: Color(0xFF835DF1),
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ],
+                    child: NavigationTextButtonRow(
+                      leadingText: 'Don\'t have an account?',
+                      buttonText: 'Register',
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SignInPage()));
+                      },
                     ),
                   ),
                   const SizedBox(

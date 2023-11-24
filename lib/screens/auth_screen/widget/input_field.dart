@@ -7,6 +7,7 @@ class InputField extends StatelessWidget {
   final FocusNode focusNode;
   final bool isFocused;
   final TextEditingController controller;
+  final bool obscureText;
 
   const InputField({
     super.key,
@@ -14,6 +15,7 @@ class InputField extends StatelessWidget {
     required this.focusNode,
     required this.isFocused,
     required this.controller,
+    required this.obscureText
   });
 
   @override
@@ -58,6 +60,7 @@ class InputField extends StatelessWidget {
               ),
               focusNode: focusNode,
               controller: controller,
+              obscureText: true,
             ),
           ),
         ],
