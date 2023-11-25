@@ -29,12 +29,17 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void signUserIn() async {
+ void signUserIn() async {
+  try {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: emailController.text,
       password: passwordController.text,
     );
+  } catch (e) {
+    print("Error during sign-in: $e");
   }
+}
+
 
   @override
   void initState() {
@@ -112,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                     focusNode: focusNodePassword,
                     isFocused: isFocusedPassword,
                     controller: passwordController,
-                    obscureText: true,
+                    obscureText: false,
                   ),
                   SizedBox(
                     height: 1.h,
@@ -149,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                         Expanded(
                           child: NavigationElevatedButton(
                             onPressed: () {
-                              signUserIn() {}
+                             signUserIn();
                             },
                             buttonText: 'Log In',
                           ),

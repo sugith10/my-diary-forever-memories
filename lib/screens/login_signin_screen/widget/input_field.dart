@@ -60,7 +60,7 @@ class InputField extends StatelessWidget {
               ),
               focusNode: focusNode,
               controller: controller,
-              obscureText: true,
+              obscureText: obscureText,
             ),
           ),
         ],

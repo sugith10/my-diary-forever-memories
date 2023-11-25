@@ -1,8 +1,6 @@
-import 'package:diary/controllers/auth_controller.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/models/profile_details.dart';
 import 'package:diary/models/savedlist_db_model.dart';
-import 'package:diary/screens/login_signin_screen/login_screen.dart';
 import 'package:diary/screens/main_screen/main_screen.dart';
 import 'package:diary/providers/provider_mainscreen.dart';
 import 'package:diary/providers/provider_onboarding.dart';
@@ -21,7 +19,7 @@ Future<void> main() async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  );
+);
 
   await Hive.initFlutter();
 
@@ -56,30 +54,33 @@ Future<void> main() async {
           create: (context) => MainScreenProvider(),
         ),
       ],
-      child: MyApp(),
+      child:  MyApp(),
     ),
   );
 }
-
+ 
 class MyApp extends StatelessWidget {
-  MyApp({super.key});
+   MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'SFPRO',
-        primaryColor: Colors.white,
-        appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+    return Sizer(
+      builder: (context, orientation, deviceType) => MaterialApp(
+        theme: ThemeData(
+        
+          fontFamily: 'SFPRO',
+          primaryColor: Colors.white,
+          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
+        ),
+        debugShowCheckedModeBanner: false,
+        home: Splash(),
+        // initialRoute: '/splash',
+        // routes: {
+        //   '/splash': (context) => const Splash(),
+         
+        //   '/main': (context) => MainScreen(),
+        // },
       ),
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-      // initialRoute: '/splash',
-      // routes: {
-      //   '/splash': (context) => const Splash(),
-
-      //   '/main': (context) => MainScreen(),
-      // },
     );
   }
 }
