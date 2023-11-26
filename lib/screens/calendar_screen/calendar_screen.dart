@@ -5,7 +5,7 @@ import 'package:diary/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/screens/create_screen/create_page.dart';
 import 'package:diary/providers/provider_calendar.dart';
 import 'package:diary/screens/widget/appbar_titlestyle.dart';
-import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/appbar_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';

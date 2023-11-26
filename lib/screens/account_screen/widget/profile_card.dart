@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:diary/controllers/hive_profile_operations.dart';
 import 'package:diary/models/profile_details.dart';
-import 'package:diary/screens/profile_screen/edit_profile_screen.dart';
+import 'package:diary/screens/account_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sizer/sizer.dart';

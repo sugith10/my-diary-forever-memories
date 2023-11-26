@@ -5,7 +5,7 @@ import 'package:diary/models/diary_entry.dart';
 import 'package:diary/providers/provider_calendar.dart';
 import 'package:diary/providers/provider_create.dart';
 import 'package:diary/screens/widget/back_button.dart';
-import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/appbar_bottom.dart';
 import 'package:diary/screens/widget/save_text_button.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,6 @@
-import 'package:diary/screens/profile_screen/customization_screen.dart';
-import 'package:diary/screens/profile_screen/notifications_screen.dart';
-import 'package:diary/screens/profile_screen/widget/account_screen_content_item.dart';
+import 'package:diary/screens/account_screen/customization_screen/customization_screen.dart';
+import 'package:diary/screens/account_screen/notifications_screen.dart';
+import 'package:diary/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/util/profile_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';

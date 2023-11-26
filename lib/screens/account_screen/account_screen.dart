@@ -1,8 +1,8 @@
-import 'package:diary/screens/profile_screen/edit_profile_screen.dart';
-import 'package:diary/screens/profile_screen/widget/account_screen_contents.dart';
-import 'package:diary/screens/profile_screen/widget/profile_card.dart';
+import 'package:diary/screens/account_screen/edit_profile_screen.dart';
+import 'package:diary/screens/account_screen/widget/account_screen_contents.dart';
+import 'package:diary/screens/account_screen/widget/profile_card.dart';
 import 'package:diary/screens/widget/appbar_titlestyle.dart';
-import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/appbar_bottom.dart';
 import 'package:diary/util/profile_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';

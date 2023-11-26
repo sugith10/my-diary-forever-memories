@@ -2,7 +2,7 @@ import 'package:diary/models/savedlist_db_model.dart';
 import 'package:diary/screens/saved_list_screen/saved_item_screen.dart';
 import 'package:diary/screens/widget/appbar_titlestyle.dart';
 import 'package:diary/screens/widget/back_button.dart';
-import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/appbar_bottom.dart';
 import 'package:diary/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';

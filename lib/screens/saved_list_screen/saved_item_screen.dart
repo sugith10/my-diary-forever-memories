@@ -4,7 +4,7 @@ import 'package:diary/models/savedlist_db_model.dart';
 import 'package:diary/screens/main_screen/main_screen.dart';
 import 'package:diary/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
-import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/appbar_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 

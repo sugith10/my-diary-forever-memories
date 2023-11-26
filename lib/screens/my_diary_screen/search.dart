@@ -1,5 +1,5 @@
 import 'package:diary/screens/widget/back_button.dart';
-import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/appbar_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

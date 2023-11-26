@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:diary/screens/main_screen/main_screen.dart';
 import 'package:diary/screens/edit_screen/edit_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
-import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/appbar_bottom.dart';
 import 'package:diary/util/diary_screen_functions.dart';
 import 'package:diary/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';

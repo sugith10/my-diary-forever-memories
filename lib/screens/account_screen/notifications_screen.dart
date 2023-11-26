@@ -1,6 +1,6 @@
 import 'package:diary/screens/main_screen/main_screen.dart';
-import 'package:diary/screens/widget/appbar_bottom.dart';
-import 'package:diary/screens/profile_screen/widget/info_container.dart';
+import 'package:diary/screens/widget/appbar_with_back_button_only.dart';
+import 'package:diary/screens/account_screen/widget/info_container.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:sizer/sizer.dart';

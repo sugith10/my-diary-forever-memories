@@ -40,7 +40,7 @@ ThemeData darkMode = ThemeData(
   ),
   scaffoldBackgroundColor: AppColor.black.color,
   appBarTheme: AppBarTheme(backgroundColor: AppColor.black.color),
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: const Color.fromARGB(255, 69, 69, 69),
-  ),
+  floatingActionButtonTheme:  const FloatingActionButtonThemeData(
+    backgroundColor: Color.fromARGB(255, 35, 35, 35)
+  )
 );
