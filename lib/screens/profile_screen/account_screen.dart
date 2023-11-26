@@ -1,16 +1,11 @@
-import 'package:diary/screens/login_signin_screen/welcome_screen.dart';
-import 'package:diary/screens/profile_screen/notifications_screen.dart';
-import 'package:diary/screens/profile_screen/customization_screen.dart';
 import 'package:diary/screens/profile_screen/edit_profile_screen.dart';
 import 'package:diary/screens/profile_screen/widget/account_screen_contents.dart';
 import 'package:diary/screens/profile_screen/widget/profile_card.dart';
-import 'package:diary/screens/profile_screen/widget/account_screen_content_item.dart';
 import 'package:diary/screens/widget/appbar_titlestyle.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
 import 'package:diary/util/profile_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
 class AccountScreen extends StatelessWidget {
@@ -30,6 +25,7 @@ class AccountScreen extends StatelessWidget {
             IconButton(
               onPressed: () {
                 showMenu(
+                  color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : const Color.fromARGB(255, 25, 25, 25),
                   context: context,
                   position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[
@@ -72,8 +68,9 @@ class AccountScreen extends StatelessWidget {
                   }
                 });
               },
-              icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                  color: Colors.black),
+              icon: const Icon(
+                Ionicons.ellipsis_vertical_outline,
+              ),
             ),
           ],
           elevation: 0,
@@ -88,8 +85,4 @@ class AccountScreen extends StatelessWidget {
       ),
     );
   }
-
-  }
-
-
- 
+}

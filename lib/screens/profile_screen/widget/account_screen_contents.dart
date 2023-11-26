@@ -15,101 +15,103 @@ class AccountScreenContents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                child: Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeftJoined,
-                                child: const NotificationPage(),
-                                childCurrent: this));
-                      },
-                      child: const ProfileOptions(
-                        item: 'Notifications',
-                        icon: Icons.notifications_none,
+      child: Builder(
+        builder: (context) {
+          // Use the obtained context to access the theme
+          final theme = Theme.of(context);
+
+          return Container(
+             decoration: BoxDecoration(
+              color: theme.colorScheme.background, // Use the background color from the theme
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+          
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeftJoined,
+                          child: const NotificationPage(),
+                          childCurrent: this,
+                        ),
+                      );
+                    },
+                    child: const ProfileOptions(
+                      item: 'Notifications',
+                      icon: Icons.notifications_none,
+                    ),
+                  ),
+                  SizedBox(height: 1.2.h),
+                  const Divider(),
+                  SizedBox(height: 1.2.h),
+                  InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.rightToLeftJoined,
+                        child: const CustomizationPage(),
+                        childCurrent: this,
                       ),
                     ),
-                    SizedBox(
-                      height: 1.2.h,
+                    child: const ProfileOptions(
+                      item: 'Customization',
+                      icon: Ionicons.color_palette_outline,
                     ),
-                    const Divider(),
-                    SizedBox(
-                      height: 1.2.h,
-                    ),
-                    InkWell(
-                        onTap: () => Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.rightToLeftJoined,
-                                child: const CustomizationPage(),
-                                childCurrent: this)),
-                        child: const ProfileOptions(
-                          item: 'Customization',
-                          icon: Ionicons.color_palette_outline,
-                        )),
-                    SizedBox(
-                      height: 1.2.h,
-                    ),
-                    const Divider(),
-                    SizedBox(
-                      height: 1.2.h,
-                    ),
-                    const InkWell(
-                        child: ProfileOptions(
+                  ),
+                  SizedBox(height: 1.2.h),
+                  const Divider(),
+                  SizedBox(height: 1.2.h),
+                  const InkWell(
+                    child: ProfileOptions(
                       item: 'Backup',
                       icon: Icons.backup_outlined,
-                    )),
-                    SizedBox(
-                      height: 1.2.h,
                     ),
-                    const Divider(),
-                    SizedBox(
-                      height: 1.2.h,
-                    ),
-                    const InkWell(
-                        child: ProfileOptions(
+                  ),
+                  SizedBox(height: 1.2.h),
+                  const Divider(),
+                  SizedBox(height: 1.2.h),
+                  const InkWell(
+                    child: ProfileOptions(
                       item: 'Restore',
                       icon: Icons.restore,
-                    )),
-                    SizedBox(
-                      height: 1.2.h,
                     ),
-                    const Divider(),
-                    SizedBox(
-                      height: 1.2.h,
+                  ),
+                  SizedBox(height: 1.2.h),
+                  const Divider(),
+                  SizedBox(height: 1.2.h),
+                  InkWell(
+                    onTap: () async {
+                      await ProfileScreenFunctions().launchEmail();
+                    },
+                    child: const ProfileOptions(
+                      item: 'Feedback',
+                      icon: Icons.feedback_outlined,
                     ),
-                    InkWell(
-                        onTap: () async {
-                          await ProfileScreenFunctions().launchEmail();
-                        },
-                        child: const ProfileOptions(
-                          item: 'Feedback',
-                          icon: Icons.feedback_outlined,
-                        )),
-                    SizedBox(
-                      height: 1.2.h,
+                  ),
+                  SizedBox(height: 1.2.h),
+                  const Divider(),
+                  SizedBox(height: 1.2.h),
+                  InkWell(
+                    onTap: () async {
+                      await ProfileScreenFunctions().launchPrivacyPolicy();
+                    },
+                    child: const ProfileOptions(
+                      item: 'Privacy Policy',
+                      icon: Ionicons.newspaper_outline,
                     ),
-                    const Divider(),
-                    SizedBox(
-                      height: 1.2.h,
-                    ),
-                    InkWell(
-                        onTap: () async {
-                          await ProfileScreenFunctions().launchPrivacyPolicy();
-                        },
-                        child: const ProfileOptions(
-                          item: 'Privacy Policy',
-                          icon: Ionicons.newspaper_outline,
-                        )),
-                    const Spacer()
-                  ],
-                ),
+                  ),
+                  const Spacer(),
+                ],
               ),
-    )
-         ;
+            ),
+          );
+        },
+      ),
+    );
   }
 }

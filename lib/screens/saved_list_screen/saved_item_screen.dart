@@ -26,7 +26,8 @@ class _SavedItemsState extends State<SavedItems> {
   }
 
   List<DiaryEntry> getDiaryEntries(List<String> diaryEntryIds) {
-    final diaryEntryBox = Hive.box<DiaryEntry>('_boxName'); // Use your actual box name
+    final diaryEntryBox =
+        Hive.box<DiaryEntry>('_boxName'); // Use your actual box name
     return diaryEntryIds
         .map((entryId) => diaryEntryBox.get(entryId))
         .where((entry) => entry != null)
@@ -46,7 +47,6 @@ class _SavedItemsState extends State<SavedItems> {
             },
             icon: const Icon(
               Icons.delete_outline_rounded,
-              color: Colors.black,
             ),
           ),
         ],
@@ -61,7 +61,7 @@ class _SavedItemsState extends State<SavedItems> {
             // Fetch all diary entries
             // List<DiaryEntry> diaryEntries = box.values.toList();
             final selectedDiaryEntries = getDiaryEntries(diaryEntryIds);
-      
+
             if (selectedDiaryEntries.isNotEmpty) {
               return ListView.builder(
                 itemCount: selectedDiaryEntries.length,
@@ -86,7 +86,8 @@ class _SavedItemsState extends State<SavedItems> {
     );
   }
 
-  void _showDeleteConfirmationDialog(BuildContext context, SavedList savedList) {
+  void _showDeleteConfirmationDialog(
+      BuildContext context, SavedList savedList) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -103,7 +104,8 @@ class _SavedItemsState extends State<SavedItems> {
           ),
           actions: [
             TextButton(
-              child: const Text('Cancel', style: TextStyle(color: Colors.black)),
+              child:
+                  const Text('Cancel', style: TextStyle(color: Colors.black)),
               onPressed: () {
                 Navigator.of(context).pop();
               },

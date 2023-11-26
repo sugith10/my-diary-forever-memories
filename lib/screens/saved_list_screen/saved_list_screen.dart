@@ -27,7 +27,7 @@ class SavedListScreen extends StatelessWidget {
               },
               icon: const Icon(
                 Icons.add,
-                color: Colors.black,
+              
                 size: 25,
               ))
         ],

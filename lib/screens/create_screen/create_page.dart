@@ -6,6 +6,7 @@ import 'package:diary/providers/provider_calendar.dart';
 import 'package:diary/providers/provider_create.dart';
 import 'package:diary/screens/widget/back_button.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/save_text_button.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -137,7 +138,6 @@ class _CreatePageState extends State<CreatePage> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
-               
               },
               child: const Text(
                 'OK',
@@ -156,56 +156,46 @@ class _CreatePageState extends State<CreatePage> {
       resizeToAvoidBottomInset: false,
       backgroundColor: _selectedColor,
       appBar: AppBar(
-          backgroundColor: Colors.white,
+  
           leading: const BackButtonWidget(),
           actions: [
-            Center(
-              child: TextButton(
-                onPressed: () async {
-                  final title = titleController.text;
-                  final content = contentController.text;
+            SaveButton(onPressed: () async {
+              final title = titleController.text;
+              final content = contentController.text;
 
-                  String? imagePath;
-                  if (_image != null) {
-                    imagePath = await saveImage(_image!);
+              String? imagePath;
+              if (_image != null) {
+                imagePath = await saveImage(_image!);
+              }
+
+              if (title.isNotEmpty) {
+                final entry = DiaryEntry(
+                  id: DateTime.now().millisecondsSinceEpoch.toString(),
+                  date: widget.changer.selectedDate,
+                  title: title,
+                  content: content,
+                  imagePath: imagePath,
+                  background:
+                      '#${_selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                );
+                widget.changer.selectDate(DateTime.now());
+
+                await DbFunctions().addDiaryEntry(entry).then((value) async {
+                  log("Function completed: $value");
+
+                  var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
+                  final allData = hiveBox.values.toList();
+                  log(allData.length.toString());
+                  for (var data in allData) {
+                    log("Diary Entry: key=${data.id} Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}, Background=${data.background}");
                   }
-
-                  if (title.isNotEmpty) {
-                    final entry = DiaryEntry(
-                      id: DateTime.now().millisecondsSinceEpoch.toString(),
-                      date: widget.changer.selectedDate,
-                      title: title,
-                      content: content,
-                      imagePath: imagePath,
-                      background:
-                          '#${_selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
-                    );
-                    widget.changer.selectDate(DateTime.now());
-
-                    await DbFunctions()
-                        .addDiaryEntry(entry)
-                        .then((value) async {
-                      log("Function completed: $value");
-
-                      var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
-                      final allData = hiveBox.values.toList();
-                      log(allData.length.toString());
-                      for (var data in allData) {
-                        log("Diary Entry: key=${data.id} Date=${data.date}, Title=${data.title}, Content=${data.content}, ImagePath=${data.imagePath}, Background=${data.background}");
-                      }
-                    }).catchError((error) {
-                      log("Error adding DiaryEntry: $error");
-                    });
-                  }
-                  // ignore: use_build_context_synchronously
-                  Navigator.pop(context);
-                },
-                child: const Text(
-                  'Save',
-                  style: TextStyle(color: Colors.black, fontSize: 20),
-                ),
-              ),
-            ),
+                }).catchError((error) {
+                  log("Error adding DiaryEntry: $error");
+                });
+              }
+              // ignore: use_build_context_synchronously
+              Navigator.pop(context);
+            }),
           ],
           elevation: 0,
           bottom: const BottomBorderWidget()),
@@ -270,7 +260,7 @@ class _CreatePageState extends State<CreatePage> {
               controller: titleController,
               decoration: const InputDecoration(
                 hintText: ' Title',
-                hintStyle: TextStyle(fontSize: 28),
+                hintStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
                 border: InputBorder.none,
               ),
               cursorColor: Colors.green[900],
@@ -301,7 +291,8 @@ class _CreatePageState extends State<CreatePage> {
                 controller: contentController,
                 decoration: const InputDecoration(
                   hintText: '  Start typing here',
-                  hintStyle: TextStyle(fontSize: 18),
+                  hintStyle:
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   border: InputBorder.none,
                 ),
                 cursorColor: Colors.red[900],
@@ -364,67 +355,73 @@ class _CreatePageState extends State<CreatePage> {
       ),
       bottomNavigationBar: Consumer<CreatePageProvider>(
         builder: (context, bottomNavigationProvider, child) {
-          return BottomNavigationBar(
-            selectedItemColor: const Color(0xFF835DF1),
-            showUnselectedLabels: false,
-            showSelectedLabels: false,
-            type: BottomNavigationBarType.fixed,
-            currentIndex: bottomNavigationProvider.selectedIndex,
-            onTap: (index) {
-              switch (index) {
-                case 0:
-                  showTimePicker(context: context, initialTime: TimeOfDay.now())
-                      .then((pickedTime) {
-                    if (pickedTime != null) {
-                      String formattedTime = pickedTime.format(context);
-                      String existingText = contentController.text;
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: BottomNavigationBar(
+              selectedItemColor: const Color(0xFF835DF1),
+              showUnselectedLabels: false,
+              showSelectedLabels: false,
+              type: BottomNavigationBarType.fixed,
+              currentIndex: bottomNavigationProvider.selectedIndex,
+              onTap: (index) {
+                switch (index) {
+                  case 0:
+                    showTimePicker(
+                            context: context, initialTime: TimeOfDay.now())
+                        .then((pickedTime) {
+                      if (pickedTime != null) {
+                        String formattedTime = pickedTime.format(context);
+                        String existingText = contentController.text;
 
-                      String newText = existingText.isNotEmpty
-                          ? '$existingText\n\n\n$formattedTime\n\n'
-                          : '$formattedTime\n\n';
+                        String newText = existingText.isNotEmpty
+                            ? '$existingText\n\n\n$formattedTime\n\n'
+                            : '$formattedTime\n\n';
 
-                      contentController.value = TextEditingValue(
-                        text: newText,
-                        selection:
-                            TextSelection.collapsed(offset: newText.length),
-                      );
-                    }
-                  });
-                  break;
+                        contentController.value = TextEditingValue(
+                          text: newText,
+                          selection:
+                              TextSelection.collapsed(offset: newText.length),
+                        );
+                      }
+                    });
+                    break;
 
-                case 1:
-                  _toggleEmojiKeyboard();
-                  
-                  break;
-                case 2:
-                  getImage();
-                  break;
-                case 3:
-                  _showColorPickerDialog();
-                  break;
-              }
-              bottomNavigationProvider.setSelectedIndex(index);
-            },
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(
-                  Ionicons.time_outline,
+                  case 1:
+                    _toggleEmojiKeyboard();
+
+                    break;
+                  case 2:
+                    getImage();
+                    break;
+                  case 3:
+                    _showColorPickerDialog();
+                    break;
+                }
+                bottomNavigationProvider.setSelectedIndex(index);
+              },
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Ionicons.time_outline,
+                
+                  ),
+                  label: 'Time',
                 ),
-                label: 'Time',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Ionicons.happy_outline),
-                label: 'Emoji',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Ionicons.image_outline),
-                label: 'Gallery',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Ionicons.color_palette_outline),
-                label: 'Color',
-              ),
-            ],
+                BottomNavigationBarItem(
+                  icon: Icon(Ionicons.happy_outline),
+                  label: 'Emoji',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Ionicons.image_outline),
+                  label: 'Gallery',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Ionicons.color_palette_outline),
+                  label: 'Color',
+                ),
+              ],
+            ),
           );
         },
       ),

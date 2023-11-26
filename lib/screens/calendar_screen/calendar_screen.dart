@@ -29,7 +29,6 @@ class CalendarScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
           title: InkWell(
             onTap: () {
               changer.toggleCalendarVisibility();
@@ -48,7 +47,6 @@ class CalendarScreen extends StatelessWidget {
                   changer.isCalendarVisible
                       ? Ionicons.chevron_down_outline
                       : Ionicons.chevron_up_outline,
-                  color: Colors.black,
                 ),
               ],
             ),
@@ -68,7 +66,10 @@ class CalendarScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: AppColor.black.color,
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? AppColor.black.color
+                                  : Colors.white,
                           width: 1.5,
                         ),
                       ),
@@ -79,7 +80,6 @@ class CalendarScreen extends StatelessWidget {
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 15.sp,
-                            color: Colors.black,
                           ),
                         ),
                       ),
@@ -104,7 +104,6 @@ class CalendarScreen extends StatelessWidget {
                     formatButtonVisible: false,
                     titleCentered: true,
                     titleTextStyle: TextStyle(
-                      color: AppColor.black.color, 
                       fontSize: 15.sp,
                       fontWeight: FontWeight.bold,
                     ),
@@ -122,16 +121,16 @@ class CalendarScreen extends StatelessWidget {
                   onDaySelected: (day, focusedDay) {
                     changer.selectDate(day);
                   },
-                  calendarStyle:  CalendarStyle(
+                  calendarStyle: CalendarStyle(
                     todayDecoration: BoxDecoration(
                       color: AppColor.secondary.color,
                       shape: BoxShape.circle,
                     ),
                     todayTextStyle: const TextStyle(color: Colors.white),
                     selectedDecoration: BoxDecoration(
-                        color:  AppColor.primary.color, shape: BoxShape.circle),
-                    selectedTextStyle:
-                        const TextStyle(color: Color.fromARGB(255, 255, 255, 255)),
+                        color: AppColor.primary.color, shape: BoxShape.circle),
+                    selectedTextStyle: const TextStyle(
+                        color: Color.fromARGB(255, 255, 255, 255)),
                     weekendTextStyle: const TextStyle(color: Colors.red),
                   ),
                 ),
@@ -173,7 +172,7 @@ class CalendarScreen extends StatelessWidget {
                                     changer: changer,
                                   )));
                         },
-                        child:const CreateDiaryText(),
+                        child: const CreateDiaryText(),
                       ),
                     );
                   }

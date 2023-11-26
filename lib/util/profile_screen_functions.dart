@@ -6,8 +6,8 @@ class ProfileScreenFunctions {
   // Private function for launching email
   Future<void> _launchEmail() async {
     const String emailAddress = 'dayproductionltd@gmail.com';
-    const String emailSubject = 'Help_me';
-    const String emailBody = 'Need_help';
+    const String emailSubject = '';
+    const String emailBody = '';
 
     final Uri emailUri = Uri(
       scheme: 'mailto',

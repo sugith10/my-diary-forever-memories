@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:diary/screens/login_signin_screen/welcome_screen.dart';
-import 'package:diary/screens/splash_screen/onboarding.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {

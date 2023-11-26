@@ -1,3 +1,4 @@
+import 'package:diary/color/theme.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/models/profile_details.dart';
 import 'package:diary/models/savedlist_db_model.dart';
@@ -66,14 +67,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-        theme: ThemeData(
-        
-          fontFamily: 'SFPRO',
-          primaryColor: Colors.white,
-          appBarTheme: const AppBarTheme(backgroundColor: Colors.white),
-        ),
+        theme: lightMode,
+        darkTheme: darkMode,
         debugShowCheckedModeBanner: false,
-        home: Splash(),
+        // home: Splash(),
+         home: MainScreen(),
         // initialRoute: '/splash',
         // routes: {
         //   '/splash': (context) => const Splash(),

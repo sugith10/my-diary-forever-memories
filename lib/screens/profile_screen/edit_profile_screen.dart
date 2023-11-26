@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/models/profile_details.dart';
+import 'package:diary/screens/widget/save_text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -62,27 +63,20 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+       
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: const Icon(Ionicons.chevron_back_outline,
-              color: Colors.black, size: 25),
+             size: 25),
         ),
         actions: [
-          Center(
-            child: TextButton(
-              onPressed: () async {
-                await saveProfileDetails();
-                Navigator.pop(context);
-              },
-              child: const Text(
-                'Save',
-                style: TextStyle(color: Colors.black, fontSize: 20),
-              ),
-            ),
-          ),
+          SaveButton(onPressed: ()async{
+            await saveProfileDetails();
+            Navigator.pop(context);
+          },)
+        
         ],
         elevation: 0,
         bottom: PreferredSize(
@@ -203,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           hintStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                          
                           )),
                       textCapitalization: TextCapitalization.words,
                       controller: _nameController,
@@ -228,7 +222,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           hintStyle: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                          
                           )),
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -248,7 +242,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           hintStyle: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                           
                           )),
                       textCapitalization: TextCapitalization.words,
                       controller: _locationController,

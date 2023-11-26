@@ -30,177 +30,176 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
   @override
   Widget build(BuildContext context) {
     bool isFabVisible = true;
-    return SafeArea(
-      child: Scaffold(
-        //  floatingActionButtonAnimator: FloatingActionButtonAnimator.scaling,
-        body: ScrollConfiguration(
-          behavior: ScrollConfiguration.of(context)
-              .copyWith(physics: const BouncingScrollPhysics()),
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                automaticallyImplyLeading: false,
-                title: RichText(
-                  text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'My ',
-                        style: TextStyle(
-                          fontFamily: 'SFPRO',
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
+    return Scaffold(
+      body: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context)
+            .copyWith(physics: const BouncingScrollPhysics()),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              automaticallyImplyLeading: false,
+              title: RichText(
+                text: TextSpan(
+                  style: DefaultTextStyle.of(context).style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: 'My ',
+                      style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.w600,
                       ),
-                      TextSpan(
-                        text: 'Diary',
-                        style: TextStyle(
-                          fontFamily: 'SFPRO',
-                          color: const Color(0xFF835DF1),
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    ),
+                    TextSpan(
+                      text: 'Diary',
+                      style: TextStyle(
+                        color: const Color(0xFF835DF1),
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.w600,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.fade,
-                          child: MySearchAppBar(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.search, color: Colors.black),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              type: PageTransitionType.topToBottom,
-                              child: const SavedListScreen()));
-                    },
-                    icon: const Icon(Ionicons.bookmarks_outline,
-                        color: Colors.black),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      showMenu(
-                        context: context,
-                        position: const RelativeRect.fromLTRB(1, 0, 0, 5),
-                        items: <PopupMenuEntry>[
-                          const PopupMenuItem(
-                            value: 'Newest First',
-                            child: Text('Newest First'),
-                          ),
-                          const PopupMenuItem(
-                            value: 'Oldest First',
-                            child: Text('Oldest First'),
-                          ),
-                          const PopupMenuItem(
-                            value: 'Range Pick',
-                            child: Text('Range Pick'),
-                          ),
-                        ],
-                      ).then((value) {
-                        if (value == 'Newest First') {
-                          setState(() {
-                            selectedSortOption = value as String;
-                          });
-                        } else if (value == 'Oldest First') {
-                          setState(() {
-                            selectedSortOption = value as String;
-                          });
-                        } else if (value == 'Range Pick') {
-                          handleDateRangePick(context);
-                        }
-                      });
-                    },
-                    icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                        color: Colors.black),
-                  ),
-                ],
-                bottom: const BottomBorderWidget(),
-                elevation: 0,
-                pinned: false, // Keep the app bar pinned
-                floating: true, // Make the app bar float
-                snap: true,
               ),
-              SliverPadding(
-                padding: const EdgeInsets.all(8.0),
-                sliver: ValueListenableBuilder(
-                  valueListenable:
-                      Hive.box<DiaryEntry>('_boxName').listenable(),
-                  builder: (context, box, child) {
-                    var sortedEntries = box.values.toList();
-                    //  print('Sorted Entries Length: ${sortedEntries.length}');
-                    switch (selectedSortOption) {
-                      case 'Newest First':
-                        sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                        break;
-                      case 'Oldest First':
-                        sortedEntries.sort((a, b) => a.date.compareTo(b.date));
-                        break;
-                      default:
-                        sortedEntries.sort((a, b) => b.date.compareTo(a.date));
-                        break;
-                    }
-
-                    Map<String, List<DiaryEntry>> groupedEntries = {};
-                    for (var entry in sortedEntries) {
-                      final dateKey = DateFormat('y-MM-dd').format(entry.date);
-                      groupedEntries.putIfAbsent(dateKey, () => []);
-                      groupedEntries[dateKey]!.add(entry);
-                    }
-                    log('Grouped Entries Length: ${groupedEntries.length}');
-
-                    return SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                        (BuildContext context, int index) {
-                          if (index >= groupedEntries.length) {
-                            log('Index out of bounds: $index');
-                            return const SizedBox();
-                          }
-                          final dateKey = groupedEntries.keys.toList()[index];
-                          final entries = groupedEntries[dateKey]!;
-                          return buildGroupedDiaryEntries(entries, dateKey);
-                        },
-                        childCount: sortedEntries.length,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.fade,
+                        child: MySearchAppBar(),
                       ),
                     );
                   },
+                  icon: const Icon(
+                    Icons.search,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
-        floatingActionButton: isFabVisible
-            ? FloatingActionButton(
-                shape: const CircleBorder(),
-                onPressed: () {
-                  final changer = Provider.of<Changer>(context, listen: false);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreatePage(
-                        changer: changer,
-                      ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.topToBottom,
+                            child: const SavedListScreen()));
+                  },
+                  icon: const Icon(
+                    Ionicons.bookmarks_outline,
+                    // color: Colors.black,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showMenu(
+                      context: context,
+                      position: const RelativeRect.fromLTRB(1, 0, 0, 5),
+                       color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : const Color.fromARGB(255, 25, 25, 25),
+                      items: <PopupMenuEntry>[
+                        const PopupMenuItem(
+                          value: 'Newest First',
+                          child: Text('Newest First'),
+                        ),
+                        const PopupMenuItem(
+                          value: 'Oldest First',
+                          child: Text('Oldest First'),
+                        ),
+                        const PopupMenuItem(
+                          value: 'Range Pick',
+                          child: Text('Range Pick'),
+                        ),
+                      ],
+                    ).then((value) {
+                      if (value == 'Newest First') {
+                        setState(() {
+                          selectedSortOption = value as String;
+                        });
+                      } else if (value == 'Oldest First') {
+                        setState(() {
+                          selectedSortOption = value as String;
+                        });
+                      } else if (value == 'Range Pick') {
+                        handleDateRangePick(context);
+                      }
+                    });
+                  },
+                  icon: const Icon(
+                    Ionicons.ellipsis_vertical_outline,
+                  ),
+                ),
+              ],
+              bottom: const BottomBorderWidget(),
+              elevation: 0,
+              pinned: false, // Keep the app bar pinned
+              floating: true, // Make the app bar float
+              snap: true,
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.all(8.0),
+              sliver: ValueListenableBuilder(
+                valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+                builder: (context, box, child) {
+                  var sortedEntries = box.values.toList();
+                  //  print('Sorted Entries Length: ${sortedEntries.length}');
+                  switch (selectedSortOption) {
+                    case 'Newest First':
+                      sortedEntries.sort((a, b) => b.date.compareTo(a.date));
+                      break;
+                    case 'Oldest First':
+                      sortedEntries.sort((a, b) => a.date.compareTo(b.date));
+                      break;
+                    default:
+                      sortedEntries.sort((a, b) => b.date.compareTo(a.date));
+                      break;
+                  }
+
+                  Map<String, List<DiaryEntry>> groupedEntries = {};
+                  for (var entry in sortedEntries) {
+                    final dateKey = DateFormat('y-MM-dd').format(entry.date);
+                    groupedEntries.putIfAbsent(dateKey, () => []);
+                    groupedEntries[dateKey]!.add(entry);
+                  }
+                  log('Grouped Entries Length: ${groupedEntries.length}');
+
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        if (index >= groupedEntries.length) {
+                          log('Index out of bounds: $index');
+                          return const SizedBox();
+                        }
+                        final dateKey = groupedEntries.keys.toList()[index];
+                        final entries = groupedEntries[dateKey]!;
+                        return buildGroupedDiaryEntries(entries, dateKey);
+                      },
+                      childCount: sortedEntries.length,
                     ),
                   );
                 },
-                backgroundColor: const Color.fromARGB(255, 255, 254, 254),
-                elevation: 3,
-                child: const CustomIconWidget(),
-                // ignore: dead_code
-              )
-            : null,
+              ),
+            ),
+          ],
+        ),
       ),
+      floatingActionButton: isFabVisible
+          ? FloatingActionButton(
+              shape: const CircleBorder(),
+              onPressed: () {
+                final changer = Provider.of<Changer>(context, listen: false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatePage(
+                      changer: changer,
+                    ),
+                  ),
+                );
+              },
+              // backgroundColor: const Color.fromARGB(255, 255, 254, 254),
+              elevation: 3,
+              child: const CustomIconWidget(),
+              // ignore: dead_code
+            )
+          : null,
     );
   }
 
@@ -319,7 +318,6 @@ class DiaryEntryCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
-              color: Colors.white,
               borderRadius: BorderRadius.circular(12.0),
               boxShadow: [
                 BoxShadow(
@@ -339,8 +337,7 @@ class DiaryEntryCard extends StatelessWidget {
                       child: Text(
                         entry.title,
                         style: TextStyle(
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w500),
+                            fontSize: 15.sp, fontWeight: FontWeight.w500),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),

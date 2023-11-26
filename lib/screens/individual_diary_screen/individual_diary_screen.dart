@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:diary/screens/main_screen/main_screen.dart';
-import 'package:diary/screens/my_diary_screen/edit_screen/edit_screen.dart';
+import 'package:diary/screens/edit_screen/edit_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
 import 'package:diary/util/diary_screen_functions.dart';
@@ -41,7 +41,6 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.white,
           elevation: 0,
           leading: const BackButtonWidget(),
           actions: [
@@ -110,14 +109,14 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                   } else if (value == 'Delete') {
                     _showDeleteConfirmationDialog(context, widget.entry);
                   } else if (value == 'Save') {
-                    //hfhkjasdhjkfhkldhkjhsgldfkjkgljfhssssslhhsdhafhdhasbjkdbfhdhbkjfbhdkfhnksajkfkjsdbjhfvbjsdnvjnskabfdkdhfldjiokshfiakadhnbsdjnasjdgfh
                     SavedScreenFunctions()
                         .displayBottomSheet(context, widget.entry.id!);
                   }
                 });
               },
-              icon: const Icon(Ionicons.ellipsis_vertical_outline,
-                  color: Colors.black),
+              icon: const Icon(
+                Ionicons.ellipsis_vertical_outline,
+              ),
             )
           ],
           bottom: const BottomBorderWidget()),

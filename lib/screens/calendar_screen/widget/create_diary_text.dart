@@ -7,32 +7,31 @@ class CreateDiaryText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-                          margin: const EdgeInsets.only(left: 20, right: 20),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Start writing about your day...',
-                                style: TextStyle(
-                                  color: const Color.fromARGB(255, 31, 31, 31),
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w500,
-                                  fontFamily: "Satoshi"
-                                ),
-                              ),
-                              SizedBox(height: 0.1.h,),
-                              Text(
-                                'Click this text to create your personal diary',
-                                style: TextStyle(
-                                    color: AppColor.secondary.color,
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 9.sp,
-                                    fontFamily: "Satoshi"
-                                    ),
-                              ),
-                            ],
-                          ),
-                        );
+    return Container(
+      margin: const EdgeInsets.only(left: 20, right: 20),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Start writing about your day...',
+            style: TextStyle(
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w500,
+                fontFamily: "Satoshi"),
+          ),
+          SizedBox(
+            height: 0.1.h,
+          ),
+          Text(
+            'Click this text to create your personal diary',
+            style: TextStyle(
+                color: AppColor.secondary.color,
+                fontWeight: FontWeight.w400,
+                fontSize: 9.sp,
+                fontFamily: "Satoshi"),
+          ),
+        ],
+      ),
+    );
   }
 }

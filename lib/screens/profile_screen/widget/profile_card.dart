@@ -34,7 +34,7 @@ class ProfileCard extends StatelessWidget {
                 ),
               ],
               borderRadius: BorderRadius.circular(10),
-              color: Colors.white,
+              color:  Theme.of(context).brightness == Brightness.light? Colors.white : Color.fromARGB(255, 212, 214, 221).withOpacity(0.2) ,
             ),
             child: ValueListenableBuilder(
                 valueListenable:
@@ -67,8 +67,8 @@ class ProfileCard extends StatelessWidget {
                             ),
                             Text(
                               profileDetails.email,
-                              style: const TextStyle(
-                                  color: Colors.black26, fontSize: 15),
+                              style:  TextStyle(
+                                  color:  Theme.of(context).brightness == Brightness.light ? Colors.black26 : Colors.white60, fontSize: 15,),
                             ),
                           ],
                         ),

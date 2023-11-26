@@ -3,7 +3,6 @@ import 'package:diary/screens/login_signin_screen/widget/input_field.dart';
 import 'package:diary/screens/login_signin_screen/widget/navigation_text_button.dart';
 import 'package:diary/screens/login_signin_screen/widget/social_login.dart';
 import 'package:diary/screens/login_signin_screen/widget/welcome_text_widget.dart';
-import 'package:diary/screens/main_screen/main_screen.dart';
 import 'package:diary/screens/login_signin_screen/signin_screen.dart';
 import 'package:diary/screens/login_signin_screen/welcome_screen.dart';
 import 'package:diary/screens/login_signin_screen/widget/navigation_elevated_button.dart';
@@ -43,7 +42,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     focusNodeEmail.addListener(() {
       setState(() {
         isFocusedEmail = focusNodeEmail.hasFocus;

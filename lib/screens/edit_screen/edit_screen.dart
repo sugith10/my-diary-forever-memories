@@ -5,6 +5,7 @@ import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/main_screen/main_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
 import 'package:diary/screens/widget/bottomborder.dart';
+import 'package:diary/screens/widget/save_text_button.dart';
 import 'package:flutter/material.dart';
 
 import 'package:image_picker/image_picker.dart';
@@ -42,17 +43,17 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   }
 
   Future getImage() async {
-  final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-  if (image == null) return;
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (image == null) return;
 
-  final imageTemporary = File(image.path);
+    final imageTemporary = File(image.path);
 
     setState(() {
       _image = imageTemporary;
     });
   }
 
-   Future<String?> saveImage(File image) async {
+  Future<String?> saveImage(File image) async {
     try {
       final appDocDir = await getApplicationDocumentsDirectory();
       final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
@@ -69,11 +70,102 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: const BackButtonWidget(),
-        actions: [
-          Center(
-            child: TextButton(
+       
+          leading: const BackButtonWidget(),
+          actions: [
+            SaveButton(onPressed: () {
+              _showPopupDialog(context);
+            })
+          ],
+          elevation: 0,
+          bottom: const BottomBorderWidget()),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: TextField(
+                  controller: titleController,
+                  decoration: const InputDecoration(
+                    hintText: 'Title',
+                    hintStyle: TextStyle(fontSize: 24),
+                    border: InputBorder.none,
+                  ),
+                  style: const TextStyle(fontSize: 24),
+                ),
+              ),
+              SizedBox(
+                // height: 200,
+                child: _image != null
+                    ? Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: InkWell(
+                          onTap: () {
+                            getImage();
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.file(
+                              _image!,
+                            ),
+                          ),
+                        ),
+                      )
+                    : Container(),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: TextField(
+                  controller: contentController,
+                  maxLines: null, // Allows for multiple lines
+                  decoration: const InputDecoration(
+                    hintText: 'Content',
+                    hintStyle: TextStyle(fontSize: 18),
+                    border: InputBorder.none,
+                  ),
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(fontSize: 18),
+                  autofocus: true,
+                ),
+              ),
+              // Add image selection and emoji handling widgets
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showPopupDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text(
+            'Edit Confirmation',
+            style: TextStyle(
+              fontSize: 27,
+            ),
+          ),
+          content: const Text(
+            'Are you sure about editing this record?',
+            style: TextStyle(fontSize: 17),
+          ),
+          actions: [
+            TextButton(
+              child: const Text(
+                'Cancel',
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Save', style: TextStyle(color: Colors.red)),
               onPressed: () async {
                 final title = titleController.text;
                 final content = contentController.text;
@@ -102,125 +194,17 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                   });
                 }
                 Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => MainScreen()),
-                ModalRoute.withName('/main'),
-              );
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  ModalRoute.withName('/main'),
+                );
               },
-              child: Text(
-                'Save',
-                style: TextStyle(color: Colors.black, fontSize: 15.sp),
-              ),
             ),
-          ),
-        ],
-        elevation: 0,
-        bottom: const BottomBorderWidget()
-      ),
-      body: SizedBox(
-        height:  MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextField(
-                  controller: titleController,
-                  decoration: const InputDecoration(
-                    hintText: 'Title',
-                    hintStyle: TextStyle(fontSize: 24),
-                    border: InputBorder.none,
-                  ),
-                  style: const TextStyle(fontSize: 24),
-                ),
-              ),
-              SizedBox(
-                // height: 200,
-                child: _image != null
-                    ? Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: InkWell(
-                        onTap: (){
-                           getImage();
-                        },
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(
-                              _image!,
-                            ),
-                          ),
-                      ),
-                    )
-                    :  Container(),
-              ),
-          
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextField(
-                  controller: contentController,
-                  maxLines: null, // Allows for multiple lines
-                  decoration: const InputDecoration(
-                    hintText: 'Content',
-                    hintStyle: TextStyle(fontSize: 18),
-                    border: InputBorder.none,
-                  ),
-                  // ignore: prefer_const_constructors
-                  style: TextStyle(fontSize: 18),
-                  autofocus: true,
-                ),
-              ),
-              // Add image selection and emoji handling widgets
-            ],
-          ),
-        ),
-      ),
+          ],
+        );
+      },
     );
   }
 
-  
-
   // ... Rest of your methods for image selection, emoji handling, and backspace pressed.
 }
-
-void _showPopupDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text(
-          'Edit Confirmation',
-          style: TextStyle(
-            fontSize: 27,
-          ),
-        ),
-        content: const Text(
-          'Are you sure about editing this record?',
-          style: TextStyle(fontSize: 17),
-        ),
-        actions: [
-          TextButton(
-            child: const Text('Cancel', style: TextStyle(color: Colors.black)),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-          TextButton(
-            child: const Text('Save', style: TextStyle(color: Colors.red)),
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => MainScreen()),
-                ModalRoute.withName('/main'),
-              );
-            },
-          ),
-        ],
-      );
-    },
-  );
-}
-
-
-
-

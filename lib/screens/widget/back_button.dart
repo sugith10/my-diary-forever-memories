@@ -10,10 +10,8 @@ class BackButtonWidget extends StatelessWidget {
       onPressed: () {
         Navigator.pop(context);
       },
-      icon:  const Icon(
+      icon: const Icon(
         Ionicons.chevron_back_outline,
-        color: Colors.black,
-       
         size: 25,
       ),
     );
