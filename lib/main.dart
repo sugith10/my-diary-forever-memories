@@ -1,13 +1,13 @@
-import 'package:diary/color/theme.dart';
-import 'package:diary/models/diary_entry.dart';
-import 'package:diary/models/profile_details.dart';
-import 'package:diary/models/savedlist_db_model.dart';
-import 'package:diary/screens/main_screen/main_screen.dart';
-import 'package:diary/providers/provider_mainscreen.dart';
-import 'package:diary/providers/provider_onboarding.dart';
-import 'package:diary/screens/splash_screen/splash.dart';
-import 'package:diary/providers/provider_calendar.dart';
-import 'package:diary/providers/provider_create.dart';
+import 'package:diary/application/notifications/local_notifications.dart';
+import 'package:diary/domain/models/diary_entry.dart';
+import 'package:diary/domain/models/profile_details.dart';
+import 'package:diary/domain/models/savedlist_db_model.dart';
+import 'package:diary/presentation/theme/theme.dart';
+import 'package:diary/presentation/screens/main_screen/main_screen.dart';
+import 'package:diary/infrastructure/providers/provider_mainscreen.dart';
+import 'package:diary/infrastructure/providers/provider_onboarding.dart';
+import 'package:diary/infrastructure/providers/provider_calendar.dart';
+import 'package:diary/infrastructure/providers/provider_create.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -39,6 +39,8 @@ Future<void> main() async {
   }
   await Hive.openBox<SavedList>('_savedListBoxName');
 
+  NotificationService().initNotification();
+
   runApp(
     MultiProvider(
       providers: [
@@ -55,13 +57,13 @@ Future<void> main() async {
           create: (context) => MainScreenProvider(),
         ),
       ],
-      child:  MyApp(),
+      child:  const MyApp(),
     ),
   );
 }
  
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
