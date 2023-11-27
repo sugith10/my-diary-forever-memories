@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:diary/controllers/hive_profile_operations.dart';
 import 'package:diary/models/profile_details.dart';
-import 'package:diary/screens/account_screen/edit_profile_screen.dart';
+import 'package:diary/screens/account_screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sizer/sizer.dart';
@@ -34,7 +34,7 @@ class ProfileCard extends StatelessWidget {
                 ),
               ],
               borderRadius: BorderRadius.circular(10),
-              color:  Theme.of(context).brightness == Brightness.light? Colors.white : Color.fromARGB(255, 212, 214, 221).withOpacity(0.2) ,
+              color:  Theme.of(context).brightness == Brightness.light? Colors.white : Color.fromARGB(255, 25, 25, 25) ,
             ),
             child: ValueListenableBuilder(
                 valueListenable:
@@ -99,7 +99,8 @@ class ProfileCard extends StatelessWidget {
                                 BoxShadow(
                                   spreadRadius: 2,
                                   blurRadius: 10,
-                                  color: Colors.black.withOpacity(0.1),
+                                  color:  Theme.of(context).brightness == Brightness.light
+          ?  Colors.black.withOpacity(0.1):  Color.fromARGB(255, 255, 255, 255).withOpacity(0.1),
                                 ),
                               ],
                             )),

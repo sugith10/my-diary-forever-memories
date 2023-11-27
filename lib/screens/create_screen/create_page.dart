@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:diary/color/primary_colors.dart';
 import 'package:diary/controllers/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/providers/provider_calendar.dart';
@@ -68,95 +69,94 @@ class _CreatePageState extends State<CreatePage> {
     }
   }
 
-  Color _selectedColor = Colors.white; // Initial background color
-
-  void _showColorPickerDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Center(
-              child: ShaderMask(
-            blendMode: BlendMode.srcIn,
-            shaderCallback: (Rect bounds) => const LinearGradient(
-              colors: [Colors.red, Colors.blue],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ).createShader(bounds),
-            child: const Text(
-              'Choose Background Color',
-              style: TextStyle(fontSize: 24),
-            ),
-          )),
-          content: SingleChildScrollView(
-            child: BlockPicker(
-              pickerColor: _selectedColor,
-              onColorChanged: (color) {
-                setState(() {
-                  _selectedColor = color;
-                });
-              },
-              availableColors: const [
-                Color.fromARGB(255, 248, 248, 248),
-                Color.fromARGB(255, 250, 240, 248),
-                Color.fromARGB(255, 223, 244, 255),
-                Color.fromARGB(255, 229, 215, 162),
-                Color.fromARGB(255, 243, 215, 116),
-                Color.fromARGB(255, 200, 194, 151),
-                Color.fromARGB(255, 244, 181, 104),
-                Color.fromARGB(255, 200, 216, 145),
-                Color.fromARGB(255, 187, 240, 214),
-                Color.fromARGB(255, 122, 236, 198),
-                Color.fromARGB(255, 113, 184, 150),
-                Color.fromARGB(255, 107, 213, 111),
-                Colors.blueGrey,
-                Colors.grey,
-                Color.fromARGB(255, 164, 151, 200),
-                Color.fromARGB(255, 134, 193, 223),
-                Color.fromARGB(255, 201, 112, 112),
-                Color.fromARGB(255, 250, 142, 99),
-                Color.fromARGB(255, 217, 130, 217),
-                Color.fromARGB(255, 224, 153, 181),
-                Color.fromARGB(255, 111, 98, 98),
-                Color.fromARGB(255, 108, 107, 99),
-                Color.fromARGB(255, 140, 113, 80),
-                Color.fromARGB(255, 97, 96, 108),
-              ],
-              // enableAlpha: true,
-
-              // pickerAreaHeightPercent: 0.8,
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child:
-                  const Text('Cancel', style: TextStyle(color: Colors.black)),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text(
-                'OK',
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
+    Color _selectedColor = Theme.of(context).brightness == Brightness.light
+        ? Colors.white
+        : Colors.black; // Initial background color
+
+    void _showColorPickerDialog() {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Center(
+                child: ShaderMask(
+              blendMode: BlendMode.srcIn,
+              shaderCallback: (Rect bounds) => const LinearGradient(
+                colors: [Colors.red, Colors.blue],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ).createShader(bounds),
+              child: const Text(
+                'Choose Background Color',
+                style: TextStyle(fontSize: 24),
+              ),
+            )),
+            content: SingleChildScrollView(
+              child: BlockPicker(
+                pickerColor: _selectedColor,
+                onColorChanged: (color) {
+                  setState(() {
+                    _selectedColor = color;
+                  });
+                },
+                availableColors: const [
+                  Color.fromARGB(255, 248, 248, 248),
+                  Color.fromARGB(255, 250, 240, 248),
+                  Color.fromARGB(255, 223, 244, 255),
+                  Color.fromARGB(255, 229, 215, 162),
+                  Color.fromARGB(255, 243, 215, 116),
+                  Color.fromARGB(255, 200, 194, 151),
+                  Color.fromARGB(255, 244, 181, 104),
+                  Color.fromARGB(255, 200, 216, 145),
+                  Color.fromARGB(255, 187, 240, 214),
+                  Color.fromARGB(255, 122, 236, 198),
+                  Color.fromARGB(255, 113, 184, 150),
+                  Color.fromARGB(255, 107, 213, 111),
+                  Colors.blueGrey,
+                  Colors.grey,
+                  Color.fromARGB(255, 164, 151, 200),
+                  Color.fromARGB(255, 134, 193, 223),
+                  Color.fromARGB(255, 201, 112, 112),
+                  Color.fromARGB(255, 250, 142, 99),
+                  Color.fromARGB(255, 217, 130, 217),
+                  Color.fromARGB(255, 224, 153, 181),
+                  Color.fromARGB(255, 111, 98, 98),
+                  Color.fromARGB(255, 108, 107, 99),
+                  Color.fromARGB(255, 140, 113, 80),
+                  Color.fromARGB(255, 97, 96, 108),
+                ],
+                // enableAlpha: true,
+
+                // pickerAreaHeightPercent: 0.8,
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'OK',
+                ),
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: _selectedColor,
       appBar: AppBar(
-  
           leading: const BackButtonWidget(),
           actions: [
             SaveButton(onPressed: () async {
@@ -218,7 +218,7 @@ class _CreatePageState extends State<CreatePage> {
                           data: ThemeData.light().copyWith(
                             primaryColor: const Color(0xFF835DF1),
                             colorScheme: const ColorScheme.light(
-                                primary: Color(0xFF835DF1)),
+                                primary: Color(0xFF835DF1),),
                             buttonTheme: const ButtonThemeData(
                                 textTheme: ButtonTextTheme.primary),
                           ),
@@ -239,13 +239,11 @@ class _CreatePageState extends State<CreatePage> {
                         builder: (context, changer, child) {
                           return Text(
                             DateFormat('d MMMM,y').format(changer.selectedDate),
-                            style: const TextStyle(color: Colors.black),
                           );
                         },
                       ),
                       const Icon(
                         Ionicons.caret_down_outline,
-                        color: Colors.black,
                       )
                     ],
                   ),
@@ -326,20 +324,22 @@ class _CreatePageState extends State<CreatePage> {
                   horizontalSpacing: 0,
                   gridPadding: EdgeInsets.zero,
                   initCategory: Category.RECENT,
-                  bgColor: const Color(0xFFF2F2F2),
+                  bgColor: Theme.of(context).brightness == Brightness.light
+                      ? Colors.white
+                      : AppColor.black.color,
                   indicatorColor: const Color(0xFF835DF1),
                   iconColor: Colors.grey,
                   iconColorSelected: const Color(0xFF835DF1),
                   backspaceColor: const Color(0xFF835DF1),
-                  skinToneDialogBgColor: Colors.white,
-                  skinToneIndicatorColor: Colors.grey,
+                  // skinToneDialogBgColor: Colors.white,
+                  // skinToneIndicatorColor: Colors.grey,
                   enableSkinTones: true,
                   recentTabBehavior: RecentTabBehavior.RECENT,
                   recentsLimit: 28,
                   replaceEmojiOnLimitExceed: false,
                   noRecents: const Text(
                     'No Recents',
-                    style: TextStyle(fontSize: 20, color: Colors.black26),
+                    style: TextStyle(fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
                   loadingIndicator: const SizedBox.shrink(),
@@ -404,7 +404,6 @@ class _CreatePageState extends State<CreatePage> {
                 BottomNavigationBarItem(
                   icon: Icon(
                     Ionicons.time_outline,
-                
                   ),
                   label: 'Time',
                 ),

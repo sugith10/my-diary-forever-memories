@@ -14,9 +14,9 @@ class AuthController extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         //user is logged in
-       if (snapshot.hasData && snapshot.data != null) {
-  return MainScreen();
-}
+        if (snapshot.hasData && snapshot.data != null) {
+          return MainScreen();
+        }
 
         //user not logged in
         else {

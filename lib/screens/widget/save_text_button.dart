@@ -12,15 +12,9 @@ class SaveButton extends StatelessWidget {
       type: MaterialType.transparency,
       child: TextButton(
         onPressed: onPressed,
-        child:  Text(
+        child: const Text(
           'Save',
-          style: TextStyle(
-            color: Theme.of(context).brightness == Brightness.light
-          ? AppColor.black.color
-          : Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w600
-          ),
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
         ),
       ),
     );

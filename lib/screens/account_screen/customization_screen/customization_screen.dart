@@ -4,8 +4,15 @@ import 'package:diary/screens/account_screen/widget/info_container.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class CustomizationPage extends StatelessWidget {
-  const CustomizationPage({super.key});
+class CustomizationPage extends StatefulWidget {
+  const CustomizationPage({Key? key}) : super(key: key);
+
+  @override
+  _CustomizationPageState createState() => _CustomizationPageState();
+}
+
+class _CustomizationPageState extends State<CustomizationPage> {
+  int? selectedTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +26,62 @@ class CustomizationPage extends StatelessWidget {
               description:
                   "Personalize your diary experience by customizing settings. Tailor the app to match your preferences and make each entry uniquely yours.",
             ),
-           ThemeSwitchCard(
-  child: Row(
-    
-  ),
-)
+            ThemeSwitchCard(
+              child: Row(
+                children: [
+                  Radio(
+                    value: 1,
+                    groupValue: selectedTheme,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedTheme = value as int?;
+                      });
+                    },
+                  ),
+                  Column(
+                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text('Day'),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Container(),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            SizedBox(height: 4.h,),
+            ThemeSwitchCard(
+              child: Row(
+                children: [
+                  SizedBox(width: 10,),
+                  Radio(
+                    value: 2,
+                    groupValue: selectedTheme,
+                    onChanged: (value) {
+                      setState(() {
+                        selectedTheme = value as int?;
+                      });
+                    },
+                  ),
+                  SizedBox(width: 20,),
+                  Column( 
+                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text('Night'),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10),
+                        child: Container(
+                          height: 50,
+                          color: Colors.amber,
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),

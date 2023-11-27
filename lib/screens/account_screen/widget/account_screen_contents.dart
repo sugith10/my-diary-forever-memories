@@ -1,5 +1,6 @@
 import 'package:diary/screens/account_screen/customization_screen/customization_screen.dart';
 import 'package:diary/screens/account_screen/notifications_screen.dart';
+import 'package:diary/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/util/profile_screen_functions.dart';
 import 'package:flutter/material.dart';
@@ -29,6 +30,7 @@ class AccountScreenContents extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
+                 mainAxisSize: MainAxisSize.min,
                 children: [
                   InkWell(
                     onTap: () {
@@ -47,7 +49,7 @@ class AccountScreenContents extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 1.2.h),
-                  const Divider(),
+                   const ContentDivider(),
                   SizedBox(height: 1.2.h),
                   InkWell(
                     onTap: () => Navigator.push(
@@ -64,7 +66,7 @@ class AccountScreenContents extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 1.2.h),
-                  const Divider(),
+                    const ContentDivider(),
                   SizedBox(height: 1.2.h),
                   const InkWell(
                     child: ProfileOptions(
@@ -73,7 +75,7 @@ class AccountScreenContents extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 1.2.h),
-                  const Divider(),
+                   const ContentDivider(),
                   SizedBox(height: 1.2.h),
                   const InkWell(
                     child: ProfileOptions(
@@ -82,7 +84,7 @@ class AccountScreenContents extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 1.2.h),
-                  const Divider(),
+                   const ContentDivider(),
                   SizedBox(height: 1.2.h),
                   InkWell(
                     onTap: () async {
@@ -94,7 +96,7 @@ class AccountScreenContents extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 1.2.h),
-                  const Divider(),
+                   const ContentDivider(),
                   SizedBox(height: 1.2.h),
                   InkWell(
                     onTap: () async {

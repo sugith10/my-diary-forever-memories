@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 enum AppColor {
+  //dark mode
   black,
+  showMenuBlack,
   primary,
   secondary,
   accent,
-  // Add more color options as needed
+  //light mode
 }
 
 extension AppColorExtension on AppColor {
@@ -13,6 +15,8 @@ extension AppColorExtension on AppColor {
     switch (this) {
       case AppColor.black:
         return const Color.fromARGB(255, 00, 00, 00);
+        case AppColor.showMenuBlack:
+        return const Color.fromARGB(255, 10, 10, 10);
       case AppColor.primary:
         return const Color(0xFF835DF1); 
       case AppColor.secondary:

@@ -1,5 +1,6 @@
 import 'package:diary/screens/login_signin_screen/welcome_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreenFunctions {
@@ -57,20 +58,20 @@ class ProfileScreenFunctions {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text(
+          title: Text(
             'Logout Confirmation',
             style: TextStyle(
-              fontSize: 27,
+              fontSize: 16.sp,
             ),
           ),
-          content: const Text(
+          content:  Text(
             'Are you sure you want to log out?',
-            style: TextStyle(fontSize: 17),
+            style: TextStyle(fontSize: 9.sp),
           ),
           actions: [
             TextButton(
               child:
-                  const Text('Cancel', style: TextStyle(color: Colors.black)),
+                  const Text('Cancel' ),
               onPressed: () {
                 Navigator.of(context).pop();
               },

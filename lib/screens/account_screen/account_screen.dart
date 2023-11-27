@@ -1,4 +1,5 @@
-import 'package:diary/screens/account_screen/edit_profile_screen.dart';
+import 'package:diary/color/primary_colors.dart';
+import 'package:diary/screens/account_screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:diary/screens/account_screen/widget/account_screen_contents.dart';
 import 'package:diary/screens/account_screen/widget/profile_card.dart';
 import 'package:diary/screens/widget/appbar_titlestyle.dart';
@@ -25,7 +26,7 @@ class AccountScreen extends StatelessWidget {
             IconButton(
               onPressed: () {
                 showMenu(
-                  color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : const Color.fromARGB(255, 25, 25, 25),
+                  color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : AppColor.showMenuBlack.color,
                   context: context,
                   position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[

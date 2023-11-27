@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:diary/color/primary_colors.dart';
 import 'package:diary/screens/main_screen/main_screen.dart';
 import 'package:diary/screens/edit_screen/edit_screen.dart';
 import 'package:diary/screens/widget/back_button.dart';
@@ -47,6 +48,9 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
             IconButton(
               onPressed: () {
                 showMenu(
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? const Color.fromARGB(255, 255, 255, 255)
+                      : AppColor.showMenuBlack.color,
                   context: context,
                   position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[

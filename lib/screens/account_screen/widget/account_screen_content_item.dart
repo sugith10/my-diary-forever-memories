@@ -15,11 +15,11 @@ class ProfileOptions extends StatelessWidget {
         CircleAvatar(
           backgroundColor: Theme.of(context).brightness == Brightness.light
               ? Color(0xFFF1F5FF)
-              : Color.fromARGB(255, 212, 214, 221).withOpacity(0.2),
+              : Color.fromARGB(255, 25, 25, 25),
           child: Icon(icon,
               color: Theme.of(context).brightness == Brightness.light
                   ? Colors.black
-                  : Colors.white),
+                  : Color.fromARGB(255, 171, 170, 170)),
         ),
         const SizedBox(
           width: 18,

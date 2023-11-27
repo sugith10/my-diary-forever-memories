@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:diary/color/primary_colors.dart';
 import 'package:diary/controllers/hive_operations.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/screens/individual_diary_screen/individual_diary_screen.dart';
@@ -94,7 +95,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       showMenu(
                         context: context,
                         position: const RelativeRect.fromLTRB(1, 0, 0, 5),
-                         color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : const Color.fromARGB(255, 25, 25, 25),
+                         color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : AppColor.showMenuBlack.color,
                         items: <PopupMenuEntry>[
                           const PopupMenuItem(
                             value: 'Newest First',
