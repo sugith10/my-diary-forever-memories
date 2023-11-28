@@ -1,5 +1,5 @@
 import 'package:diary/presentation/screens/account_screen/customization_screen/customization_screen.dart';
-import 'package:diary/presentation/screens/account_screen/notifications_screen.dart';
+import 'package:diary/presentation/screens/account_screen/notifications_sceen/notifications_screen.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/presentation/util/profile_screen_functions.dart';

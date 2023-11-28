@@ -337,7 +337,7 @@ class _CreatePageState extends State<CreatePage> {
                   initCategory: Category.RECENT,
                   bgColor: Theme.of(context).brightness == Brightness.light
                       ? Colors.white
-                      : AppColor.black.color,
+                      : AppColor.dark.color,
                   indicatorColor: const Color(0xFF835DF1),
                   iconColor: Colors.grey,
                   iconColorSelected: const Color(0xFF835DF1),

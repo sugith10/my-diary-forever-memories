@@ -26,7 +26,7 @@ class AccountScreen extends StatelessWidget {
             IconButton(
               onPressed: () {
                 showMenu(
-                  color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : AppColor.showMenuBlack.color,
+                  color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : AppColor.showMenuDark.color,
                   context: context,
                   position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[

@@ -68,7 +68,7 @@ class CalendarScreen extends StatelessWidget {
                         border: Border.all(
                           color:
                               Theme.of(context).brightness == Brightness.light
-                                  ? AppColor.black.color
+                                  ? AppColor.dark.color
                                   : Colors.white,
                           width: 1.5,
                         ),

@@ -8,23 +8,23 @@ ThemeData lightMode = ThemeData(
   ),
   fontFamily: 'SFPRO',
   textTheme: TextTheme(
-    labelLarge: TextStyle(color: AppColor.black.color),
-    displayLarge: TextStyle(color: AppColor.black.color),
-    displayMedium: TextStyle(color: AppColor.black.color),
-    displaySmall: TextStyle(color: AppColor.black.color),
-    headlineMedium: TextStyle(color: AppColor.black.color),
-    headlineSmall: TextStyle(color: AppColor.black.color),
-    titleLarge: TextStyle(color: AppColor.black.color),
+    labelLarge: TextStyle(color: AppColor.dark.color),
+    displayLarge: TextStyle(color: AppColor.dark.color),
+    displayMedium: TextStyle(color: AppColor.dark.color),
+    displaySmall: TextStyle(color: AppColor.dark.color),
+    headlineMedium: TextStyle(color: AppColor.dark.color),
+    headlineSmall: TextStyle(color: AppColor.dark.color),
+    titleLarge: TextStyle(color: AppColor.dark.color),
   ),
   appBarTheme: AppBarTheme(
       backgroundColor: Colors.white,
-      toolbarTextStyle: TextStyle(color: AppColor.black.color),
-      titleTextStyle: TextStyle(color: AppColor.black.color),
+      toolbarTextStyle: TextStyle(color: AppColor.dark.color),
+      titleTextStyle: TextStyle(color: AppColor.dark.color),
       iconTheme: IconThemeData(
           color:
-              AppColor.black.color), // Color for leading icon and back button
+              AppColor.dark.color), // Color for leading icon and back button
       actionsIconTheme: IconThemeData(
-          color: AppColor.black.color), // Color for actions (icons or buttons)
+          color: AppColor.dark.color), // Color for actions (icons or buttons)
       elevation: 0),
   floatingActionButtonTheme:
       const FloatingActionButtonThemeData(backgroundColor: Colors.white),
@@ -44,12 +44,12 @@ ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
   buttonBarTheme: const ButtonBarThemeData(),
   colorScheme: ColorScheme.dark(
-    primary: AppColor.black.color,
-    background: AppColor.black.color,
-    secondary: AppColor.black.color,
+    primary: AppColor.dark.color,
+    background: AppColor.dark.color,
+    secondary: AppColor.dark.color,
   ),
-  scaffoldBackgroundColor: AppColor.black.color,
-  appBarTheme: AppBarTheme(backgroundColor: AppColor.black.color),
+  scaffoldBackgroundColor: AppColor.dark.color,
+  appBarTheme: AppBarTheme(backgroundColor: AppColor.dark.color),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: Color.fromARGB(255, 25, 25, 25)),
   textButtonTheme: TextButtonThemeData(

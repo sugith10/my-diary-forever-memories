@@ -15,9 +15,9 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  var hour = 1;
-  var minute = 1;
-  var timeFormat = "AM";
+  int hour = 1;
+  int minute = 1;
+  String timeFormat = "AM";
 
   @override
   Widget build(BuildContext context) {
@@ -165,10 +165,27 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               child: ElevatedButton(
                 onPressed: () {
+                  printSelectedTime();
+
+
                   NotificationService().showNotification(
                     title: 'Sample title',
                     body: 'It workd!!',
                   );
+
+
+                  //          NotificationService().scheduleNotification(
+                  // title: 'Scheduled Notification',
+                  // body: 'It workd!!',
+                  // scheduledNotificationDateTime: scheduleTime);
+
+                  // NotificationService().scheduleDailyNotification(
+                  //   id: 0,
+                  //   title: 'Scheduled Notification',
+                  //   body: 'It works!!',
+                  //   hour: hour,
+                  //   minute: minute,
+                  // );
 
                   // Navigator.push(
                   //   context,
@@ -197,5 +214,9 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
       ),
     );
+  }
+
+  void printSelectedTime() {
+    print('Selected Time: $hour:$minute $timeFormat');
   }
 }

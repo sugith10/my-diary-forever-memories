@@ -14,7 +14,7 @@ class DiaryTitle extends StatelessWidget {
         fontSize: 20.sp,
         fontWeight: FontWeight.w700,
         color: Theme.of(context).brightness == Brightness.light 
-            ? AppColor.black.color
+            ? AppColor.dark.color
             : Colors.white,
       ),
       // overflow: TextOverflow.ellipsis,

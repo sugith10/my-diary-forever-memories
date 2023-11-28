@@ -95,7 +95,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       showMenu(
                         context: context,
                         position: const RelativeRect.fromLTRB(1, 0, 0, 5),
-                         color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : AppColor.showMenuBlack.color,
+                         color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : AppColor.showMenuDark.color,
                         items: <PopupMenuEntry>[
                           const PopupMenuItem(
                             value: 'Newest First',

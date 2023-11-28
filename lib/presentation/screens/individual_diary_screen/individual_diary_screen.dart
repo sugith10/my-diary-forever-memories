@@ -49,7 +49,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                 showMenu(
                   color: Theme.of(context).brightness == Brightness.light
                       ? const Color.fromARGB(255, 255, 255, 255)
-                      : AppColor.showMenuBlack.color,
+                      : AppColor.showMenuDark.color,
                   context: context,
                   position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[
