@@ -1,4 +1,4 @@
-import 'package:custom_date_range_picker/custom_date_range_picker.dart';
+
 import 'package:diary/application/notifications/local_notifications.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_with_back_button_only.dart';
@@ -165,31 +165,11 @@ class _NotificationPageState extends State<NotificationPage> {
                 borderRadius: BorderRadius.all(Radius.circular(40)),
               ),
               child: ElevatedButton(
+                //hjfdhbshkjcvhbkljszzzzzzzzzzzzzzbnclkjahbnzsLXihujvilaeskzdcrujnkfhbvlesiahnnxcjnskladjnkjnndjnnvnvnvncilcsdnjnjcncncn
                 onPressed: () {
                   printSelectedTime();
-
-                 showCustomDateRangePicker(
-            context,
-            dismissible: true,
-            minimumDate: DateTime.now().subtract(const Duration(days: 30)),
-            maximumDate: DateTime.now().add(const Duration(days: 30)),
-            endDate:  DateTime(2020) ,
-            startDate:DateTime(2030) ,
-            backgroundColor: Colors.white,
-            primaryColor: Colors.green,
-            onApplyClick: (start, end) {
-              // setState(() {
-              //   endDate = end;
-              //   startDate = start;
-              // });
-            },
-            onCancelClick: () {
-              // setState(() {
-              //   endDate = null;
-              //   startDate = null;
-              // });
-            },
-          );
+                  
+                
                 },
                 style: ElevatedButton.styleFrom(
                   elevation: 0,

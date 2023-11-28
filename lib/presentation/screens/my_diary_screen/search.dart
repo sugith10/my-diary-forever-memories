@@ -21,47 +21,45 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
   List<DiaryEntry> searchResults = [];
 
   void searchDiaryEntries(String query) {
-  query = query.toLowerCase();
-  if (query.isEmpty) {
-    setState(() {
-      searchResults = [];
-    });
-  } else {
-    setState(() {
-      searchResults = diaryBox.values.where((entry) {
-        return entry.title.toLowerCase().contains(query);
-      }).toList();
-    });
+    query = query.toLowerCase();
+    if (query.isEmpty) {
+      setState(() {
+        searchResults = [];
+      });
+    } else {
+      setState(() {
+        searchResults = diaryBox.values.where((entry) {
+          return entry.title.toLowerCase().contains(query);
+        }).toList();
+      });
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading: const BackButtonWidget(),
-          title: TextField(
-            controller: _searchController,
-            onChanged: (query) {
-              searchDiaryEntries(query);
-            },
-            autofocus: true,
-            decoration: InputDecoration(
-              hintText: 'Search...',
-              hintStyle: TextStyle(fontSize: 16.sp),
-              border: InputBorder.none,
+            automaticallyImplyLeading: false,
+            leading: const BackButtonWidget(),
+            title: TextField(
+              controller: _searchController,
+              onChanged: (query) {
+                searchDiaryEntries(query);
+              },
+              autofocus: true,
+              decoration: InputDecoration(
+                hintText: 'Search...',
+                hintStyle: TextStyle(fontSize: 16.sp),
+                border: InputBorder.none,
+              ),
+              cursorColor: const Color.fromARGB(115, 95, 95, 95),
+              cursorHeight: 22,
+              style: const TextStyle(fontSize: 20),
+              textCapitalization: TextCapitalization.sentences,
             ),
-            cursorColor: const Color.fromARGB(115, 95, 95, 95),
-            cursorHeight: 22,
-            style: const TextStyle(fontSize: 20),
-            textCapitalization: TextCapitalization.sentences,
-          ),
-          elevation: 0,
-          bottom: const BottomBorderWidget()
-        ),
+            elevation: 0,
+            bottom: const BottomBorderWidget()),
         body: Column(
           children: [
             Expanded(

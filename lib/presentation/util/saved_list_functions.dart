@@ -12,7 +12,9 @@ class SavedScreenFunctions {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).brightness == Brightness.light ? AppColor.light.color : AppColor.showMenuDark.color,
+          backgroundColor: Theme.of(context).brightness == Brightness.light
+              ? AppColor.light.color
+              : AppColor.showMenuDark.color,
           title: const Center(child: Text('Create a Saved List')),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -48,7 +50,10 @@ class SavedScreenFunctions {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(const Color(0xFF835DF1)),
                 ),
-                child: const Text('Create List', style: TextStyle(color: Colors.white),),
+                child: const Text(
+                  'Create List',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ],
           ),
@@ -68,7 +73,9 @@ class SavedScreenFunctions {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
       ),
       builder: (context) => Container(
-        color: Theme.of(context).brightness == Brightness.light ? AppColor.light.color :  AppColor.showMenuDark.color,
+        color: Theme.of(context).brightness == Brightness.light
+            ? AppColor.light.color
+            : AppColor.showMenuDark.color,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -76,10 +83,12 @@ class SavedScreenFunctions {
               padding: const EdgeInsets.only(top: 10),
               child: Container(
                 width: 10.w,
-                height: 4,
+                height: 2.5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).brightness == Brightness.light ? Colors.black : Colors.white, // Change the color as needed
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? Colors.black
+                      : Colors.white, 
                 ),
               ),
             ),
@@ -108,28 +117,36 @@ class SavedScreenFunctions {
                   Hive.box<SavedList>('_savedListBoxName').listenable(),
               builder: (context, box, child) {
                 List<SavedList> savedList = box.values.toList();
-                return ListView.builder(
+                if(savedList.isNotEmpty){
+                   return ListView.builder(
                   shrinkWrap: true,
                   itemCount: savedList.length,
                   itemBuilder: (context, index) {
                     String listName = savedList[index].listName;
                     String listId = savedList[index].id;
-                    bool isChecked = false;
+                    // Check if the diary entry is in the current SavedList
+                    bool isChecked = SavedListDbFunctions()
+                        .isDiaryEntryInSavedList(listId, entryId);
                     return InkWell(
                       onTap: () {
                         print(listId);
                         print(entryId);
-                        SavedListDbFunctions()
-                            .addMapToDiaryEntryIds(listId, entryId);
-                        Navigator.pop(context);
+
+                        isChecked == false ?  SavedListDbFunctions()
+                            .addMapToDiaryEntryIds(listId, entryId) : SavedListDbFunctions().deleteDiaryEntry(listId, entryId);
+
+                       
+                        // Navigator.pop(context);
                       },
                       child: Row(
                         children: [
                           Row(
                             children: [
                               Checkbox(
-                                  value: isChecked,
-                                  onChanged: (bool? newValue) {}),
+                                value: isChecked,
+                                onChanged: (bool? newValue) {},
+                                activeColor: isChecked ? Colors.green : Colors.red ,
+                              ),
                               Text(
                                 listName,
                                 style: TextStyle(fontSize: 16.5.sp),
@@ -141,6 +158,13 @@ class SavedScreenFunctions {
                     );
                   },
                 );
+                }else{
+                  return const SizedBox(
+                    height: 100,
+                    child: Center(child: Text('Create a list')),
+                  );
+                }
+               
               },
             ),
             const Divider(

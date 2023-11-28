@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-
 import 'package:diary/domain/models/savedlist_db_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
@@ -30,7 +29,21 @@ class SavedListDbFunctions {
     return box.values.toList();
   }
 
-  Future<void> addMapToDiaryEntryIds(String savedListId , String diary) async {
+  Future<void> deleteSavedList(String savedListId) async {
+    final savedList = box.get(savedListId);
+    if (savedList != null) {
+      // Delete the saved list from the Hive box
+      await box.delete(savedListId);
+      print('Deleted saved list: $savedListId');
+
+      // Notify listeners about the change in the saved lists
+      savedListsNotifier.value = box.values.toList();
+    } else {
+      print('SavedList with ID $savedListId not found.');
+    }
+  }
+
+  Future<void> addMapToDiaryEntryIds(String savedListId, String diary) async {
     final savedList = box.get(savedListId);
     if (savedList != null) {
       savedList.diaryEntryIds.add(diary);
@@ -41,30 +54,19 @@ class SavedListDbFunctions {
     }
   }
 
-   Future<void> deleteDiaryEntry(String savedListId, String diaryEntryId) async {
+  Future<void> deleteDiaryEntry(String savedListId, String diaryEntryId) async {
     final savedList = box.get(savedListId);
     if (savedList != null) {
       savedList.diaryEntryIds.remove(diaryEntryId);
+       await box.put(savedListId, savedList);
       print('Deleted diary entry $diaryEntryId from SavedList: $savedListId');
     } else {
       print('SavedList with ID $savedListId not found.');
     }
   }
 
-  Future<void> deleteSavedList(String savedListId) async {
-  final savedList = box.get(savedListId);
-  if (savedList != null) {
-    // Delete the saved list from the Hive box
-    await box.delete(savedListId);
-    print('Deleted saved list: $savedListId');
-
-    // Notify listeners about the change in the saved lists
-    savedListsNotifier.value = box.values.toList();
-  } else {
-    print('SavedList with ID $savedListId not found.');
+  bool isDiaryEntryInSavedList(String savedListId, String diaryEntryId) {
+    final savedList = box.get(savedListId);
+    return savedList?.diaryEntryIds.contains(diaryEntryId) ?? false;
   }
-}
-
-
-
 }

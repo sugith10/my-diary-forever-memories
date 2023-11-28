@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
@@ -38,11 +37,8 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(SavedListAdapter().typeId)) {
     Hive.registerAdapter(SavedListAdapter());
   }
-  await Hive.openBox<SavedList>('_savedListBoxName');
+  await Hive.openBox<SavedList>('_savedListBoxName');      
 
-  NotificationService().initNotification();
-
-  tz.initializeTimeZones();
 
   runApp(
     MultiProvider(
