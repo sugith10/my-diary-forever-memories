@@ -10,6 +10,7 @@ import 'package:diary/presentation/screens/create_screen/create_page.dart';
 import 'package:diary/presentation/screens/my_diary_screen/search.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
 import 'package:diary/presentation/screens/widget/custom_icon.dart';
+import 'package:diary/presentation/util/my_diary_scren_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -120,7 +121,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                             selectedSortOption = value as String;
                           });
                         } else if (value == 'Range Pick') {
-                          handleDateRangePick(context);
+                          MyDiaryScreenFunctions().handleDateRangePick(context);
                         }
                       });
                     },
@@ -367,27 +368,27 @@ class DiaryEntryCard extends StatelessWidget {
 
 void doNothing(BuildContext context) {}
 
-Future<void> handleDateRangePick(BuildContext context) async {
-  final DateTimeRange? pickedDateRange = await showDateRangePicker(
-    context: context,
-    firstDate: DateTime(DateTime.now().day),
-    lastDate: DateTime.now(),
-    locale: Localizations.localeOf(context),
-    saveText: 'Done',
-    builder: (BuildContext context, Widget? child) {
-      return Theme(
-        data: ThemeData.light().copyWith(
-          colorScheme: const ColorScheme.light(primary: Color(0xFF835DF1)),
-        ),
-        child: child ?? Container(),
-      );
-    },
-  );
-  if (pickedDateRange != null) {
-    final startDate = pickedDateRange.start;
-    final endDate = pickedDateRange.end;
-    final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
-    final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
-    print('Selected date range: $formattedStartDate - $formattedEndDate');
-  }
-}
+// Future<void> handleDateRangePick(BuildContext context) async {
+//   final DateTimeRange? pickedDateRange = await showDateRangePicker(
+//     context: context,
+//     firstDate: DateTime(DateTime.now().day),
+//     lastDate: DateTime.now(),
+//     locale: Localizations.localeOf(context),
+//     saveText: 'Done',
+//     builder: (BuildContext context, Widget? child) {
+//       return Theme(
+//         data: ThemeData.light().copyWith(
+//           colorScheme: const ColorScheme.light(primary: Color(0xFF835DF1)),
+//         ),
+//         child: child ?? Container(),
+//       );
+//     },
+//   );
+//   if (pickedDateRange != null) {
+//     final startDate = pickedDateRange.start;
+//     final endDate = pickedDateRange.end;
+//     final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
+//     final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
+//     print('Selected date range: $formattedStartDate - $formattedEndDate');
+//   }
+// }
