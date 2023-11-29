@@ -1,4 +1,4 @@
-import 'package:diary/presentation/theme/primary_colors.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/screens/account_screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_contents.dart';
 import 'package:diary/presentation/screens/account_screen/widget/profile_card.dart';

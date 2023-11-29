@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/presentation/util/saved_list_functions.dart';
-import 'package:diary/presentation/theme/primary_colors.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/screens/edit_screen/edit_screen.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/widget/title.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';

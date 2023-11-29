@@ -1,6 +1,7 @@
 import 'package:diary/application/controllers/hive_savedlist_db_ops.dart';
 import 'package:diary/domain/models/savedlist_db_model.dart';
-import 'package:diary/presentation/theme/primary_colors.dart';
+import 'package:diary/presentation/screens/main_screen/main_screen.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:sizer/sizer.dart';
@@ -62,7 +63,7 @@ class SavedScreenFunctions {
     );
   }
 
-  void showCreateListDialog(BuildContext context) {
+   showCreateListDialog(BuildContext context) {
     _showCreateListDialog(context);
   }
 
@@ -87,7 +88,7 @@ class SavedScreenFunctions {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: Theme.of(context).brightness == Brightness.light
-                      ? Colors.black
+                      ? AppColor.dark.color
                       : Colors.white, 
                 ),
               ),
@@ -161,7 +162,7 @@ class SavedScreenFunctions {
                 }else{
                   return const SizedBox(
                     height: 100,
-                    child: Center(child: Text('Create a list')),
+                    child: Center(child: Text('Create a list', style: TextStyle(fontSize: 20),),),
                   );
                 }
                
@@ -199,4 +200,55 @@ class SavedScreenFunctions {
   Future<void> displayBottomSheet(BuildContext context, String entryId) async {
     await _displayBottomSheet(context, entryId);
   }
+
+  void _showDeleteConfirmationDialog(
+      BuildContext context, SavedList savedList) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          
+          title: const Text(
+            'Delete Confirmation',
+            style: TextStyle(
+              fontSize: 27,
+            ),
+          ),
+          content: const Text(
+            'Are you sure you want to delete this?',
+            style: TextStyle(fontSize: 17),
+          ),
+          actions: [
+            TextButton(
+              child:
+                  const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Delete', style: TextStyle(color: Colors.red)),
+              onPressed: () {
+                SavedListDbFunctions().deleteSavedList(savedList.id);
+
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  ModalRoute.withName('/main'),
+                );
+                            },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+   showDeleteConfirmationDialog(BuildContext context,  SavedList savedList){
+
+    _showDeleteConfirmationDialog(context, savedList);
+
+  }
+
+
 }

@@ -1,4 +1,4 @@
-import 'package:diary/presentation/theme/primary_colors.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 

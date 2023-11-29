@@ -1,6 +1,6 @@
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/presentation/screens/calendar_screen/widget/create_diary_text.dart';
-import 'package:diary/presentation/theme/primary_colors.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/presentation/screens/create_screen/create_page.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
@@ -168,7 +168,7 @@ class CalendarScreen extends StatelessWidget {
                               PageTransition(
                                   type: PageTransitionType.size,
                                   alignment: Alignment.bottomCenter,
-                                  child: CreatePage(
+                                  child: CreateDiaryScreen(
                                     changer: changer,
                                   )));
                         },

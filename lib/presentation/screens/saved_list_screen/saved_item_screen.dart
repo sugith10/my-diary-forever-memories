@@ -1,17 +1,15 @@
-import 'package:diary/application/controllers/hive_savedlist_db_ops.dart';
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/domain/models/savedlist_db_model.dart';
-
-import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
+import 'package:diary/presentation/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class SavedItems extends StatefulWidget {
   final SavedList savedList;
-  const SavedItems({required this.savedList, Key? key}) : super(key: key);
+  const SavedItems({required this.savedList, super.key});
 
   @override
   State<SavedItems> createState() => _SavedItemsState();
@@ -28,7 +26,7 @@ class _SavedItemsState extends State<SavedItems> {
 
   List<DiaryEntry> getDiaryEntries(List<String> diaryEntryIds) {
     final diaryEntryBox =
-        Hive.box<DiaryEntry>('_boxName'); // Use your actual box name
+        Hive.box<DiaryEntry>('_boxName'); 
     return diaryEntryIds
         .map((entryId) => diaryEntryBox.get(entryId))
         .where((entry) => entry != null)
@@ -44,7 +42,7 @@ class _SavedItemsState extends State<SavedItems> {
         actions: [
           IconButton(
             onPressed: () {
-              _showDeleteConfirmationDialog(context, widget.savedList);
+              SavedScreenFunctions().showDeleteConfirmationDialog(context, widget.savedList);
             },
             icon: const Icon(
               Icons.delete_outline_rounded,
@@ -59,10 +57,7 @@ class _SavedItemsState extends State<SavedItems> {
         child: ValueListenableBuilder<Box<DiaryEntry>>(
           valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
           builder: (context, box, child) {
-            // Fetch all diary entries
-            // List<DiaryEntry> diaryEntries = box.values.toList();
             final selectedDiaryEntries = getDiaryEntries(diaryEntryIds);
-
             if (selectedDiaryEntries.isNotEmpty) {
               return ListView.builder(
                 itemCount: selectedDiaryEntries.length,
@@ -84,49 +79,6 @@ class _SavedItemsState extends State<SavedItems> {
           },
         ),
       ),
-    );
-  }
-
-  void _showDeleteConfirmationDialog(
-      BuildContext context, SavedList savedList) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          
-          title: const Text(
-            'Delete Confirmation',
-            style: TextStyle(
-              fontSize: 27,
-            ),
-          ),
-          content: const Text(
-            'Are you sure you want to delete this?',
-            style: TextStyle(fontSize: 17),
-          ),
-          actions: [
-            TextButton(
-              child:
-                  const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Delete', style: TextStyle(color: Colors.red)),
-              onPressed: () {
-                SavedListDbFunctions().deleteSavedList(savedList.id);
-
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
-                  ModalRoute.withName('/main'),
-                );
-                            },
-            ),
-          ],
-        );
-      },
     );
   }
 }

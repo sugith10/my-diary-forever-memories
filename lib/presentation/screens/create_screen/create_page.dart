@@ -1,16 +1,17 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/domain/models/diary_entry.dart';
-import 'package:diary/presentation/theme/primary_colors.dart';
+import 'package:diary/presentation/screens/create_screen/widget/down_icon.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/application/controllers/hive_operations.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/infrastructure/providers/provider_create.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
 import 'package:diary/presentation/screens/widget/save_text_button.dart';
+import 'package:diary/presentation/util/create_page_screen_functions.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -20,19 +21,32 @@ import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:sizer/sizer.dart';
 
-class CreatePage extends StatefulWidget {
+class CreateDiaryScreen extends StatefulWidget {
   final Changer changer;
 
-  const CreatePage({Key? key, required this.changer}) : super(key: key);
+  const CreateDiaryScreen({Key? key, required this.changer}) : super(key: key);
 
   @override
-  State<CreatePage> createState() => _CreatePageState();
+  State<CreateDiaryScreen> createState() => _CreatePageState();
 }
 
-class _CreatePageState extends State<CreatePage> {
+class _CreatePageState extends State<CreateDiaryScreen> {
+  late Color selectedColor;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Initialize selectedColor in didChangeDependencies
+    selectedColor = Theme.of(context).brightness == Brightness.light
+        ? Colors.white
+        : Colors.black;
+  }
+
   final TextEditingController titleController = TextEditingController();
 
   final TextEditingController contentController = TextEditingController();
+
+ 
 
   bool _isEmojiKeyboardVisible = false;
 
@@ -71,88 +85,6 @@ class _CreatePageState extends State<CreatePage> {
 
   @override
   Widget build(BuildContext context) {
-    Color selectedColor = Theme.of(context).brightness == Brightness.light
-        ? Colors.white
-        : Colors.black; // Initial background color
-
-    void showColorPickerDialog() {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Center(
-                child: ShaderMask(
-              blendMode: BlendMode.srcIn,
-              shaderCallback: (Rect bounds) => const LinearGradient(
-                colors: [Colors.red, Colors.blue],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ).createShader(bounds),
-              child: const Text(
-                'Choose Background Color',
-                style: TextStyle(fontSize: 24),
-              ),
-            )),
-            content: SingleChildScrollView(
-              child: BlockPicker(
-                pickerColor: selectedColor,
-                onColorChanged: (color) {
-                  setState(() {
-                    selectedColor = color;
-                  });
-                },
-                availableColors: const [
-                  Color.fromARGB(255, 248, 248, 248),
-                  Color.fromARGB(255, 250, 240, 248),
-                  Color.fromARGB(255, 223, 244, 255),
-                  Color.fromARGB(255, 229, 215, 162),
-                  Color.fromARGB(255, 243, 215, 116),
-                  Color.fromARGB(255, 200, 194, 151),
-                  Color.fromARGB(255, 244, 181, 104),
-                  Color.fromARGB(255, 200, 216, 145),
-                  Color.fromARGB(255, 187, 240, 214),
-                  Color.fromARGB(255, 122, 236, 198),
-                  Color.fromARGB(255, 113, 184, 150),
-                  Color.fromARGB(255, 107, 213, 111),
-                  Colors.blueGrey,
-                  Colors.grey,
-                  Color.fromARGB(255, 164, 151, 200),
-                  Color.fromARGB(255, 134, 193, 223),
-                  Color.fromARGB(255, 201, 112, 112),
-                  Color.fromARGB(255, 250, 142, 99),
-                  Color.fromARGB(255, 217, 130, 217),
-                  Color.fromARGB(255, 224, 153, 181),
-                  Color.fromARGB(255, 111, 98, 98),
-                  Color.fromARGB(255, 108, 107, 99),
-                  Color.fromARGB(255, 140, 113, 80),
-                  Color.fromARGB(255, 97, 96, 108),
-                ],
-                // enableAlpha: true,
-
-                // pickerAreaHeightPercent: 0.8,
-              ),
-            ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text(
-                  'OK',
-                ),
-              ),
-            ],
-          );
-        },
-      );
-    }
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: selectedColor,
@@ -181,7 +113,7 @@ class _CreatePageState extends State<CreatePage> {
                 widget.changer.selectDate(DateTime.now());
 
                 await DbFunctions().addDiaryEntry(entry).then((value) async {
-                  log("Function completed: $value"); 
+                  log("Function completed: $value");
 
                   var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');
                   final allData = hiveBox.values.toList();
@@ -213,25 +145,23 @@ class _CreatePageState extends State<CreatePage> {
                       initialDate: widget.changer.selectedDate,
                       firstDate: DateTime(2023),
                       lastDate: DateTime.now(),
-                       initialEntryMode: DatePickerEntryMode.calendar,
+                      initialEntryMode: DatePickerEntryMode.calendar,
                       builder: (BuildContext context, Widget? child) {
                         final isDark =
                             Theme.of(context).brightness == Brightness.dark;
                         return Theme(
                           data: isDark
                               ? ThemeData.dark().copyWith(
-                                  primaryColor: const Color(0xFF835DF1),
-                                  colorScheme: const ColorScheme.dark(
-                                      primary: Color(0xFF835DF1)),
-                                  buttonTheme: const ButtonThemeData(
-                                      textTheme: ButtonTextTheme.primary),
+                                  colorScheme: ColorScheme.dark(
+                                    primary: AppColor.darkBuilder.color,
+                                    secondary: AppColor.darkFourth.color,
+                                  ),
                                 )
                               : ThemeData.light().copyWith(
-                                  primaryColor: const Color(0xFF835DF1),
-                                  colorScheme: const ColorScheme.light(
-                                      primary: Color(0xFF835DF1)),
-                                  buttonTheme: const ButtonThemeData(
-                                      textTheme: ButtonTextTheme.primary),
+                                  colorScheme: ColorScheme.light(
+                                    primary: AppColor.primary.color,
+                                    secondary: AppColor.primary.color,
+                                  ),
                                 ),
                           child: child ?? Container(),
                         );
@@ -240,8 +170,6 @@ class _CreatePageState extends State<CreatePage> {
 
                     if (pickedDate != null) {
                       widget.changer.selectDate(pickedDate);
-
-                      // var selectedate = widget.changer.selectedDate;
                     }
                   },
                   child: Row(
@@ -249,13 +177,11 @@ class _CreatePageState extends State<CreatePage> {
                       Consumer<Changer>(
                         builder: (context, changer, child) {
                           return Text(
-                            DateFormat('d MMMM,y').format(changer.selectedDate),
+                            DateFormat('d MMMM,y').format(changer.selectedDate),style: TextStyle( color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
                           );
                         },
                       ),
-                      const Icon(
-                        Ionicons.caret_down_outline,
-                      )
+                    CaretDown(selectedColor: selectedColor,)
                     ],
                   ),
                 ),
@@ -264,12 +190,12 @@ class _CreatePageState extends State<CreatePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: TextField(
               controller: titleController,
-              decoration: const InputDecoration(
+              decoration:  InputDecoration(
                 hintText: ' Title',
-                hintStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
+                hintStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
                 border: InputBorder.none,
               ),
               cursorColor: Colors.green[900],
@@ -292,16 +218,16 @@ class _CreatePageState extends State<CreatePage> {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: TextField(
                 maxLines: null,
                 minLines: null,
                 expands: true,
                 controller: contentController,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: '  Start typing here',
                   hintStyle:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                      TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white ),
                   border: InputBorder.none,
                 ),
                 cursorColor: Colors.red[900],
@@ -321,7 +247,6 @@ class _CreatePageState extends State<CreatePage> {
                 onBackspacePressed: _onBackspacePressed,
                 onEmojiSelected: (Category? category, Emoji? emoji) {
                   if (emoji != null) {
-                    // Handle the selected emoji (e.g., add it to the text field)
                     contentController.text += emoji.emoji;
                   }
                 },
@@ -342,8 +267,6 @@ class _CreatePageState extends State<CreatePage> {
                   iconColor: Colors.grey,
                   iconColorSelected: const Color(0xFF835DF1),
                   backspaceColor: const Color(0xFF835DF1),
-                  // skinToneDialogBgColor: Colors.white,
-                  // skinToneIndicatorColor: Colors.grey,
                   enableSkinTones: true,
                   recentTabBehavior: RecentTabBehavior.RECENT,
                   recentsLimit: 28,
@@ -379,8 +302,29 @@ class _CreatePageState extends State<CreatePage> {
                 switch (index) {
                   case 0:
                     showTimePicker(
-                            context: context, initialTime: TimeOfDay.now())
-                        .then((pickedTime) {
+                      context: context,
+                      initialTime: TimeOfDay.now(),
+                      builder: (BuildContext context, Widget? child) {
+                        final isDark =
+                            Theme.of(context).brightness == Brightness.dark;
+                        return Theme(
+                          data: isDark
+                              ? ThemeData.dark().copyWith(
+                                  colorScheme: ColorScheme.dark(
+                                    primary: AppColor.darkBuilder.color,
+                                    secondary: AppColor.darkFourth.color,
+                                  ),
+                                )
+                              : ThemeData.light().copyWith(
+                                  colorScheme: ColorScheme.light(
+                                    primary: AppColor.primary.color,
+                                    secondary: AppColor.primary.color,
+                                  ),
+                                ),
+                          child: child ?? Container(),
+                        );
+                      },
+                    ).then((pickedTime) {
                       if (pickedTime != null) {
                         String formattedTime = pickedTime.format(context);
                         String existingText = contentController.text;
@@ -406,7 +350,12 @@ class _CreatePageState extends State<CreatePage> {
                     getImage();
                     break;
                   case 3:
-                    showColorPickerDialog();
+                    CreateDiaryScreenFunctions().showColorPickerDialog(
+                        context, selectedColor, (Color color) {
+                      setState(() {
+                        selectedColor = color;
+                      });
+                    });
                     break;
                 }
                 bottomNavigationProvider.setSelectedIndex(index);

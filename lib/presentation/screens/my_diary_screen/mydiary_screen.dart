@@ -1,13 +1,13 @@
 import 'dart:developer';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:diary/domain/models/diary_entry.dart';
-import 'package:diary/presentation/theme/primary_colors.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/application/controllers/hive_operations.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_list_screen.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/presentation/screens/create_screen/create_page.dart';
-import 'package:diary/presentation/screens/my_diary_screen/search.dart';
+import 'package:diary/presentation/screens/my_diary_screen/search_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
 import 'package:diary/presentation/screens/widget/custom_icon.dart';
 import 'package:diary/presentation/util/my_diary_scren_functions.dart';
@@ -21,7 +21,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class MyDiaryScreen extends StatefulWidget {
-  const MyDiaryScreen({Key? key}) : super(key: key);
+  const MyDiaryScreen({super.key});
 
   @override
   State<MyDiaryScreen> createState() => _MyDiaryScreenState();
@@ -191,7 +191,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CreatePage(
+                      builder: (context) => CreateDiaryScreen(
                         changer: changer,
                       ),
                     ),

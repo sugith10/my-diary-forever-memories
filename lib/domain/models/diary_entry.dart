@@ -5,11 +5,11 @@ part 'diary_entry.g.dart';
 @HiveType(typeId: 0)
 class DiaryEntry { 
 
-  @HiveField(0)
+  @HiveField(0)               
   String? id;
 
   @HiveField(1)
-  DateTime date;
+  DateTime date;                                              
 
   @HiveField(2)
   String title;
@@ -18,10 +18,10 @@ class DiaryEntry {
   String content;
 
   @HiveField(4)
-  String? imagePath; 
+  String? imagePath;
 
    @HiveField(5)
-  String? imagePathTwo; 
+  String? imagePathTwo;
 
   @HiveField(6)
   String? imagePathThree; 
