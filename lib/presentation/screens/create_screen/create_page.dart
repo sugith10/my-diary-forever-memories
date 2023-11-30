@@ -131,161 +131,165 @@ class _CreatePageState extends State<CreateDiaryScreen> {
           ],
           elevation: 0,
           bottom: const BottomBorderWidget()),
-      body: Column(
-        children: [
-          SizedBox(height: 2.h),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: Row(
-              children: [
-                TextButton(
-                  onPressed: () async {
-                    final pickedDate = await showDatePicker(
-                      context: context,
-                      initialDate: widget.changer.selectedDate,
-                      firstDate: DateTime(2023),
-                      lastDate: DateTime.now(),
-                      initialEntryMode: DatePickerEntryMode.calendar,
-                      builder: (BuildContext context, Widget? child) {
-                        final isDark =
-                            Theme.of(context).brightness == Brightness.dark;
-                        return Theme(
-                          data: isDark
-                              ? ThemeData.dark().copyWith(
-                                  colorScheme: ColorScheme.dark(
-                                    primary: AppColor.darkBuilder.color,
-                                    secondary: AppColor.darkFourth.color,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 2.h),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+              child: Row(
+                children: [
+                  TextButton(
+                    onPressed: () async {
+                      final pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: widget.changer.selectedDate,
+                        firstDate: DateTime(2023),
+                        lastDate: DateTime.now(),
+                        initialEntryMode: DatePickerEntryMode.calendar,
+                        builder: (BuildContext context, Widget? child) {
+                          final isDark =
+                              Theme.of(context).brightness == Brightness.dark;
+                          return Theme(
+                            data: isDark
+                                ? ThemeData.dark().copyWith(
+                                    colorScheme: ColorScheme.dark(
+                                      primary: AppColor.darkBuilder.color,
+                                      secondary: AppColor.darkFourth.color,
+                                    ),
+                                  )
+                                : ThemeData.light().copyWith(
+                                    colorScheme: ColorScheme.light(
+                                      primary: AppColor.primary.color,
+                                      secondary: AppColor.primary.color,
+                                    ),
                                   ),
-                                )
-                              : ThemeData.light().copyWith(
-                                  colorScheme: ColorScheme.light(
-                                    primary: AppColor.primary.color,
-                                    secondary: AppColor.primary.color,
-                                  ),
-                                ),
-                          child: child ?? Container(),
-                        );
-                      },
-                    );
-
-                    if (pickedDate != null) {
-                      widget.changer.selectDate(pickedDate);
-                    }
-                  },
-                  child: Row(
-                    children: [
-                      Consumer<Changer>(
-                        builder: (context, changer, child) {
-                          return Text(
-                            DateFormat('d MMMM,y').format(changer.selectedDate),style: TextStyle( color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
+                            child: child ?? Container(),
                           );
                         },
-                      ),
-                    CaretDown(selectedColor: selectedColor,)
-                    ],
-                  ),
-                ),
-                const Spacer(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: TextField(
-              controller: titleController,
-              decoration:  InputDecoration(
-                hintText: ' Title',
-                hintStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
-                border: InputBorder.none,
-              ),
-              cursorColor: Colors.green[900],
-              cursorHeight: 28,
-              style: const TextStyle(fontSize: 28),
-              textCapitalization: TextCapitalization.sentences,
-              autofocus: true,
-            ),
-          ),
-          Container(
-            child: _image != null
-                ? ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.file(
-                      _image!,
-                      height: 200,
+                      );
+        
+                      if (pickedDate != null) {
+                        widget.changer.selectDate(pickedDate);
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        Consumer<Changer>(
+                          builder: (context, changer, child) {
+                            return Text(
+                              DateFormat('d MMMM,y').format(changer.selectedDate),style: TextStyle( color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
+                            );
+                          },
+                        ),
+                      CaretDownIcon(selectedColor: selectedColor,)
+                      ],
                     ),
-                  )
-                : Container(),
-          ),
-          Expanded(
-            child: Padding(
+                  ),
+                  const Spacer(),
+                ],
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: TextField(
-                maxLines: null,
-                minLines: null,
-                expands: true,
-                controller: contentController,
-                decoration: InputDecoration(
-                  hintText: '  Start typing here',
-                  hintStyle:
-                      TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white ),
+                controller: titleController,
+                decoration:  InputDecoration(
+                  hintText: ' Title',
+                  hintStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
                   border: InputBorder.none,
                 ),
-                cursorColor: Colors.red[900],
-                cursorHeight: 18,
-                style: const TextStyle(fontSize: 18),
+                cursorColor: Colors.green[900],
+                cursorHeight: 28,
+                style:  TextStyle(fontSize: 28, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white ),
                 textCapitalization: TextCapitalization.sentences,
+                autofocus: true,
+                maxLines: 2,
               ),
             ),
-          ),
-          Offstage(
-            offstage: !_isEmojiKeyboardVisible,
-            child: SizedBox(
-              height: 250,
-              width: double.infinity,
-              child: EmojiPicker(
-                textEditingController: contentController,
-                onBackspacePressed: _onBackspacePressed,
-                onEmojiSelected: (Category? category, Emoji? emoji) {
-                  if (emoji != null) {
-                    contentController.text += emoji.emoji;
-                  }
-                },
-                config: Config(
-                  columns: 8,
-                  emojiSizeMax: 32 *
-                      (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                          ? 1.30
-                          : 1.0),
-                  verticalSpacing: 0,
-                  horizontalSpacing: 0,
-                  gridPadding: EdgeInsets.zero,
-                  initCategory: Category.RECENT,
-                  bgColor: Theme.of(context).brightness == Brightness.light
-                      ? Colors.white
-                      : AppColor.dark.color,
-                  indicatorColor: const Color(0xFF835DF1),
-                  iconColor: Colors.grey,
-                  iconColorSelected: const Color(0xFF835DF1),
-                  backspaceColor: const Color(0xFF835DF1),
-                  enableSkinTones: true,
-                  recentTabBehavior: RecentTabBehavior.RECENT,
-                  recentsLimit: 28,
-                  replaceEmojiOnLimitExceed: false,
-                  noRecents: const Text(
-                    'No Recents',
-                    style: TextStyle(fontSize: 20),
-                    textAlign: TextAlign.center,
+            Container(
+              child: _image != null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.file(
+                        _image!,
+                        height: 200,
+                      ),
+                    )
+                  : Container(),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: TextField(
+                  maxLines: null,
+                  minLines: null,
+                  expands: true,
+                  controller: contentController,
+                  decoration: InputDecoration(
+                    hintText: '  Start typing here',
+                    hintStyle:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white ),
+                    border: InputBorder.none,
                   ),
-                  loadingIndicator: const SizedBox.shrink(),
-                  tabIndicatorAnimDuration: kTabScrollDuration,
-                  categoryIcons: const CategoryIcons(),
-                  buttonMode: ButtonMode.MATERIAL,
-                  checkPlatformCompatibility: true,
+                  cursorColor: Colors.red[900],
+                  cursorHeight: 18,
+                  style: TextStyle(fontSize: 18,  color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
+                  textCapitalization: TextCapitalization.sentences,
                 ),
               ),
             ),
-          )
-        ],
+            Offstage(
+              offstage: !_isEmojiKeyboardVisible,
+              child: SizedBox(
+                height: 250,
+                width: double.infinity,
+                child: EmojiPicker(
+                  textEditingController: contentController,
+                  onBackspacePressed: _onBackspacePressed,
+                  onEmojiSelected: (Category? category, Emoji? emoji) {
+                    if (emoji != null) {
+                      contentController.text += emoji.emoji;
+                    }
+                  },
+                  config: Config(
+                    columns: 8,
+                    emojiSizeMax: 32 *
+                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
+                            ? 1.30
+                            : 1.0),
+                    verticalSpacing: 0,
+                    horizontalSpacing: 0,
+                    gridPadding: EdgeInsets.zero,
+                    initCategory: Category.RECENT,
+                    bgColor: Theme.of(context).brightness == Brightness.light
+                        ? Colors.white
+                        : AppColor.dark.color,
+                    indicatorColor: const Color(0xFF835DF1),
+                    iconColor: Colors.grey,
+                    iconColorSelected: const Color(0xFF835DF1),
+                    backspaceColor: const Color(0xFF835DF1),
+                    enableSkinTones: true,
+                    recentTabBehavior: RecentTabBehavior.RECENT,
+                    recentsLimit: 28,
+                    replaceEmojiOnLimitExceed: false,
+                    noRecents: const Text(
+                      'No Recents',
+                      style: TextStyle(fontSize: 20),
+                      textAlign: TextAlign.center,
+                    ),
+                    loadingIndicator: const SizedBox.shrink(),
+                    tabIndicatorAnimDuration: kTabScrollDuration,
+                    categoryIcons: const CategoryIcons(),
+                    buttonMode: ButtonMode.MATERIAL,
+                    checkPlatformCompatibility: true,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
       bottomNavigationBar: Consumer<CreatePageProvider>(
         builder: (context, bottomNavigationProvider, child) {

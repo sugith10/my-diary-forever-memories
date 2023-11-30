@@ -6,15 +6,13 @@ import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
 import 'package:diary/presentation/screens/widget/save_text_button.dart';
 import 'package:flutter/material.dart';
-
 import 'package:image_picker/image_picker.dart';
-
 import 'package:path_provider/path_provider.dart';
 
 class EditDiaryEntryScreen extends StatefulWidget {
   final DiaryEntry entry;
 
-  const EditDiaryEntryScreen({required this.entry, Key? key}) : super(key: key);
+  const EditDiaryEntryScreen({required this.entry, super.key});
 
   @override
   State<EditDiaryEntryScreen> createState() => _EditDiaryEntryScreenState();
