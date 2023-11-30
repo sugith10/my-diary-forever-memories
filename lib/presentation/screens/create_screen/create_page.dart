@@ -46,6 +46,8 @@ class _CreatePageState extends State<CreateDiaryScreen> {
 
   final TextEditingController contentController = TextEditingController();
 
+ 
+
   bool _isEmojiKeyboardVisible = false;
 
   _onBackspacePressed() {
@@ -130,7 +132,6 @@ class _CreatePageState extends State<CreateDiaryScreen> {
           elevation: 0,
           bottom: const BottomBorderWidget()),
       body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             SizedBox(height: 2.h),
@@ -167,7 +168,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                           );
                         },
                       );
-      
+        
                       if (pickedDate != null) {
                         widget.changer.selectDate(pickedDate);
                       }
@@ -177,19 +178,11 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                         Consumer<Changer>(
                           builder: (context, changer, child) {
                             return Text(
-                              DateFormat('d MMMM,y')
-                                  .format(changer.selectedDate),
-                              style: TextStyle(
-                                  color: CreateDiaryScreenFunctions()
-                                          .isColorBright(selectedColor)
-                                      ? Colors.black
-                                      : Colors.white),
+                              DateFormat('d MMMM,y').format(changer.selectedDate),style: TextStyle( color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
                             );
                           },
                         ),
-                        CaretDownIcon(
-                          selectedColor: selectedColor,
-                        )
+                      CaretDownIcon(selectedColor: selectedColor,)
                       ],
                     ),
                   ),
@@ -201,25 +194,14 @@ class _CreatePageState extends State<CreateDiaryScreen> {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: TextField(
                 controller: titleController,
-                decoration: InputDecoration(
-                  hintText: ' Title',
-                  hintStyle: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w500,
-                      color: CreateDiaryScreenFunctions()
-                              .isColorBright(selectedColor)
-                          ? Colors.black
-                          : Colors.white),
+                decoration:  InputDecoration(
+                  hintText: 'Title',
+                  hintStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
                   border: InputBorder.none,
                 ),
                 cursorColor: Colors.green[900],
                 cursorHeight: 28,
-                style: TextStyle(
-                    fontSize: 28,
-                    color: CreateDiaryScreenFunctions()
-                            .isColorBright(selectedColor)
-                        ? Colors.black
-                        : Colors.white),
+                style:  TextStyle(fontSize: 28, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white ),
                 textCapitalization: TextCapitalization.sentences,
                 autofocus: true,
                 maxLines: 2,
@@ -236,33 +218,26 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                     )
                   : Container(),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-              child: TextField(
-                maxLines: null,
-                minLines: null,
-                
-                controller: contentController,
-                decoration: InputDecoration(
-                  hintText: '  Start typing here',
-                  hintStyle: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: CreateDiaryScreenFunctions()
-                              .isColorBright(selectedColor)
-                          ? Colors.black
-                          : Colors.white),
-                  border: InputBorder.none,
+            Container(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: TextField(
+                  maxLines: null,
+                  minLines: null,
+                  expands: true,
+                  controller: contentController,
+                  decoration: InputDecoration(
+                    hintText: 'Start typing here',
+                    hintStyle:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white ),
+                    border: InputBorder.none,
+                  ),
+                  cursorColor: Colors.red[900],
+                  cursorHeight: 18,
+                  style: TextStyle(fontSize: 18,  color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
+                  textCapitalization: TextCapitalization.sentences,
                 ),
-                cursorColor: Colors.red[900],
-                cursorHeight: 18,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: CreateDiaryScreenFunctions()
-                            .isColorBright(selectedColor)
-                        ? Colors.black
-                        : Colors.white),
-                textCapitalization: TextCapitalization.sentences,
               ),
             ),
             Offstage(
@@ -281,8 +256,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                   config: Config(
                     columns: 8,
                     emojiSizeMax: 32 *
-                        (foundation.defaultTargetPlatform ==
-                                TargetPlatform.iOS
+                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
                             ? 1.30
                             : 1.0),
                     verticalSpacing: 0,

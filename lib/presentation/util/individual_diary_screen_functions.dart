@@ -1,7 +1,12 @@
+import 'dart:io';
 import 'package:diary/application/controllers/hive_operations.dart';
 import 'package:diary/domain/models/diary_entry.dart';
+import 'package:diary/presentation/screens/edit_screen/edit_screen.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
+import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class DiaryDetailPageFunctions {
   void _showDeleteConfirmationDialog(BuildContext context, DiaryEntry entry) {
@@ -57,4 +62,102 @@ class DiaryDetailPageFunctions {
   Color hexToColor(String code){
     return  _hexToColor(code);
   }
+
+ _showOriginalImage(BuildContext context, DiaryEntry entry) {
+    if (entry.imagePath != null) {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            child: Image.file(
+              File(entry.imagePath!),
+              fit: BoxFit.contain,
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  showOriginalImage(BuildContext context, DiaryEntry entry){
+    _showOriginalImage(context, entry);
+  }
+
+  _showMenu(BuildContext context, DiaryEntry entry) {
+  showMenu(
+    color: Theme.of(context).brightness == Brightness.light
+        ? const Color.fromARGB(255, 255, 255, 255)
+        : AppColor.showMenuDark.color,
+    context: context,
+    position: const RelativeRect.fromLTRB(1, 0, 0, 5),
+    items: <PopupMenuEntry>[
+      PopupMenuItem(
+        value: 'Delete',
+        child: Row(
+          children: [
+            const Icon(Icons.delete_outline_rounded),
+            SizedBox(
+              width: 3.w,
+            ),
+            const Text('Delete'),
+          ],
+        ),
+      ),
+      PopupMenuItem(
+        value: 'Edit',
+        child: Row(
+          children: [
+            const Icon(Icons.edit_outlined),
+            SizedBox(
+              width: 3.w,
+            ),
+            const Text('Edit'),
+          ],
+        ),
+      ),
+      PopupMenuItem(
+        value: 'Save',
+        child: Row(
+          children: [
+            const Icon(Icons.bookmark_outline_sharp),
+            SizedBox(
+              width: 3.w,
+            ),
+            const Text('Save'),
+          ],
+        ),
+      ),
+      PopupMenuItem(
+        value: 'Share',
+        child: Row(
+          children: [
+            const Icon(Icons.share_outlined),
+            SizedBox(
+              width: 3.w,
+            ),
+            const Text('Share'),
+          ],
+        ),
+      ),
+    ],
+  ).then((value) {
+    if (value == 'Edit') {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EditDiaryEntryScreen(entry: entry)));
+    } else if (value == 'Delete') {
+      DiaryDetailPageFunctions().showDeleteConfirmationDialog(context, entry);
+      // _showDeleteConfirmationDialog(context, widget.entry);
+    } else if (value == 'Save') {
+      SavedScreenFunctions().displayBottomSheet(context, entry.id!);
+    }
+  });
+}
+
+showingMenu(BuildContext context, DiaryEntry entry){
+   _showMenu(context, entry);
+}
+  
+
 }

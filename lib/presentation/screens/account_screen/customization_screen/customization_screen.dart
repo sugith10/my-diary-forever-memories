@@ -1,11 +1,14 @@
+import 'package:diary/infrastructure/providers/provider_theme.dart';
 import 'package:diary/presentation/screens/account_screen/customization_screen/widget/theme_switch_card.dart';
+import 'package:diary/presentation/screens/account_screen/customization_screen/widget/theme_switch_card_body.dart';
 import 'package:diary/presentation/screens/widget/appbar_with_back_button_only.dart';
 import 'package:diary/presentation/screens/account_screen/widget/info_container.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomizationPage extends StatefulWidget {
-  const CustomizationPage({Key? key}) : super(key: key);
+  const CustomizationPage({super.key});
 
   @override
   _CustomizationPageState createState() => _CustomizationPageState();
@@ -29,35 +32,48 @@ class _CustomizationPageState extends State<CustomizationPage> {
             ThemeSwitchCard(
               child: Row(
                 children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Radio(
                     value: 1,
+                    activeColor:
+                        Theme.of(context).brightness == Brightness.light
+                            ? const Color.fromARGB(255, 9, 9, 9)
+                            : const Color.fromRGBO(255, 255, 255, 1),
                     groupValue: selectedTheme,
                     onChanged: (value) {
-                      setState(() {
-                        selectedTheme = value;
-                      });
+                      setState(
+                        () {
+                          selectedTheme = value;
+                         
+                        },
+                      );
                     },
                   ),
-                  Column(
-                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text('Day'),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(),
-                      )
-                    ],
-                  )
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  const ThemeSwitchCardBody(text: 'Day', color: Color.fromARGB(255, 255, 255, 255)),
+                 
                 ],
               ),
             ),
-            SizedBox(height: 4.h,),
+            SizedBox(
+              height: 4.h,
+            ),
             ThemeSwitchCard(
               child: Row(
                 children: [
-                  const SizedBox(width: 10,),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   Radio(
                     value: 2,
+                    activeColor:
+                        Theme.of(context).brightness == Brightness.light
+                            ? const Color.fromARGB(255, 9, 9, 9)
+                            : const Color.fromRGBO(255, 255, 255, 1),
                     groupValue: selectedTheme,
                     onChanged: (value) {
                       setState(() {
@@ -65,20 +81,15 @@ class _CustomizationPageState extends State<CustomizationPage> {
                       });
                     },
                   ),
-                  const SizedBox(width: 20,),
-                  Column( 
-                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      const Text('Night'),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Container(
-                          height: 50,
-                          color: Colors.amber,
-                        ),
-                      )
-                    ],
-                  )
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  GestureDetector(
+                    onTap: (){
+                       Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                    }
+                    
+                    ,child: const ThemeSwitchCardBody(text: 'Night', color: Color.fromARGB(255, 38, 38, 38),)),
                 ],
               ),
             )

@@ -2,6 +2,7 @@ import 'package:diary/application/notifications/local_notifications.dart';
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/domain/models/profile_details.dart';
 import 'package:diary/domain/models/savedlist_db_model.dart';
+import 'package:diary/infrastructure/providers/provider_theme.dart';
 import 'package:diary/presentation/theme/app_theme.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/infrastructure/providers/provider_mainscreen.dart';
@@ -44,6 +45,8 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
+          create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(
           create: (context) => CreatePageProvider(),
         ),
         ChangeNotifierProvider(
@@ -68,8 +71,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-        theme: AppTheme(). lightMode,
-        darkTheme:AppTheme(). darkMode,
+        theme: Provider.of<ThemeProvider>(context).themeData,
         debugShowCheckedModeBanner: false,
         // home: Splash(),
          home: MainScreen(),

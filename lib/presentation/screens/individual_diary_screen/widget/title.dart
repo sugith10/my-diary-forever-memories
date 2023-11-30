@@ -1,10 +1,12 @@
-import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/util/create_page_screen_functions.dart';
+import 'package:diary/presentation/util/individual_diary_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class DiaryTitle extends StatelessWidget {
   final String title;
-  const DiaryTitle({super.key, required this.title});
+  final String backgroundColor;
+  const DiaryTitle({super.key, required this.title,required this.backgroundColor});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +15,7 @@ class DiaryTitle extends StatelessWidget {
       style: TextStyle(
         fontSize: 20.sp,
         fontWeight: FontWeight.w700,
-        color: Theme.of(context).brightness == Brightness.light 
-            ? AppColor.dark.color
-            : Colors.white,
+        color:CreateDiaryScreenFunctions().isColorBright(DiaryDetailPageFunctions().hexToColor(backgroundColor)) ? Colors.black : Colors.white ,
       ),
       // overflow: TextOverflow.ellipsis,
     );
