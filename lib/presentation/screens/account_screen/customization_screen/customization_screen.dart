@@ -3,6 +3,7 @@ import 'package:diary/presentation/screens/account_screen/customization_screen/w
 import 'package:diary/presentation/screens/account_screen/customization_screen/widget/theme_switch_card_body.dart';
 import 'package:diary/presentation/screens/widget/appbar_with_back_button_only.dart';
 import 'package:diary/presentation/screens/account_screen/widget/info_container.dart';
+import 'package:diary/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -46,7 +47,8 @@ class _CustomizationPageState extends State<CustomizationPage> {
                       setState(
                         () {
                           selectedTheme = value;
-                         
+                       Provider.of<ThemeNotifier>(context, listen: false).switchLight();
+                          print('white');
                         },
                       );
                     },
@@ -54,8 +56,8 @@ class _CustomizationPageState extends State<CustomizationPage> {
                   const SizedBox(
                     width: 20,
                   ),
-                  const ThemeSwitchCardBody(text: 'Day', color: Color.fromARGB(255, 255, 255, 255)),
-                 
+                  const ThemeSwitchCardBody(
+                      text: 'Day', color: Color.fromARGB(255, 255, 255, 255)),
                 ],
               ),
             ),
@@ -78,18 +80,18 @@ class _CustomizationPageState extends State<CustomizationPage> {
                     onChanged: (value) {
                       setState(() {
                         selectedTheme = value;
+                         Provider.of<ThemeNotifier>(context, listen: false).switchDark();
+                        print('dark');
                       });
                     },
                   ),
                   const SizedBox(
                     width: 20,
                   ),
-                  GestureDetector(
-                    onTap: (){
-                       Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-                    }
-                    
-                    ,child: const ThemeSwitchCardBody(text: 'Night', color: Color.fromARGB(255, 38, 38, 38),)),
+                  const ThemeSwitchCardBody(
+                    text: 'Night',
+                    color: Color.fromARGB(255, 38, 38, 38),
+                  ),
                 ],
               ),
             )

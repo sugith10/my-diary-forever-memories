@@ -1,23 +1,23 @@
-import 'package:diary/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class ThemeProvider with  ChangeNotifier{
-  ThemeData _themeData =  AppTheme(). lightMode;
+class ThemeNotifier extends  ChangeNotifier {
+  bool _isDarkMode = false;
 
-  ThemeData get themeData => _themeData;
+  bool get isDarkMode => _isDarkMode;
 
-  set themeData(ThemeData themeData){
-    _themeData = themeData;
-    notifyListeners();
-  }
-
-  void toggleTheme(){
-    if(_themeData == AppTheme().lightMode){
-      themeData = AppTheme().darkMode;
-    }else{
-      themeData = AppTheme().lightMode;
+  void switchLight(){
+    if(_isDarkMode != false){
+       _isDarkMode = false;
+        notifyListeners();
     }
   }
-  
- 
+
+  void switchDark(){
+     if(_isDarkMode != true){
+     _isDarkMode = true;
+      notifyListeners();
+    }
+   
+  }
+
 }

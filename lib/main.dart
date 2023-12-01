@@ -1,4 +1,3 @@
-import 'package:diary/application/notifications/local_notifications.dart';
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/domain/models/profile_details.dart';
 import 'package:diary/domain/models/savedlist_db_model.dart';
@@ -45,7 +44,8 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => ThemeProvider()),
+          create: (context) => ThemeNotifier(),
+        ),
         ChangeNotifierProvider(
           create: (context) => CreatePageProvider(),
         ),
@@ -71,7 +71,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-        theme: Provider.of<ThemeProvider>(context).themeData,
+        theme: AppTheme(). lightMode,
+        darkTheme:AppTheme(). darkMode,
+        themeMode:Provider.of<ThemeNotifier>(context).isDarkMode
+            ? ThemeMode.dark
+            : ThemeMode.light,
         debugShowCheckedModeBanner: false,
         // home: Splash(),
          home: MainScreen(),
