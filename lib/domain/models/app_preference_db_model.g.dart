@@ -18,7 +18,7 @@ class AppPreferenceAdapter extends TypeAdapter<AppPreference> {
     };
     return AppPreference(
       id: fields[0] as String?,
-      isDark: fields[1] as bool,
+      isDark: fields[1] as bool?,
     );
   }
 

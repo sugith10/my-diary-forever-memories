@@ -8,7 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../application/controllers/hive_profile_operations.dart';
+import '../../../../application/controllers/hive_profile_details_db_ops.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);

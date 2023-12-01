@@ -1,3 +1,4 @@
+import 'package:diary/domain/models/app_preference_db_model.dart';
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/domain/models/profile_details.dart';
 import 'package:diary/domain/models/savedlist_db_model.dart';
@@ -38,6 +39,11 @@ Future<void> main() async {
     Hive.registerAdapter(SavedListAdapter());
   }
   await Hive.openBox<SavedList>('_savedListBoxName');      
+
+  if (!Hive.isAdapterRegistered(AppPreferenceAdapter().typeId)) {
+    Hive.registerAdapter(AppPreferenceAdapter());
+  }
+  await Hive.openBox<AppPreference>('appPreferenceBox');      
 
 
   runApp(

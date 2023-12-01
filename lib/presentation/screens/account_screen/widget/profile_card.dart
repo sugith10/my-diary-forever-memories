@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/application/controllers/hive_profile_operations.dart';
+import 'package:diary/application/controllers/hive_profile_details_db_ops.dart';
 import 'package:diary/domain/models/profile_details.dart';
 import 'package:diary/presentation/screens/account_screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +17,7 @@ class ProfileCard extends StatelessWidget {
       width: 100.w,
       child: Center(
         child: GestureDetector(
-          onDoubleTap: () {
+          onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => const ProfilePage()));
           },
@@ -33,7 +33,9 @@ class ProfileCard extends StatelessWidget {
                 ),
               ],
               borderRadius: BorderRadius.circular(10),
-              color:  Theme.of(context).brightness == Brightness.light? Colors.white : const Color.fromARGB(255, 25, 25, 25) ,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.white
+                  : const Color.fromARGB(255, 25, 25, 25),
             ),
             child: ValueListenableBuilder(
                 valueListenable:
@@ -66,8 +68,13 @@ class ProfileCard extends StatelessWidget {
                             ),
                             Text(
                               profileDetails.email,
-                              style:  TextStyle(
-                                  color:  Theme.of(context).brightness == Brightness.light ? Colors.black26 : Colors.white60, fontSize: 15,),
+                              style: TextStyle(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.black26
+                                    : Colors.white60,
+                                fontSize: 15,
+                              ),
                             ),
                           ],
                         ),
@@ -98,8 +105,11 @@ class ProfileCard extends StatelessWidget {
                                 BoxShadow(
                                   spreadRadius: 2,
                                   blurRadius: 10,
-                                  color:  Theme.of(context).brightness == Brightness.light
-          ?  Colors.black.withOpacity(0.1):  const Color.fromARGB(255, 255, 255, 255).withOpacity(0.1),
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? Colors.black.withOpacity(0.1)
+                                      : const Color.fromARGB(255, 255, 255, 255)
+                                          .withOpacity(0.1),
                                 ),
                               ],
                             )),

@@ -10,6 +10,7 @@ final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
 class DbFunctions {
   List<DiaryEntry> diaryEntryNotifier = [];
   final box = Hive.box<DiaryEntry>('_boxName');
+  
   Future addDiaryEntry(DiaryEntry entry) async {
     final box = Hive.box<DiaryEntry>('_boxName');
     await box.put(entry.id, entry);

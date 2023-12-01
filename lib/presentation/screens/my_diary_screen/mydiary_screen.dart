@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/presentation/theme/app_color.dart';
-import 'package:diary/application/controllers/hive_operations.dart';
+import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_list_screen.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';

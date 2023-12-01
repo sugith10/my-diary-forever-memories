@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/application/controllers/hive_operations.dart';
+import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
@@ -99,7 +99,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                 // height: 200,
                 child: _image != null
                     ? Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: InkWell(
                           onTap: () {
                             getImage();

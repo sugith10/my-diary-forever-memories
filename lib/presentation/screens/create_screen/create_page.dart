@@ -1,9 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:diary/domain/models/diary_entry.dart';
 import 'package:diary/presentation/screens/create_screen/widget/down_icon.dart';
 import 'package:diary/presentation/theme/app_color.dart';
-import 'package:diary/application/controllers/hive_operations.dart';
+import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/infrastructure/providers/provider_create.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
@@ -20,6 +21,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' as foundation;
 import 'package:sizer/sizer.dart';
+import 'package:image/image.dart' as img;
+
 
 class CreateDiaryScreen extends StatefulWidget {
   final Changer changer;
@@ -45,8 +48,6 @@ class _CreatePageState extends State<CreateDiaryScreen> {
   final TextEditingController titleController = TextEditingController();
 
   final TextEditingController contentController = TextEditingController();
-
- 
 
   bool _isEmojiKeyboardVisible = false;
 
@@ -75,8 +76,21 @@ class _CreatePageState extends State<CreateDiaryScreen> {
       final appDocDir = await getApplicationDocumentsDirectory();
       final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
       final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
-      await image.copy(imagePath);
+// Read and decode the original image
+      final bytes = image.readAsBytesSync();
+      final originalImage = img.decodeImage(Uint8List.fromList(bytes));
+
+      // Resize the image if its height is more than 300 pixels
+      if (originalImage != null && originalImage.height > 800) {
+        final resizedImage = img.copyResize(originalImage, height: 800);
+        File(imagePath).writeAsBytesSync(img.encodeJpg(resizedImage));
+      } else {
+        // Save the original image if its height is not more than 300 pixels
+        image.copy(imagePath);
+      }
+
       return imagePath;
+   
     } catch (e) {
       log("Error saving image: $e");
       return null;
@@ -168,7 +182,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                           );
                         },
                       );
-        
+
                       if (pickedDate != null) {
                         widget.changer.selectDate(pickedDate);
                       }
@@ -178,11 +192,19 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                         Consumer<Changer>(
                           builder: (context, changer, child) {
                             return Text(
-                              DateFormat('d MMMM,y').format(changer.selectedDate),style: TextStyle( color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
+                              DateFormat('d MMMM,y')
+                                  .format(changer.selectedDate),
+                              style: TextStyle(
+                                  color: CreateDiaryScreenFunctions()
+                                          .isColorBright(selectedColor)
+                                      ? Colors.black
+                                      : Colors.white),
                             );
                           },
                         ),
-                      CaretDownIcon(selectedColor: selectedColor,)
+                        CaretDownIcon(
+                          selectedColor: selectedColor,
+                        )
                       ],
                     ),
                   ),
@@ -194,26 +216,40 @@ class _CreatePageState extends State<CreateDiaryScreen> {
               padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: TextField(
                 controller: titleController,
-                decoration:  InputDecoration(
+                decoration: InputDecoration(
                   hintText: 'Title',
-                  hintStyle: TextStyle(fontSize: 28, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
+                  hintStyle: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w500,
+                      color: CreateDiaryScreenFunctions()
+                              .isColorBright(selectedColor)
+                          ? Colors.black
+                          : Colors.white),
                   border: InputBorder.none,
                 ),
                 cursorColor: Colors.green[900],
                 cursorHeight: 28,
-                style:  TextStyle(fontSize: 28, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white ),
+                style: TextStyle(
+                    fontSize: 28,
+                    color: CreateDiaryScreenFunctions()
+                            .isColorBright(selectedColor)
+                        ? Colors.black
+                        : Colors.white),
                 textCapitalization: TextCapitalization.sentences,
                 autofocus: true,
                 maxLines: 2,
               ),
             ),
-            Container(
+            SizedBox(
               child: _image != null
-                  ? ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.file(
-                        _image!,
-                        height: 200,
+                  ? Padding(
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.file(
+                          _image!,
+                          height: 300,
+                        ),
                       ),
                     )
                   : Container(),
@@ -229,13 +265,23 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                   controller: contentController,
                   decoration: InputDecoration(
                     hintText: 'Start typing here',
-                    hintStyle:
-                        TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white ),
+                    hintStyle: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: CreateDiaryScreenFunctions()
+                                .isColorBright(selectedColor)
+                            ? Colors.black
+                            : Colors.white),
                     border: InputBorder.none,
                   ),
                   cursorColor: Colors.red[900],
                   cursorHeight: 18,
-                  style: TextStyle(fontSize: 18,  color: CreateDiaryScreenFunctions().isColorBright(selectedColor) ? Colors.black : Colors.white),
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: CreateDiaryScreenFunctions()
+                              .isColorBright(selectedColor)
+                          ? Colors.black
+                          : Colors.white),
                   textCapitalization: TextCapitalization.sentences,
                 ),
               ),

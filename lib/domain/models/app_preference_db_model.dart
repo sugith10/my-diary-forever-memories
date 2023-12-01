@@ -7,9 +7,9 @@ class AppPreference{
   final String? id;
 
   @HiveField(1)
-  final bool isDark;
+  final bool? isDark;
 
   AppPreference({
-    this.id, required this.isDark
+    this.id, this.isDark
   });
 }
