@@ -1,5 +1,5 @@
 import 'package:diary/core/models/savedlist_db_model.dart';
-import 'package:diary/presentation/screens/saved_list_screen/saved_item_screen.dart';
+import 'package:diary/presentation/screens/saved_list_screen/saved_item_screen/saved_item_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';

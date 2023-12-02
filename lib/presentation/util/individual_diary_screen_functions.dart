@@ -14,6 +14,9 @@ class DiaryDetailPageFunctions {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+           backgroundColor: Theme.of(context).brightness == Brightness.light
+              ? AppColor.light.color
+              : AppColor.showMenuDark.color,
           title: const Text(
             'Delete Confirmation',
             style: TextStyle(

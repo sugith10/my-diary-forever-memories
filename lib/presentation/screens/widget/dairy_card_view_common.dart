@@ -14,11 +14,11 @@ class DiaryCardView extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.light
             ? Colors.white
-            : Colors.transparent,
+            : const Color.fromARGB(255, 9, 9, 9),
         borderRadius: BorderRadius.circular(12.0),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Theme.of(context).brightness == Brightness.light ?Colors.grey.withOpacity(0.1) : Colors.transparent,
             spreadRadius: 2,
             blurRadius: 5,
             offset: const Offset(0, 3),

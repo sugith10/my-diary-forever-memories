@@ -1,5 +1,5 @@
-
 import 'package:diary/presentation/screens/login_signin_screen/welcome_screen.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -27,9 +27,9 @@ class ProfileScreenFunctions {
     }
   }
 
-   Future<void> _launchPrivacyPolicy() async {
-
-    final Uri url = Uri.parse('https://www.freeprivacypolicy.com/live/7a362b50-908e-4f46-ba36-617bab644ff9');
+  Future<void> _launchPrivacyPolicy() async {
+    final Uri url = Uri.parse(
+        'https://www.freeprivacypolicy.com/live/7a362b50-908e-4f46-ba36-617bab644ff9');
 
     try {
       await launchUrl(url);
@@ -54,35 +54,52 @@ class ProfileScreenFunctions {
     }
   }
 
-   void _showPopupDialog(BuildContext context) {
+  void _showPopupDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(
-            'Logout Confirmation',
-            style: TextStyle(
-              fontSize: 16.sp,
+          backgroundColor: Theme.of(context).brightness == Brightness.light
+              ? AppColor.showMenuLight.color
+              : AppColor.showMenuDark.color,
+          title: Center(
+            child: Text(
+              'Logout Confirmation',
+              style: TextStyle(
+                fontSize: 20.sp,
+              ),
             ),
           ),
-          content:  Text(
-            'Are you sure you want to log out?',
-            style: TextStyle(fontSize: 9.sp),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Are you sure you want to log out?',
+                style: TextStyle(fontSize: 13.sp),
+              ),
+            ],
           ),
           actions: [
-            TextButton(
-              child:
-                  const Text('Cancel' ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Logout', style: TextStyle(color: Colors.red)),
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const WelcomePage()));
-              },
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child:
+                      const Text('Logout', style: TextStyle(color: Colors.red)),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WelcomePage()));
+                  },
+                ),
+              ],
             ),
           ],
         );
@@ -99,11 +116,11 @@ class ProfileScreenFunctions {
     await _launchPrivacyPolicy();
   }
 
-  String getGreeting(){
+  String getGreeting() {
     return _getGreeting();
   }
 
-  void showPopupDialog(BuildContext context){
+  void showPopupDialog(BuildContext context) {
     _showPopupDialog(context);
   }
 }

@@ -24,7 +24,7 @@ extension AppColorExtension on AppColor {
       case AppColor.darkBuilder:
         return const  Color.fromARGB(255, 186, 186, 186);
       case AppColor.darkFourth:
-        return Color.fromRGBO(186, 186, 186, 1);
+        return const Color.fromRGBO(186, 186, 186, 1);
       case AppColor.primary:
         return const Color(0xFF835DF1); 
       case AppColor.secondary:

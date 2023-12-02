@@ -172,8 +172,11 @@ class CalendarScreen extends StatelessWidget {
                                 ),
                               );
                             },
-                            child: DiaryCardView(
-                              entry: selectedEntries[index],
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: DiaryCardView(
+                                entry: selectedEntries[index],
+                              ),
                             ));
                       },
                     );

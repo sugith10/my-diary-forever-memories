@@ -2,6 +2,7 @@ import 'package:diary/application/controllers/hive_savedlist_db_ops.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:sizer/sizer.dart';
@@ -63,7 +64,7 @@ class SavedScreenFunctions {
     );
   }
 
-   showCreateListDialog(BuildContext context) {
+  showCreateListDialog(BuildContext context) {
     _showCreateListDialog(context);
   }
 
@@ -74,9 +75,7 @@ class SavedScreenFunctions {
         borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
       ),
       builder: (context) => Container(
-        color: Theme.of(context).brightness == Brightness.light
-            ? AppColor.light.color
-            : AppColor.showMenuDark.color,
+        color: GetColors().getAlertBoxColor(context),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -89,7 +88,7 @@ class SavedScreenFunctions {
                   borderRadius: BorderRadius.circular(10),
                   color: Theme.of(context).brightness == Brightness.light
                       ? AppColor.dark.color
-                      : Colors.white, 
+                      : Colors.white,
                 ),
               ),
             ),
@@ -118,54 +117,61 @@ class SavedScreenFunctions {
                   Hive.box<SavedList>('_savedListBoxName').listenable(),
               builder: (context, box, child) {
                 List<SavedList> savedList = box.values.toList();
-                if(savedList.isNotEmpty){
-                   return ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: savedList.length,
-                  itemBuilder: (context, index) {
-                    String listName = savedList[index].listName;
-                    String listId = savedList[index].id;
-                    // Check if the diary entry is in the current SavedList
-                    bool isChecked = SavedListDbFunctions()
-                        .isDiaryEntryInSavedList(listId, entryId);
-                    return InkWell(
-                      onTap: () {
-                        print(listId);
-                        print(entryId);
+                if (savedList.isNotEmpty) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: savedList.length,
+                    itemBuilder: (context, index) {
+                      String listName = savedList[index].listName;
+                      String listId = savedList[index].id;
+                      // Check if the diary entry is in the current SavedList
+                      bool isChecked = SavedListDbFunctions()
+                          .isDiaryEntryInSavedList(listId, entryId);
+                      return InkWell(
+                        onTap: () {
+                          print(listId);
+                          print(entryId);
 
-                        isChecked == false ?  SavedListDbFunctions()
-                            .addMapToDiaryEntryIds(listId, entryId) : SavedListDbFunctions().deleteDiaryEntry(listId, entryId);
+                          isChecked == false
+                              ? SavedListDbFunctions()
+                                  .addMapToDiaryEntryIds(listId, entryId)
+                              : SavedListDbFunctions()
+                                  .deleteDiaryEntry(listId, entryId);
 
-                       
-                        // Navigator.pop(context);
-                      },
-                      child: Row(
-                        children: [
-                          Row(
-                            children: [
-                              Checkbox(
-                                value: isChecked,
-                                onChanged: (bool? newValue) {},
-                                activeColor: isChecked ? Colors.green : Colors.red ,
-                              ),
-                              Text(
-                                listName,
-                                style: TextStyle(fontSize: 16.5.sp),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-                }else{
+                          // Navigator.pop(context);
+                        },
+                        child: Row(
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: isChecked,
+                                  onChanged: (bool? newValue) {},
+                                  activeColor:
+                                      isChecked ? Colors.green : Colors.red,
+                                ),
+                                Text(
+                                  listName,
+                                  style: TextStyle(fontSize: 16.5.sp),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                } else {
                   return const SizedBox(
                     height: 100,
-                    child: Center(child: Text('Create a list', style: TextStyle(fontSize: 20),),),
+                    child: Center(
+                      child: Text(
+                        'Create a list',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
                   );
                 }
-               
               },
             ),
             const Divider(
@@ -207,7 +213,9 @@ class SavedScreenFunctions {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          
+            backgroundColor: Theme.of(context).brightness == Brightness.light
+              ? AppColor.light.color
+              : AppColor.showMenuDark.color,
           title: const Text(
             'Delete Confirmation',
             style: TextStyle(
@@ -220,8 +228,7 @@ class SavedScreenFunctions {
           ),
           actions: [
             TextButton(
-              child:
-                  const Text('Cancel'),
+              child: const Text('Cancel'),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -236,7 +243,7 @@ class SavedScreenFunctions {
                   MaterialPageRoute(builder: (context) => MainScreen()),
                   ModalRoute.withName('/main'),
                 );
-                            },
+              },
             ),
           ],
         );
@@ -244,11 +251,7 @@ class SavedScreenFunctions {
     );
   }
 
-   showDeleteConfirmationDialog(BuildContext context,  SavedList savedList){
-
+  showDeleteConfirmationDialog(BuildContext context, SavedList savedList) {
     _showDeleteConfirmationDialog(context, savedList);
-
   }
-
-
 }
