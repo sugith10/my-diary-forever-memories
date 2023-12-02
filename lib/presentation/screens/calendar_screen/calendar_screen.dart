@@ -135,6 +135,12 @@ class CalendarScreen extends StatelessWidget {
                         color: Color.fromARGB(255, 255, 255, 255)),
                     weekendTextStyle: const TextStyle(color: Colors.red),
                   ),
+                  eventLoader: (day) {
+                    final hasDiaryEntry = Hive.box<DiaryEntry>('_boxName')
+                        .values
+                        .any((entry) => isSameDay(entry.date, day));
+                    return hasDiaryEntry ? [day] : [];
+                  },
                 ),
               ),
             ),
