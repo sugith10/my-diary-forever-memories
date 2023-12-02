@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:diary/presentation/screens/login_signin_screen/login_screen.dart';
 import 'package:diary/presentation/screens/login_signin_screen/signin_screen.dart';
 import 'package:diary/presentation/screens/login_signin_screen/widget/navigation_elevated_button.dart';
+import 'package:diary/presentation/util/get_colors.dart';
 
 import 'package:flutter/material.dart';
 
@@ -14,8 +15,6 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Container(
-        color: Colors.white,
         child: Column(
           children: [
             FadeInDown(
@@ -25,17 +24,22 @@ class WelcomePage extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 2.w, vertical: 1.h),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'images/first-img.png',
+                  child: Theme.of(context).brightness == Brightness.light ? Image.asset(
+                    'assets/images/forever_memories_logo/forever_memories_logo_black.png',
                     width: 100.w,
                     height: 50.h,
                     fit: BoxFit.cover,
-                  ),
+                  ) : Image.asset(
+                    'assets/images/forever_memories_logo/forever_memories_logo_white.png',
+                    width: 100.w,
+                    height: 50.h,
+                    fit: BoxFit.cover,
+                  ) ,
                 ),
               ),
             ),
             Container(
-              decoration: const BoxDecoration(color: Colors.white),
+             
               padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 2.h),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -54,10 +58,10 @@ class WelcomePage extends StatelessWidget {
                                 'Forever Memories',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 28.sp,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: "Satoshi"
-                                ),
+                                    color: GetColors().getFontColor(context),
+                                    fontSize: 28.sp,
+                                    fontWeight: FontWeight.w600,
+                                    fontFamily: "Satoshi"),
                               ),
                             ),
                           ),
@@ -71,9 +75,10 @@ class WelcomePage extends StatelessWidget {
                               'In the book of your heart, every chapter is a memory to rember forever.',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontSize: 18.sp,
-                                  fontWeight: FontWeight.w400,
-                                  color: const Color.fromARGB(244, 44, 44, 44)),
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                                color: GetColors().getFontColor (context),
+                              ),
                             ),
                           ),
                         ]),
@@ -139,7 +144,7 @@ class WelcomePage extends StatelessWidget {
             )
           ],
         ),
-      )),
+      ),
     );
   }
 }

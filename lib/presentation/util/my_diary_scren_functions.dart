@@ -1,3 +1,5 @@
+import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/presentation/screens/my_diary_screen/widget/diary_card_view.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -52,4 +54,32 @@ class MyDiaryScreenFunctions {
   Future<void> handleDateRangePick(BuildContext context) async {
     return _handleDateRangePick(context);
   }
+
+  Widget _buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            date,
+            style: const TextStyle(
+              // fontWeight: FontWeight.normal,
+              fontSize: 15.0,
+            ),
+          ),
+        ),
+        Column(
+          children: entries.map((entry) {
+            return DiaryEntryCard(entry, entries.indexOf(entry),
+                key: ValueKey(entry.id));
+          }).toList(),
+        ),
+      ],
+    );
+  }
+
+   Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date){
+    return  _buildGroupedDiaryEntries(entries, date);
+   }
 }

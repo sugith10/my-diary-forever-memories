@@ -7,9 +7,12 @@ class AppPreference{
   final String? id;
 
   @HiveField(1)
+  final bool? showOnboarding;
+
+  @HiveField(2)
   final bool? isDark;
 
   AppPreference({
-    this.id, this.isDark
+    this.id,  this.showOnboarding, this.isDark,
   });
 }

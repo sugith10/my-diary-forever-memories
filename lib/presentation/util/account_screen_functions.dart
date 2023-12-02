@@ -1,5 +1,6 @@
 import 'package:diary/presentation/screens/login_signin_screen/welcome_screen.dart';
 import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -59,9 +60,7 @@ class ProfileScreenFunctions {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? AppColor.showMenuLight.color
-              : AppColor.showMenuDark.color,
+          backgroundColor: GetColors().getAlertBoxColor(context) ,
           title: Center(
             child: Text(
               'Logout Confirmation',
@@ -94,9 +93,11 @@ class ProfileScreenFunctions {
                       const Text('Logout', style: TextStyle(color: Colors.red)),
                   onPressed: () {
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const WelcomePage()));
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const WelcomePage(),
+                      ),
+                    );
                   },
                 ),
               ],

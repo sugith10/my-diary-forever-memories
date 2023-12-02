@@ -10,7 +10,7 @@ import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/infrastructure/providers/provider_create.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
-import 'package:diary/presentation/util/create_page_screen_functions.dart';
+import 'package:diary/presentation/util/create_screen_functions.dart';
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

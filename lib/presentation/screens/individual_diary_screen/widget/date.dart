@@ -1,4 +1,4 @@
-import 'package:diary/presentation/util/create_page_screen_functions.dart';
+import 'package:diary/presentation/util/create_screen_functions.dart';
 import 'package:diary/presentation/util/individual_diary_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

@@ -1,3 +1,4 @@
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
 
@@ -6,10 +7,10 @@ class NavigationElevatedButton extends StatelessWidget {
   final String buttonText;
 
   const NavigationElevatedButton({
-    Key? key,
+    super.key,
     required this.onPressed,
     required this.buttonText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class NavigationElevatedButton extends StatelessWidget {
           fontWeight: FontWeight.w500,
           fontFamily: 'Satoshi',
         ),
-        backgroundColor: const Color(0xFF835DF1),
+        backgroundColor: AppColor.primary.color ,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -31,7 +32,7 @@ class NavigationElevatedButton extends StatelessWidget {
       child: FadeInUp(
         delay: const Duration(milliseconds: 700),
         duration: const Duration(milliseconds: 800),
-        child: Text(buttonText),
+        child: Text(buttonText, style: const TextStyle(color: Colors.white),),
       ),
     );
   }

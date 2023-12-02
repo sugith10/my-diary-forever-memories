@@ -3,6 +3,8 @@ import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/core/models/profile_details.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/infrastructure/providers/provider_theme.dart';
+import 'package:diary/presentation/screens/splash_screen/onboarding.dart';
+import 'package:diary/presentation/screens/splash_screen/splash.dart';
 import 'package:diary/presentation/theme/app_theme.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/infrastructure/providers/provider_mainscreen.dart';
@@ -21,7 +23,7 @@ Future<void> main() async {
 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
 
   await Hive.initFlutter();
 
@@ -38,13 +40,12 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(SavedListAdapter().typeId)) {
     Hive.registerAdapter(SavedListAdapter());
   }
-  await Hive.openBox<SavedList>('_savedListBoxName');      
+  await Hive.openBox<SavedList>('_savedListBoxName');
 
   if (!Hive.isAdapterRegistered(AppPreferenceAdapter().typeId)) {
     Hive.registerAdapter(AppPreferenceAdapter());
   }
-  await Hive.openBox<AppPreference>('appPreferenceBox');      
-
+  await Hive.openBox<AppPreference>('appPreferenceBox');
 
   runApp(
     MultiProvider(
@@ -65,32 +66,33 @@ Future<void> main() async {
           create: (context) => MainScreenProvider(),
         ),
       ],
-      child:  const MyApp(),
+      child: const MyApp(),
     ),
   );
 }
- 
+
 class MyApp extends StatelessWidget {
-   const MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
-        theme: AppTheme(). lightMode,
-        darkTheme:AppTheme(). darkMode,
-        themeMode:Provider.of<ThemeNotifier>(context).isDarkMode
+        theme: AppTheme().lightMode,
+        darkTheme: AppTheme().darkMode,
+        themeMode: Provider.of<ThemeNotifier>(context).isDarkMode
             ? ThemeMode.dark
             : ThemeMode.light,
         debugShowCheckedModeBanner: false,
         // home: Splash(),
-         home: MainScreen(),
-        // initialRoute: '/splash',
-        // routes: {
-        //   '/splash': (context) => const Splash(),
-         
-        //   '/main': (context) => MainScreen(),
-        // },
+        //  home: MainScreen(),
+        initialRoute: '/splash',
+        routes: {
+          '/splash': (context) => const Splash(),
+          '/onboarding': (context) => Onbording(
+                onboardingState: Provider.of<OnboardingState>(context),
+              ),
+        },
       ),
     );
   }

@@ -1,7 +1,5 @@
-import 'package:diary/infrastructure/providers/provider_theme.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AppTheme {
   final ThemeData lightMode = ThemeData(
@@ -18,7 +16,7 @@ class AppTheme {
       headlineMedium: TextStyle(color: AppColor.dark.color),
       headlineSmall: TextStyle(color: AppColor.dark.color),
       titleLarge: TextStyle(color: AppColor.dark.color),
-    ), 
+    ),
     appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         toolbarTextStyle: TextStyle(color: AppColor.dark.color),
@@ -51,7 +49,7 @@ class AppTheme {
       background: AppColor.dark.color,
       secondary: AppColor.dark.color,
     ),
-     fontFamily: 'SFPRO',
+    fontFamily: 'SFPRO',
     scaffoldBackgroundColor: AppColor.dark.color,
     appBarTheme: AppBarTheme(backgroundColor: AppColor.dark.color),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -67,6 +65,4 @@ class AppTheme {
       ),
     ),
   );
-
-  
 }

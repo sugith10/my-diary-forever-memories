@@ -18,17 +18,20 @@ class AppPreferenceAdapter extends TypeAdapter<AppPreference> {
     };
     return AppPreference(
       id: fields[0] as String?,
-      isDark: fields[1] as bool?,
+      showOnboarding: fields[1] as bool?,
+      isDark: fields[2] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, AppPreference obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(3)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
+      ..write(obj.showOnboarding)
+      ..writeByte(2)
       ..write(obj.isDark);
   }
 

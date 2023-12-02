@@ -1,8 +1,10 @@
 import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
+import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
 import 'package:diary/presentation/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
+import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:diary/presentation/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -25,8 +27,7 @@ class _SavedItemsState extends State<SavedItems> {
   }
 
   List<DiaryEntry> getDiaryEntries(List<String> diaryEntryIds) {
-    final diaryEntryBox =
-        Hive.box<DiaryEntry>('_boxName'); 
+    final diaryEntryBox = Hive.box<DiaryEntry>('_boxName');
     return diaryEntryIds
         .map((entryId) => diaryEntryBox.get(entryId))
         .where((entry) => entry != null)
@@ -42,7 +43,8 @@ class _SavedItemsState extends State<SavedItems> {
         actions: [
           IconButton(
             onPressed: () {
-              SavedScreenFunctions().showDeleteConfirmationDialog(context, widget.savedList);
+              SavedScreenFunctions()
+                  .showDeleteConfirmationDialog(context, widget.savedList);
             },
             icon: const Icon(
               Icons.delete_outline_rounded,
@@ -62,7 +64,19 @@ class _SavedItemsState extends State<SavedItems> {
               return ListView.builder(
                 itemCount: selectedDiaryEntries.length,
                 itemBuilder: (context, index) {
-                  return DiaryEntryCard(selectedDiaryEntries[index], index);
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DiaryDetailPage(
+                            entry: selectedDiaryEntries[index],
+                          ),
+                        ),
+                      );
+                    },
+                    child: DiaryCardView(entry: selectedDiaryEntries[index]),
+                  );
                 },
               );
             } else {

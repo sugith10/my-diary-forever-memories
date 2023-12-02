@@ -4,7 +4,7 @@ import 'package:diary/presentation/screens/account_screen/widget/account_screen_
 import 'package:diary/presentation/screens/account_screen/widget/profile_card.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
-import 'package:diary/presentation/util/profile_screen_functions.dart';
+import 'package:diary/presentation/util/account_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:diary/presentation/screens/login_signin_screen/welcome_screen.dart';
+import 'package:diary/presentation/screens/splash_screen/onboarding.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
@@ -8,12 +9,22 @@ class Splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 1), () {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => const WelcomePage()));
+      Navigator.pushReplacementNamed(context, '/onboarding');
     });
 
-    return const Scaffold(
-        backgroundColor: Colors.white,
-        body: Center(child: Image(image: AssetImage('images/first-img.png'))));
+    return  Scaffold(
+     
+      body: Center(
+        child: Image(
+          image: Theme.of(context).brightness == Brightness.light ? const AssetImage(
+            
+            'assets/images/forever_memories_logo/forever_memories_logo_black.png',
+          ) : const AssetImage(
+            
+            'assets/images/forever_memories_logo/forever_memories_logo_white.png',
+          )
+        ),
+      ),
+    );
   }
 }

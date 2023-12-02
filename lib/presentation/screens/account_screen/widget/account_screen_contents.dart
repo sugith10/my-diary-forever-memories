@@ -2,7 +2,7 @@ import 'package:diary/presentation/screens/account_screen/customization_screen/c
 import 'package:diary/presentation/screens/account_screen/notifications_sceen/notifications_screen.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_item.dart';
-import 'package:diary/presentation/util/profile_screen_functions.dart';
+import 'package:diary/presentation/util/account_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';

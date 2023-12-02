@@ -1,4 +1,6 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -40,7 +42,7 @@ class InputField extends StatelessWidget {
             margin: EdgeInsets.symmetric(vertical: 0.8.h),
             padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: .3.h),
             decoration: BoxDecoration(
-              color: isFocused ? Colors.white : const Color(0xFFF1F0F5),
+              color: isFocused ? Theme.of(context).brightness == Brightness.light ? AppColor.light.color : AppColor.dark.color :  Theme.of(context).brightness == Brightness.light ? const Color.fromRGBO(241, 240, 245, 1) :  const Color.fromARGB(255, 39, 39, 39),
               border: Border.all(width: 1, color: const Color(0xFFD2D2D4)),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
@@ -57,7 +59,9 @@ class InputField extends StatelessWidget {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 hintText: labelText,
+                hintStyle: TextStyle(color: GetColors().getFontColor(context))
               ),
+              cursorColor:  GetColors().getFontColor(context) ,
               focusNode: focusNode,
               controller: controller,
               obscureText: obscureText,

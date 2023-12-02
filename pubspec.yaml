@@ -65,12 +65,13 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/first-img.png
+    - assets/images/onboarding_screen_animation/onboarding_lottie_light.json
+    - assets/images/onboarding_screen_animation/onboarding_lottie_dark.json
+    - assets/images/forever_memories_logo/forever_memories_logo_white.png
+    - assets/images/forever_memories_logo/forever_memories_logo_black.png
     - images/date.png
     - images/start_writing.png
     - images/profile.png
-    - images/animation-1697987169484.json
-    - assets/images/Animation-gallery.json
     - assets/images/google.png
 
   fonts:
