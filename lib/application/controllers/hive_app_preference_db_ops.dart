@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/domain/models/app_preference_db_model.dart';
+import 'package:diary/core/models/app_preference_db_model.dart';
 import 'package:hive/hive.dart';
 
 class AppPreferenceFunctions {

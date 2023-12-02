@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:diary/application/controllers/hive_profile_details_db_ops.dart';
-import 'package:diary/domain/models/profile_details.dart';
+import 'package:diary/core/models/profile_details.dart';
 import 'package:diary/presentation/screens/account_screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';

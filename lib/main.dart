@@ -1,7 +1,7 @@
-import 'package:diary/domain/models/app_preference_db_model.dart';
-import 'package:diary/domain/models/diary_entry.dart';
-import 'package:diary/domain/models/profile_details.dart';
-import 'package:diary/domain/models/savedlist_db_model.dart';
+import 'package:diary/core/models/app_preference_db_model.dart';
+import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/core/models/profile_details.dart';
+import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/infrastructure/providers/provider_theme.dart';
 import 'package:diary/presentation/theme/app_theme.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';

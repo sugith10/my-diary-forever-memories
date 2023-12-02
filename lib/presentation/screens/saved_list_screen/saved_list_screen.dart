@@ -1,10 +1,8 @@
-
-import 'package:diary/domain/models/savedlist_db_model.dart';
+import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_item_screen.dart';
-import 'package:diary/presentation/screens/widget/appbar_titlestyle.dart';
+import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
+import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
-import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
-
 import 'package:diary/presentation/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';

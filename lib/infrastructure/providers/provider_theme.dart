@@ -1,5 +1,5 @@
 import 'package:diary/application/controllers/hive_app_preference_db_ops.dart';
-import 'package:diary/domain/models/app_preference_db_model.dart';
+import 'package:diary/core/models/app_preference_db_model.dart';
 import 'package:flutter/material.dart';
 
 class ThemeNotifier extends ChangeNotifier {

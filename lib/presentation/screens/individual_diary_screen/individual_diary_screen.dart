@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'package:diary/domain/models/diary_entry.dart';
+import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/widget/content.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/widget/date.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/widget/title.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
-import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
+import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/util/individual_diary_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';

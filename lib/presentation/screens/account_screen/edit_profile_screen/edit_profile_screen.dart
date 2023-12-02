@@ -1,14 +1,15 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:diary/domain/models/profile_details.dart';
-import 'package:diary/presentation/screens/widget/save_text_button.dart';
+import 'package:diary/application/controllers/hive_profile_details_db_ops.dart';
+import 'package:diary/core/models/profile_details.dart';
+import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
-import '../../../../application/controllers/hive_profile_details_db_ops.dart';
+
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);

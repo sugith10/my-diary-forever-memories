@@ -1,11 +1,13 @@
-import 'package:diary/domain/models/diary_entry.dart';
+import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/presentation/screens/calendar_screen/widget/create_diary_text.dart';
+import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
+import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/presentation/screens/create_screen/create_page.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
-import 'package:diary/presentation/screens/widget/appbar_titlestyle.dart';
-import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
+import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
+import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
@@ -145,18 +147,28 @@ class CalendarScreen extends StatelessWidget {
                 builder: (context, box, child) {
                   // Fetch all diary entries
                   List<DiaryEntry> diaryEntries = box.values.toList();
-
                   final selectedEntries = diaryEntries
                       .where((entry) =>
                           isSameDay(entry.date, changer.selectedDate))
                       .toList();
-
                   if (selectedEntries.isNotEmpty) {
                     return ListView.builder(
                       physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: selectedEntries.length,
                       itemBuilder: (context, index) {
-                        return DiaryEntryCard(selectedEntries[index], index);
+                        return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DiaryDetailPage(
+                                      entry: selectedEntries[index]),
+                                ),
+                              );
+                            },
+                            child: DiaryCardView(
+                              entry: selectedEntries[index],
+                            ));
                       },
                     );
                   } else {

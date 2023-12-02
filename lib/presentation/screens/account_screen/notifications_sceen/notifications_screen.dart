@@ -1,7 +1,5 @@
 
-import 'package:diary/application/notifications/local_notifications.dart';
-import 'package:diary/presentation/screens/main_screen/main_screen.dart';
-import 'package:diary/presentation/screens/widget/appbar_with_back_button_only.dart';
+import 'package:diary/presentation/screens/widget/appbar_with_back_button_only_common.dart';
 import 'package:diary/presentation/screens/account_screen/widget/info_container.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';

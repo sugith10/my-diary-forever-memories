@@ -1,7 +1,7 @@
 import 'dart:io';
-import 'package:diary/domain/models/diary_entry.dart';
-import 'package:diary/presentation/screens/widget/appbar_titlestyle.dart';
-import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
+import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
+import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:flutter_masonry_view/flutter_masonry_view.dart';
@@ -49,8 +49,7 @@ class GalleryScreen extends StatelessWidget {
 class DiaryGalleryEntryCard extends StatelessWidget {
   final String imagePath;
 
-  const DiaryGalleryEntryCard({required this.imagePath, Key? key})
-      : super(key: key);
+  const DiaryGalleryEntryCard({required this.imagePath, super.key});
 
   @override
   Widget build(BuildContext context) {

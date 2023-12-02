@@ -1,8 +1,8 @@
-import 'package:diary/domain/models/diary_entry.dart';
+import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
-import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
+import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
+import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:hive/hive.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
@@ -82,52 +82,8 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
                     },
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                      child: Container(
-                        padding: const EdgeInsets.all(16.0),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.1),
-                              spreadRadius: 2,
-                              blurRadius: 5,
-                              offset: const Offset(0, 3),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              entry.title,
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 8.0),
-                            Text(
-                              entry.content,
-                              style: const TextStyle(
-                                fontSize: 16.0,
-                              ),
-                            ),
-                            const SizedBox(height: 12.0),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  DateFormat('d MMMM, y').format(entry.date),
-                                  style: const TextStyle(
-                                    fontSize: 14.0,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                      child: DiaryCardView(
+                        entry: entry,
                       ),
                     ),
                   );

@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/domain/models/diary_entry.dart';
+import 'package:diary/core/models/diary_entry.dart';
 import 'package:hive/hive.dart';
 
 import 'package:flutter/foundation.dart';

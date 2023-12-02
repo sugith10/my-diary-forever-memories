@@ -1,9 +1,8 @@
 import 'package:diary/infrastructure/providers/provider_theme.dart';
 import 'package:diary/presentation/screens/account_screen/customization_screen/widget/theme_switch_card.dart';
 import 'package:diary/presentation/screens/account_screen/customization_screen/widget/theme_switch_card_body.dart';
-import 'package:diary/presentation/screens/widget/appbar_with_back_button_only.dart';
+import 'package:diary/presentation/screens/widget/appbar_with_back_button_only_common.dart';
 import 'package:diary/presentation/screens/account_screen/widget/info_container.dart';
-import 'package:diary/presentation/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';

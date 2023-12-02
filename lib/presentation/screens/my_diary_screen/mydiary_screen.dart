@@ -1,15 +1,16 @@
 import 'dart:developer';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:diary/domain/models/diary_entry.dart';
+import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_list_screen.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/presentation/screens/create_screen/create_page.dart';
-import 'package:diary/presentation/screens/my_diary_screen/search_screen.dart';
-import 'package:diary/presentation/screens/widget/appbar_bottom.dart';
-import 'package:diary/presentation/screens/widget/custom_icon.dart';
+import 'package:diary/presentation/screens/search_screen/search_screen.dart';
+import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
+import 'package:diary/presentation/screens/widget/custom_icon_common.dart';
 import 'package:diary/presentation/util/my_diary_scren_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -142,7 +143,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                   valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
                   builder: (context, box, child) {
                     var sortedEntries = box.values.toList();
-                    //  print('Sorted Entries Length: ${sortedEntries.length}');
+
                     switch (selectedSortOption) {
                       case 'Newest First':
                         sortedEntries.sort((a, b) => b.date.compareTo(a.date));
@@ -319,47 +320,7 @@ class DiaryEntryCard extends StatelessWidget {
         },
         child: Padding(
           padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
-          child: Container(
-            padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12.0),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.1),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      child: Text(
-                        entry.title,
-                        style: TextStyle(
-                            fontSize: 15.sp, fontWeight: FontWeight.w500),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 5.sp),
-                Text(entry.content,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 13.sp,
-                        color: const Color.fromARGB(255, 105, 105, 105)),
-                    textAlign: TextAlign.justify),
-                SizedBox(height: 5.sp),
-              ],
-            ),
-          ),
+          child: DiaryCardView(entry: entry)
         ),
       ),
     );
@@ -368,27 +329,3 @@ class DiaryEntryCard extends StatelessWidget {
 
 void doNothing(BuildContext context) {}
 
-// Future<void> handleDateRangePick(BuildContext context) async {
-//   final DateTimeRange? pickedDateRange = await showDateRangePicker(
-//     context: context,
-//     firstDate: DateTime(DateTime.now().day),
-//     lastDate: DateTime.now(),
-//     locale: Localizations.localeOf(context),
-//     saveText: 'Done',
-//     builder: (BuildContext context, Widget? child) {
-//       return Theme(
-//         data: ThemeData.light().copyWith(
-//           colorScheme: const ColorScheme.light(primary: Color(0xFF835DF1)),
-//         ),
-//         child: child ?? Container(),
-//       );
-//     },
-//   );
-//   if (pickedDateRange != null) {
-//     final startDate = pickedDateRange.start;
-//     final endDate = pickedDateRange.end;
-//     final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
-//     final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
-//     print('Selected date range: $formattedStartDate - $formattedEndDate');
-//   }
-// }

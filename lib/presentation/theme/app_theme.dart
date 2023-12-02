@@ -51,6 +51,7 @@ class AppTheme {
       background: AppColor.dark.color,
       secondary: AppColor.dark.color,
     ),
+     fontFamily: 'SFPRO',
     scaffoldBackgroundColor: AppColor.dark.color,
     appBarTheme: AppBarTheme(backgroundColor: AppColor.dark.color),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
