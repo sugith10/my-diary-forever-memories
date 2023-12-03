@@ -43,11 +43,11 @@ class DiaryEntryCard extends StatelessWidget {
             //  diaryEntriesNotifier.notifyListeners();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: const Text("Successfully Deleted"),
                 behavior: SnackBarBehavior.floating,
                 margin: EdgeInsets.all(2.h),
                 backgroundColor: Colors.red,
                 duration: const Duration(seconds: 2),
+                content: const Text("Successfully Deleted"),
               ),
             );
           } else {
@@ -96,13 +96,11 @@ class DiaryEntryCard extends StatelessWidget {
                   )));
         },
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
-          child: DiaryCardView(entry: entry)
-        ),
+            padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
+            child: DiaryCardView(entry: entry)),
       ),
     );
   }
 }
 
 void doNothing(BuildContext context) {}
-

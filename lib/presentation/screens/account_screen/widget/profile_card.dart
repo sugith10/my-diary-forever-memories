@@ -13,8 +13,8 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20),
-      height: 30.h,
-      width: 100.w,
+      // height: 30,
+      // width: 100,
       child: Center(
         child: GestureDetector(
           onTap: () {
@@ -59,12 +59,12 @@ class ProfileCard extends StatelessWidget {
                             Text(
                               profileDetails.name,
                               style: TextStyle(
-                                  fontSize: 18.sp, fontWeight: FontWeight.w500),
+                                  fontSize: 18, fontWeight: FontWeight.w500),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             SizedBox(
-                              height: .5.h,
+                              height: 5,
                             ),
                             Text(
                               profileDetails.email,
@@ -78,7 +78,7 @@ class ProfileCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(width: 10.w),
+                        SizedBox(width: 10),
                         Container(
                             width: 100,
                             height: 100,
@@ -116,7 +116,7 @@ class ProfileCard extends StatelessWidget {
                       ],
                     );
                   } else {
-                    return const SizedBox.shrink();
+                    return const SizedBox();
                   }
                 }),
           ),

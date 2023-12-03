@@ -47,5 +47,20 @@ class DiaryEntry {
     this.imagePathFive, 
     required this.background,
   });
+
+   Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'date': date.toIso8601String(),
+      'title': title,
+      'content': content,
+      'imagePath': imagePath,
+      'imagePathTwo': imagePathTwo,
+      'imagePathThree': imagePathThree,
+      'imagePathFour': imagePathFour,
+      'imagePathFive': imagePathFive,
+      'background': background,
+    };
+  }
 }
 

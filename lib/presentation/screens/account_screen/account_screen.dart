@@ -78,9 +78,11 @@ class AccountScreen extends StatelessWidget {
           bottom: const BottomBorderWidget()),
       body: Column(
         children: [
+          SizedBox(height: 25,),
           const ProfileCard(),
+            SizedBox(height: 25,),
           Expanded(
-            child: AccountScreenContents(),
+            child: SingleChildScrollView(child: AccountScreenContents()),
           )
         ],
       ),

@@ -6,7 +6,6 @@ import 'package:diary/infrastructure/providers/provider_theme.dart';
 import 'package:diary/presentation/screens/splash_screen/onboarding.dart';
 import 'package:diary/presentation/screens/splash_screen/splash.dart';
 import 'package:diary/presentation/theme/app_theme.dart';
-import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/infrastructure/providers/provider_mainscreen.dart';
 import 'package:diary/infrastructure/providers/provider_onboarding.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
@@ -14,7 +13,7 @@ import 'package:diary/infrastructure/providers/provider_create.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+import 'package:sizer/sizer.dart'; 
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
