@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MyDiaryScreenFunctions {
-  Future<void> _handleDateRangePick(BuildContext context) async {
+  Future<DateTimeRange?> _handleDateRangePick(BuildContext context) async {
     final DateTimeRange? pickedDateRange = await showDateRangePicker(
       context: context,
       firstDate: DateTime(DateTime.now().day),
@@ -34,6 +34,7 @@ class MyDiaryScreenFunctions {
       initialEntryMode: Theme.of(context).brightness == Brightness.light
           ? DatePickerEntryMode.calendar
           : DatePickerEntryMode.input,
+          initialDateRange: DateTimeRange(start: DateTime(2023) , end: DateTime.now()),
       helpText: 'Select Date Range',
       cancelText: 'Cancel',
       confirmText: 'OK',
@@ -49,9 +50,10 @@ class MyDiaryScreenFunctions {
       final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
       print('Selected date range: $formattedStartDate - $formattedEndDate');
     }
+     return pickedDateRange ;
   }
 
-  Future<void> handleDateRangePick(BuildContext context) async {
+ Future<DateTimeRange?> handleDateRangePick(BuildContext context) async {
     return _handleDateRangePick(context);
   }
 

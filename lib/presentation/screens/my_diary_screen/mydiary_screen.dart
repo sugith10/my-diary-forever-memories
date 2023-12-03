@@ -25,6 +25,18 @@ class MyDiaryScreen extends StatefulWidget {
 
 class _MyDiaryScreenState extends State<MyDiaryScreen> {
   String selectedSortOption = 'Newest First';
+  DateTimeRange? selectedDateRange;
+
+  List<DiaryEntry> filterEntriesByDateRange(
+      List<DiaryEntry> entries, DateTimeRange dateRange) {
+    print('filter function added');
+    return entries
+        .where((entry) =>
+            entry.date.isAfter(dateRange.start) &&
+            entry.date.isBefore(dateRange.end))
+        .toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isFabVisible = true;
@@ -109,7 +121,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                             child: Text('Range Pick'),
                           ),
                         ],
-                      ).then((value) {
+                      ).then((value) async {
                         if (value == 'Newest First') {
                           setState(() {
                             selectedSortOption = value as String;
@@ -119,7 +131,17 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                             selectedSortOption = value as String;
                           });
                         } else if (value == 'Range Pick') {
-                          MyDiaryScreenFunctions().handleDateRangePick(context);
+                          selectedDateRange = await MyDiaryScreenFunctions()
+                              .handleDateRangePick(context);
+                          if (selectedDateRange != null) {
+                            selectedSortOption = value as String;
+                            print('the new range = $selectedDateRange');
+                          } else {
+                            setState(() {
+                              selectedSortOption = value as String;
+                            });
+                            print('date range is null');
+                          }
                         }
                       });
                     },
@@ -141,7 +163,6 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       Hive.box<DiaryEntry>('_boxName').listenable(),
                   builder: (context, box, child) {
                     var sortedEntries = box.values.toList();
-
                     switch (selectedSortOption) {
                       case 'Newest First':
                         sortedEntries.sort((a, b) => b.date.compareTo(a.date));
@@ -149,11 +170,18 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       case 'Oldest First':
                         sortedEntries.sort((a, b) => a.date.compareTo(b.date));
                         break;
+                      case 'Range Pick':
+                        if (selectedDateRange != null) {
+                          log('range pick - in value listanble builder');
+
+                          sortedEntries = filterEntriesByDateRange(
+                              sortedEntries, selectedDateRange!);
+                        }
+                        break;
                       default:
                         sortedEntries.sort((a, b) => b.date.compareTo(a.date));
                         break;
                     }
-
                     Map<String, List<DiaryEntry>> groupedEntries = {};
                     for (var entry in sortedEntries) {
                       final dateKey = DateFormat('y-MM-dd').format(entry.date);

@@ -14,17 +14,13 @@ class DbFunctions {
   Future addDiaryEntry(DiaryEntry entry) async {
     final box = Hive.box<DiaryEntry>('_boxName');
     await box.put(entry.id, entry);
-   
     diaryEntryNotifier.add(entry);
-
-    // diaryEntriesNotifier.notifyListeners();
   }
 
   Future getAllDiary() async {
     final box = Hive.box<DiaryEntry>('_boxName');
     diaryEntryNotifier.clear();
     diaryEntryNotifier.addAll(box.values);
-    // diaryEntriesNotifier.notifyListeners();
   }
 
   Future<void> deleteDiary(String id) async {
