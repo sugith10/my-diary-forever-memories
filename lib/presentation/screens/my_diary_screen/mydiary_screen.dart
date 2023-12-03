@@ -1,11 +1,6 @@
 import 'dart:developer';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:diary/core/models/diary_entry.dart';
-import 'package:diary/presentation/screens/my_diary_screen/widget/diary_card_view.dart';
-import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:diary/presentation/theme/app_color.dart';
-import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
-import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_list_screen.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/presentation/screens/create_screen/create_page.dart';
@@ -14,7 +9,6 @@ import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/custom_icon_common.dart';
 import 'package:diary/presentation/util/my_diary_scren_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
@@ -98,7 +92,9 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       showMenu(
                         context: context,
                         position: const RelativeRect.fromLTRB(1, 0, 0, 5),
-                         color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : AppColor.showMenuDark.color,
+                        color: Theme.of(context).brightness == Brightness.light
+                            ? const Color.fromARGB(255, 255, 255, 255)
+                            : AppColor.showMenuDark.color,
                         items: <PopupMenuEntry>[
                           const PopupMenuItem(
                             value: 'Newest First',
@@ -141,7 +137,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
               SliverPadding(
                 padding: const EdgeInsets.all(8.0),
                 sliver: ValueListenableBuilder(
-                  valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+                  valueListenable:
+                      Hive.box<DiaryEntry>('_boxName').listenable(),
                   builder: (context, box, child) {
                     var sortedEntries = box.values.toList();
 
@@ -156,7 +153,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                         sortedEntries.sort((a, b) => b.date.compareTo(a.date));
                         break;
                     }
-    
+
                     Map<String, List<DiaryEntry>> groupedEntries = {};
                     for (var entry in sortedEntries) {
                       final dateKey = DateFormat('y-MM-dd').format(entry.date);
@@ -164,7 +161,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       groupedEntries[dateKey]!.add(entry);
                     }
                     log('Grouped Entries Length: ${groupedEntries.length}');
-    
+
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
@@ -174,7 +171,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                           }
                           final dateKey = groupedEntries.keys.toList()[index];
                           final entries = groupedEntries[dateKey]!;
-                          return MyDiaryScreenFunctions().buildGroupedDiaryEntries(entries, dateKey);
+                          return MyDiaryScreenFunctions()
+                              .buildGroupedDiaryEntries(entries, dateKey);
                         },
                         childCount: sortedEntries.length,
                       ),
@@ -208,8 +206,4 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
       ),
     );
   }
-
- 
 }
-
-
