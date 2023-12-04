@@ -8,6 +8,16 @@ class GetColors {
       : ThemeMode.light;
 }
 
+  Color _getThemeColor(BuildContext context){
+      return Theme.of(context).brightness == Brightness.light
+      ? AppColor.light.color
+      : AppColor.dark.color;
+  }
+
+  Color getThemeColor(BuildContext context){
+      return _getThemeColor(context);
+  }
+
    ThemeMode getThemeMode(BuildContext context) {
   return  _getThemeMode(context);
 }

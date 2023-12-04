@@ -5,16 +5,17 @@ import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
+import 'package:diary/presentation/util/create_screen_functions.dart';
+import 'package:diary/presentation/util/get_colors.dart';
+import 'package:diary/presentation/util/individual_diary_screen_functions.dart';
 import 'package:flutter/material.dart';
-
 import 'package:image_picker/image_picker.dart';
-
 import 'package:path_provider/path_provider.dart';
 
 class EditDiaryEntryScreen extends StatefulWidget {
   final DiaryEntry entry;
 
-  const EditDiaryEntryScreen({required this.entry, super.key});
+   const EditDiaryEntryScreen({required this.entry, super.key});
 
   @override
   State<EditDiaryEntryScreen> createState() => _EditDiaryEntryScreenState();
@@ -25,6 +26,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   final TextEditingController contentController;
   File? _image;
 
+
   _EditDiaryEntryScreenState()
       : titleController = TextEditingController(),
         contentController = TextEditingController();
@@ -34,6 +36,8 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
     super.initState();
     titleController.text = widget.entry.title;
     contentController.text = widget.entry.content;
+
+
 
     if (widget.entry.imagePath != null) {
       _image = File(widget.entry.imagePath!);
@@ -67,8 +71,8 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: DiaryDetailPageFunctions().hexToColor(widget.entry.background),
       appBar: AppBar(
-       
           leading: const BackButtonWidget(),
           actions: [
             SaveButton(onPressed: () {
@@ -92,7 +96,11 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     hintStyle: TextStyle(fontSize: 24),
                     border: InputBorder.none,
                   ),
-                  style: const TextStyle(fontSize: 24),
+                  style:  TextStyle(fontSize: 24, color: CreateDiaryScreenFunctions()
+                              .isColorBright(DiaryDetailPageFunctions().hexToColor(widget.entry.background))
+                          ? Colors.black
+                          : Colors.white),
+                  cursorColor: Colors.green[900],
                 ),
               ),
               SizedBox(
@@ -119,18 +127,22 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                 padding: const EdgeInsets.all(16),
                 child: TextField(
                   controller: contentController,
-                  maxLines: null, // Allows for multiple lines
+                  maxLines: null, 
                   decoration: const InputDecoration(
                     hintText: 'Content',
                     hintStyle: TextStyle(fontSize: 18),
                     border: InputBorder.none,
                   ),
                   // ignore: prefer_const_constructors
-                  style: TextStyle(fontSize: 18),
+                  style: TextStyle(fontSize: 18,  color: CreateDiaryScreenFunctions()
+                              .isColorBright(DiaryDetailPageFunctions().hexToColor(widget.entry.background))
+                          ? Colors.black
+                          : Colors.white),
                   autofocus: true,
+                  cursorColor: Colors.red[900],
                 ),
               ),
-              // Add image selection and emoji handling widgets
+             
             ],
           ),
         ),
@@ -143,6 +155,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: GetColors().getAlertBoxColor(context),
           title: const Text(
             'Edit Confirmation',
             style: TextStyle(
@@ -204,5 +217,4 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
     );
   }
 
-  // ... Rest of your methods for image selection, emoji handling, and backspace pressed.
 }

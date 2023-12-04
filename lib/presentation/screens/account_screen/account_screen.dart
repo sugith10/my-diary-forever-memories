@@ -1,16 +1,23 @@
+import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
+import 'package:diary/presentation/screens/account_screen/customization_screen/customization_screen.dart';
+import 'package:diary/presentation/screens/account_screen/notifications_sceen/notifications_screen.dart';
+import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_divider.dart';
+import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/screens/account_screen/edit_profile_screen/edit_profile_screen.dart';
-import 'package:diary/presentation/screens/account_screen/widget/account_screen_contents.dart';
 import 'package:diary/presentation/screens/account_screen/widget/profile_card.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/util/account_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key, });
+  const AccountScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,9 @@ class AccountScreen extends StatelessWidget {
             IconButton(
               onPressed: () {
                 showMenu(
-                  color: Theme.of(context).brightness == Brightness.light ? const Color.fromARGB(255, 255, 255, 255) : AppColor.showMenuDark.color,
+                  color: Theme.of(context).brightness == Brightness.light
+                      ? const Color.fromARGB(255, 255, 255, 255)
+                      : AppColor.showMenuDark.color,
                   context: context,
                   position: const RelativeRect.fromLTRB(1, 0, 0, 5),
                   items: <PopupMenuEntry>[
@@ -78,11 +87,78 @@ class AccountScreen extends StatelessWidget {
           bottom: const BottomBorderWidget()),
       body: Column(
         children: [
-          SizedBox(height: 25,),
           const ProfileCard(),
-            SizedBox(height: 25,),
           Expanded(
-            child: SingleChildScrollView(child: AccountScreenContents()),
+            child: SingleChildScrollView(
+                child: Padding(
+              padding: const EdgeInsets.only(left: 20, right: 20),
+              child: Column(
+                children: [
+                  ProfileOptions(
+                    function: () => Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.rightToLeftJoined,
+                        child: const NotificationPage(),
+                        childCurrent: this,
+                      ),
+                    ),
+                    item: 'Notifications',
+                    icon: Icons.notifications_none,
+                  ),
+                  const ContentDivider(),
+                  ProfileOptions(
+                    function: () => Navigator.push(
+                      context,
+                      PageTransition(
+                        type: PageTransitionType.rightToLeftJoined,
+                        child: const CustomizationPage(),
+                        childCurrent: this,
+                      ),
+                    ),
+                    item: 'Customization',
+                    icon: Ionicons.color_palette_outline,
+                  ),
+                  const ContentDivider(),
+                  ProfileOptions(
+                    function: () async {
+                      await DbFunctions().backupDiaryEntries(context);
+                    },
+                    item: 'Backup',
+                    icon: Icons.backup_outlined,
+                  ),
+                  const ContentDivider(),
+                  ProfileOptions(
+                    function: () async {
+                      await ProfileScreenFunctions().launchEmail();
+                    },
+                    item: 'Feedback',
+                    icon: Icons.feedback_outlined,
+                  ),
+                  const ContentDivider(),
+                  ProfileOptions(
+                    function: () async {
+                      await ProfileScreenFunctions().launchPrivacyPolicy();
+                    },
+                    item: 'Privacy Policy',
+                    icon: Ionicons.newspaper_outline,
+                  ),
+                  const ContentDivider(),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Made with 💙 in India',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  const Text('© 2023 DayProduction® v1.0.0'),
+                  const SizedBox(
+                    height: 10,
+                  )
+                ],
+              ),
+            )),
           )
         ],
       ),

@@ -7,6 +7,7 @@ import 'package:diary/presentation/screens/create_screen/create_page.dart';
 import 'package:diary/presentation/screens/search_screen/search_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/custom_icon_common.dart';
+import 'package:diary/presentation/util/get_colors.dart';
 import 'package:diary/presentation/util/my_diary_scren_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -220,7 +221,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => CreateDiaryScreen(
-                        changer: changer,
+                        changer: changer,selectedColor: GetColors().getThemeColor(context)
                       ),
                     ),
                   );

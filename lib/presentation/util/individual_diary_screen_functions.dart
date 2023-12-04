@@ -4,6 +4,7 @@ import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/presentation/screens/edit_screen/edit_screen.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/util/get_colors.dart';
 import 'package:diary/presentation/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -148,7 +149,7 @@ class DiaryDetailPageFunctions {
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => EditDiaryEntryScreen(entry: entry)));
+              builder: (context) => EditDiaryEntryScreen(entry: entry,)));
     } else if (value == 'Delete') {
       DiaryDetailPageFunctions().showDeleteConfirmationDialog(context, entry);
       // _showDeleteConfirmationDialog(context, widget.entry);

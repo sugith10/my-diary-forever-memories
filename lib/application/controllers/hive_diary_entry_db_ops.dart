@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:diary/core/models/diary_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
-import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 
 final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =

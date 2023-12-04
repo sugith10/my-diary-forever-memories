@@ -23,27 +23,17 @@ import 'package:flutter/foundation.dart' as foundation;
 import 'package:sizer/sizer.dart';
 import 'package:image/image.dart' as img;
 
-
 class CreateDiaryScreen extends StatefulWidget {
   final Changer changer;
+   Color selectedColor;
 
-  const CreateDiaryScreen({Key? key, required this.changer}) : super(key: key);
+  CreateDiaryScreen({super.key, required this.changer, required this.selectedColor});
 
   @override
   State<CreateDiaryScreen> createState() => _CreatePageState();
 }
 
 class _CreatePageState extends State<CreateDiaryScreen> {
-  late Color selectedColor;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Initialize selectedColor in didChangeDependencies
-    selectedColor = Theme.of(context).brightness == Brightness.light
-        ? Colors.white
-        : Colors.black;
-  }
 
   final TextEditingController titleController = TextEditingController();
 
@@ -76,11 +66,11 @@ class _CreatePageState extends State<CreateDiaryScreen> {
       final appDocDir = await getApplicationDocumentsDirectory();
       final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
       final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
-// Read and decode the original image
+      // Read and decode the original image
       final bytes = image.readAsBytesSync();
       final originalImage = img.decodeImage(Uint8List.fromList(bytes));
 
-      // Resize the image if its height is more than 300 pixels
+      // Resize the image if its height is more than 800 pixels
       if (originalImage != null && originalImage.height > 800) {
         final resizedImage = img.copyResize(originalImage, height: 800);
         File(imagePath).writeAsBytesSync(img.encodeJpg(resizedImage));
@@ -101,7 +91,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: selectedColor,
+      backgroundColor:  widget.selectedColor,
       appBar: AppBar(
           leading: const BackButtonWidget(),
           actions: [
@@ -122,7 +112,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                   content: content,
                   imagePath: imagePath,
                   background:
-                      '#${selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                      '#${widget.selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
                 );
                 widget.changer.selectDate(DateTime.now());
 
@@ -196,14 +186,14 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                                   .format(changer.selectedDate),
                               style: TextStyle(
                                   color: CreateDiaryScreenFunctions()
-                                          .isColorBright(selectedColor)
+                                          .isColorBright(widget.selectedColor)
                                       ? Colors.black
                                       : Colors.white),
                             );
                           },
                         ),
                         CaretDownIcon(
-                          selectedColor: selectedColor,
+                          selectedColor: widget.selectedColor,
                         )
                       ],
                     ),
@@ -222,7 +212,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                       fontSize: 28,
                       fontWeight: FontWeight.w500,
                       color: CreateDiaryScreenFunctions()
-                              .isColorBright(selectedColor)
+                              .isColorBright(widget.selectedColor)
                           ? Colors.black
                           : Colors.white),
                   border: InputBorder.none,
@@ -232,7 +222,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                 style: TextStyle(
                     fontSize: 28,
                     color: CreateDiaryScreenFunctions()
-                            .isColorBright(selectedColor)
+                            .isColorBright(widget.selectedColor)
                         ? Colors.black
                         : Colors.white),
                 textCapitalization: TextCapitalization.sentences,
@@ -269,7 +259,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         color: CreateDiaryScreenFunctions()
-                                .isColorBright(selectedColor)
+                                .isColorBright(widget.selectedColor)
                             ? Colors.black
                             : Colors.white),
                     border: InputBorder.none,
@@ -279,7 +269,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                   style: TextStyle(
                       fontSize: 18,
                       color: CreateDiaryScreenFunctions()
-                              .isColorBright(selectedColor)
+                              .isColorBright(widget.selectedColor)
                           ? Colors.black
                           : Colors.white),
                   textCapitalization: TextCapitalization.sentences,
@@ -401,9 +391,9 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                     break;
                   case 3:
                     CreateDiaryScreenFunctions().showColorPickerDialog(
-                        context, selectedColor, (Color color) {
+                        context, widget.selectedColor, (Color color) {
                       setState(() {
-                        selectedColor = color;
+                       widget.selectedColor = color;
                       });
                     });
                     break;

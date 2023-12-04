@@ -13,8 +13,8 @@ class ProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20),
-      // height: 30,
-      // width: 100,
+      height: 27.h,
+      width: 100.w,
       child: Center(
         child: GestureDetector(
           onTap: () {
@@ -58,12 +58,12 @@ class ProfileCard extends StatelessWidget {
                           children: [
                             Text(
                               profileDetails.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w500),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(
@@ -78,7 +78,7 @@ class ProfileCard extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Container(
                             width: 100,
                             height: 100,
