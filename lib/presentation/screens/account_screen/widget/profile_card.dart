@@ -80,43 +80,86 @@ class ProfileCard extends StatelessWidget {
                         ),
                         const SizedBox(width: 10),
                         Container(
-                            width: 100,
-                            height: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: profileDetails.profilePicturePath != null
-                                  ? DecorationImage(
-                                      image: FileImage(
-                                        File(
-                                            profileDetails.profilePicturePath!),
-                                      ),
-                                      fit: BoxFit.cover,
-                                    )
-                                  : const DecorationImage(
-                                      image: AssetImage('images/profile.png'),
-                                      fit: BoxFit.cover,
+                          width: 100,
+                          height: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: profileDetails.profilePicturePath != null
+                                ? DecorationImage(
+                                    image: FileImage(
+                                      File(profileDetails.profilePicturePath!),
                                     ),
-                              border: Border.all(
-                                width: 4,
-                                color:
-                                    Theme.of(context).scaffoldBackgroundColor,
+                                    fit: BoxFit.cover,
+                                  )
+                                : const DecorationImage(
+                                    image: AssetImage('images/profile.png'),
+                                    fit: BoxFit.cover,
+                                  ),
+                            border: Border.all(
+                              width: 4,
+                              color:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.black.withOpacity(0.1)
+                                    : const Color.fromARGB(255, 255, 255, 255)
+                                        .withOpacity(0.1),
                               ),
-                              boxShadow: [
-                                BoxShadow(
-                                  spreadRadius: 2,
-                                  blurRadius: 10,
-                                  color: Theme.of(context).brightness ==
-                                          Brightness.light
-                                      ? Colors.black.withOpacity(0.1)
-                                      : const Color.fromARGB(255, 255, 255, 255)
-                                          .withOpacity(0.1),
-                                ),
-                              ],
-                            )),
+                            ],
+                          ),
+                        ),
                       ],
                     );
                   } else {
-                    return const SizedBox();
+                   
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'User Name',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w500),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              'default@example.com',
+                              style: TextStyle(
+                                color: Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.black26
+                                    : Colors.white60,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(width: 10),
+                        Container(
+                          width: 100,
+                          height: 100,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              image: AssetImage('images/profile.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ],
+                    );
                   }
                 }),
           ),

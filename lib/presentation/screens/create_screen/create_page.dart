@@ -217,7 +217,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                           : Colors.white),
                   border: InputBorder.none,
                 ),
-                cursorColor: Colors.green[900],
+                cursorColor: const Color.fromRGBO(27, 94, 32, 1),
                 cursorHeight: 28,
                 style: TextStyle(
                     fontSize: 28,
@@ -264,7 +264,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                             : Colors.white),
                     border: InputBorder.none,
                   ),
-                  cursorColor: Colors.red[900],
+                  cursorColor: const Color.fromRGBO(183, 28, 28, 1),
                   cursorHeight: 18,
                   style: TextStyle(
                       fontSize: 18,

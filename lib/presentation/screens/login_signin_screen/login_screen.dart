@@ -28,16 +28,16 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
- void signUserIn() async {
-  try {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
-  } catch (e) {
-    print("Error during sign-in: $e");
-  }
-}
+//  void signUserIn() async {
+//   try {
+//     await FirebaseAuth.instance.signInWithEmailAndPassword(
+//       email: emailController.text,
+//       password: passwordController.text,
+//     );
+//   } catch (e) {
+//     print("Error during sign-in: $e");
+//   }
+// }
 
 
   @override
@@ -101,13 +101,14 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 5.h,
                     ),
-                    InputField(
+                      InputField(
                       labelText: 'Email',
                       focusNode: focusNodeEmail,
                       isFocused: isFocusedEmail,
                       controller: emailController,
                       obscureText: false,
                     ),
+                 
                     SizedBox(
                       height: 2.h,
                     ),
@@ -122,25 +123,25 @@ class _LoginPageState extends State<LoginPage> {
                       height: 1.h,
                     ),
                     //forgot passworddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-                    FadeInDown(
-                      delay: const Duration(milliseconds: 700),
-                      duration: const Duration(milliseconds: 800),
-                      child: InkWell(
-                        onTap: () {},
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              'Forgot Password?',
-                              style: TextStyle(
-                                color: Colors.grey[600],
-                                fontSize: 15,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    // FadeInDown(
+                    //   delay: const Duration(milliseconds: 700),
+                    //   duration: const Duration(milliseconds: 800),
+                    //   child: InkWell(
+                    //     onTap: () {},
+                    //     child: Row(
+                    //       mainAxisAlignment: MainAxisAlignment.end,
+                    //       children: [
+                    //         Text(
+                    //           'Forgot Password?',
+                    //           style: TextStyle(
+                    //             color: Colors.grey[600],
+                    //             fontSize: 15,
+                    //           ),
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                     SizedBox(
                       height: 2.h,
                     ),
@@ -153,7 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                           Expanded(
                             child: NavigationElevatedButton(
                               onPressed: () {
-                               signUserIn();
+                              //  signUserIn();
                               },
                               buttonText: 'Log In',
                             ),
@@ -163,7 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const Spacer(),
                     //googleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-                    const SocialLoginDivider(),
+                    // const SocialLoginDivider(),
                     //google endddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
                     const Spacer(),
                     FadeInUp(

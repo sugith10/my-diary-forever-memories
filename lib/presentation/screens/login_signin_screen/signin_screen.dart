@@ -18,15 +18,25 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+   var focusNodeUserName = FocusNode();
   var focusNodeEmail = FocusNode();
   var focusNodePassword = FocusNode();
+  bool isFocusedUserName = false;
   bool isFocusedEmail = false;
   bool isFocusedPassword = false;
+  final TextEditingController userNameController = TextEditingController();
+
   final TextEditingController emailController = TextEditingController();
+  
   final TextEditingController passwordController = TextEditingController();
 
   @override
   void initState() {
+    focusNodeEmail.addListener(() {
+      setState(() {
+        isFocusedUserName = focusNodeUserName.hasFocus;
+      });
+    });
     focusNodeEmail.addListener(() {
       setState(() {
         isFocusedEmail = focusNodeEmail.hasFocus;
@@ -86,6 +96,17 @@ class _SignInPageState extends State<SignInPage> {
                       SizedBox(
                         height: 5.h,
                       ),
+                     
+                    InputField(
+                      labelText: 'User Name',
+                      focusNode: focusNodeUserName,
+                      isFocused: isFocusedUserName,
+                      controller: userNameController,
+                      obscureText: false,
+                    ),
+                        SizedBox(
+                      height: 2.h,
+                    ),
                       InputField(
                         labelText: 'Email',
                         focusNode: focusNodeEmail,
@@ -120,6 +141,7 @@ class _SignInPageState extends State<SignInPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => MainScreen()));
+                                  print({passwordController, emailController ,userNameController } );
                                 },
                                 buttonText: 'Sign Up',
                               ),

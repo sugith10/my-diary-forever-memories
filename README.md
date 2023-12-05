@@ -14,7 +14,7 @@ lib
 |   |-- notifications
 |       |-- notification_service.dart
 |
-|-- domain
+|-- core
 |   |-- models
 |       |-- model.dart
 |
@@ -28,12 +28,12 @@ lib
 |   |-- screens
 |       |-- screen1
 |           |-- screen1.dart
-|           |-- components
+|           |-- widget
 |               |-- component1.dart
 |               |-- component2.dart
 |       |-- screen2
 |           |-- screen2.dart
-|           |-- components
+|           |-- widget
 |               |-- component3.dart
 |               |-- component4.dart
 |   |-- util
@@ -48,7 +48,7 @@ lib
    - Orchestrates and coordinates the application's behavior.
    - Contains controllers, services, and components implementing specific use cases.
 
-2. **Domain Layer (`domain`):**
+2. **Domain Layer (`core`):**
    - Houses core business logic and domain models.
    - Represents the conceptual foundation of the application.
 

@@ -85,7 +85,7 @@ class Onbording extends StatelessWidget {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const WelcomePage(),
+                        builder: (_) =>  MainScreen(),
                       ),
                     );
                   } else {

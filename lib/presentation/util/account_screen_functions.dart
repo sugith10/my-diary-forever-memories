@@ -1,4 +1,7 @@
+import 'package:diary/application/controllers/hive_app_preference_db_ops.dart';
+import 'package:diary/core/models/app_preference_db_model.dart';
 import 'package:diary/presentation/screens/login_signin_screen/welcome_screen.dart';
+import 'package:diary/presentation/screens/splash_screen/onboarding.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/util/get_colors.dart';
 import 'package:flutter/material.dart';
@@ -91,13 +94,13 @@ class ProfileScreenFunctions {
                 TextButton(
                   child:
                       const Text('Logout', style: TextStyle(color: Colors.red)),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const WelcomePage(),
-                      ),
-                    );
+                  onPressed: ()async {
+                      // Update showOnboarding to true
+                  final appPreferenceFunctions = AppPreferenceFunctions();
+                 final onboardingStatus = AppPreference(id: '1', showOnboarding: true);
+                  await appPreferenceFunctions.showOnboarding(onboardingStatus);
+
+                    Navigator.pushReplacementNamed(context, '/onboarding');
                   },
                 ),
               ],
@@ -108,7 +111,6 @@ class ProfileScreenFunctions {
     );
   }
 
-  // Public function to be used from other classes
   Future<void> launchEmail() async {
     await _launchEmail();
   }

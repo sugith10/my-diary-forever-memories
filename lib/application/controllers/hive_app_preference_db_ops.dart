@@ -8,8 +8,6 @@ class AppPreferenceFunctions {
   Future<void> addThemePreference(AppPreference isDark) async {
     await box.put(isDark.id, isDark);
     log('Added theme into db ${isDark.isDark}');
-    
-
   }
 
  Future<AppPreference?> getThemePreference() async {
@@ -17,5 +15,17 @@ class AppPreferenceFunctions {
   print( storedPreference?.isDark);
   return storedPreference;
 }
+
+ Future<void> showOnboarding(AppPreference showOnboarding) async {
+    await box.put(showOnboarding.id, showOnboarding);
+    log('Added theme into db ${showOnboarding.showOnboarding}');
+  }
+
+   Future<AppPreference?> getOnboardingStatus() async {
+  final onboarding = box.get('1');
+  print( onboarding?.showOnboarding);
+  return onboarding;
+}
+
 
 }
