@@ -1,10 +1,7 @@
-import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
 import 'package:diary/presentation/screens/account_screen/customization_screen/customization_screen.dart';
 import 'package:diary/presentation/screens/account_screen/notifications_sceen/notifications_screen.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_item.dart';
-import 'package:diary/presentation/theme/app_color.dart';
-import 'package:diary/presentation/screens/account_screen/edit_profile_screen/edit_profile_screen.dart';
 import 'package:diary/presentation/screens/account_screen/widget/profile_card.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
@@ -12,7 +9,7 @@ import 'package:diary/presentation/util/account_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:sizer/sizer.dart';
+
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({
@@ -31,7 +28,7 @@ class AccountScreen extends StatelessWidget {
           ),
           actions: [
          
-                          IconButton(onPressed: (){ ProfileScreenFunctions().showPopupDialog(context);}, icon: Icon( Icons.power_settings_new_outlined,
+                          IconButton(onPressed: (){ ProfileScreenFunctions().showPopupDialog(context);}, icon: const Icon( Icons.power_settings_new_outlined,
                             color: Color.fromARGB(255, 197, 60, 50),))
            ,
           ],

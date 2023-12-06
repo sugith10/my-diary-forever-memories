@@ -11,6 +11,7 @@ import 'package:diary/infrastructure/providers/provider_onboarding.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/infrastructure/providers/provider_create.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart'; 
@@ -45,7 +46,10 @@ Future<void> main() async {
     Hive.registerAdapter(AppPreferenceAdapter());
   }
   await Hive.openBox<AppPreference>('appPreferenceBox');
-
+   SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
   runApp(
     MultiProvider(
       providers: [

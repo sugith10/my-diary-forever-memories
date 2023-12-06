@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:diary/application/controllers/hive_app_preference_db_ops.dart';
 import 'package:diary/core/models/app_preference_db_model.dart';
-import 'package:diary/presentation/screens/login_signin_screen/welcome_screen.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
-import 'package:diary/presentation/screens/splash_screen/onboarding.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {

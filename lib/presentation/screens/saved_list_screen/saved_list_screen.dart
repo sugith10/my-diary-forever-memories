@@ -41,7 +41,7 @@ class SavedListScreen extends StatelessWidget {
           builder: (context, Box<SavedList> box, child) {
             final List<SavedList> savedLists = box.values.toList();
             if (savedLists.isEmpty) {
-              return Center(
+              return const Center(
                 child: 
                 // Image.asset('assets/images/empty_area/saved_not_found.png')
                 Column(
