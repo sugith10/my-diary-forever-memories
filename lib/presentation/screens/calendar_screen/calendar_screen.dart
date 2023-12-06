@@ -151,7 +151,6 @@ class CalendarScreen extends StatelessWidget {
               child: ValueListenableBuilder<Box<DiaryEntry>>(
                 valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
                 builder: (context, box, child) {
-                  // Fetch all diary entries
                   List<DiaryEntry> diaryEntries = box.values.toList();
                   final selectedEntries = diaryEntries
                       .where((entry) =>

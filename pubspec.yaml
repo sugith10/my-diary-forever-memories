@@ -75,6 +75,10 @@ flutter:
     - images/start_writing.png
     - images/profile.png
     - assets/images/google.png
+    - assets/images/empty_area/search_not_found_2.png
+    - assets/images/empty_area/entry_not_found.png
+    - assets/images/empty_area/saved_not_found.png
+    - assets/images/empty_area/photo_not_found.png
 
   fonts:
     - family: Satoshi

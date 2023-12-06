@@ -12,12 +12,12 @@ class CreateDiaryText extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
+          const Text(
             'Start writing about your day...',
             style: TextStyle(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w500,
-                fontFamily: "Satoshi"),
+                fontSize: 20,
+                
+              ),
           ),
           SizedBox(
             height: 0.1.h,
@@ -27,8 +27,8 @@ class CreateDiaryText extends StatelessWidget {
             style: TextStyle(
                 color: AppColor.secondary.color,
                 fontWeight: FontWeight.w400,
-                fontSize: 9.sp,
-                fontFamily: "Satoshi"),
+                fontSize: 12.5,
+              ),
           ),
         ],
       ),

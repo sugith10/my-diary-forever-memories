@@ -22,14 +22,14 @@ class SavedListScreen extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-              onPressed: () {
-                SavedScreenFunctions().showCreateListDialog(context);
-              },
-              icon: const Icon(
-                Icons.add,
-              
-                size: 25,
-              ))
+            onPressed: () {
+              SavedScreenFunctions().showCreateListDialog(context);
+            },
+            icon: const Icon(
+              Icons.add,
+              size: 25,
+            ),
+          )
         ],
         bottom: const BottomBorderWidget(),
       ),
@@ -40,6 +40,22 @@ class SavedListScreen extends StatelessWidget {
               Hive.box<SavedList>('_savedListBoxName').listenable(),
           builder: (context, Box<SavedList> box, child) {
             final List<SavedList> savedLists = box.values.toList();
+            if (savedLists.isEmpty) {
+              return Center(
+                child: 
+                // Image.asset('assets/images/empty_area/saved_not_found.png')
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Oops...'),
+                    Text("Don't wait create a saved list.", style: TextStyle(
+                      fontSize: 20
+                    ),),
+                  ],
+                )
+                ,
+              );
+            }
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -48,30 +64,30 @@ class SavedListScreen extends StatelessWidget {
               itemCount: savedLists.length,
               itemBuilder: (BuildContext context, int index) {
                 final savedList = savedLists[index];
-                return Column(
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SavedItems(savedList: savedList),
-                          ),
-                        );
-                      },
-                      child: Container(
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            SavedItems(savedList: savedList),
+                      ),
+                    );
+                  },
+                  child: Column(
+                    children: [
+                      Container(
                         height: 16.h,
                         decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 213, 212, 212),
                             borderRadius: BorderRadius.circular(8)),
                       ),
-                    ),
-                    Text(
-                      savedList.listName,
-                      style: const TextStyle(fontSize: 18.0),
-                    )
-                  ],
+                      Text(
+                        savedList.listName,
+                        style: const TextStyle(fontSize: 18.0),
+                      )
+                    ],
+                  ),
                 );
               },
             );

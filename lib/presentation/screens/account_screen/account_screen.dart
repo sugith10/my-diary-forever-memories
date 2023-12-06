@@ -30,58 +30,10 @@ class AccountScreen extends StatelessWidget {
             text: greetingTitle,
           ),
           actions: [
-            IconButton(
-              onPressed: () {
-                showMenu(
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? const Color.fromARGB(255, 255, 255, 255)
-                      : AppColor.showMenuDark.color,
-                  context: context,
-                  position: const RelativeRect.fromLTRB(1, 0, 0, 5),
-                  items: <PopupMenuEntry>[
-                    PopupMenuItem(
-                      value: 'Edit Profile',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.edit_outlined),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          const Text('Edit Profile'),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'Logout',
-                      child: Row(
-                        children: [
-                          const Icon(
-                            Icons.power_settings_new_outlined,
-                            color: Color.fromARGB(255, 197, 60, 50),
-                          ),
-                          SizedBox(
-                            width: 3.w,
-                          ),
-                          const Text('Logout'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ).then((value) {
-                  if (value == 'Edit Profile') {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ProfilePage()));
-                  } else if (value == 'Logout') {
-                    ProfileScreenFunctions().showPopupDialog(context);
-                  }
-                });
-              },
-              icon: const Icon(
-                Ionicons.ellipsis_vertical_outline,
-              ),
-            ),
+         
+                          IconButton(onPressed: (){ ProfileScreenFunctions().showPopupDialog(context);}, icon: Icon( Icons.power_settings_new_outlined,
+                            color: Color.fromARGB(255, 197, 60, 50),))
+           ,
           ],
           elevation: 0,
           bottom: const BottomBorderWidget()),
@@ -120,14 +72,14 @@ class AccountScreen extends StatelessWidget {
                     icon: Ionicons.color_palette_outline,
                   ),
                   const ContentDivider(),
-                  ProfileOptions(
-                    function: () async {
-                      await DbFunctions().backupDiaryEntries(context);
-                    },
-                    item: 'Backup',
-                    icon: Icons.backup_outlined,
-                  ),
-                  const ContentDivider(),
+                  // ProfileOptions(
+                  //   function: () async {
+                  //     await DbFunctions().backupDiaryEntries(context);
+                  //   },
+                  //   item: 'Backup',
+                  //   icon: Icons.backup_outlined,
+                  // ),
+                  // const ContentDivider(),
                   ProfileOptions(
                     function: () async {
                       await ProfileScreenFunctions().launchEmail();
@@ -142,6 +94,14 @@ class AccountScreen extends StatelessWidget {
                     },
                     item: 'Privacy Policy',
                     icon: Ionicons.newspaper_outline,
+                  ),
+                  const ContentDivider(),
+                   ProfileOptions(
+                    function: () async {
+                      await ProfileScreenFunctions().launchTermsConditions();
+                    },
+                    item: 'Terms & Conditions',
+                    icon:Ionicons.newspaper_outline,
                   ),
                   const ContentDivider(),
                   const SizedBox(height: 20),

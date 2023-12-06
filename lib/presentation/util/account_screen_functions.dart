@@ -33,13 +33,32 @@ class ProfileScreenFunctions {
 
   Future<void> _launchPrivacyPolicy() async {
     final Uri url = Uri.parse(
-        'https://www.freeprivacypolicy.com/live/7a362b50-908e-4f46-ba36-617bab644ff9');
+        'https://www.app-privacy-policy.com/live.php?token=uJFo1kXdQd1aY9NJNjsbjNCuvTbYchkT');
 
     try {
       await launchUrl(url);
     } catch (e) {
       print('Error launching email: $e');
     }
+  }
+
+  Future<void> launchPrivacyPolicy() async {
+    await _launchPrivacyPolicy();
+  }
+
+    Future<void> _launchTermsConditions() async {
+    final Uri url = Uri.parse(
+        'https://www.app-privacy-policy.com/live.php?token=ve3uRD89qHFik8ihl2bdtEckKaMW3Jap');
+
+    try {
+      await launchUrl(url);
+    } catch (e) {
+      print('Error launching email: $e');
+    }
+  }
+
+   Future<void> launchTermsConditions() async {
+    await _launchTermsConditions();
   }
 
   String _getGreeting() {
@@ -115,9 +134,7 @@ class ProfileScreenFunctions {
     await _launchEmail();
   }
 
-  Future<void> launchPrivacyPolicy() async {
-    await _launchPrivacyPolicy();
-  }
+
 
   String getGreeting() {
     return _getGreeting();

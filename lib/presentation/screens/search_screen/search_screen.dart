@@ -40,58 +40,65 @@ class _MySearchAppBarState extends State<MySearchAppBar> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-            automaticallyImplyLeading: false,
-            leading: const BackButtonWidget(),
-            title: TextField(
-              controller: _searchController,
-              onChanged: (query) {
-                searchDiaryEntries(query);
-              },
-              autofocus: true,
-              decoration: InputDecoration(
-                hintText: 'Search...',
-                hintStyle: TextStyle(fontSize: 16.sp),
-                border: InputBorder.none,
-              ),
-              cursorColor: const Color.fromARGB(115, 95, 95, 95),
-              cursorHeight: 22,
-              style: const TextStyle(fontSize: 20),
-              textCapitalization: TextCapitalization.sentences,
+          automaticallyImplyLeading: false,
+          leading: const BackButtonWidget(),
+          title: TextField(
+            controller: _searchController,
+            onChanged: (query) {
+              searchDiaryEntries(query);
+            },
+            autofocus: true,
+            decoration: InputDecoration(
+              hintText: 'Search...',
+              hintStyle: TextStyle(fontSize: 16.sp),
+              border: InputBorder.none,
             ),
-            elevation: 0,
-            bottom: const BottomBorderWidget()),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  final entry = searchResults[index];
-                  return InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.size,
-                          alignment: Alignment.bottomCenter,
-                          child: DiaryDetailPage(
-                            entry: entry,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-                      child: DiaryCardView(
-                        entry: entry,
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
+            cursorColor: const Color.fromARGB(115, 95, 95, 95),
+            cursorHeight: 22,
+            style: const TextStyle(fontSize: 20),
+            textCapitalization: TextCapitalization.sentences,
+          ),
+          elevation: 0,
+          bottom: const BottomBorderWidget(),
         ),
+        body: searchResults.isEmpty
+            ? Center(
+                child: Image.asset(
+                  'assets/images/empty_area/search_not_found_2.png',
+                ),
+              )
+            : Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: searchResults.length,
+                      itemBuilder: (context, index) {
+                        final entry = searchResults[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.size,
+                                alignment: Alignment.bottomCenter,
+                                child: DiaryDetailPage(
+                                  entry: entry,
+                                ),
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                            child: DiaryCardView(
+                              entry: entry,
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
       ),
     );
   }

@@ -43,123 +43,122 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
     bool isFabVisible = true;
     return SafeArea(
       child: Scaffold(
-        body: ScrollConfiguration(
-          behavior: ScrollConfiguration.of(context)
-              .copyWith(physics: const BouncingScrollPhysics()),
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                automaticallyImplyLeading: false,
-                title: RichText(
-                  text: TextSpan(
-                    style: DefaultTextStyle.of(context).style,
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'My ',
-                        style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.w600,
+          body: ScrollConfiguration(
+            behavior: ScrollConfiguration.of(context)
+                .copyWith(physics: const BouncingScrollPhysics()),
+            child: CustomScrollView(
+              slivers: [
+                SliverAppBar(
+                  automaticallyImplyLeading: false,
+                  title: RichText(
+                    text: TextSpan(
+                      style: DefaultTextStyle.of(context).style,
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'My ',
+                          style: TextStyle(
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text: 'Diary',
-                        style: TextStyle(
-                          color: const Color(0xFF835DF1),
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w600,
+                        TextSpan(
+                          text: 'Diary',
+                          style: TextStyle(
+                            color: const Color(0xFF835DF1),
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageTransition(
-                          type: PageTransitionType.fade,
-                          child: const MySearchAppBar(),
-                        ),
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.search,
+                      ],
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {
-                      Navigator.push(
+                  actions: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
                           context,
                           PageTransition(
-                              type: PageTransitionType.topToBottom,
-                              child: const SavedListScreen()));
-                    },
-                    icon: const Icon(
-                      Ionicons.bookmarks_outline,
-                      // color: Colors.black,
+                            type: PageTransitionType.fade,
+                            child: const MySearchAppBar(),
+                          ),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.search,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      showMenu(
-                        context: context,
-                        position: const RelativeRect.fromLTRB(1, 0, 0, 5),
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? const Color.fromARGB(255, 255, 255, 255)
-                            : AppColor.showMenuDark.color,
-                        items: <PopupMenuEntry>[
-                          const PopupMenuItem(
-                            value: 'Newest First',
-                            child: Text('Newest First'),
-                          ),
-                          const PopupMenuItem(
-                            value: 'Oldest First',
-                            child: Text('Oldest First'),
-                          ),
-                          const PopupMenuItem(
-                            value: 'Range Pick',
-                            child: Text('Range Pick'),
-                          ),
-                        ],
-                      ).then((value) async {
-                        if (value == 'Newest First') {
-                          setState(() {
-                            selectedSortOption = value as String;
-                          });
-                        } else if (value == 'Oldest First') {
-                          setState(() {
-                            selectedSortOption = value as String;
-                          });
-                        } else if (value == 'Range Pick') {
-                          selectedDateRange = await MyDiaryScreenFunctions()
-                              .handleDateRangePick(context);
-                          if (selectedDateRange != null) {
-                            selectedSortOption = value as String;
-                            print('the new range = $selectedDateRange');
-                          } else {
+                    IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.topToBottom,
+                                child: const SavedListScreen()));
+                      },
+                      icon: const Icon(
+                        Ionicons.bookmarks_outline,
+                        // color: Colors.black,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        showMenu(
+                          context: context,
+                          position: const RelativeRect.fromLTRB(1, 0, 0, 5),
+                          color:
+                              Theme.of(context).brightness == Brightness.light
+                                  ? const Color.fromARGB(255, 255, 255, 255)
+                                  : AppColor.showMenuDark.color,
+                          items: <PopupMenuEntry>[
+                            const PopupMenuItem(
+                              value: 'Newest First',
+                              child: Text('Newest First'),
+                            ),
+                            const PopupMenuItem(
+                              value: 'Oldest First',
+                              child: Text('Oldest First'),
+                            ),
+                            const PopupMenuItem(
+                              value: 'Range Pick',
+                              child: Text('Range Pick'),
+                            ),
+                          ],
+                        ).then((value) async {
+                          if (value == 'Newest First') {
                             setState(() {
                               selectedSortOption = value as String;
                             });
-                            print('date range is null');
+                          } else if (value == 'Oldest First') {
+                            setState(() {
+                              selectedSortOption = value as String;
+                            });
+                          } else if (value == 'Range Pick') {
+                            selectedDateRange = await MyDiaryScreenFunctions()
+                                .handleDateRangePick(context);
+                            if (selectedDateRange != null) {
+                              selectedSortOption = value as String;
+                              print('the new range = $selectedDateRange');
+                            } else {
+                              setState(() {
+                                selectedSortOption = value as String;
+                              });
+                              print('date range is null');
+                            }
                           }
-                        }
-                      });
-                    },
-                    icon: const Icon(
-                      Ionicons.ellipsis_vertical_outline,
+                        });
+                      },
+                      icon: const Icon(
+                        Ionicons.ellipsis_vertical_outline,
+                      ),
                     ),
-                  ),
-                ],
-                bottom: const BottomBorderWidget(),
-                elevation: 0,
-                pinned: false, // Keep the app bar pinned
-                floating: true, // Make the app bar float
-                snap: true,
-              ),
-              SliverPadding(
-                padding: const EdgeInsets.all(8.0),
-                sliver: ValueListenableBuilder(
+                  ],
+                  bottom: const BottomBorderWidget(),
+                  elevation: 0,
+                  pinned: false, // Keep the app bar pinned
+                  floating: true, // Make the app bar float
+                  snap: true,
+                ),
+                ValueListenableBuilder(
                   valueListenable:
                       Hive.box<DiaryEntry>('_boxName').listenable(),
                   builder: (context, box, child) {
@@ -174,7 +173,6 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       case 'Range Pick':
                         if (selectedDateRange != null) {
                           log('range pick - in value listanble builder');
-
                           sortedEntries = filterEntriesByDateRange(
                               sortedEntries, selectedDateRange!);
                         }
@@ -191,6 +189,29 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                     }
                     log('Grouped Entries Length: ${groupedEntries.length}');
 
+                    if (sortedEntries.isEmpty) {
+                      return SliverFillRemaining(
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                  'assets/images/empty_area/entry_not_found.png'),
+                              const Text(
+                                'Capture the beauty of your memories',
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              const Text(
+                                'Never lose, always record.',
+                                style: TextStyle(
+                                    fontSize: 20,
+                                 ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    }
                     return SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
@@ -208,31 +229,25 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                     );
                   },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        floatingActionButton: isFabVisible
-            ? FloatingActionButton(
-                shape: const CircleBorder(),
-                onPressed: () {
-                  final changer = Provider.of<Changer>(context, listen: false);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CreateDiaryScreen(
-                        changer: changer,selectedColor: GetColors().getThemeColor(context)
-                      ),
-                    ),
-                  );
-                },
-                // backgroundColor: const Color.fromARGB(255, 255, 254, 254),
-                elevation: 3,
-                child: const CustomIconWidget(),
-                // ignore: dead_code
-              )
-            : null,
-      ),
+          floatingActionButton: FloatingActionButton(
+            shape: const CircleBorder(),
+            onPressed: () {
+              final changer = Provider.of<Changer>(context, listen: false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CreateDiaryScreen(
+                      changer: changer,
+                      selectedColor: GetColors().getThemeColor(context)),
+                ),
+              );
+            },
+            elevation: 3,
+            child: const CustomIconWidget(),
+          )),
     );
   }
 }
