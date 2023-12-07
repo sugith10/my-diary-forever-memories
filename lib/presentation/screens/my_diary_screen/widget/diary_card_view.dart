@@ -1,6 +1,4 @@
 import 'dart:developer';
-
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
 import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
@@ -23,7 +21,7 @@ class DiaryEntryCard extends StatelessWidget {
       startActionPane: ActionPane(
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(onDismissed: () {
-          // print('Start Action Dismissed');
+
         }),
         children: const [
           SlidableAction(
@@ -40,14 +38,13 @@ class DiaryEntryCard extends StatelessWidget {
         dismissible: DismissiblePane(onDismissed: () {
           if (entry.id != null) {
             DbFunctions().deleteDiary(entry.id!);
-            //  diaryEntriesNotifier.notifyListeners();
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 behavior: SnackBarBehavior.floating,
                 margin: EdgeInsets.all(2.h),
                 backgroundColor: Colors.red,
                 duration: const Duration(seconds: 2),
-                content: const Text("Successfully Deleted"),
+                content: const Text("Successfully Deleted", style: TextStyle(color: Colors.white),),
               ),
             );
           } else {
@@ -59,21 +56,15 @@ class DiaryEntryCard extends StatelessWidget {
             onPressed: (BuildContext context) {
               if (entry.id != null) {
                 DbFunctions().deleteDiary(entry.id!);
-                final snackBar = SnackBar(
-                  elevation: 0,
-                  behavior: SnackBarBehavior.floating,
-                  backgroundColor: Colors.transparent,
-                  content: AwesomeSnackbarContent(
-                    title: 'Successfully Deleted...',
-                    message:
-                        'This is an example error message that will be shown in the body of snackbar!',
-                    contentType: ContentType.failure,
-                  ),
-                );
-
-                ScaffoldMessenger.of(context)
-                  ..hideCurrentSnackBar()
-                  ..showSnackBar(snackBar);
+               ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.all(2.h),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 2),
+                content: const Text("Successfully Deleted", style: TextStyle(color: Colors.white),),
+              ),
+            );
               }
             },
             backgroundColor: const Color(0xFFFE4A49),
@@ -85,7 +76,6 @@ class DiaryEntryCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          //  Navigator.push(context, MaterialPageRoute(builder: (context)=> DiaryDetailPage(entry: entry,)));
           Navigator.push(
               context,
               PageTransition(
@@ -96,7 +86,7 @@ class DiaryEntryCard extends StatelessWidget {
                   )));
         },
         child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 4, 0, 4),
+            padding: const EdgeInsets.fromLTRB(6, 4, 6, 4),
             child: DiaryCardView(entry: entry)),
       ),
     );

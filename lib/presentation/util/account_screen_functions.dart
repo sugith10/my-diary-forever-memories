@@ -1,15 +1,11 @@
 import 'package:diary/application/controllers/hive_app_preference_db_ops.dart';
 import 'package:diary/core/models/app_preference_db_model.dart';
-import 'package:diary/presentation/screens/login_signin_screen/welcome_screen.dart';
-import 'package:diary/presentation/screens/splash_screen/onboarding.dart';
-import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreenFunctions {
-  // Private function for launching email
   Future<void> _launchEmail() async {
     const String emailAddress = 'dayproductionltd@gmail.com';
     const String emailSubject = '';
@@ -29,6 +25,10 @@ class ProfileScreenFunctions {
     } catch (e) {
       print('Error launching email: $e');
     }
+  }
+
+  Future<void> launchEmail() async {
+    await _launchEmail();
   }
 
   Future<void> _launchPrivacyPolicy() async {
@@ -77,6 +77,11 @@ class ProfileScreenFunctions {
     }
   }
 
+
+  String getGreeting() {
+    return _getGreeting();
+  }
+
   void _showPopupDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -114,7 +119,6 @@ class ProfileScreenFunctions {
                   child:
                       const Text('Logout', style: TextStyle(color: Colors.red)),
                   onPressed: ()async {
-                      // Update showOnboarding to true
                   final appPreferenceFunctions = AppPreferenceFunctions();
                  final onboardingStatus = AppPreference(id: '1', showOnboarding: true);
                   await appPreferenceFunctions.showOnboarding(onboardingStatus);
@@ -128,16 +132,6 @@ class ProfileScreenFunctions {
         );
       },
     );
-  }
-
-  Future<void> launchEmail() async {
-    await _launchEmail();
-  }
-
-
-
-  String getGreeting() {
-    return _getGreeting();
   }
 
   void showPopupDialog(BuildContext context) {

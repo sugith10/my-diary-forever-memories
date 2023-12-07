@@ -9,6 +9,7 @@ class BackButtonWidget extends StatelessWidget {
     return IconButton(
       onPressed: () {
         Navigator.pop(context);
+        FocusScope.of(context).requestFocus(FocusNode()); 
       },
       icon: const Icon(
         Ionicons.chevron_back_outline,

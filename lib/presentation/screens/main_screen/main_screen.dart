@@ -30,7 +30,7 @@ class MainScreen extends StatelessWidget {
     'Gallery ',
     'Account ',
   ];
-
+  
   MainScreen({super.key});
 
   @override
@@ -49,7 +49,6 @@ class MainScreen extends StatelessWidget {
         padding: const EdgeInsets.only(bottom: 0, top: 0, right: 6, left: 6),
         child: SizedBox(
           height: displayWidth * 0.155,
-    
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: List.generate(4, (index) {

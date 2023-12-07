@@ -97,7 +97,6 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       },
                       icon: const Icon(
                         Ionicons.bookmarks_outline,
-                        // color: Colors.black,
                       ),
                     ),
                     IconButton(
@@ -154,8 +153,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                   ],
                   bottom: const BottomBorderWidget(),
                   elevation: 0,
-                  pinned: false, // Keep the app bar pinned
-                  floating: true, // Make the app bar float
+                  pinned: false, 
+                  floating: true, 
                   snap: true,
                 ),
                 ValueListenableBuilder(
@@ -188,7 +187,6 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                       groupedEntries[dateKey]!.add(entry);
                     }
                     log('Grouped Entries Length: ${groupedEntries.length}');
-
                     if (sortedEntries.isEmpty) {
                       return SliverFillRemaining(
                         child: Center(

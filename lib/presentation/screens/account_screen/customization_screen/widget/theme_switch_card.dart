@@ -1,3 +1,4 @@
+import 'package:diary/presentation/util/responsive_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -10,7 +11,7 @@ class ThemeSwitchCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20),
-      height: 15.h,
+      height: ResponsiveUtils().customizationScreenHeight(context),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
         border: Border.all(

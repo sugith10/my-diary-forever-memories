@@ -102,7 +102,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
               String? imagePath;
               if (_image != null) {
                 imagePath = await saveImage(_image!);
-              }
+              }                                                                                                                                               
 
               if (title.isNotEmpty) {
                 final entry = DiaryEntry(

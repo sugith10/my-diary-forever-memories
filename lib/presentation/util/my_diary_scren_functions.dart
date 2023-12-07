@@ -34,7 +34,8 @@ class MyDiaryScreenFunctions {
       initialEntryMode: Theme.of(context).brightness == Brightness.light
           ? DatePickerEntryMode.calendar
           : DatePickerEntryMode.input,
-          initialDateRange: DateTimeRange(start: DateTime(2023) , end: DateTime.now()),
+      initialDateRange:
+          DateTimeRange(start: DateTime(2023), end: DateTime.now()),
       helpText: 'Select Date Range',
       cancelText: 'Cancel',
       confirmText: 'OK',
@@ -50,38 +51,55 @@ class MyDiaryScreenFunctions {
       final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
       print('Selected date range: $formattedStartDate - $formattedEndDate');
     }
-     return pickedDateRange ;
+    return pickedDateRange;
   }
 
- Future<DateTimeRange?> handleDateRangePick(BuildContext context) async {
+  Future<DateTimeRange?> handleDateRangePick(BuildContext context) async {
     return _handleDateRangePick(context);
   }
+Widget _buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
+  final formattedDate = DateFormat('d MMM - y  EEEE').format(DateTime.parse(date));
 
-  Widget _buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            date,
-            style: const TextStyle(
-              // fontWeight: FontWeight.normal,
-              fontSize: 15.0,
+  // Split the formatted date to get the day and year separately
+  final dateParts = formattedDate.split(' - ');
+
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Padding(
+        padding: const EdgeInsets.only(bottom: 8, left: 16, right: 8, top: 8),
+        child: Row(
+          children: [
+            Text(
+              dateParts[0], // Day and Month
+              style:  TextStyle(
+                fontSize: 15.0,
+                // color:Colors.grey, // Set your desired color
+                fontWeight: FontWeight.w400
+              ),
             ),
-          ),
+            const SizedBox(width: 4), // Add spacing between day and year
+            Text(
+              dateParts[1], // Year and Day of the week
+              style: const TextStyle(
+                fontSize: 15.0,
+                // color: Colors.grey, // Set your desired color
+              ),
+            ),
+          ],
         ),
-        Column(
-          children: entries.map((entry) {
-            return DiaryEntryCard(entry, entries.indexOf(entry),
-                key: ValueKey(entry.id));
-          }).toList(),
-        ),
-      ],
-    );
-  }
+      ),
+      Column(
+        children: entries.map((entry) {
+          return DiaryEntryCard(entry, entries.indexOf(entry), key: ValueKey(entry.id));
+        }).toList(),
+      ),
+    ],
+  );
+}
 
-   Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date){
-    return  _buildGroupedDiaryEntries(entries, date);
-   }
+
+  Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
+    return _buildGroupedDiaryEntries(entries, date);
+  }
 }

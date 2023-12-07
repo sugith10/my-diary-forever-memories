@@ -1,7 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/core/models/content_model.dart';
 import 'package:diary/infrastructure/providers/provider_onboarding.dart';
-import 'package:diary/presentation/screens/login_signin_screen/welcome_screen.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/screens/splash_screen/widget/build_bot.dart';
 import 'package:diary/presentation/util/get_colors.dart';
@@ -27,7 +26,7 @@ class Onbording extends StatelessWidget {
           children: [
             const Spacer(),
             Lottie.asset(
-             OnboardingScreenFunctions().getLottieJsonFileName(themeMode),
+              OnboardingScreenFunctions().getLottieJsonFileName(themeMode),
               width: double.infinity,
             ),
             Expanded(
@@ -43,7 +42,8 @@ class Onbording extends StatelessWidget {
                       Text(
                         contents[i].title,
                         style: TextStyle(
-                            fontSize: 25.sp, fontWeight: FontWeight.w600),
+                            fontSize:  MediaQuery.of(context).size.height >= 500 ? 35.0 : 25.0, 
+                            fontWeight: FontWeight.w600),
                       ),
                       SizedBox(height: 1.5.h),
                       Container(
@@ -52,8 +52,9 @@ class Onbording extends StatelessWidget {
                           contents[i].discription,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 15.sp,
-                            color: OnboardingScreenFunctions().getDescriptionColor(context)  ,
+                           fontSize:  MediaQuery.of(context).size.height >= 500 ? 20.0 : 15.0, 
+                            color: OnboardingScreenFunctions()
+                                .getDescriptionColor(context),
                           ),
                         ),
                       ),
@@ -62,30 +63,29 @@ class Onbording extends StatelessWidget {
                 },
               ),
             ),
-            // ignore: avoid_unnecessary_containers
-            Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(
-                  contents.length,
-                  (index) => BuidDot(
-                      index: index,
-                      context: context,
-                      onboardingState: onboardingState),
-                ),
+           
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                contents.length,
+                (index) => BuidDot(
+                    index: index,
+                    context: context,
+                    onboardingState: onboardingState),
               ),
             ),
 
             Container(
               margin: const EdgeInsets.all(20),
               width: double.infinity,
+              height: 60,
               child: ElevatedButton(
                 onPressed: () {
                   if (onboardingState.currentIndex == contents.length - 1) {
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (_) =>  MainScreen(),
+                        builder: (_) => MainScreen(),
                       ),
                     );
                   } else {
@@ -98,7 +98,7 @@ class Onbording extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   textStyle: TextStyle(
-                    fontSize: 18.sp,
+                      fontSize: MediaQuery.of(context).size.width * 0.05, 
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Satoshi',
                   ),
@@ -115,9 +115,8 @@ class Onbording extends StatelessWidget {
                     onboardingState.currentIndex == contents.length - 1
                         ? "Continue"
                         : "Next",
-                        style: const TextStyle(
-                          color:  Color.fromRGBO(255, 255, 255, 1)
-                        ),
+                    style: const TextStyle(
+                        color: Color.fromRGBO(255, 255, 255, 1)),
                   ),
                 ),
               ),
