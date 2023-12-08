@@ -54,36 +54,42 @@ class MyDiaryScreenFunctions {
     return pickedDateRange;
   }
 
-  Future<DateTimeRange?> handleDateRangePick(BuildContext context) async {
+Future<DateTimeRange?> handleDateRangePick(BuildContext context) async {
     return _handleDateRangePick(context);
   }
-Widget _buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
-  final formattedDate = DateFormat('d MMM - y  EEEE').format(DateTime.parse(date));
 
-  // Split the formatted date to get the day and year separately
+
+Widget _buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
+  final formattedDate = DateFormat('d MMM y - EEEE').format(DateTime.parse(date));
+
   final dateParts = formattedDate.split(' - ');
+
+  // Function to get the common day abbreviation
+  String getCommonDayAbbreviation(String fullDay) {
+    return DateFormat.E().format(DateTime.parse(date)).substring(0, 3);
+  }
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       Padding(
-        padding: const EdgeInsets.only(bottom: 8, left: 16, right: 8, top: 8),
+        padding: const EdgeInsets.only(bottom: 10, left: 16, right: 8, top: 10),
         child: Row(
           children: [
+           
+            const SizedBox(width: 4),
             Text(
-              dateParts[0], // Day and Month
-              style:  TextStyle(
-                fontSize: 15.0,
-                // color:Colors.grey, // Set your desired color
-                fontWeight: FontWeight.w400
-              ),
-            ),
-            const SizedBox(width: 4), // Add spacing between day and year
-            Text(
-              dateParts[1], // Year and Day of the week
+              dateParts[0],
               style: const TextStyle(
                 fontSize: 15.0,
-                // color: Colors.grey, // Set your desired color
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            const SizedBox(width: 4),
+            Text(
+              '(${getCommonDayAbbreviation(date)})', // Include common day abbreviation in parentheses
+              style: const TextStyle(
+                fontSize: 15.0,
               ),
             ),
           ],
@@ -97,8 +103,7 @@ Widget _buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
     ],
   );
 }
-
-
+ 
   Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
     return _buildGroupedDiaryEntries(entries, date);
   }
