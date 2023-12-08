@@ -2,44 +2,43 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/presentation/screens/create_screen/image_view_screen.dart';
 import 'package:diary/presentation/screens/create_screen/widget/down_icon.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
+import 'package:diary/presentation/screens/widget/create_screen_bottom_navigationbar.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
-import 'package:diary/infrastructure/providers/provider_create.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
 import 'package:diary/presentation/util/create_screen_functions.dart';
-import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
+import 'package:diary/presentation/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter/foundation.dart' as foundation;
 import 'package:sizer/sizer.dart';
 import 'package:image/image.dart' as img;
 
 class CreateDiaryScreen extends StatefulWidget {
   final Changer changer;
-   Color selectedColor;
+  Color selectedColor;
 
-  CreateDiaryScreen({super.key, required this.changer, required this.selectedColor});
+  CreateDiaryScreen(
+      {super.key, required this.changer, required this.selectedColor});
 
   @override
   State<CreateDiaryScreen> createState() => _CreatePageState();
 }
 
 class _CreatePageState extends State<CreateDiaryScreen> {
-
   final TextEditingController titleController = TextEditingController();
 
   final TextEditingController contentController = TextEditingController();
 
-  bool _isEmojiKeyboardVisible = false;
+  final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
 
   _onBackspacePressed() {
     contentController
@@ -80,7 +79,6 @@ class _CreatePageState extends State<CreateDiaryScreen> {
       }
 
       return imagePath;
-   
     } catch (e) {
       log("Error saving image: $e");
       return null;
@@ -91,7 +89,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor:  widget.selectedColor,
+      backgroundColor: widget.selectedColor,
       appBar: AppBar(
           leading: const BackButtonWidget(),
           actions: [
@@ -102,7 +100,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
               String? imagePath;
               if (_image != null) {
                 imagePath = await saveImage(_image!);
-              }                                                                                                                                               
+              }
 
               if (title.isNotEmpty) {
                 final entry = DiaryEntry(
@@ -233,12 +231,18 @@ class _CreatePageState extends State<CreateDiaryScreen> {
             SizedBox(
               child: _image != null
                   ? Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Image.file(
-                          _image!,
-                          height: 300,
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 20),
+                      child: GestureDetector(
+                        onTapDown: (details) {
+                          _showImageMenu(context, details);
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.file(
+                            _image!,
+                            // height: 300,
+                          ),
                         ),
                       ),
                     )
@@ -276,160 +280,142 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                 ),
               ),
             ),
-            Offstage(
-              offstage: !_isEmojiKeyboardVisible,
-              child: SizedBox(
-                height: 250,
-                width: double.infinity,
-                child: EmojiPicker(
-                  textEditingController: contentController,
-                  onBackspacePressed: _onBackspacePressed,
-                  onEmojiSelected: (Category? category, Emoji? emoji) {
-                    if (emoji != null) {
-                      contentController.text += emoji.emoji;
-                    }
-                  },
-                  config: Config(
-                    columns: 8,
-                    emojiSizeMax: 32 *
-                        (foundation.defaultTargetPlatform == TargetPlatform.iOS
-                            ? 1.30
-                            : 1.0),
-                    verticalSpacing: 0,
-                    horizontalSpacing: 0,
-                    gridPadding: EdgeInsets.zero,
-                    initCategory: Category.RECENT,
-                    bgColor: Theme.of(context).brightness == Brightness.light
-                        ? Colors.white
-                        : AppColor.dark.color,
-                    indicatorColor: const Color(0xFF835DF1),
-                    iconColor: Colors.grey,
-                    iconColorSelected: const Color(0xFF835DF1),
-                    backspaceColor: const Color(0xFF835DF1),
-                    enableSkinTones: true,
-                    recentTabBehavior: RecentTabBehavior.RECENT,
-                    recentsLimit: 28,
-                    replaceEmojiOnLimitExceed: false,
-                    noRecents: const Text(
-                      'No Recents',
-                      style: TextStyle(fontSize: 20),
-                      textAlign: TextAlign.center,
-                    ),
-                    loadingIndicator: const SizedBox.shrink(),
-                    tabIndicatorAnimDuration: kTabScrollDuration,
-                    categoryIcons: const CategoryIcons(),
-                    buttonMode: ButtonMode.MATERIAL,
-                    checkPlatformCompatibility: true,
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),
-      bottomNavigationBar: Consumer<CreatePageProvider>(
-        builder: (context, bottomNavigationProvider, child) {
-          return Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: BottomNavigationBar(
-              selectedItemColor: const Color(0xFF835DF1),
-              showUnselectedLabels: false,
-              showSelectedLabels: false,
-              type: BottomNavigationBarType.fixed,
-              currentIndex: bottomNavigationProvider.selectedIndex,
-              onTap: (index) {
-                switch (index) {
-                  case 0:
-                    showTimePicker(
-                      context: context,
-                      initialTime: TimeOfDay.now(),
-                      builder: (BuildContext context, Widget? child) {
-                        final isDark =
-                            Theme.of(context).brightness == Brightness.dark;
-                        return Theme(
-                          data: isDark
-                              ? ThemeData.dark().copyWith(
-                                  colorScheme: ColorScheme.dark(
-                                    primary: AppColor.darkBuilder.color,
-                                    secondary: AppColor.darkFourth.color,
-                                  ),
-                                )
-                              : ThemeData.light().copyWith(
-                                  colorScheme: ColorScheme.light(
-                                    primary: AppColor.primary.color,
-                                    secondary: AppColor.primary.color,
-                                  ),
-                                ),
-                          child: child ?? Container(),
-                        );
-                      },
-                    ).then((pickedTime) {
-                      if (pickedTime != null) {
-                        String formattedTime = pickedTime.format(context);
-                        String existingText = contentController.text;
-
-                        String newText = existingText.isNotEmpty
-                            ? '$existingText\n\n\n$formattedTime\n\n'
-                            : '$formattedTime\n\n';
-
-                        contentController.value = TextEditingValue(
-                          text: newText,
-                          selection:
-                              TextSelection.collapsed(offset: newText.length),
-                        );
-                      }
-                    });
-                    break;
-
-                  case 1:
-                    _toggleEmojiKeyboard();
-
-                    break;
-                  case 2:
-                    getImage();
-                    break;
-                  case 3:
-                    CreateDiaryScreenFunctions().showColorPickerDialog(
-                        context, widget.selectedColor, (Color color) {
-                      setState(() {
-                       widget.selectedColor = color;
-                      });
-                    });
-                    break;
-                }
-                bottomNavigationProvider.setSelectedIndex(index);
-              },
-              items: const [
-                BottomNavigationBarItem(
-                  icon: Icon(
-                    Ionicons.time_outline,
-                  ),
-                  label: 'Time',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Ionicons.happy_outline),
-                  label: 'Emoji',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Ionicons.image_outline),
-                  label: 'Gallery',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Ionicons.color_palette_outline),
-                  label: 'Color',
-                ),
-              ],
-            ),
-          );
+      bottomNavigationBar: CreatePageBottomNav(
+        selectedIndexNotifier: _selectedIndexNotifier,
+        onTap: (index) {
+          _selectedIndexNotifier.value = index;
+          _navigateToPage(index);
         },
       ),
     );
   }
 
-  void _toggleEmojiKeyboard() {
+  void _navigateToPage(int index) {
+    switch (index) {
+      case 0:
+        showTimePicker(
+          context: context,
+          initialTime: TimeOfDay.now(),
+          builder: (BuildContext context, Widget? child) {
+            final isDark = Theme.of(context).brightness == Brightness.dark;
+            return Theme(
+              data: isDark
+                  ? ThemeData.dark().copyWith(
+                      colorScheme: ColorScheme.dark(
+                        primary: AppColor.darkBuilder.color,
+                        secondary: AppColor.darkFourth.color,
+                      ),
+                    )
+                  : ThemeData.light().copyWith(
+                      colorScheme: ColorScheme.light(
+                        primary: AppColor.primary.color,
+                        secondary: AppColor.primary.color,
+                      ),
+                    ),
+              child: child ?? Container(),
+            );
+          },
+        ).then((pickedTime) {
+          if (pickedTime != null) {
+            String formattedTime = pickedTime.format(context);
+            String existingText = contentController.text;
+
+            String newText = existingText.isNotEmpty
+                ? '$existingText\n\n\n$formattedTime\n\n'
+                : '$formattedTime\n\n';
+
+            contentController.value = TextEditingValue(
+              text: newText,
+              selection: TextSelection.collapsed(offset: newText.length),
+            );
+          }
+        });
+        break;
+
+      case 1:
+        getImage();
+
+        break;
+      case 2:
+        CreateDiaryScreenFunctions().showColorPickerDialog(
+            context, widget.selectedColor, (Color color) {
+          setState(() {
+            widget.selectedColor = color;
+          });
+        });
+        break;
+    }
+  }
+
+  void _showImageMenu(BuildContext context, TapDownDetails details) {
+    showMenu(
+      color: GetColors().getAlertBoxColor(context),
+      context: context,
+      position: RelativeRect.fromLTRB(
+        details.globalPosition.dx,
+        details.globalPosition.dy,
+        details.globalPosition.dx,
+        details.globalPosition.dy,
+      ),
+      items: [
+        PopupMenuItem(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ImageViewerPage(imageFile: _image!),
+                ),
+              );
+            },
+            child: const Center(
+                child: Text(
+              'Open',
+              style: TextStyle(fontSize: 17),
+            )),
+          ),
+        ),
+        PopupMenuItem(
+          child: GestureDetector(
+            onTap: () {
+              getImage();
+              Navigator.pop(context);
+            },
+            child: const Center(
+                child: Text(
+              'Change',
+              style: TextStyle(fontSize: 17),
+            )),
+          ),
+        ),
+        PopupMenuItem(
+          child: GestureDetector(
+            onTap: () {
+              _removePhoto();
+              Navigator.pop(context);
+            },
+            child: const Center(
+              child: Text(
+                'Remove',
+                style: TextStyle(fontSize: 17),
+              ),
+            ),
+          ),
+        ),
+      ],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
+  void _removePhoto() {
     setState(() {
-      _isEmojiKeyboardVisible = !_isEmojiKeyboardVisible;
+      _image = null;
     });
   }
+
 }

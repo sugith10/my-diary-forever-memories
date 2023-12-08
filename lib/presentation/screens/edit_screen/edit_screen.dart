@@ -4,6 +4,7 @@ import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
+import 'package:diary/presentation/screens/widget/create_screen_bottom_navigationbar.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
 import 'package:diary/presentation/util/create_screen_functions.dart';
 import 'package:diary/presentation/util/get_colors.dart';
@@ -15,7 +16,7 @@ import 'package:path_provider/path_provider.dart';
 class EditDiaryEntryScreen extends StatefulWidget {
   final DiaryEntry entry;
 
-   const EditDiaryEntryScreen({required this.entry, super.key});
+  const EditDiaryEntryScreen({required this.entry, super.key});
 
   @override
   State<EditDiaryEntryScreen> createState() => _EditDiaryEntryScreenState();
@@ -25,7 +26,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   final TextEditingController titleController;
   final TextEditingController contentController;
   File? _image;
-
+   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
 
   _EditDiaryEntryScreenState()
       : titleController = TextEditingController(),
@@ -36,8 +37,6 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
     super.initState();
     titleController.text = widget.entry.title;
     contentController.text = widget.entry.content;
-
-
 
     if (widget.entry.imagePath != null) {
       _image = File(widget.entry.imagePath!);
@@ -71,7 +70,8 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: DiaryDetailPageFunctions().hexToColor(widget.entry.background),
+      backgroundColor:
+          DiaryDetailPageFunctions().hexToColor(widget.entry.background),
       appBar: AppBar(
           leading: const BackButtonWidget(),
           actions: [
@@ -96,8 +96,11 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     hintStyle: TextStyle(fontSize: 24),
                     border: InputBorder.none,
                   ),
-                  style:  TextStyle(fontSize: 24, color: CreateDiaryScreenFunctions()
-                              .isColorBright(DiaryDetailPageFunctions().hexToColor(widget.entry.background))
+                  style: TextStyle(
+                      fontSize: 24,
+                      color: CreateDiaryScreenFunctions().isColorBright(
+                              DiaryDetailPageFunctions()
+                                  .hexToColor(widget.entry.background))
                           ? Colors.black
                           : Colors.white),
                   cursorColor: Colors.green[900],
@@ -122,32 +125,41 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                       )
                     : Container(),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextField(
                   controller: contentController,
-                  maxLines: null, 
+                  maxLines: null,
                   decoration: const InputDecoration(
                     hintText: 'Content',
                     hintStyle: TextStyle(fontSize: 18),
                     border: InputBorder.none,
                   ),
-                  // ignore: prefer_const_constructors
-                  style: TextStyle(fontSize: 18,  color: CreateDiaryScreenFunctions()
-                              .isColorBright(DiaryDetailPageFunctions().hexToColor(widget.entry.background))
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: CreateDiaryScreenFunctions().isColorBright(
+                              DiaryDetailPageFunctions()
+                                  .hexToColor(widget.entry.background))
                           ? Colors.black
                           : Colors.white),
                   autofocus: true,
                   cursorColor: Colors.red[900],
                 ),
               ),
-             
             ],
           ),
         ),
       ),
-    );
+      bottomNavigationBar: CreatePageBottomNav(
+        selectedIndexNotifier: _selectedIndexNotifier,
+        onTap: (index) {
+          // Update the selected index
+          _selectedIndexNotifier.value = index;
+          // Handle the onTap logic as needed
+          _navigateToPage(index);
+        },
+      ),
+    ); 
   }
 
   void _showPopupDialog(BuildContext context) {
@@ -216,5 +228,20 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       },
     );
   }
-
 }
+
+
+void _navigateToPage(int index) {
+    switch (index) {
+      case 0:
+        // Handle time navigation
+        break;
+      case 1:
+        // Handle gallery navigation
+      
+        break;
+      case 2:
+       
+        break;
+    }
+  }

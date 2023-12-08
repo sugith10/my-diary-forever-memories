@@ -9,7 +9,6 @@ import 'package:diary/presentation/theme/app_theme.dart';
 import 'package:diary/infrastructure/providers/provider_mainscreen.dart';
 import 'package:diary/infrastructure/providers/provider_onboarding.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
-import 'package:diary/infrastructure/providers/provider_create.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -55,9 +54,6 @@ Future<void> main() async {
       providers: [
         ChangeNotifierProvider(
           create: (context) => ThemeNotifier(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CreatePageProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => Changer(),

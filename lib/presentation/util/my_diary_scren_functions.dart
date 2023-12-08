@@ -54,56 +54,57 @@ class MyDiaryScreenFunctions {
     return pickedDateRange;
   }
 
-Future<DateTimeRange?> handleDateRangePick(BuildContext context) async {
+  Future<DateTimeRange?> handleDateRangePick(BuildContext context) async {
     return _handleDateRangePick(context);
   }
 
+  Widget _buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
+    final formattedDate =
+        DateFormat('d MMM y - EEEE').format(DateTime.parse(date));
 
-Widget _buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
-  final formattedDate = DateFormat('d MMM y - EEEE').format(DateTime.parse(date));
+    final dateParts = formattedDate.split(' - ');
 
-  final dateParts = formattedDate.split(' - ');
+    // Function to get the common day abbreviation
+    String getCommonDayAbbreviation(String fullDay) {
+      return DateFormat.E().format(DateTime.parse(date)).substring(0, 3);
+    }
 
-  // Function to get the common day abbreviation
-  String getCommonDayAbbreviation(String fullDay) {
-    return DateFormat.E().format(DateTime.parse(date)).substring(0, 3);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding:
+              const EdgeInsets.only(bottom: 10, left: 16, right: 8, top: 10),
+          child: Row(
+            children: [
+              const SizedBox(width: 4),
+              Text(
+                dateParts[0],
+                style: const TextStyle(
+                  fontSize: 15.0,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              const SizedBox(width: 4),
+              Text(
+                '(${getCommonDayAbbreviation(date)})', // Include common day abbreviation in parentheses
+                style: const TextStyle(
+                  fontSize: 15.0,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Column(
+          children: entries.map((entry) {
+            return DiaryEntryCard(entry, entries.indexOf(entry),
+                key: ValueKey(entry.id));
+          }).toList(),
+        ),
+      ],
+    );
   }
 
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: const EdgeInsets.only(bottom: 10, left: 16, right: 8, top: 10),
-        child: Row(
-          children: [
-           
-            const SizedBox(width: 4),
-            Text(
-              dateParts[0],
-              style: const TextStyle(
-                fontSize: 15.0,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            const SizedBox(width: 4),
-            Text(
-              '(${getCommonDayAbbreviation(date)})', // Include common day abbreviation in parentheses
-              style: const TextStyle(
-                fontSize: 15.0,
-              ),
-            ),
-          ],
-        ),
-      ),
-      Column(
-        children: entries.map((entry) {
-          return DiaryEntryCard(entry, entries.indexOf(entry), key: ValueKey(entry.id));
-        }).toList(),
-      ),
-    ],
-  );
-}
- 
   Widget buildGroupedDiaryEntries(List<DiaryEntry> entries, String date) {
     return _buildGroupedDiaryEntries(entries, date);
   }

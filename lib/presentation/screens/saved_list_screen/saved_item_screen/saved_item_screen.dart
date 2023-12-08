@@ -1,7 +1,7 @@
 import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
-import 'package:diary/presentation/screens/my_diary_screen/mydiary_screen.dart';
+import 'package:diary/presentation/screens/saved_list_screen/widget/not_found.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
@@ -81,14 +81,9 @@ class _SavedItemsState extends State<SavedItems> {
               );
             } else {
               return const Center(
-                child: Text(
-                  'No diary entries found for this list.',
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              );
+                  child: NotFound(
+                message: "No diary entries found for this list.",
+              ));
             }
           },
         ),

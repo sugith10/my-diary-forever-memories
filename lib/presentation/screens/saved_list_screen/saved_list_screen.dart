@@ -1,5 +1,6 @@
 import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_item_screen/saved_item_screen.dart';
+import 'package:diary/presentation/screens/saved_list_screen/widget/not_found.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
@@ -42,19 +43,9 @@ class SavedListScreen extends StatelessWidget {
             final List<SavedList> savedLists = box.values.toList();
             if (savedLists.isEmpty) {
               return const Center(
-                child: 
-                // Image.asset('assets/images/empty_area/saved_not_found.png')
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text('Oops...'),
-                    Text("Don't wait create a saved list.", style: TextStyle(
-                      fontSize: 20
-                    ),),
-                  ],
-                )
-                ,
-              );
+                  child: NotFound(
+                  message: "Don't wait create a saved list.",
+              ));
             }
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -69,8 +60,7 @@ class SavedListScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>
-                            SavedItems(savedList: savedList),
+                        builder: (context) => SavedItems(savedList: savedList),
                       ),
                     );
                   },

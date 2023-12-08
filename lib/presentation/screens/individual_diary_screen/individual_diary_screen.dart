@@ -70,7 +70,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                     child: Image.file(
                       File(widget.entry.imagePath!),
                       fit: BoxFit.cover,
-                      height: 500,
+                      height: 380,
                     ),
                   ),
                 ),
