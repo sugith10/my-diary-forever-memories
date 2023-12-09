@@ -84,7 +84,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
       return null;
     }
   }
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,12 +97,12 @@ class _CreatePageState extends State<CreateDiaryScreen> {
               final title = titleController.text;
               final content = contentController.text;
 
-              String? imagePath;
-              if (_image != null) {
-                imagePath = await saveImage(_image!);
-              }
-
               if (title.isNotEmpty) {
+                Navigator.pop(context);
+                String? imagePath;
+                if (_image != null) {
+                  imagePath = await saveImage(_image!);
+                }
                 final entry = DiaryEntry(
                   id: DateTime.now().millisecondsSinceEpoch.toString(),
                   date: widget.changer.selectedDate,
@@ -126,9 +126,18 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                 }).catchError((error) {
                   log("Error adding DiaryEntry: $error");
                 });
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    margin: EdgeInsets.all(10),
+                    backgroundColor: Colors.red,
+                    content: Text('Title cannot be empty!'),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
               }
               // ignore: use_build_context_synchronously
-              Navigator.pop(context);
             }),
           ],
           elevation: 0,
@@ -241,14 +250,13 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                           borderRadius: BorderRadius.circular(20),
                           child: Image.file(
                             _image!,
-                            // height: 300,
                           ),
                         ),
                       ),
                     )
                   : Container(),
             ),
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.6,
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -417,5 +425,4 @@ class _CreatePageState extends State<CreateDiaryScreen> {
       _image = null;
     });
   }
-
 }

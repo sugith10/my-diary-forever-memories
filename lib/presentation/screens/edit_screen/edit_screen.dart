@@ -1,10 +1,13 @@
+import 'dart:developer';
 import 'dart:io';
-import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
+import 'dart:typed_data';
 import 'package:diary/core/models/diary_entry.dart';
-import 'package:diary/presentation/screens/main_screen/main_screen.dart';
-import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
+import 'package:diary/presentation/screens/create_screen/image_view_screen.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/create_screen_bottom_navigationbar.dart';
+import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
+import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
 import 'package:diary/presentation/util/create_screen_functions.dart';
 import 'package:diary/presentation/util/get_colors.dart';
@@ -12,6 +15,7 @@ import 'package:diary/presentation/util/individual_diary_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:image/image.dart' as img;
 
 class EditDiaryEntryScreen extends StatefulWidget {
   final DiaryEntry entry;
@@ -26,7 +30,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   final TextEditingController titleController;
   final TextEditingController contentController;
   File? _image;
-   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
+  final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
 
   _EditDiaryEntryScreenState()
       : titleController = TextEditingController(),
@@ -59,10 +63,22 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       final appDocDir = await getApplicationDocumentsDirectory();
       final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
       final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
-      await image.copy(imagePath);
+      // Read and decode the original image
+      final bytes = image.readAsBytesSync();
+      final originalImage = img.decodeImage(Uint8List.fromList(bytes));
+
+      // Resize the image if its height is more than 800 pixels
+      if (originalImage != null && originalImage.height > 800) {
+        final resizedImage = img.copyResize(originalImage, height: 800);
+        File(imagePath).writeAsBytesSync(img.encodeJpg(resizedImage));
+      } else {
+        // Save the original image if its height is not more than 300 pixels
+        image.copy(imagePath);
+      }
+
       return imagePath;
     } catch (e) {
-      print("Error saving image: $e");
+      log("Error saving image: $e");
       return null;
     }
   }
@@ -73,14 +89,17 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       backgroundColor:
           DiaryDetailPageFunctions().hexToColor(widget.entry.background),
       appBar: AppBar(
-          leading: const BackButtonWidget(),
-          actions: [
-            SaveButton(onPressed: () {
+        leading: const BackButtonWidget(),
+        actions: [
+          SaveButton(
+            onPressed: () {
               _showPopupDialog(context);
-            })
-          ],
-          elevation: 0,
-          bottom: const BottomBorderWidget()),
+            },
+          )
+        ],
+        elevation: 0,
+        bottom: const BottomBorderWidget(),
+      ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(
@@ -97,34 +116,37 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     border: InputBorder.none,
                   ),
                   style: TextStyle(
-                      fontSize: 24,
-                      color: CreateDiaryScreenFunctions().isColorBright(
-                              DiaryDetailPageFunctions()
-                                  .hexToColor(widget.entry.background))
-                          ? Colors.black
-                          : Colors.white),
+                    fontSize: 24,
+                    color: CreateDiaryScreenFunctions().isColorBright(
+                      DiaryDetailPageFunctions()
+                          .hexToColor(widget.entry.background),
+                    )
+                        ? Colors.black
+                        : Colors.white,
+                  ),
                   cursorColor: Colors.green[900],
                 ),
               ),
               SizedBox(
-                // height: 200,
-                child: _image != null
-                    ? Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: InkWell(
-                          onTap: () {
-                            getImage();
-                          },
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.file(
-                              _image!,
-                            ),
+              child: _image != null
+                  ? Padding(
+                      padding: const EdgeInsets.only(
+                          left: 20, right: 20, bottom: 20),
+                      child: GestureDetector(
+                        onTapDown: (details) {
+                          _showImageMenu(context, details);
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Image.file(
+                            _image!,
+                        
                           ),
                         ),
-                      )
-                    : Container(),
-              ),
+                      ),
+                    )
+                  : Container(),
+            ),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextField(
@@ -136,12 +158,14 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     border: InputBorder.none,
                   ),
                   style: TextStyle(
-                      fontSize: 18,
-                      color: CreateDiaryScreenFunctions().isColorBright(
-                              DiaryDetailPageFunctions()
-                                  .hexToColor(widget.entry.background))
-                          ? Colors.black
-                          : Colors.white),
+                    fontSize: 18,
+                    color: CreateDiaryScreenFunctions().isColorBright(
+                      DiaryDetailPageFunctions()
+                          .hexToColor(widget.entry.background),
+                    )
+                        ? Colors.black
+                        : Colors.white,
+                  ),
                   autofocus: true,
                   cursorColor: Colors.red[900],
                 ),
@@ -159,7 +183,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
           _navigateToPage(index);
         },
       ),
-    ); 
+    );
   }
 
   void _showPopupDialog(BuildContext context) {
@@ -211,16 +235,28 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                   await DbFunctions()
                       .updateDiaryEntry(updatedEntry)
                       .then((value) {
-                    print("Function completed: ");
+                    log("DiaryEntry updated successfully!");
                   }).catchError((error) {
                     print("Error updating DiaryEntry: $error");
                   });
+                  // ignore: use_build_context_synchronously
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    '/main',
+                    (route) => false,
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      margin: EdgeInsets.all(10),
+                      backgroundColor: Colors.red,
+                      content: Text('Title cannot be empty!'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                  Navigator.pop(context);
                 }
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
-                  ModalRoute.withName('/main'),
-                );
               },
             ),
           ],
@@ -228,20 +264,137 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       },
     );
   }
-}
 
-
-void _navigateToPage(int index) {
+  void _navigateToPage(int index) {
     switch (index) {
       case 0:
-        // Handle time navigation
+        showTimePicker(
+          context: context,
+          initialTime: TimeOfDay.now(),
+          builder: (BuildContext context, Widget? child) {
+            final isDark = Theme.of(context).brightness == Brightness.dark;
+            return Theme(
+              data: isDark
+                  ? ThemeData.dark().copyWith(
+                      colorScheme: ColorScheme.dark(
+                        primary: AppColor.darkBuilder.color,
+                        secondary: AppColor.darkFourth.color,
+                      ),
+                    )
+                  : ThemeData.light().copyWith(
+                      colorScheme: ColorScheme.light(
+                        primary: AppColor.primary.color,
+                        secondary: AppColor.primary.color,
+                      ),
+                    ),
+              child: child ?? Container(),
+            );
+          },
+        ).then((pickedTime) {
+          if (pickedTime != null) {
+            String formattedTime = pickedTime.format(context);
+            String existingText = contentController.text;
+
+            String newText = existingText.isNotEmpty
+                ? '$existingText\n\n\n$formattedTime\n\n'
+                : '$formattedTime\n\n';
+
+            contentController.value = TextEditingValue(
+              text: newText,
+              selection: TextSelection.collapsed(offset: newText.length),
+            );
+          }
+        });
         break;
+
       case 1:
-        // Handle gallery navigation
-      
+        getImage();
         break;
       case 2:
-       
+        CreateDiaryScreenFunctions().showColorPickerDialog(
+          context,
+          DiaryDetailPageFunctions().hexToColor(widget.entry.background),
+          (Color color) {
+            setState(() {
+              widget.entry.background =
+                  '#${color.value.toRadixString(16).substring(2).toUpperCase()}';
+            });
+          },
+        );
         break;
     }
   }
+
+ void _showImageMenu(BuildContext context, TapDownDetails details) {
+  final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+
+  showMenu(
+    color: GetColors().getAlertBoxColor(context),
+    context: context,
+    position: RelativeRect.fromLTRB(
+      details.globalPosition.dx,
+      details.globalPosition.dy,
+      overlay.size.width - details.globalPosition.dx,
+      overlay.size.height - details.globalPosition.dy,
+    ),
+    items: [
+      PopupMenuItem(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ImageViewerPage(imageFile: _image!),
+              ),
+            );
+          },
+          child: const Center(
+            child: Text(
+              'Open',
+              style: TextStyle(fontSize: 17),
+            ),
+          ),
+        ),
+      ),
+      PopupMenuItem(
+        child: GestureDetector(
+          onTap: () {
+            getImage();
+            Navigator.pop(context);
+          },
+          child: const Center(
+            child: Text(
+              'Change',
+              style: TextStyle(fontSize: 17),
+            ),
+          ),
+        ),
+      ),
+      PopupMenuItem(
+        child: GestureDetector(
+          onTap: () {
+            _removePhoto();
+            Navigator.pop(context);
+          },
+          child: const Center(
+            child: Text(
+              'Remove',
+              style: TextStyle(fontSize: 17),
+            ),
+          ),
+        ),
+      ),
+    ],
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  );
+}
+
+ void _removePhoto() {
+    setState(() {
+      _image = null;
+    });
+  }
+
+}

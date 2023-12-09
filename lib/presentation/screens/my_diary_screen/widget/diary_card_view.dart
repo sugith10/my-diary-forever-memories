@@ -20,9 +20,7 @@ class DiaryEntryCard extends StatelessWidget {
       key: const ValueKey(0),
       startActionPane: ActionPane(
         motion: const ScrollMotion(),
-        dismissible: DismissiblePane(onDismissed: () {
-
-        }),
+        dismissible: DismissiblePane(onDismissed: () {}),
         children: const [
           SlidableAction(
             onPressed: doNothing,
@@ -39,12 +37,15 @@ class DiaryEntryCard extends StatelessWidget {
           if (entry.id != null) {
             DbFunctions().deleteDiary(entry.id!);
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
+              const SnackBar(
                 behavior: SnackBarBehavior.floating,
-                margin: EdgeInsets.all(2.h),
+                margin: EdgeInsets.all(10),
                 backgroundColor: Colors.red,
-                duration: const Duration(seconds: 2),
-                content: const Text("Successfully Deleted", style: TextStyle(color: Colors.white),),
+                duration: Duration(seconds: 2),
+                content: Text(
+                  "Successfully Deleted",
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             );
           } else {
@@ -56,15 +57,18 @@ class DiaryEntryCard extends StatelessWidget {
             onPressed: (BuildContext context) {
               if (entry.id != null) {
                 DbFunctions().deleteDiary(entry.id!);
-               ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                behavior: SnackBarBehavior.floating,
-                margin: EdgeInsets.all(2.h),
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 2),
-                content: const Text("Successfully Deleted", style: TextStyle(color: Colors.white),),
-              ),
-            );
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    behavior: SnackBarBehavior.floating,
+                    margin: EdgeInsets.all(2.h),
+                    backgroundColor: Colors.red,
+                    duration: const Duration(seconds: 2),
+                    content: const Text(
+                      "Successfully Deleted",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                );
               }
             },
             backgroundColor: const Color(0xFFFE4A49),

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:diary/application/controllers/hive_app_preference_db_ops.dart';
-import 'package:diary/core/models/app_preference_db_model.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -9,20 +8,19 @@ class Splash extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appPreferenceFunctions = AppPreferenceFunctions();
 
-    Timer(const Duration(seconds: 1), () async {
+
+    Timer(const Duration(seconds: 2), () async {
       
       final onboardingStatus =
-          await appPreferenceFunctions.getOnboardingStatus();
+          await AppPreferenceFunctions().getOnboardingStatus();
 
       if (onboardingStatus == null || onboardingStatus.showOnboarding == true) {
-        final updatedOnboardingStatus =
-            AppPreference(id: '1', showOnboarding: false);
-        await appPreferenceFunctions.showOnboarding(updatedOnboardingStatus);
+     
         Navigator.pushReplacementNamed(context, '/onboarding');
       } else {
        
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

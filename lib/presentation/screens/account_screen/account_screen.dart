@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
 
-
 class AccountScreen extends StatelessWidget {
   const AccountScreen({
     super.key,
@@ -27,10 +26,14 @@ class AccountScreen extends StatelessWidget {
             text: greetingTitle,
           ),
           actions: [
-         
-                          IconButton(onPressed: (){ ProfileScreenFunctions().showPopupDialog(context);}, icon: const Icon( Icons.power_settings_new_outlined,
-                            color: Color.fromARGB(255, 197, 60, 50),))
-           ,
+            IconButton(
+                onPressed: () {
+                  ProfileScreenFunctions().showPopupDialog(context);
+                },
+                icon: const Icon(
+                  Icons.power_settings_new_outlined,
+                  color: Color.fromARGB(255, 197, 60, 50),
+                )),
           ],
           elevation: 0,
           bottom: const BottomBorderWidget()),
@@ -93,12 +96,12 @@ class AccountScreen extends StatelessWidget {
                     icon: Ionicons.newspaper_outline,
                   ),
                   const ContentDivider(),
-                   ProfileOptions(
+                  ProfileOptions(
                     function: () async {
                       await ProfileScreenFunctions().launchTermsConditions();
                     },
                     item: 'Terms & Conditions',
-                    icon:Ionicons.newspaper_outline,
+                    icon: Ionicons.newspaper_outline,
                   ),
                   const ContentDivider(),
                   const SizedBox(height: 20),

@@ -17,12 +17,14 @@ class AppPreferenceFunctions {
 }
 
  Future<void> showOnboarding(AppPreference showOnboarding) async {
+  print('added false');
     await box.put(showOnboarding.id, showOnboarding);
     log('Added theme into db ${showOnboarding.showOnboarding}');
   }
 
    Future<AppPreference?> getOnboardingStatus() async {
   final onboarding = box.get('1');
+  log('jsjahjdhhhsd');
   print( onboarding?.showOnboarding);
   return onboarding;
 }

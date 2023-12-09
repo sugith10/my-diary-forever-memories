@@ -1,4 +1,6 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:diary/application/controllers/hive_app_preference_db_ops.dart';
+import 'package:diary/core/models/app_preference_db_model.dart';
 import 'package:diary/core/models/content_model.dart';
 import 'package:diary/infrastructure/providers/provider_onboarding.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
@@ -42,7 +44,9 @@ class Onbording extends StatelessWidget {
                       Text(
                         contents[i].title,
                         style: TextStyle(
-                            fontSize:  MediaQuery.of(context).size.height >= 500 ? 35.0 : 25.0, 
+                            fontSize: MediaQuery.of(context).size.height >= 500
+                                ? 35.0
+                                : 25.0,
                             fontWeight: FontWeight.w600),
                       ),
                       SizedBox(height: 1.5.h),
@@ -52,7 +56,9 @@ class Onbording extends StatelessWidget {
                           contents[i].discription,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                           fontSize:  MediaQuery.of(context).size.height >= 500 ? 20.0 : 15.0, 
+                            fontSize: MediaQuery.of(context).size.height >= 500
+                                ? 20.0
+                                : 15.0,
                             color: OnboardingScreenFunctions()
                                 .getDescriptionColor(context),
                           ),
@@ -63,7 +69,6 @@ class Onbording extends StatelessWidget {
                 },
               ),
             ),
-           
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
@@ -74,7 +79,6 @@ class Onbording extends StatelessWidget {
                     onboardingState: onboardingState),
               ),
             ),
-
             Container(
               margin: const EdgeInsets.all(20),
               width: double.infinity,
@@ -82,6 +86,8 @@ class Onbording extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (onboardingState.currentIndex == contents.length - 1) {
+                     AppPreferenceFunctions()
+                    .showOnboarding(AppPreference(id: '1', showOnboarding: false));
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -98,7 +104,7 @@ class Onbording extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   elevation: 0,
                   textStyle: TextStyle(
-                      fontSize: MediaQuery.of(context).size.width * 0.05, 
+                    fontSize: MediaQuery.of(context).size.width * 0.05,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Satoshi',
                   ),
@@ -122,7 +128,9 @@ class Onbording extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {
+              onPressed: () {       
+                 AppPreferenceFunctions()
+                    .showOnboarding(AppPreference(id: '1', showOnboarding: false));
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

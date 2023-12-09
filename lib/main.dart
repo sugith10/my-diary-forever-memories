@@ -3,6 +3,7 @@ import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/core/models/profile_details.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/infrastructure/providers/provider_theme.dart';
+import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/screens/splash_screen/onboarding.dart';
 import 'package:diary/presentation/screens/splash_screen/splash.dart';
 import 'package:diary/presentation/theme/app_theme.dart';
@@ -88,6 +89,7 @@ class MyApp extends StatelessWidget {
           '/onboarding': (context) => Onbording(
                 onboardingState: Provider.of<OnboardingState>(context),
               ),
+           '/main': (context) => MainScreen(),   
         },
       ),
     );
