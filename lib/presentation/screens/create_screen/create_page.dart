@@ -7,7 +7,7 @@ import 'package:diary/presentation/screens/create_screen/widget/down_icon.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/create_screen_bottom_navigationbar.dart';
 import 'package:diary/presentation/theme/app_color.dart';
-import 'package:diary/application/controllers/hive_diary_entry_db_ops.dart';
+import 'package:diary/application/controllers/diary_entry_db_ops_hive.dart';
 import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';

@@ -5,7 +5,7 @@ part 'profile_details.g.dart';
 class ProfileDetails {
 
   @HiveField(0)
-  final String? id;
+  final String id = "1";
 
   @HiveField(1)
   final String name;
@@ -20,7 +20,6 @@ class ProfileDetails {
   final String? profilePicturePath;
 
   ProfileDetails({
-    this.id,
     required this.name,
     required this.email,
     this.location,

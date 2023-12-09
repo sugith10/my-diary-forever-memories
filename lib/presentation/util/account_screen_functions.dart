@@ -1,4 +1,4 @@
-import 'package:diary/application/controllers/hive_app_preference_db_ops.dart';
+import 'package:diary/application/controllers/app_preference_db_ops_hive.dart';
 import 'package:diary/core/models/app_preference_db_model.dart';
 import 'package:diary/presentation/util/get_colors.dart';
 import 'package:flutter/material.dart';
@@ -120,7 +120,7 @@ class ProfileScreenFunctions {
                       const Text('Logout', style: TextStyle(color: Colors.red)),
                   onPressed: ()async {
                   final appPreferenceFunctions = AppPreferenceFunctions();
-                 final onboardingStatus = AppPreference(id: '1', showOnboarding: true);
+                 final onboardingStatus = AppPreference(showOnboarding: true);
                   await appPreferenceFunctions.showOnboarding(onboardingStatus);
 
                     Navigator.pushReplacementNamed(context, '/onboarding');

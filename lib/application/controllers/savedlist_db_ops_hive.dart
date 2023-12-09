@@ -3,25 +3,23 @@ import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-final ValueNotifier<List<SavedList>> savedListsNotifier =
-    ValueNotifier<List<SavedList>>([]);
-
 class SavedListDbFunctions {
+  final ValueNotifier<List<SavedList>> savedListsNotifier =
+    ValueNotifier<List<SavedList>>([]);
   final box = Hive.box<SavedList>('_savedListBoxName');
 
-  Future<void> createSavedList(String listname) async {
+  Future<void> createSavedList(String listName) async {
     final newSavedList = SavedList(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       date: DateTime.now(),
-      listName: listname,
+      listName: listName,
       diaryEntryIds: [], // Initial diary entry IDs, can be null or empty
     );
     await box.put(newSavedList.id, newSavedList);
-    log('Created saved list successfully');
+    // log('Created saved list successfully');
 
     savedListsNotifier.value = box.values.toList();
 
-    log('Updated List: ${box.values.toList()}');
   }
 
   List<SavedList> getAllSavedLists() {
@@ -33,12 +31,12 @@ class SavedListDbFunctions {
     if (savedList != null) {
       // Delete the saved list from the Hive box
       await box.delete(savedListId);
-      print('Deleted saved list: $savedListId');
+      // print('Deleted saved list: $savedListId');
 
       // Notify listeners about the change in the saved lists
       savedListsNotifier.value = box.values.toList();
     } else {
-      print('SavedList with ID $savedListId not found.');
+      // log('SavedList with ID $savedListId not found.');
     }
   }
 
@@ -47,9 +45,9 @@ class SavedListDbFunctions {
     if (savedList != null) {
       savedList.diaryEntryIds.add(diary);
       await box.put(savedListId, savedList);
-      print('Added map to diaryEntryIds in SavedList: $diary');
+      // log('Added map to diaryEntryIds in SavedList: $diary');
     } else {
-      print('SavedList with ID $savedListId not found.');
+      // log('SavedList with ID $savedListId not found.');
     }
   }
 
@@ -58,9 +56,9 @@ class SavedListDbFunctions {
     if (savedList != null) {
       savedList.diaryEntryIds.remove(diaryEntryId);
        await box.put(savedListId, savedList);
-      print('Deleted diary entry $diaryEntryId from SavedList: $savedListId');
+      log('Deleted diary entry $diaryEntryId from SavedList: $savedListId');
     } else {
-      print('SavedList with ID $savedListId not found.');
+      log('SavedList with ID $savedListId not found.');
     }
   }
 

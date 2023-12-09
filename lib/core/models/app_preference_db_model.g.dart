@@ -17,7 +17,6 @@ class AppPreferenceAdapter extends TypeAdapter<AppPreference> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AppPreference(
-      id: fields[0] as String?,
       showOnboarding: fields[1] as bool?,
       isDark: fields[2] as bool?,
     );

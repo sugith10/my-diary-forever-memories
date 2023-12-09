@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'archive_diary_entry_db_model.dart';
+part of 'archive_db_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DiaryEntryAdapter extends TypeAdapter<DiaryEntry> {
+class ArchiveDiaryAdapter extends TypeAdapter<ArchiveDiary> {
   @override
   final int typeId = 5;
 
   @override
-  DiaryEntry read(BinaryReader reader) {
+  ArchiveDiary read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return DiaryEntry(
+    return ArchiveDiary(
       id: fields[0] as String?,
       date: fields[1] as DateTime,
       title: fields[2] as String,
@@ -31,7 +31,7 @@ class DiaryEntryAdapter extends TypeAdapter<DiaryEntry> {
   }
 
   @override
-  void write(BinaryWriter writer, DiaryEntry obj) {
+  void write(BinaryWriter writer, ArchiveDiary obj) {
     writer
       ..writeByte(10)
       ..writeByte(0)
@@ -62,7 +62,7 @@ class DiaryEntryAdapter extends TypeAdapter<DiaryEntry> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DiaryEntryAdapter &&
+      other is ArchiveDiaryAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

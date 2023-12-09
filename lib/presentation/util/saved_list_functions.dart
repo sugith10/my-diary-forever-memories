@@ -1,4 +1,4 @@
-import 'package:diary/application/controllers/hive_savedlist_db_ops.dart';
+import 'package:diary/application/controllers/savedlist_db_ops_hive.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/theme/app_color.dart';

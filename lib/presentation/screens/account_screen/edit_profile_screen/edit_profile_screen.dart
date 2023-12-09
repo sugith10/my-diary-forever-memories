@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:diary/application/controllers/hive_profile_details_db_ops.dart';
+import 'package:diary/application/controllers/profile_details_db_ops_hive.dart';
 import 'package:diary/core/models/profile_details.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
 import 'package:flutter/material.dart';
@@ -267,7 +267,6 @@ class _ProfilePageState extends State<ProfilePage> {
           _profilePicture != null ? await saveImage(_profilePicture!) : null;
 
       final ProfileDetails details = ProfileDetails(
-        id: '1',
         name: name,
         email: email,
         location: _locationController.text.trim(),

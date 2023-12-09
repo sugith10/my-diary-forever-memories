@@ -4,7 +4,7 @@ part 'app_preference_db_model.g.dart';
 @HiveType(typeId : 3)
 class AppPreference{
   @HiveField(0)
-  final String? id;
+  final String id = "1";
 
   @HiveField(1)
   final bool? showOnboarding;
@@ -13,6 +13,6 @@ class AppPreference{
   final bool? isDark;
 
   AppPreference({
-    this.id,  this.showOnboarding, this.isDark,
+    this.showOnboarding, this.isDark,
   });
 }

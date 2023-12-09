@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:diary/application/controllers/hive_app_preference_db_ops.dart';
+import 'package:diary/application/controllers/app_preference_db_ops_hive.dart';
 import 'package:diary/core/models/app_preference_db_model.dart';
 import 'package:diary/core/models/content_model.dart';
 import 'package:diary/infrastructure/providers/provider_onboarding.dart';
@@ -87,7 +87,7 @@ class Onbording extends StatelessWidget {
                 onPressed: () {
                   if (onboardingState.currentIndex == contents.length - 1) {
                      AppPreferenceFunctions()
-                    .showOnboarding(AppPreference(id: '1', showOnboarding: false));
+                    .showOnboarding(AppPreference(showOnboarding: false));
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -130,7 +130,7 @@ class Onbording extends StatelessWidget {
             TextButton(
               onPressed: () {       
                  AppPreferenceFunctions()
-                    .showOnboarding(AppPreference(id: '1', showOnboarding: false));
+                    .showOnboarding(AppPreference(showOnboarding: false));
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(

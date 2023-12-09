@@ -1,4 +1,5 @@
 import 'package:diary/core/models/app_preference_db_model.dart';
+import 'package:diary/core/models/archive_db_model.dart';
 import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/core/models/profile_details.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
@@ -46,6 +47,12 @@ Future<void> main() async {
     Hive.registerAdapter(AppPreferenceAdapter());
   }
   await Hive.openBox<AppPreference>('appPreferenceBox');
+
+  if (!Hive.isAdapterRegistered(ArchiveDiaryAdapter().typeId)) {
+    Hive.registerAdapter(ArchiveDiaryAdapter());
+  }
+  await Hive.openBox<ArchiveDiary>('archiveDiaryEntryBox');
+
    SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
