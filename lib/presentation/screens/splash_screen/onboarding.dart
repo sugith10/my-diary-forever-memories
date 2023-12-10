@@ -44,8 +44,8 @@ class Onbording extends StatelessWidget {
                       Text(
                         contents[i].title,
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height >= 500
-                                ? 35.0
+                            fontSize: MediaQuery.of(context).size.height >= 800
+                                ? 30.0
                                 : 25.0,
                             fontWeight: FontWeight.w600),
                       ),
@@ -56,7 +56,7 @@ class Onbording extends StatelessWidget {
                           contents[i].discription,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height >= 500
+                            fontSize: MediaQuery.of(context).size.height >= 800
                                 ? 20.0
                                 : 15.0,
                             color: OnboardingScreenFunctions()

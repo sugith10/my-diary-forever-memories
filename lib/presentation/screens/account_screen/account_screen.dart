@@ -10,6 +10,7 @@ import 'package:diary/presentation/util/account_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:sizer/sizer.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({
@@ -120,9 +121,9 @@ class AccountScreen extends StatelessWidget {
                   ),
                   const ContentDivider(),
                   const SizedBox(height: 20),
-                  const Text(
+                   Text(
                     'Made with 💙 in India',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 15.sp),
                   ),
                   const SizedBox(
                     height: 5,

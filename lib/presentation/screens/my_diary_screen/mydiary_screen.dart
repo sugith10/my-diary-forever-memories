@@ -153,8 +153,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                   ],
                   bottom: const BottomBorderWidget(),
                   elevation: 0,
-                  pinned: false, 
-                  floating: true, 
+                  pinned: false,
+                  floating: true,
                   snap: true,
                 ),
                 ValueListenableBuilder(
@@ -202,8 +202,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                               const Text(
                                 'Never lose, always record.',
                                 style: TextStyle(
-                                    fontSize: 20,
-                                 ),
+                                  fontSize: 20,
+                                ),
                               ),
                             ],
                           ),
@@ -234,14 +234,14 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
             shape: const CircleBorder(),
             onPressed: () {
               final changer = Provider.of<Changer>(context, listen: false);
+
               Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => CreateDiaryScreen(
-                      changer: changer,
-                      selectedColor: GetColors().getThemeColor(context)),
-                ),
-              );
+                  context,
+                  PageTransition(
+                      type: PageTransitionType.bottomToTop,
+                      child: CreateDiaryScreen(
+                          changer: changer,
+                          selectedColor: GetColors().getThemeColor(context))));
             },
             elevation: 3,
             child: const CustomIconWidget(),

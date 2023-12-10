@@ -40,13 +40,6 @@ class _CreatePageState extends State<CreateDiaryScreen> {
 
   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
 
-  _onBackspacePressed() {
-    contentController
-      ..text = contentController.text.characters.toString()
-      ..selection = TextSelection.fromPosition(
-          TextPosition(offset: contentController.text.length));
-  }
-
   File? _image;
 
   Future getImage() async {
@@ -84,7 +77,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
       return null;
     }
   }
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

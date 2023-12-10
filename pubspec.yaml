@@ -51,6 +51,8 @@ dependencies:
   permission_handler: ^11.1.0
   device_info_plus: ^9.1.1
   focused_menu: ^1.0.5
+  custom_date_range_picker: ^1.0.10
+  calendar_date_picker2: ^0.5.3
 
 
 dev_dependencies: 
