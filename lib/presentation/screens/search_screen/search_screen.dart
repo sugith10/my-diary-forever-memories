@@ -5,7 +5,7 @@ import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
+import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:sizer/sizer.dart';
 
 class MySearchAppBar extends StatefulWidget {

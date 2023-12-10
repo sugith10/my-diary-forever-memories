@@ -5,7 +5,7 @@ import 'package:diary/presentation/screens/individual_diary_screen/widget/date.d
 import 'package:diary/presentation/screens/individual_diary_screen/widget/title.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
-import 'package:diary/presentation/util/individual_diary_screen_functions.dart';
+import 'package:diary/presentation/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 

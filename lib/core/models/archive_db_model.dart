@@ -6,7 +6,7 @@ part 'archive_db_model.g.dart';
 class ArchiveDiary { 
 
   @HiveField(0)               
-  String? id;
+  String id;
 
   @HiveField(1)
   DateTime date;                                              
@@ -36,7 +36,7 @@ class ArchiveDiary {
   String background;
 
   ArchiveDiary({
-    this.id,
+    required this.id,
     required this.date,
     required this.title,
     required this.content,

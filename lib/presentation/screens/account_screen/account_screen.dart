@@ -3,6 +3,7 @@ import 'package:diary/presentation/screens/account_screen/notifications_sceen/no
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/presentation/screens/account_screen/widget/profile_card.dart';
+import 'package:diary/presentation/screens/archive_screen/archive_page.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/util/account_screen_functions.dart';
@@ -46,17 +47,30 @@ class AccountScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
-                  ProfileOptions(
+                  // ProfileOptions(
+                  //   function: () => Navigator.push(
+                  //     context,
+                  //     PageTransition(
+                  //       type: PageTransitionType.rightToLeftJoined,
+                  //       child: const NotificationPage(),
+                  //       childCurrent: this,
+                  //     ),
+                  //   ),
+                  //   item: 'Notifications',
+                  //   icon: Icons.notifications_none,
+                  // ),
+                  // const ContentDivider(),
+                     ProfileOptions(
                     function: () => Navigator.push(
                       context,
                       PageTransition(
                         type: PageTransitionType.rightToLeftJoined,
-                        child: const NotificationPage(),
+                        child: const ArchivePage(),
                         childCurrent: this,
                       ),
                     ),
-                    item: 'Notifications',
-                    icon: Icons.notifications_none,
+                    item: 'Archived',
+                    icon: Icons.archive_outlined,
                   ),
                   const ContentDivider(),
                   ProfileOptions(
@@ -72,6 +86,7 @@ class AccountScreen extends StatelessWidget {
                     icon: Ionicons.color_palette_outline,
                   ),
                   const ContentDivider(),
+                  //backup
                   // ProfileOptions(
                   //   function: () async {
                   //     await DbFunctions().backupDiaryEntries(context);

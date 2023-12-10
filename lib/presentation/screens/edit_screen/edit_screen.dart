@@ -11,7 +11,7 @@ import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
 import 'package:diary/presentation/util/create_screen_functions.dart';
 import 'package:diary/presentation/util/get_colors.dart';
-import 'package:diary/presentation/util/individual_diary_screen_functions.dart';
+import 'package:diary/presentation/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';

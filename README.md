@@ -35,9 +35,11 @@ lib
 |           |-- screen2.dart
 |           |-- widget
 |               |-- component3.dart
-|               |-- component4.dart
-|   |-- util
-|       |-- utility_functions.dart
+|               |-- component4.dart   
+|           |-- util
+|               |-- utility_functions.dart
+|           |-- widget
+|               |-- widget.dart
 |
 |-- main.dart
 ```

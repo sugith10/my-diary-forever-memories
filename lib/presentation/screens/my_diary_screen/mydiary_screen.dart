@@ -171,7 +171,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                         break;
                       case 'Range Pick':
                         if (selectedDateRange != null) {
-                          log('range pick - in value listanble builder');
+                          log('range pick - in value listenable builder');
                           sortedEntries = filterEntriesByDateRange(
                               sortedEntries, selectedDateRange!);
                         }

@@ -1,6 +1,6 @@
 import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
-import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_screen.dart';
+import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/saved_list_screen/widget/not_found.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';

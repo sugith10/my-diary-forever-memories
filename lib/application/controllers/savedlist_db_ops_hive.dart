@@ -29,11 +29,7 @@ class SavedListDbFunctions {
   Future<void> deleteSavedList(String savedListId) async {
     final savedList = box.get(savedListId);
     if (savedList != null) {
-      // Delete the saved list from the Hive box
       await box.delete(savedListId);
-      // print('Deleted saved list: $savedListId');
-
-      // Notify listeners about the change in the saved lists
       savedListsNotifier.value = box.values.toList();
     } else {
       // log('SavedList with ID $savedListId not found.');

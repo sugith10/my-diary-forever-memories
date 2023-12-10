@@ -18,6 +18,7 @@ class DbFunctions {
     final box = Hive.box<DiaryEntry>('_boxName');
     await box.put(entry.id, entry);
     diaryEntryNotifier.add(entry);
+    log('added entry with IC: entry.id');
   }
 
   Future getAllDiary() async {
