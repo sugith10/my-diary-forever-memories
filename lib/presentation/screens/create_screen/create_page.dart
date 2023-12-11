@@ -22,6 +22,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:image/image.dart' as img;
 
+// ignore: must_be_immutable
 class CreateDiaryScreen extends StatefulWidget {
   final Changer changer;
   Color selectedColor;

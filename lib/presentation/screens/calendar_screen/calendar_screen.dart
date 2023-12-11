@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+// ignore: must_be_immutable
 class CalendarScreen extends StatelessWidget {
   CalendarScreen({super.key});
 

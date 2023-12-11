@@ -35,7 +35,7 @@ class ThemeSwitchCardBody extends StatelessWidget {
                               .withOpacity(0.3),
                       spreadRadius: 2,
                       blurRadius: 4,
-                      offset: Offset(0, 4))
+                      offset: const Offset(0, 4))
                 ]),
             height: 60,
             width: 210,

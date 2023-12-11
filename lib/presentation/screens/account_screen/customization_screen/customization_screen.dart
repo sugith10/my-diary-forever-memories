@@ -11,6 +11,7 @@ class CustomizationPage extends StatefulWidget {
   const CustomizationPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CustomizationPageState createState() => _CustomizationPageState();
 }
 
@@ -47,7 +48,7 @@ class _CustomizationPageState extends State<CustomizationPage> {
                         () {
                           selectedTheme = value;
                        Provider.of<ThemeNotifier>(context, listen: false).switchLight();
-                          print('white');
+   
                         },
                       );
                     },
@@ -80,7 +81,7 @@ class _CustomizationPageState extends State<CustomizationPage> {
                       setState(() {
                         selectedTheme = value;
                          Provider.of<ThemeNotifier>(context, listen: false).switchDark();
-                        print('dark');
+            
                       });
                     },
                   ),

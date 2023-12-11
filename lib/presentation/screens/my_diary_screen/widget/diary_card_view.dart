@@ -1,5 +1,3 @@
-import 'dart:developer';
-import 'package:diary/application/controllers/archive_db_ops_hive.dart';
 import 'package:diary/application/controllers/diary_entry_db_ops_hive.dart';
 import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
@@ -23,8 +21,7 @@ class DiaryEntryCard extends StatelessWidget {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-            if (entry.id != null) {
-              DbFunctions().deleteDiary(entry.id!);
+              DbFunctions().deleteDiary(entry.id);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   behavior: SnackBarBehavior.floating,
@@ -37,16 +34,14 @@ class DiaryEntryCard extends StatelessWidget {
                   ),
                 ),
               );
-            } else {
-              log('no data found');
-            }
+           
           },
         ),
         children: [
           SlidableAction(
             onPressed: (BuildContext context) {
-              if (entry.id != null) {
-                DbFunctions().deleteDiary(entry.id!);
+              
+                DbFunctions().deleteDiary(entry.id);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     behavior: SnackBarBehavior.floating,
@@ -59,7 +54,7 @@ class DiaryEntryCard extends StatelessWidget {
                     ),
                   ),
                 );
-              }
+            
             },
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
@@ -72,8 +67,8 @@ class DiaryEntryCard extends StatelessWidget {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-            if (entry.id != null) {
-              DbFunctions().deleteDiary(entry.id!);
+           
+              DbFunctions().deleteDiary(entry.id);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   behavior: SnackBarBehavior.floating,
@@ -86,16 +81,14 @@ class DiaryEntryCard extends StatelessWidget {
                   ),
                 ),
               );
-            } else {
-              log('no data found');
-            }
+          
           },
         ),
         children: [
           SlidableAction(
             onPressed: (BuildContext context) {
-              if (entry.id != null) {
-                DbFunctions().deleteDiary(entry.id!);
+           
+                DbFunctions().deleteDiary(entry.id);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     behavior: SnackBarBehavior.floating,
@@ -108,7 +101,7 @@ class DiaryEntryCard extends StatelessWidget {
                     ),
                   ),
                 );
-              }
+             
             },
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,

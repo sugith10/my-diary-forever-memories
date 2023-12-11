@@ -10,24 +10,19 @@ class AppPreferenceFunctions {
     log('Added theme into db ${isDark.isDark}');
   }
 
- Future<AppPreference?> getThemePreference() async {
-  final storedPreference = box.get('1');
-  print( storedPreference?.isDark);
-  return storedPreference;
-}
+  Future<AppPreference?> getThemePreference() async {
+    final storedPreference = box.get('1');
 
- Future<void> showOnboarding(AppPreference showOnboarding) async {
-  print('added false');
+    return storedPreference;
+  }
+
+  Future<void> showOnboarding(AppPreference showOnboarding) async {
     await box.put(showOnboarding.id, showOnboarding);
     log('Added theme into db ${showOnboarding.showOnboarding}');
   }
 
-   Future<AppPreference?> getOnboardingStatus() async {
-  final onboarding = box.get('1');
-  log('jsjahjdhhhsd');
-  print( onboarding?.showOnboarding);
-  return onboarding;
-}
-
-
+  Future<AppPreference?> getOnboardingStatus() async {
+    final onboarding = box.get('1');
+    return onboarding;
+  }
 }

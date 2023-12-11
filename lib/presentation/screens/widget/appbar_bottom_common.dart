@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class BottomBorderWidget extends StatelessWidget implements PreferredSizeWidget {
-  const BottomBorderWidget({Key? key}) : super(key: key);
+  const BottomBorderWidget({super.key});
 
   @override
   Size get preferredSize => const Size.fromHeight(0);

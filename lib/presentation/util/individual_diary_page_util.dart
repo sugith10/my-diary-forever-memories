@@ -111,7 +111,7 @@ class DiaryDetailPageFunctions {
                 TextButton(
               child: const Text('Archive', style: TextStyle(color: Colors.red)),
               onPressed: () {
-                if (entry.id != null) {
+                
                   ArchiveFunctions().addArchiveDiary(
                     id: entry.id,
                     date: entry.date,
@@ -124,14 +124,14 @@ class DiaryDetailPageFunctions {
                     entry.imagePathFour,
                     entry.imagePathFive,
                   );
-                  DbFunctions().deleteDiary(entry.id!);
+                  DbFunctions().deleteDiary(entry.id);
 
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => MainScreen()),
                     ModalRoute.withName('/main'),
                   );
-                }
+                
               },
             ),
 

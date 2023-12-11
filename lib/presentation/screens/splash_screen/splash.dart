@@ -1,10 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:async';
 import 'package:diary/application/controllers/app_preference_db_ops_hive.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class Splash extends StatelessWidget {
-  const Splash({Key? key});
+  const Splash({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class Splash extends StatelessWidget {
         Navigator.pushReplacementNamed(context, '/onboarding');
       } else {
        
-        // ignore: use_build_context_synchronously
+       
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

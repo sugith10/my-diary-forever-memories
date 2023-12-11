@@ -39,7 +39,9 @@ class MainScreen extends StatelessWidget {
     final bottomNavigationProvider = Provider.of<MainScreenProvider>(context);
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: WillPopScope(
+      body: 
+      // ignore: deprecated_member_use
+      WillPopScope(
         onWillPop: () async {
           return false;
         },

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/application/controllers/profile_details_db_ops_hive.dart';
@@ -10,9 +12,8 @@ import 'package:ionicons/ionicons.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
 
-
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -64,20 +65,19 @@ class _ProfilePageState extends State<ProfilePage> {
 
     return Scaffold(
       appBar: AppBar(
-       
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Ionicons.chevron_back_outline,
-             size: 25),
+          icon: const Icon(Ionicons.chevron_back_outline, size: 25),
         ),
         actions: [
-          SaveButton(onPressed: ()async{
-            await saveProfileDetails();
-            Navigator.pop(context);
-          },)
-        
+          SaveButton(
+            onPressed: () async {
+              await saveProfileDetails();
+              Navigator.pop(context);
+            },
+          )
         ],
         elevation: 0,
         bottom: PreferredSize(
@@ -194,11 +194,11 @@ class _ProfilePageState extends State<ProfilePage> {
                           labelText: "Name",
                           labelStyle: const TextStyle(color: Colors.grey),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
-                          hintText: profileDetails.name , // Check for null before using the value,
+                          hintText: profileDetails
+                              .name, // Check for null before using the value,
                           hintStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                          
                           )),
                       textCapitalization: TextCapitalization.words,
                       controller: _nameController,
@@ -223,7 +223,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           hintStyle: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                          
                           )),
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
@@ -243,7 +242,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           hintStyle: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                           
                           )),
                       textCapitalization: TextCapitalization.words,
                       controller: _locationController,
@@ -276,9 +274,6 @@ class _ProfilePageState extends State<ProfilePage> {
       await ProfileFunctions().addProfileDetails(details);
 
       // log('Profile details added: $details');
-      print("Diary Entry: key=${details.id}  Name=${details.name}, Email=${details.email}, ImagePath=${details.profilePicturePath}");
-    } else {
-      print('something missing');
-    }
+    } else {}
   }
 }

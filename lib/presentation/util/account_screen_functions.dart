@@ -1,3 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
+
 import 'package:diary/application/controllers/app_preference_db_ops_hive.dart';
 import 'package:diary/core/models/app_preference_db_model.dart';
 import 'package:diary/presentation/util/get_colors.dart';
@@ -23,7 +27,7 @@ class ProfileScreenFunctions {
     try {
       await launchUrl(emailUri);
     } catch (e) {
-      print('Error launching email: $e');
+      log('Error launching email: $e');
     }
   }
 
@@ -38,7 +42,7 @@ class ProfileScreenFunctions {
     try {
       await launchUrl(url);
     } catch (e) {
-      print('Error launching email: $e');
+  log('cant find the email');
     }
   }
 
@@ -53,7 +57,7 @@ class ProfileScreenFunctions {
     try {
       await launchUrl(url);
     } catch (e) {
-      print('Error launching email: $e');
+      log('cant find the privacy policy');
     }
   }
 

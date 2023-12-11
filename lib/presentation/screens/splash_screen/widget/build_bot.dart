@@ -17,9 +17,9 @@ class BuidDot extends StatelessWidget {
       margin: EdgeInsets.only(right: 5.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.sp),
-        color: Color.fromRGBO(226, 232, 240, 1),
+        color: const Color.fromRGBO(226, 232, 240, 1),
       ),
-    );;
+    );
   }
 }
 
@@ -32,7 +32,7 @@ Container buildDot(int index, BuildContext context, OnboardingState onboardingSt
       margin: EdgeInsets.only(right: 5.sp),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20.sp),
-        color: Color.fromRGBO(226, 232, 240, 1),
+        color: const Color.fromRGBO(226, 232, 240, 1),
       ),
     );
   }

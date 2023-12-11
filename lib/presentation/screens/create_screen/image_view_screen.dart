@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 
 class ImageViewerPage extends StatelessWidget {
@@ -11,7 +10,7 @@ class ImageViewerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Image Viewer'),
+        title: const Text('Image Viewer'),
       ),
       body: Center(
         child: Image.file(

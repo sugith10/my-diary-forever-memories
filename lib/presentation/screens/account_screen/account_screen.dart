@@ -1,5 +1,4 @@
 import 'package:diary/presentation/screens/account_screen/customization_screen/customization_screen.dart';
-import 'package:diary/presentation/screens/account_screen/notifications_sceen/notifications_screen.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/presentation/screens/account_screen/widget/profile_card.dart';
@@ -48,19 +47,7 @@ class AccountScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
-                  // ProfileOptions(
-                  //   function: () => Navigator.push(
-                  //     context,
-                  //     PageTransition(
-                  //       type: PageTransitionType.rightToLeftJoined,
-                  //       child: const NotificationPage(),
-                  //       childCurrent: this,
-                  //     ),
-                  //   ),
-                  //   item: 'Notifications',
-                  //   icon: Icons.notifications_none,
-                  // ),
-                  // const ContentDivider(),
+               
                      ProfileOptions(
                     function: () => Navigator.push(
                       context,

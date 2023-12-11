@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="diary"
+        android:label="My Diary - Memories Forever"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

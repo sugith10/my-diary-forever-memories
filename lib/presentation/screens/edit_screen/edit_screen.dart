@@ -237,7 +237,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                       .then((value) {
                     log("DiaryEntry updated successfully!");
                   }).catchError((error) {
-                    print("Error updating DiaryEntry: $error");
+                    log("Error updating DiaryEntry: $error");
                   });
                   // ignore: use_build_context_synchronously
                   Navigator.pushNamedAndRemoveUntil(
@@ -246,6 +246,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     (route) => false,
                   );
                 } else {
+                  // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
                       behavior: SnackBarBehavior.floating,
@@ -255,6 +256,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                       duration: Duration(seconds: 2),
                     ),
                   );
+                  // ignore: use_build_context_synchronously
                   Navigator.pop(context);
                 }
               },
@@ -326,7 +328,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   }
 
  void _showImageMenu(BuildContext context, TapDownDetails details) {
-  final RenderBox overlay = Overlay.of(context)!.context.findRenderObject() as RenderBox;
+  final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
 
   showMenu(
     color: GetColors().getAlertBoxColor(context),

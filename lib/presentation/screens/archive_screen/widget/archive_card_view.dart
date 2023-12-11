@@ -75,7 +75,7 @@ class ArchiveCardView extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                 fontSize: 13.sp,
-                color: Theme.of(context).brightness == Brightness.light ? Color.fromRGBO(107, 107, 107, 1) : Color.fromRGBO(190, 192, 192, 50),
+                color: Theme.of(context).brightness == Brightness.light ? const Color.fromRGBO(107, 107, 107, 1) : const Color.fromRGBO(190, 192, 192, 50),
               ),
               textAlign: TextAlign.justify,
             ),

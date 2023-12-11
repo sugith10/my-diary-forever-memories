@@ -1,6 +1,5 @@
 import 'package:diary/presentation/util/responsive_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class ThemeSwitchCard extends StatelessWidget {
   final Widget child;

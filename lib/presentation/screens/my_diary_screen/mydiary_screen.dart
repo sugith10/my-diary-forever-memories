@@ -30,7 +30,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
 
   List<DiaryEntry> filterEntriesByDateRange(
       List<DiaryEntry> entries, DateTimeRange dateRange) {
-    print('filter function added');
+  
     return entries
         .where((entry) =>
             entry.date.isAfter(dateRange.start) &&
@@ -40,7 +40,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    bool isFabVisible = true;
+  
     return SafeArea(
       child: Scaffold(
           body: ScrollConfiguration(
@@ -136,12 +136,12 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                                 .handleDateRangePick(context);
                             if (selectedDateRange != null) {
                               selectedSortOption = value as String;
-                              print('the new range = $selectedDateRange');
+                          
                             } else {
                               setState(() {
                                 selectedSortOption = value as String;
                               });
-                              print('date range is null');
+                              
                             }
                           }
                         });

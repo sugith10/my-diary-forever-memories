@@ -37,22 +37,13 @@ dependencies:
   animate_do: ^3.1.2
   iconly: ^1.0.1
   flutter_slidable: ^3.0.0
-  emoji_picker_flutter: ^1.6.3
   image_picker: ^1.0.4
   page_transition: ^2.1.0
-  numberpicker: ^2.1.2
   flutter_colorpicker: ^1.0.3
-  day_night_time_picker: ^1.3.0+1
   url_launcher: ^6.2.1
   image: ^4.1.3
-  firebase_core: ^2.23.0
-  firebase_auth: ^4.14.1
   flutter_masonry_view: ^0.0.2
-  permission_handler: ^11.1.0
-  device_info_plus: ^9.1.1
-  focused_menu: ^1.0.5
-  custom_date_range_picker: ^1.0.10
-  calendar_date_picker2: ^0.5.3
+
 
 
 dev_dependencies: 
@@ -73,10 +64,8 @@ flutter:
     - assets/images/onboarding_screen_animation/onboarding_lottie_dark.json
     - assets/images/forever_memories_logo/forever_memories_logo_white.png
     - assets/images/forever_memories_logo/forever_memories_logo_black.png
-    - images/date.png
     - images/start_writing.png
     - images/profile.png
-    - assets/images/google.png
     - assets/images/empty_area/search_not_found_2.png
     - assets/images/empty_area/entry_not_found.png
     - assets/images/empty_area/saved_not_found.png

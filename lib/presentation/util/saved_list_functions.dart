@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:diary/application/controllers/savedlist_db_ops_hive.dart';
 import 'package:diary/core/models/savedlist_db_model.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
@@ -129,8 +131,7 @@ class SavedScreenFunctions {
                           .isDiaryEntryInSavedList(listId, entryId);
                       return InkWell(
                         onTap: () {
-                          print(listId);
-                          print(entryId);
+                         
 
                           isChecked == false
                               ? SavedListDbFunctions()
