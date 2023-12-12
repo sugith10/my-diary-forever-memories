@@ -90,7 +90,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                         Navigator.push(
                             context,
                             PageTransition(
-                                type: PageTransitionType.topToBottom,
+                                type: PageTransitionType.fade,
                                 child: const SavedListScreen()));
                       },
                       icon: const Icon(

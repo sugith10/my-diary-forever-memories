@@ -2,6 +2,8 @@ import 'dart:io';
 import 'package:diary/application/controllers/profile_details_db_ops_hive.dart';
 import 'package:diary/core/models/profile_details.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
+import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/util/get_colors.dart';
 import 'package:diary/presentation/util/save_image.dart';
 import 'package:diary/presentation/util/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -172,17 +174,19 @@ class _ProfilePageState extends State<ProfilePage> {
                       decoration: InputDecoration(
                           focusedBorder: const UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xFF835DF1))),
+                              
                           contentPadding:
                               const EdgeInsets.only(left: 0, bottom: 3),
                           labelText: "Name",
                           labelStyle: const TextStyle(color: Colors.grey),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
                           hintText: profileDetails
-                              .name, // Check for null before using the value,
+                              .name, 
                           hintStyle: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                          )),
+                          ),),
+                          cursorColor: GetColors().getFontColor(context),
                       textCapitalization: TextCapitalization.words,
                       controller: _nameController,
                       // inputFormatters: [
@@ -207,6 +211,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           )),
+                          cursorColor: GetColors().getFontColor(context),
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -226,6 +231,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           )),
+                          cursorColor: GetColors().getFontColor(context),
                       textCapitalization: TextCapitalization.words,
                       controller: _locationController,
                     ),
