@@ -6,7 +6,7 @@ import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/presentation/screens/create_screen/create_page.dart';
 import 'package:diary/presentation/screens/search_screen/search_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
-import 'package:diary/presentation/screens/widget/custom_icon_common.dart';
+import 'package:diary/presentation/screens/widget/create_floating_icon.dart';
 import 'package:diary/presentation/util/get_colors.dart';
 import 'package:diary/presentation/util/my_diary_scren_functions.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,6 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
 
   List<DiaryEntry> filterEntriesByDateRange(
       List<DiaryEntry> entries, DateTimeRange dateRange) {
-  
     return entries
         .where((entry) =>
             entry.date.isAfter(dateRange.start) &&
@@ -40,7 +39,6 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
 
   @override
   Widget build(BuildContext context) {
-  
     return SafeArea(
       child: Scaffold(
           body: ScrollConfiguration(
@@ -136,12 +134,10 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                                 .handleDateRangePick(context);
                             if (selectedDateRange != null) {
                               selectedSortOption = value as String;
-                          
                             } else {
                               setState(() {
                                 selectedSortOption = value as String;
                               });
-                              
                             }
                           }
                         });
@@ -244,7 +240,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                           selectedColor: GetColors().getThemeColor(context))));
             },
             elevation: 3,
-            child: const CustomIconWidget(),
+            child: const CreateFloatIcon(),
           )),
     );
   }

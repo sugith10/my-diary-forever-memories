@@ -210,7 +210,7 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                 decoration: InputDecoration(
                   hintText: 'Title',
                   hintStyle: TextStyle(
-                      fontSize: 28,
+                      fontSize: 25,
                       fontWeight: FontWeight.w500,
                       color: CreateDiaryScreenFunctions()
                               .isColorBright(widget.selectedColor)
@@ -219,9 +219,9 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                   border: InputBorder.none,
                 ),
                 cursorColor: const Color.fromRGBO(27, 94, 32, 1),
-                cursorHeight: 28,
+               
                 style: TextStyle(
-                    fontSize: 28,
+                    fontSize: 25,
                     color: CreateDiaryScreenFunctions()
                             .isColorBright(widget.selectedColor)
                         ? Colors.black
@@ -271,7 +271,6 @@ class _CreatePageState extends State<CreateDiaryScreen> {
                     border: InputBorder.none,
                   ),
                   cursorColor: const Color.fromRGBO(183, 28, 28, 1),
-                  cursorHeight: 18,
                   style: TextStyle(
                       fontSize: 18,
                       color: CreateDiaryScreenFunctions()

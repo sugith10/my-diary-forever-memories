@@ -128,25 +128,24 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                 ),
               ),
               SizedBox(
-              child: _image != null
-                  ? Padding(
-                      padding: const EdgeInsets.only(
-                          left: 20, right: 20, bottom: 20),
-                      child: GestureDetector(
-                        onTapDown: (details) {
-                          _showImageMenu(context, details);
-                        },
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.file(
-                            _image!,
-                        
+                child: _image != null
+                    ? Padding(
+                        padding: const EdgeInsets.only(
+                            left: 20, right: 20, bottom: 20),
+                        child: GestureDetector(
+                          onTapDown: (details) {
+                            _showImageMenu(context, details);
+                          },
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.file(
+                              _image!,
+                            ),
                           ),
                         ),
-                      ),
-                    )
-                  : Container(),
-            ),
+                      )
+                    : Container(),
+              ),
               Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextField(
@@ -327,76 +326,76 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
     }
   }
 
- void _showImageMenu(BuildContext context, TapDownDetails details) {
-  final RenderBox overlay = Overlay.of(context).context.findRenderObject() as RenderBox;
+  void _showImageMenu(BuildContext context, TapDownDetails details) {
+    final RenderBox overlay =
+        Overlay.of(context).context.findRenderObject() as RenderBox;
 
-  showMenu(
-    color: GetColors().getAlertBoxColor(context),
-    context: context,
-    position: RelativeRect.fromLTRB(
-      details.globalPosition.dx,
-      details.globalPosition.dy,
-      overlay.size.width - details.globalPosition.dx,
-      overlay.size.height - details.globalPosition.dy,
-    ),
-    items: [
-      PopupMenuItem(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ImageViewerPage(imageFile: _image!),
+    showMenu(
+      color: GetColors().getAlertBoxColor(context),
+      context: context,
+      position: RelativeRect.fromLTRB(
+        details.globalPosition.dx,
+        details.globalPosition.dy,
+        overlay.size.width - details.globalPosition.dx,
+        overlay.size.height - details.globalPosition.dy,
+      ),
+      items: [
+        PopupMenuItem(
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ImageViewerPage(imageFile: _image!),
+                ),
+              );
+            },
+            child: const Center(
+              child: Text(
+                'Open',
+                style: TextStyle(fontSize: 17),
               ),
-            );
-          },
-          child: const Center(
-            child: Text(
-              'Open',
-              style: TextStyle(fontSize: 17),
             ),
           ),
         ),
-      ),
-      PopupMenuItem(
-        child: GestureDetector(
-          onTap: () {
-            getImage();
-            Navigator.pop(context);
-          },
-          child: const Center(
-            child: Text(
-              'Change',
-              style: TextStyle(fontSize: 17),
+        PopupMenuItem(
+          child: GestureDetector(
+            onTap: () {
+              getImage();
+              Navigator.pop(context);
+            },
+            child: const Center(
+              child: Text(
+                'Change',
+                style: TextStyle(fontSize: 17),
+              ),
             ),
           ),
         ),
-      ),
-      PopupMenuItem(
-        child: GestureDetector(
-          onTap: () {
-            _removePhoto();
-            Navigator.pop(context);
-          },
-          child: const Center(
-            child: Text(
-              'Remove',
-              style: TextStyle(fontSize: 17),
+        PopupMenuItem(
+          child: GestureDetector(
+            onTap: () {
+              _removePhoto();
+              Navigator.pop(context);
+            },
+            child: const Center(
+              child: Text(
+                'Remove',
+                style: TextStyle(fontSize: 17),
+              ),
             ),
           ),
         ),
+      ],
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
       ),
-    ],
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
-  );
-}
+    );
+  }
 
- void _removePhoto() {
+  void _removePhoto() {
     setState(() {
       _image = null;
     });
   }
-
 }

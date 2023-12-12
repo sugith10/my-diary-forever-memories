@@ -42,10 +42,17 @@ class SavedListScreen extends StatelessWidget {
           builder: (context, Box<SavedList> box, child) {
             final List<SavedList> savedLists = box.values.toList();
             if (savedLists.isEmpty) {
-              return const Center(
-                  child: NotFound(
-                  message: "Don't wait create a saved list.",
-              ));
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image.asset(
+                    'assets/images/empty_area/savedlist_not_found.png.png',
+                  ),
+                  const NotFound(
+                message: "Don't wait create a saved list.",
+              ),
+                ],
+              );
             }
             return GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

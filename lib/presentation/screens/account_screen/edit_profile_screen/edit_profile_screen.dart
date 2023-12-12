@@ -1,15 +1,13 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:developer';
 import 'dart:io';
 import 'package:diary/application/controllers/profile_details_db_ops_hive.dart';
 import 'package:diary/core/models/profile_details.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
+import 'package:diary/presentation/util/save_image.dart';
+import 'package:diary/presentation/util/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -30,23 +28,9 @@ class _ProfilePageState extends State<ProfilePage> {
     if (image == null) return;
 
     final imageTemporary = File(image.path);
-
     setState(() {
       _profilePicture = imageTemporary;
     });
-  }
-
-  Future<String?> saveImage(File image) async {
-    try {
-      final appDocDir = await getApplicationDocumentsDirectory();
-      final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-      final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
-      await image.copy(imagePath);
-      return imagePath;
-    } catch (e) {
-      log("Error saving image: $e");
-      return null;
-    }
   }
 
   @override
@@ -75,7 +59,6 @@ class _ProfilePageState extends State<ProfilePage> {
           SaveButton(
             onPressed: () async {
               await saveProfileDetails();
-              Navigator.pop(context);
             },
           )
         ],
@@ -259,21 +242,25 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<void> saveProfileDetails() async {
     final String name = _nameController.text.trim();
     final String email = _emailController.text.trim();
-
     if (name.isNotEmpty && email.isNotEmpty) {
       final String? imagePath =
-          _profilePicture != null ? await saveImage(_profilePicture!) : null;
-
+          _profilePicture != null ? await SaveImage().saveImage(_profilePicture!) : null;
       final ProfileDetails details = ProfileDetails(
         name: name,
         email: email,
         location: _locationController.text.trim(),
         profilePicturePath: imagePath,
       );
-
       await ProfileFunctions().addProfileDetails(details);
-
       // log('Profile details added: $details');
-    } else {}
+      if (mounted) {
+         Navigator.pop(context);
+      } else {
+
+      }
+    } else {
+      ShowSnackBar().showSnackBar(context, "Fill all fields..." ,Colors.red);
+     
+    }
   }
 }
