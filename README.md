@@ -36,9 +36,9 @@ lib
 |           |-- widget
 |               |-- component3.dart
 |               |-- component4.dart   
-|           |-- util
+|       |-- util
 |               |-- utility_functions.dart
-|           |-- widget
+|       |-- widget
 |               |-- widget.dart
 |
 |-- main.dart
