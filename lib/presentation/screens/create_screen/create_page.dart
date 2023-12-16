@@ -23,18 +23,18 @@ import 'package:sizer/sizer.dart';
 import 'package:image/image.dart' as img;
 
 // ignore: must_be_immutable
-class CreateDiaryScreen extends StatefulWidget {
+class CreateDiaryPage extends StatefulWidget {
   final Changer changer;
   Color selectedColor;
 
-  CreateDiaryScreen(
+  CreateDiaryPage(
       {super.key, required this.changer, required this.selectedColor});
 
   @override
-  State<CreateDiaryScreen> createState() => _CreatePageState();
+  State<CreateDiaryPage> createState() => _CreatePageState();
 }
 
-class _CreatePageState extends State<CreateDiaryScreen> {
+class _CreatePageState extends State<CreateDiaryPage> {
   final TextEditingController titleController = TextEditingController();
 
   final TextEditingController contentController = TextEditingController();

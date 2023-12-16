@@ -198,7 +198,7 @@ class CalendarScreen extends StatelessWidget {
                               PageTransition(
                                 type: PageTransitionType.size,
                                 alignment: Alignment.bottomCenter,
-                                child: CreateDiaryScreen(
+                                child: CreateDiaryPage(
                                   changer: changer,
                                   selectedColor: GetColors().getThemeColor(context),
                                 ),

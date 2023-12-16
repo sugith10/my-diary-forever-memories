@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:diary/core/models/diary_entry.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
@@ -10,14 +8,15 @@ import 'package:page_transition/page_transition.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:sizer/sizer.dart';
 
-class MySearchAppBar extends StatefulWidget {
-  const MySearchAppBar({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
   @override
-  _MySearchAppBarState createState() => _MySearchAppBarState();
+  // ignore: library_private_types_in_public_api
+  _SearchPageState createState() => _SearchPageState();
 }
 
-class _MySearchAppBarState extends State<MySearchAppBar> {
+class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
   final Box<DiaryEntry> diaryBox = Hive.box<DiaryEntry>('_boxName');
   List<DiaryEntry> searchResults = [];
