@@ -18,11 +18,8 @@ class Splash extends StatelessWidget {
           await AppPreferenceFunctions().getOnboardingStatus();
 
       if (onboardingStatus == null || onboardingStatus.showOnboarding == true) {
-     
         Navigator.pushReplacementNamed(context, '/onboarding');
       } else {
-       
-       
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(

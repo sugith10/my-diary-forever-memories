@@ -1,12 +1,11 @@
 import 'dart:developer';
 import 'package:diary/core/models/diary_entry.dart';
-import 'package:diary/infrastructure/providers/provider_calendar.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/create_page_fab.dart';
+import 'package:diary/presentation/screens/my_diary_screen/widget/my_diary_title.dart';
+import 'package:diary/presentation/screens/my_diary_screen/widget/no_diaries.dart';
 import 'package:diary/presentation/screens/search_screen/search_screen.dart';
-
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_list_screen.dart';
-
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/util/my_diary_scren_functions.dart';
 import 'package:flutter/material.dart';
@@ -47,28 +46,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
               slivers: [
                 SliverAppBar(
                   automaticallyImplyLeading: false,
-                  title: RichText(
-                    text: TextSpan(
-                      style: DefaultTextStyle.of(context).style,
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'My ',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Diary',
-                          style: TextStyle(
-                            color: const Color(0xFF835DF1),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  title: const MyDiaryTitle(),
                   actions: [
                     IconButton(
                       onPressed: () {
@@ -183,25 +161,9 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                     }
                     log('Grouped Entries Length: ${groupedEntries.length}');
                     if (sortedEntries.isEmpty) {
-                      return SliverFillRemaining(
+                      return const SliverFillRemaining(
                         child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                  'assets/images/empty_area/entry_not_found.png'),
-                              const Text(
-                                'Capture the beauty of your memories',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              const Text(
-                                'Never lose, always record.',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              ),
-                            ],
-                          ),
+                          child: NoDiaries(),
                         ),
                       );
                     }
@@ -225,7 +187,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
               ],
             ),
           ),
-          floatingActionButton: CreatePageFAB()),
+          floatingActionButton: const CreatePageFAB()),
     );
   }
 }
