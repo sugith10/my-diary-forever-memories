@@ -1,5 +1,5 @@
-import 'package:diary/application/controllers/diary_entry_db_ops_hive.dart';
-import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/controllers/diary_entry_db_ops_hive.dart';
+import 'package:diary/models/diary_entry.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:flutter/material.dart';

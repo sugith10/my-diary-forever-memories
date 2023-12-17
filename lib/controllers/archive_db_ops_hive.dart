@@ -1,8 +1,7 @@
 import 'dart:developer';
-
-import 'package:diary/application/controllers/diary_entry_db_ops_hive.dart';
-import 'package:diary/core/models/archive_db_model.dart';
-import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/controllers/diary_entry_db_ops_hive.dart';
+import 'package:diary/models/archive_db_model.dart';
+import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 

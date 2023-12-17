@@ -1,5 +1,4 @@
-
-import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/models/diary_entry.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/diary_card_view.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +6,6 @@ import 'package:intl/intl.dart';
 
 class MyDiaryScreenFunctions {
   Future<DateTimeRange?> _handleDateRangePick(BuildContext context) async {
-
-
-    
-
-
-
-
     final DateTimeRange? pickedDateRange = await showDateRangePicker(
       context: context,
       firstDate: DateTime(DateTime.now().day),

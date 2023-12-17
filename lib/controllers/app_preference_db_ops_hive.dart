@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/core/models/app_preference_db_model.dart';
+import 'package:diary/models/app_preference_db_model.dart';
 import 'package:hive/hive.dart';
 
 class AppPreferenceFunctions {
@@ -12,7 +12,6 @@ class AppPreferenceFunctions {
 
   Future<AppPreference?> getThemePreference() async {
     final storedPreference = box.get('1');
-
     return storedPreference;
   }
 

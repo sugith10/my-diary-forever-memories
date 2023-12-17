@@ -1,4 +1,4 @@
-import 'package:diary/infrastructure/providers/provider_mainscreen.dart';
+import 'package:diary/providers/provider_mainscreen.dart';
 import 'package:diary/presentation/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/presentation/screens/calendar_screen/calendar_screen.dart';
 import 'package:diary/presentation/screens/gallery_screen/gallery_screen.dart';

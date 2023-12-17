@@ -1,4 +1,4 @@
-import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/models/diary_entry.dart';
 import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';

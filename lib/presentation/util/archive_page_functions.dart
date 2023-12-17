@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:diary/application/controllers/archive_db_ops_hive.dart';
-import 'package:diary/core/models/archive_db_model.dart';
+import 'package:diary/controllers/archive_db_ops_hive.dart';
+import 'package:diary/models/archive_db_model.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';

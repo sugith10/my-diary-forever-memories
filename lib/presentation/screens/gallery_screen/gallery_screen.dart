@@ -1,10 +1,8 @@
-import 'dart:io';
-import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/models/diary_entry.dart';
+import 'package:diary/presentation/screens/gallery_screen/widget/diary_photos.dart';
 import 'package:diary/presentation/screens/gallery_screen/widget/no_photos.dart';
-import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
-import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:flutter_masonry_view/flutter_masonry_view.dart';
@@ -42,46 +40,13 @@ class GalleryScreen extends StatelessWidget {
                       numberOfColumn: 2,
                       listOfItem: imagePaths,
                       itemBuilder: (dynamic item) {
-                        return DiaryGalleryEntryCard(imagePath: item as String);
+                        return DiaryPhotos(imagePath: item as String);
                       },
                     ),
                   ],
                 ),
               )
             : const NoPhotos(),
-      ),
-    );
-  }
-}
-
-class DiaryGalleryEntryCard extends StatelessWidget {
-  final String imagePath;
-
-  const DiaryGalleryEntryCard({
-    required this.imagePath,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final diaryEntry = Hive.box<DiaryEntry>('_boxName').values.firstWhere(
-          (entry) => entry.imagePath == imagePath,
-        );
-
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DiaryDetailPage(entry: diaryEntry),
-          ),
-        );
-      },
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child: Image.file(
-          File(imagePath),
-        ),
       ),
     );
   }

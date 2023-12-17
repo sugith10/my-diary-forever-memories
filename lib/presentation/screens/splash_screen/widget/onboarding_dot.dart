@@ -1,4 +1,4 @@
-import 'package:diary/infrastructure/providers/provider_onboarding.dart';
+import 'package:diary/providers/provider_onboarding.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 

@@ -1,10 +1,10 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:diary/application/controllers/app_preference_db_ops_hive.dart';
-import 'package:diary/core/models/app_preference_db_model.dart';
-import 'package:diary/core/models/content_model.dart';
-import 'package:diary/infrastructure/providers/provider_onboarding.dart';
+import 'package:diary/controllers/app_preference_db_ops_hive.dart';
+import 'package:diary/providers/provider_onboarding.dart';
+import 'package:diary/models/app_preference_db_model.dart';
+import 'package:diary/models/content_model.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
-import 'package:diary/presentation/screens/splash_screen/widget/build_bot.dart';
+import 'package:diary/presentation/screens/splash_screen/widget/onboarding_dot.dart';
 import 'package:diary/presentation/util/get_colors.dart';
 import 'package:diary/presentation/util/onboarding_screen_functions.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +34,7 @@ class Onbording extends StatelessWidget {
             Expanded(
               child: PageView.builder(
                 controller: pageController,
-                itemCount: contents.length,
+                itemCount: OnboardingContentList().contents.length,
                 onPageChanged: (int index) {
                   onboardingState.updateIndex(index);
                 },
@@ -42,7 +42,7 @@ class Onbording extends StatelessWidget {
                   return Column(
                     children: [
                       Text(
-                        contents[i].title,
+                        OnboardingContentList().contents[i].title,
                         style: TextStyle(
                             fontSize: MediaQuery.of(context).size.height >= 800
                                 ? 30.0
@@ -53,7 +53,7 @@ class Onbording extends StatelessWidget {
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Text(
-                          contents[i].discription,
+                         OnboardingContentList().contents[i].discription,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: MediaQuery.of(context).size.height >= 800
@@ -72,7 +72,7 @@ class Onbording extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                contents.length,
+               OnboardingContentList().contents.length,
                 (index) => BuidDot(
                     index: index,
                     context: context,
@@ -85,7 +85,7 @@ class Onbording extends StatelessWidget {
               height: 60,
               child: ElevatedButton(
                 onPressed: () {
-                  if (onboardingState.currentIndex == contents.length - 1) {
+                  if (onboardingState.currentIndex ==  OnboardingContentList().contents.length - 1) {
                      AppPreferenceFunctions()
                     .showOnboarding(AppPreference(showOnboarding: false));
                     Navigator.pushReplacement(
@@ -118,7 +118,7 @@ class Onbording extends StatelessWidget {
                   delay: const Duration(milliseconds: 600),
                   duration: const Duration(milliseconds: 700),
                   child: Text(
-                    onboardingState.currentIndex == contents.length - 1
+                    onboardingState.currentIndex ==  OnboardingContentList().contents.length - 1
                         ? "Continue"
                         : "Next",
                     style: const TextStyle(

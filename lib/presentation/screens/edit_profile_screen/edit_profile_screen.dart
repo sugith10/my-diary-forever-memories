@@ -1,8 +1,7 @@
 import 'dart:io';
-import 'package:diary/application/controllers/profile_details_db_ops_hive.dart';
-import 'package:diary/core/models/profile_details.dart';
+import 'package:diary/controllers/profile_details_db_ops_hive.dart';
+import 'package:diary/models/profile_details.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
-import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/util/get_colors.dart';
 import 'package:diary/presentation/util/save_image.dart';
 import 'package:diary/presentation/util/snackbar.dart';
@@ -171,18 +170,17 @@ class _ProfilePageState extends State<ProfilePage> {
                   Padding(
                     padding: const EdgeInsets.only(bottom: 35.0),
                     child: TextFormField(
-                      decoration: InputDecoration(
-                          focusedBorder: const UnderlineInputBorder(
+                      decoration: const InputDecoration(
+                          focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Color(0xFF835DF1))),
                               
                           contentPadding:
-                              const EdgeInsets.only(left: 0, bottom: 3),
+                              EdgeInsets.only(left: 0, bottom: 3),
                           labelText: "Name",
-                          labelStyle: const TextStyle(color: Colors.grey),
+                          hintText: "User Name",
+                          labelStyle: TextStyle(color: Colors.grey),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
-                          hintText: profileDetails
-                              .name, 
-                          hintStyle: const TextStyle(
+                          hintStyle: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),),

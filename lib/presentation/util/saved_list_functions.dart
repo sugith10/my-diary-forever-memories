@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:diary/application/controllers/savedlist_db_ops_hive.dart';
-import 'package:diary/core/models/savedlist_db_model.dart';
+import 'package:diary/controllers/savedlist_db_ops_hive.dart';
+import 'package:diary/models/savedlist_db_model.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/util/get_colors.dart';

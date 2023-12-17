@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/core/models/archive_db_model.dart';
+import 'package:diary/models/archive_db_model.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/widget/content.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/widget/date.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/widget/title.dart';

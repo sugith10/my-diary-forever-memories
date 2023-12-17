@@ -1,9 +1,8 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-
-import 'package:diary/application/controllers/app_preference_db_ops_hive.dart';
-import 'package:diary/core/models/app_preference_db_model.dart';
+import 'package:diary/controllers/app_preference_db_ops_hive.dart';
+import 'package:diary/models/app_preference_db_model.dart';
 import 'package:diary/presentation/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';

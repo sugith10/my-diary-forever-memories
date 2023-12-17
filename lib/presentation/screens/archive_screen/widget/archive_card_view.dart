@@ -1,4 +1,4 @@
-import 'package:diary/core/models/archive_db_model.dart';
+import 'package:diary/models/archive_db_model.dart';
 import 'package:diary/presentation/screens/archive_screen/individual_archive_page/individual_archive_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

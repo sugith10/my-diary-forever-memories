@@ -1,4 +1,4 @@
-import 'package:diary/core/models/archive_db_model.dart';
+import 'package:diary/models/archive_db_model.dart';
 import 'package:diary/presentation/screens/archive_screen/widget/archive_card_view.dart';
 import 'package:diary/presentation/screens/saved_list_screen/widget/not_found.dart';
 import 'package:diary/presentation/screens/widget/appbar_with_back_button_only_common.dart';

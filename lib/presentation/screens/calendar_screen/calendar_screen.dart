@@ -1,10 +1,10 @@
-import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/models/diary_entry.dart';
 import 'package:diary/presentation/screens/calendar_screen/widget/create_diary_text.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/screens/create_screen/create_page.dart';
-import 'package:diary/infrastructure/providers/provider_calendar.dart';
+import 'package:diary/providers/provider_calendar.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/util/get_colors.dart';
