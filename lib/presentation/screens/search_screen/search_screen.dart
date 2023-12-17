@@ -55,7 +55,7 @@ class _SearchPageState extends State<SearchPage> {
               border: InputBorder.none,
             ),
             cursorColor: const Color.fromARGB(115, 95, 95, 95),
-            cursorHeight: 22,
+           
             style: const TextStyle(fontSize: 20),
             textCapitalization: TextCapitalization.sentences,
           ),

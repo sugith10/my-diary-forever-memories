@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:diary/core/models/diary_entry.dart';
+import 'package:diary/presentation/screens/gallery_screen/widget/no_photos.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
@@ -47,20 +48,7 @@ class GalleryScreen extends StatelessWidget {
                   ],
                 ),
               )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/empty_area/photo_not_found.png',
-                  ),
-                  const Text('No photos yet...',style: TextStyle(
-                    fontSize: 20
-                  ),),
-                   Text('All photos in your diary will be shown here', style: TextStyle(
-                     color: AppColor.secondary.color
-                  ),)
-                ],
-              ),
+            : const NoPhotos(),
       ),
     );
   }
