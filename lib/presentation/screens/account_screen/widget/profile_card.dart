@@ -8,7 +8,6 @@ import 'package:sizer/sizer.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
