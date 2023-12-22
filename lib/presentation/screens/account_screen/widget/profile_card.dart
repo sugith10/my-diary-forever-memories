@@ -73,7 +73,7 @@ class ProfileCard extends StatelessWidget {
                                     ? Colors.black26
                                     : Colors.white60,
                                 fontSize: 15,
-                              ),
+            ),
                             ),
                           ],
                         ),
