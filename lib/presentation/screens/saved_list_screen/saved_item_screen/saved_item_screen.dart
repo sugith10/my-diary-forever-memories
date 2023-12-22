@@ -40,7 +40,7 @@ class _SavedItemsState extends State<SavedItems> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButtonWidget(),
-        title: Text(widget.savedList.listName, style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+        title: Text(widget.savedList.listName, style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
         actions: [
           IconButton(
             onPressed: () {
