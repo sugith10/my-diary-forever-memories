@@ -36,9 +36,9 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final profileFunctions = ProfileFunctions();
+    // final profileFunctions = ProfileDetailsCtrl();
     final List<ProfileDetails> profileDetailsList =
-        profileFunctions.getAllProfileDetails();
+        ProfileDetailsCtrl().getAllProfileDetails();
 
     final ProfileDetails profileDetails = profileDetailsList.isNotEmpty
         ? profileDetailsList.first
@@ -255,7 +255,7 @@ class _ProfilePageState extends State<ProfilePage> {
         location: _locationController.text.trim(),
         profilePicturePath: imagePath,
       );
-      await ProfileFunctions().addProfileDetails(details);
+      await ProfileDetailsCtrl().addProfileDetails(details);
       // log('Profile details added: $details');
       if (mounted) {
          Navigator.pop(context);

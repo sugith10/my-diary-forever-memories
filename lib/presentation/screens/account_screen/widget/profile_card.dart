@@ -40,9 +40,9 @@ class ProfileCard extends StatelessWidget {
                 valueListenable:
                     Hive.box<ProfileDetails>('_profileBoxName').listenable(),
                 builder: (context, box, child) {
-                  final profileFunctions = ProfileFunctions();
+                  // final profileFunctions = ProfileDetailsCtrl();
                   final List<ProfileDetails> profileDetailsList =
-                      profileFunctions.getAllProfileDetails();
+                      ProfileDetailsCtrl().getAllProfileDetails();
 
                   if (profileDetailsList.isNotEmpty) {
                     final ProfileDetails profileDetails =

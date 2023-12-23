@@ -86,7 +86,7 @@ class Onbording extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (onboardingState.currentIndex ==  OnboardingContentList().contents.length - 1) {
-                     AppPreferenceFunctions()
+                     AppPreferenceCtrl()
                     .showOnboarding(AppPreference(showOnboarding: false));
                     Navigator.pushReplacement(
                       context,
@@ -129,7 +129,7 @@ class Onbording extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {       
-                 AppPreferenceFunctions()
+                 AppPreferenceCtrl()
                     .showOnboarding(AppPreference(showOnboarding: false));
                 Navigator.pushReplacement(
                   context,

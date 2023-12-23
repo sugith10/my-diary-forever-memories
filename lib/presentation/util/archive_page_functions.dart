@@ -63,7 +63,7 @@ class ArchivePageUtil {
                   child:
                       const Text('Delete', style: TextStyle(color: Colors.red)),
                   onPressed: () {
-                    ArchiveFunctions().deleteArchive(archive.id);
+                    ArchiveDiaryCtrl().deleteArchive(archive.id);
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => MainScreen()),
@@ -133,7 +133,7 @@ class ArchivePageUtil {
       if (value == 'Delete') {
         ArchivePageUtil().showDeleteConfirmationDialog(context, archive);
       } else if (value == 'Move') {
-        ArchiveFunctions().moveToDiary(context, archive);
+        ArchiveDiaryCtrl().moveToDiary(context, archive);
         Navigator.pop(context);
       }
     });
