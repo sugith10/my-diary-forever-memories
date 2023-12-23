@@ -20,7 +20,6 @@ import 'package:sizer/sizer.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-
   await Hive.initFlutter();
 
   if (!Hive.isAdapterRegistered(DiaryEntryAdapter().typeId)) {
