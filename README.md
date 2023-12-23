@@ -1,69 +1,64 @@
 # My Diary - Memories Forever
 
+## Download
+
+You can download the latest version of "My Diary - Memories Forever" on your Android device using the following link:
+
+[Download My Diary - Memories Forever](https://www.amazon.com/dp/B0CPC9V42B/ref=apps_sf_sta)
+
 ## Project Overview
 
-This Flutter project follows a layered architecture, organizing code into distinct layers based on their responsibilities. This structure enhances maintainability, separation of concerns, and scalability.
+This Flutter project is a diary app named "My Diary - Memories Forever." The project has been restructured for simplicity and clarity, following a more straightforward folder structure.
 
 ## File Structure
 
 ```
 lib
-|-- application
-|   |-- controllers
-|       |-- controller.dart
-|   |-- notifications
-|       |-- notification_service.dart
+|-- model
+|   |-- database_model.dart
 |
-|-- core
-|   |-- models
-|       |-- model.dart
+|-- controller
+|   |-- database_controller.dart
 |
-|-- infrastructure
-|   |-- providers
-|       |-- provider.dart
+|-- provider
+|   |-- state_management_provider.dart
 |
 |-- presentation
+|   |-- screen
+|       |-- screen.dart
 |   |-- theme
 |       |-- app_theme.dart
-|   |-- screens
-|       |-- screen1
-|           |-- screen1.dart
-|           |-- widget
-|               |-- component1.dart
-|               |-- component2.dart
-|       |-- screen2
-|           |-- screen2.dart
-|           |-- widget
-|               |-- component3.dart
-|               |-- component4.dart   
-|       |-- util
-|               |-- utility_functions.dart
-|       |-- widget
-|               |-- widget.dart
+|   |-- util
+|       |-- screen_functions.dart
 |
 |-- main.dart
 ```
 
 ## Layers Breakdown
 
-1. **Application Layer (`application`):**
-   - Orchestrates and coordinates the application's behavior.
-   - Contains controllers, services, and components implementing specific use cases.
+1. **Model Layer (`models`):**
+   - Contains the database model (`database_model.dart`) representing the structure of the data stored in Hive.
 
-2. **Domain Layer (`core`):**
-   - Houses core business logic and domain models.
-   - Represents the conceptual foundation of the application.
+2. **Controller Layer (`controllers`):**
+   - Manages database-related functions and operations.
+   - Houses the `database_controller.dart` file, where database functionalities are implemented.
 
-3. **Infrastructure Layer (`infrastructure`):**
-   - Handles external concerns, such as data providers, databases, or APIs.
-   - Provides implementations for interfaces defined in the application layer.
+3. **Provider Layer (`provider`):**
+   - Handles state management using the Provider package.
+   - Includes the `state_management_provider.dart` file.
 
 4. **Presentation Layer (`presentation`):**
    - Manages the user interface (UI) and user experience (UX) aspects.
-   - Includes screens, components, themes, and utilities related to presentation.
+   - Includes three subfolders:
+     - **Screen (`screen`):**
+       - Contains the main screen of the diary app (`screen.dart`).
+     - **Theme (`theme`):**
+       - Houses the `app_theme.dart` file for managing the app's visual theme.
+     - **Util (`util`):**
+       - Contains `screen_functions.dart` with utility functions related to the screen.
 
 ## Key Principles
 
-- **Separation of Concerns:** Each layer focuses on specific responsibilities, improving code organization and readability.
-- **Maintainability:** The layered architecture enhances maintainability by isolating changes to specific layers.
-- **Scalability:** The modular structure allows the project to scale by adding or modifying components within each layer.
+- **Simplicity and Clarity:** The updated structure focuses on straightforward organization for better understanding.
+- **Database Integration:** Utilizes the Hive database for efficient storage and retrieval of diary entries.
+- **State Management:** Implements state management using the Provider package for a streamlined user interface.
