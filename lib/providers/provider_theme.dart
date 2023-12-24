@@ -12,7 +12,7 @@ class ThemeNotifier extends ChangeNotifier {
   bool get isDarkMode => _isDarkMode;
 
   Future<void> _initializeTheme() async {
-    final themePreference = await AppPreferenceFunctions().getThemePreference();
+    final themePreference = await AppPreferenceCtrl().getThemePreference();
     if (themePreference != null) {
       _isDarkMode = themePreference.isDark ?? false;
     } 
@@ -23,7 +23,7 @@ class ThemeNotifier extends ChangeNotifier {
     if (_isDarkMode != false) {
       _isDarkMode = false;
       notifyListeners();
-      await AppPreferenceFunctions().addThemePreference(
+      await AppPreferenceCtrl().addThemePreference(
         AppPreference( isDark: _isDarkMode),
       );
     }
@@ -33,7 +33,7 @@ class ThemeNotifier extends ChangeNotifier {
     if (_isDarkMode != true) {
       _isDarkMode = true;
       notifyListeners();
-      await AppPreferenceFunctions().addThemePreference(
+      await AppPreferenceCtrl().addThemePreference(
         AppPreference(isDark: _isDarkMode),
       );
     }
