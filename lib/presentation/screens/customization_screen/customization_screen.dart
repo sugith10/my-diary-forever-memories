@@ -21,7 +21,7 @@ class _CustomizationPageState extends State<CustomizationPage> {
   @override
   void initState() {
     super.initState();
-    AppPreferenceFunctions().getThemePreference().then((preference) {
+    AppPreferenceCtrl().getThemePreference().then((preference) {
       if (preference != null) {
         setState(() {
           selectedTheme = preference.isDark == true ? 2 : 1;

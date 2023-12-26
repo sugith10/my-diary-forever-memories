@@ -3,7 +3,7 @@ import 'package:diary/models/savedlist_db_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
-class SavedListDbFunctions {
+class SavedListCtrl {
   final ValueNotifier<List<SavedList>> savedListsNotifier =
     ValueNotifier<List<SavedList>>([]);
   final box = Hive.box<SavedList>('_savedListBoxName');

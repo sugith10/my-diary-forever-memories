@@ -7,11 +7,13 @@ import 'package:flutter/material.dart';
 class SplashScreenFunc {
   _setup(BuildContext context) {
     Timer(const Duration(seconds: 2), () async {
-      final onboardingStatus = await AppPreferenceFunctions().getOnboardingStatus();
-      WidgetsBinding.instance.addPostFrameCallback((_) {
+      final onboardingStatus = await AppPreferenceCtrl().getOnboardingStatus();
+      // WidgetsBinding.instance.addPostFrameCallback((_) {
         if (onboardingStatus == null || onboardingStatus.showOnboarding == true) {
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacementNamed(context, '/onboarding');
         } else {
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -19,7 +21,8 @@ class SplashScreenFunc {
             ),
           );
         }
-      });
+      // }
+      // );
     });
   }
   setup(BuildContext context){

@@ -3,11 +3,11 @@ import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 
+class DiaryEntryCtrl {
 
 final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
     ValueNotifier<List<DiaryEntry>>([]);
 
-class DbFunctions {
   List<DiaryEntry> diaryEntryNotifier = [];
   final box = Hive.box<DiaryEntry>('_boxName');
   

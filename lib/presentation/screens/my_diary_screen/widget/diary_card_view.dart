@@ -21,7 +21,7 @@ class DiaryEntryCard extends StatelessWidget {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-              DbFunctions().deleteDiary(entry.id);
+              DiaryEntryCtrl().deleteDiary(entry.id);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   behavior: SnackBarBehavior.floating,
@@ -41,7 +41,7 @@ class DiaryEntryCard extends StatelessWidget {
           SlidableAction(
             onPressed: (BuildContext context) {
               
-                DbFunctions().deleteDiary(entry.id);
+                DiaryEntryCtrl().deleteDiary(entry.id);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     behavior: SnackBarBehavior.floating,
@@ -68,7 +68,7 @@ class DiaryEntryCard extends StatelessWidget {
         dismissible: DismissiblePane(
           onDismissed: () {
            
-              DbFunctions().deleteDiary(entry.id);
+              DiaryEntryCtrl().deleteDiary(entry.id);
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   behavior: SnackBarBehavior.floating,
@@ -88,7 +88,7 @@ class DiaryEntryCard extends StatelessWidget {
           SlidableAction(
             onPressed: (BuildContext context) {
            
-                DbFunctions().deleteDiary(entry.id);
+                DiaryEntryCtrl().deleteDiary(entry.id);
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     behavior: SnackBarBehavior.floating,

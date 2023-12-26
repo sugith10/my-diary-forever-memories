@@ -231,7 +231,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     background: widget.entry.background,
                   );
 
-                  await DbFunctions()
+                  await DiaryEntryCtrl()
                       .updateDiaryEntry(updatedEntry)
                       .then((value) {
                     log("DiaryEntry updated successfully!");

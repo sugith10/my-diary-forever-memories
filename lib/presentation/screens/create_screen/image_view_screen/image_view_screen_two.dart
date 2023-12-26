@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'dart:typed_data';
-
+import 'package:diary/presentation/util/create_screen_ctrl.dart';
 import 'package:flutter/material.dart';
-import 'package:image/image.dart' as img;
 
 class FullScreenImageDialog extends StatelessWidget {
   final File imageFile;
@@ -12,7 +10,7 @@ class FullScreenImageDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _getImageDimensions(),
+      future: CreateScreenCtrl().getImageDimensions(imageFile) ,
       builder: (BuildContext context, AsyncSnapshot<Size> snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
@@ -30,20 +28,9 @@ class FullScreenImageDialog extends StatelessWidget {
             ),
           );
         } else {
-          return Container();
+          return const SizedBox();
         }
       },
     );
-  }
-
-  Future<Size> _getImageDimensions() async {
-    final bytes = await imageFile.readAsBytes();
-    final image = img.decodeImage(Uint8List.fromList(bytes));
-    if (image != null) {
-      return Size(image.width.toDouble(), image.height.toDouble());
-    } else {
-     
-      return const Size(300, 300);
-    }
   }
 }

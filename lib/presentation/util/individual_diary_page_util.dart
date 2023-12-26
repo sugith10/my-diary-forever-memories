@@ -45,7 +45,7 @@ class DiaryDetailPageFunctions {
                   child: const Text('Delete', style: TextStyle(color: Colors.red)),
                   onPressed: () {
                     
-                      DbFunctions().deleteDiary(entry.id);
+                      DiaryEntryCtrl().deleteDiary(entry.id);
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => MainScreen()),
@@ -112,7 +112,7 @@ class DiaryDetailPageFunctions {
               child: const Text('Archive', style: TextStyle(color: Colors.red)),
               onPressed: () {
                 
-                  ArchiveFunctions().addArchiveDiary(
+                  ArchiveDiaryCtrl().addArchiveDiary(
                     id: entry.id,
                     date: entry.date,
                     background: entry.background,
@@ -124,7 +124,7 @@ class DiaryDetailPageFunctions {
                     entry.imagePathFour,
                     entry.imagePathFive,
                   );
-                  DbFunctions().deleteDiary(entry.id);
+                  DiaryEntryCtrl().deleteDiary(entry.id);
 
                   Navigator.pushAndRemoveUntil(
                     context,

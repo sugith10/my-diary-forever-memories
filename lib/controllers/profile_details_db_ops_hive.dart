@@ -3,7 +3,7 @@ import 'package:diary/models/profile_details.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
-class ProfileFunctions {
+class ProfileDetailsCtrl {
   final ValueNotifier<List<ProfileDetails>> profileDetailsNotifier =
       ValueNotifier<List<ProfileDetails>>([]);
 

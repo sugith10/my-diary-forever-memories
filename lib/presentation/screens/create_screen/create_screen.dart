@@ -108,7 +108,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                 );
                 widget.changer.selectDate(DateTime.now());
 
-                await DbFunctions().addDiaryEntry(entry).then((value) async {
+                await DiaryEntryCtrl().addDiaryEntry(entry).then((value) async {
                   log("Function completed: $value");
 
                   var hiveBox = await Hive.openBox<DiaryEntry>('_boxName');

@@ -2,14 +2,13 @@ import 'package:diary/presentation/screens/customization_screen/customization_sc
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/presentation/screens/account_screen/widget/profile_card.dart';
-import 'package:diary/presentation/screens/archive_screen/archive_page.dart';
+import 'package:diary/presentation/screens/archive_screen/archive_screen.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/util/account_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:page_transition/page_transition.dart';
-// import 'package:sizer/sizer.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({

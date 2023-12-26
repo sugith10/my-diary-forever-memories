@@ -52,7 +52,6 @@ class ProfileScreenFunctions {
     Future<void> _launchTermsConditions() async {
     final Uri url = Uri.parse(
         'https://www.app-privacy-policy.com/live.php?token=ve3uRD89qHFik8ihl2bdtEckKaMW3Jap');
-
     try {
       await launchUrl(url);
     } catch (e) {
@@ -122,7 +121,7 @@ class ProfileScreenFunctions {
                   child:
                       const Text('Logout', style: TextStyle(color: Colors.red)),
                   onPressed: ()async {
-                  final appPreferenceFunctions = AppPreferenceFunctions();
+                  final appPreferenceFunctions = AppPreferenceCtrl();
                  final onboardingStatus = AppPreference(showOnboarding: true);
                   await appPreferenceFunctions.showOnboarding(onboardingStatus);
 

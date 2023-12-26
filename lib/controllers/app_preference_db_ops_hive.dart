@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:diary/models/app_preference_db_model.dart';
 import 'package:hive/hive.dart';
 
-class AppPreferenceFunctions {
+class AppPreferenceCtrl {
   final box = Hive.box<AppPreference>('appPreferenceBox');
 
   Future<void> addThemePreference(AppPreference isDark) async {
@@ -14,7 +14,7 @@ class AppPreferenceFunctions {
     final storedPreference = box.get('1');
     return storedPreference;
   }
-
+  
   Future<void> showOnboarding(AppPreference showOnboarding) async {
     await box.put(showOnboarding.id, showOnboarding);
     log('Added theme into db ${showOnboarding.showOnboarding}');

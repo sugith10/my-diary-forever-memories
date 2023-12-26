@@ -5,7 +5,7 @@ import 'package:diary/models/diary_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
-class ArchiveFunctions {
+class ArchiveDiaryCtrl {
   final ValueNotifier<List<ArchiveDiary>> archiveDiaryNotifier =
       ValueNotifier<List<ArchiveDiary>>([]);
 
@@ -72,9 +72,11 @@ class ArchiveFunctions {
       imagePathFive: archive.imagePathFive,
     );
 
-    DbFunctions().addDiaryEntry(movedEntry);
+    
+    
+    DiaryEntryCtrl().addDiaryEntry(movedEntry);
 
-    ArchiveFunctions().deleteArchive(archive.id);
+    ArchiveDiaryCtrl().deleteArchive(archive.id);
 
     // ScaffoldMessenger.of(context).showSnackBar(
     //   const SnackBar(
