@@ -4,6 +4,7 @@ import 'package:diary/models/profile_details.dart';
 import 'package:diary/presentation/screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -17,8 +18,14 @@ class ProfileCard extends StatelessWidget {
       child: Center(
         child: GestureDetector(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProfilePage()));
+            Navigator.push(
+              context,
+              PageTransition(
+                type: PageTransitionType.bottomToTop,
+                child: const ProfilePage(),
+                childCurrent: this,
+              ),
+            );
           },
           child: Container(
             height: 20.h,
@@ -40,7 +47,6 @@ class ProfileCard extends StatelessWidget {
                 valueListenable:
                     Hive.box<ProfileDetails>('_profileBoxName').listenable(),
                 builder: (context, box, child) {
-                  // final profileFunctions = ProfileDetailsCtrl();
                   final List<ProfileDetails> profileDetailsList =
                       ProfileDetailsCtrl().getAllProfileDetails();
 
@@ -73,7 +79,7 @@ class ProfileCard extends StatelessWidget {
                                     ? Colors.black26
                                     : Colors.white60,
                                 fontSize: 15,
-            ),
+                              ),
                             ),
                           ],
                         ),
@@ -96,8 +102,7 @@ class ProfileCard extends StatelessWidget {
                                   ),
                             border: Border.all(
                               width: 4,
-                              color:
-                                  Theme.of(context).scaffoldBackgroundColor,
+                              color: Theme.of(context).scaffoldBackgroundColor,
                             ),
                             boxShadow: [
                               BoxShadow(
@@ -115,7 +120,6 @@ class ProfileCard extends StatelessWidget {
                       ],
                     );
                   } else {
-                   
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
