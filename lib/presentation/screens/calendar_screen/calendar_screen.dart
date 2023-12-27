@@ -1,4 +1,5 @@
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/presentation/screens/calendar_screen/widget/create_diary_text.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
@@ -156,8 +157,7 @@ class CalendarScreen extends StatelessWidget {
             builder: (context, box, child) {
               List<DiaryEntry> diaryEntries = box.values.toList();
               final selectedEntries = diaryEntries
-                  .where((entry) =>
-                      isSameDay(entry.date, changer.selectedDate))
+                  .where((entry) => isSameDay(entry.date, changer.selectedDate))
                   .toList();
               if (selectedEntries.isNotEmpty) {
                 return SliverList(
@@ -193,17 +193,11 @@ class CalendarScreen extends StatelessWidget {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              PageTransition(
-                                type: PageTransitionType.size,
-                                alignment: Alignment.bottomCenter,
-                                child: CreateDiaryPage(
-                                  changer: changer,
-                                  selectedColor: GetColors().getThemeColor(context),
-                                ),
-                              ),
-                            );
+                            Navigator.of(context)
+                                .push(bottomToTop(CreateDiaryPage(
+                              changer: changer,
+                              selectedColor: GetColors().getThemeColor(context),
+                            )));
                           },
                           child: const CreateDiaryText(),
                         ),

@@ -11,14 +11,14 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:sizer/sizer.dart';
 
-class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+class EditProfScreen extends StatefulWidget {
+  const EditProfScreen({super.key});
 
   @override
-  State<ProfilePage> createState() => _ProfilePageState();
+  State<EditProfScreen> createState() => _EditProfScreenState();
 }
 
-class _ProfilePageState extends State<ProfilePage> {
+class _EditProfScreenState extends State<EditProfScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();

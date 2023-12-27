@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:diary/controllers/profile_details_db_ops_hive.dart';
 import 'package:diary/models/profile_details.dart';
+import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/presentation/screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -18,14 +19,7 @@ class ProfileCard extends StatelessWidget {
       child: Center(
         child: GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              PageTransition(
-                type: PageTransitionType.bottomToTop,
-                child: const ProfilePage(),
-                childCurrent: this,
-              ),
-            );
+            Navigator.of(context).push(bottomToTop(const EditProfScreen()));
           },
           child: Container(
             height: 20.h,

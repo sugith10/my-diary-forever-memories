@@ -40,11 +40,9 @@ class MainScreen extends StatelessWidget {
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: 
-      // ignore: deprecated_member_use
-      WillPopScope(
-        onWillPop: () async {
-          return false;
-        },
+   
+      PopScope(
+        
         child: _mainScreens[currentIndex],
       ),
       bottomNavigationBar: Padding(
