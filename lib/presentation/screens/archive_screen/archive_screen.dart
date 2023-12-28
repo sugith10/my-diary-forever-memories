@@ -18,8 +18,13 @@ class ArchivePage extends StatelessWidget {
           final archiveDiaries = box.values.toList();
 
           if (archiveDiaries.isEmpty) {
-            return const Center(
-              child: NotFound(message: "No archived diaries."),
+            return  Column(
+              mainAxisAlignment: MainAxisAlignment.center ,
+              children :[
+                Image.asset('assets/images/empty_area/archived_not_found.png'),
+                const NotFound(message: "No archived diaries."),
+              ]
+        
             );
           }
 

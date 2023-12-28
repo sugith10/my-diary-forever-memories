@@ -6,7 +6,7 @@ class CreateFloatIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Image.asset(
-      'images/start_writing.png',
+      'assets/images/fab/start_writing.png',
       width: 40,
       height: 40,
     );

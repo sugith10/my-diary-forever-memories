@@ -64,12 +64,13 @@ flutter:
     - assets/images/onboarding_screen_animation/onboarding_lottie_dark.json
     - assets/images/forever_memories_logo/forever_memories_logo_white.png
     - assets/images/forever_memories_logo/forever_memories_logo_black.png
-    - images/start_writing.png
+    - assets/images/fab/start_writing.png
     - images/profile.png
     - assets/images/empty_area/search_not_found_2.png
     - assets/images/empty_area/entry_not_found.png
     - assets/images/empty_area/photo_not_found.png
     - assets/images/empty_area/savedlist_not_found.png.png
+    - assets/images/empty_area/archived_not_found.png
 
   fonts:
     - family: Satoshi
