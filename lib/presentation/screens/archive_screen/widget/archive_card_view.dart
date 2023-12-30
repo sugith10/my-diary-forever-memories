@@ -1,8 +1,8 @@
 import 'package:diary/models/archive_db_model.dart';
+import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/presentation/screens/archive_screen/individual_archive_page/individual_archive_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
 class ArchiveCardView extends StatelessWidget {
@@ -16,13 +16,9 @@ class ArchiveCardView extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          PageTransition(
-            type: PageTransitionType.size,
-            alignment: Alignment.bottomCenter,
-            child: IndividualArchive(
+         bottomToTop(IndividualArchive(
               archiveDiary: archiveDiary,
-            ),
-          ),
+            ))
         );
       },
       child: Container(

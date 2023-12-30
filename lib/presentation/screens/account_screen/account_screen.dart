@@ -1,3 +1,4 @@
+import 'package:diary/presentation/screen_transition/right_to_left.dart';
 import 'package:diary/presentation/screens/customization_screen/customization_screen.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/presentation/screens/account_screen/widget/account_screen_content_item.dart';
@@ -8,12 +9,9 @@ import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/util/account_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:page_transition/page_transition.dart';
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({
-    super.key,
-  });
+  const AccountScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,29 +44,16 @@ class AccountScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Column(
                 children: [
-               
-                     ProfileOptions(
-                    function: () => Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.rightToLeftJoined,
-                        child: const ArchivePage(),
-                        childCurrent: this,
-                      ),
-                    ),
+                  ProfileOptions(
+                    function: () =>
+                        Navigator.of(context).push(rightToLeft(const ArchivePage())),
                     item: 'Archived',
                     icon: Icons.archive_outlined,
                   ),
                   const ContentDivider(),
                   ProfileOptions(
-                    function: () => Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.rightToLeftJoined,
-                        child: const CustomizationPage(),
-                        childCurrent: this,
-                      ),
-                    ),
+                      function: () =>
+                        Navigator.of(context).push(rightToLeft(CustomizationPage())),
                     item: 'Customization',
                     icon: Ionicons.color_palette_outline,
                   ),
@@ -107,14 +92,15 @@ class AccountScreen extends StatelessWidget {
                   ),
                   const ContentDivider(),
                   const SizedBox(height: 20),
-                   const Text(
+                  const Text(
                     'Made with 💙 in India',
                     style: TextStyle(fontSize: 18),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text('© 2023 DayProduction® v1.1.0', style: TextStyle(fontSize: 15)),
+                  const Text('© 2023 DayProduction® v1.1.0',
+                      style: TextStyle(fontSize: 15)),
                   const SizedBox(
                     height: 10,
                   )

@@ -1,5 +1,6 @@
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/models/savedlist_db_model.dart';
+import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/widget/not_found.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
@@ -40,7 +41,10 @@ class _SavedItemsState extends State<SavedItems> {
     return Scaffold(
       appBar: AppBar(
         leading: const BackButtonWidget(),
-        title: Text(widget.savedList.listName, style: const TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+        title: Text(
+          widget.savedList.listName,
+          style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -69,11 +73,9 @@ class _SavedItemsState extends State<SavedItems> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => DiaryDetailPage(
-                            entry: selectedDiaryEntries[index],
-                          ),
-                        ),
+                        bottomToTop(DiaryDetailPage(
+                          entry: selectedDiaryEntries[index],
+                        )),
                       );
                     },
                     child: DiaryCardView(entry: selectedDiaryEntries[index]),

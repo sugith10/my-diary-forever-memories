@@ -36,13 +36,12 @@ class _EditProfScreenState extends State<EditProfScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final profileFunctions = ProfileDetailsCtrl();
     final List<ProfileDetails> profileDetailsList =
         ProfileDetailsCtrl().getAllProfileDetails();
 
     final ProfileDetails profileDetails = profileDetailsList.isNotEmpty
         ? profileDetailsList.first
-        : ProfileDetails(name: '', email: ''); // Provide default values
+        : ProfileDetails(name: '', email: '');
 
     if (_profilePicture == null && profileDetails.profilePicturePath != null) {
       _profilePicture = File(profileDetails.profilePicturePath!);
@@ -171,27 +170,21 @@ class _EditProfScreenState extends State<EditProfScreen> {
                     padding: const EdgeInsets.only(bottom: 35.0),
                     child: TextFormField(
                       decoration: const InputDecoration(
-                          focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFF835DF1))),
-                              
-                          contentPadding:
-                              EdgeInsets.only(left: 0, bottom: 3),
-                          labelText: "Name",
-                          hintText: "User Name",
-                          labelStyle: TextStyle(color: Colors.grey),
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          hintStyle: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),),
-                          cursorColor: GetColors().getFontColor(context),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Color(0xFF835DF1))),
+                        contentPadding: EdgeInsets.only(left: 0, bottom: 3),
+                        labelText: "Name",
+                        hintText: "User Name",
+                        labelStyle: TextStyle(color: Colors.grey),
+                        floatingLabelBehavior: FloatingLabelBehavior.always,
+                        hintStyle: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      cursorColor: GetColors().getFontColor(context),
                       textCapitalization: TextCapitalization.words,
                       controller: _nameController,
-                      // inputFormatters: [
-                      //   FilteringTextInputFormatter.allow(
-                      //     RegExp(r'^[a-zA-Z ]+$'),
-                      //   ),
-                      // ],
                     ),
                   ),
                   Padding(
@@ -209,7 +202,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           )),
-                          cursorColor: GetColors().getFontColor(context),
+                      cursorColor: GetColors().getFontColor(context),
                       controller: _emailController,
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -229,7 +222,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           )),
-                          cursorColor: GetColors().getFontColor(context),
+                      cursorColor: GetColors().getFontColor(context),
                       textCapitalization: TextCapitalization.words,
                       controller: _locationController,
                     ),
@@ -247,8 +240,9 @@ class _EditProfScreenState extends State<EditProfScreen> {
     final String name = _nameController.text.trim();
     final String email = _emailController.text.trim();
     if (name.isNotEmpty && email.isNotEmpty) {
-      final String? imagePath =
-          _profilePicture != null ? await SaveImage().saveImage(_profilePicture!) : null;
+      final String? imagePath = _profilePicture != null
+          ? await SaveImage().saveImage(_profilePicture!)
+          : null;
       final ProfileDetails details = ProfileDetails(
         name: name,
         email: email,
@@ -258,13 +252,10 @@ class _EditProfScreenState extends State<EditProfScreen> {
       await ProfileDetailsCtrl().addProfileDetails(details);
       // log('Profile details added: $details');
       if (mounted) {
-         Navigator.pop(context);
-      } else {
-
-      }
+        Navigator.pop(context);
+      } else {}
     } else {
-      ShowSnackBar().showSnackBar(context, "Fill all fields..." ,Colors.red);
-     
+      ShowSnackBar().showSnackBar(context, "Fill all fields...", Colors.red);
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:diary/models/savedlist_db_model.dart';
+import 'package:diary/presentation/screen_transition/scale.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_item_screen/saved_item_screen.dart';
 import 'package:diary/presentation/screens/widget/not_found.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
@@ -66,9 +67,17 @@ class SavedListScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => SavedItems(savedList: savedList),
-                      ),
+ SizeTransitionPageRoute(
+    child: SavedItems(savedList: savedList),
+    alignment: Alignment.center,
+    duration: Duration(milliseconds: 500),
+  ),
+                        
+
+
+                      // MaterialPageRoute(
+                      //   builder: (context) => SavedItems(savedList: savedList),
+                      // ),
                     );
                   },
                   child: Column(

@@ -5,7 +5,6 @@ import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/presentation/screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
 class ProfileCard extends StatelessWidget {

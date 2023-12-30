@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/presentation/screen_transition/no_movement.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/fab/fab.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/my_diary_title.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/no_diaries.dart';
@@ -12,8 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
-import 'package:page_transition/page_transition.dart';
-// import 'package:sizer/sizer.dart';
 
 class MyDiaryScreen extends StatefulWidget {
   const MyDiaryScreen({super.key});
@@ -50,13 +49,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                   actions: [
                     IconButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.fade,
-                            child: const SearchPage(),
-                          ),
-                        );
+                        Navigator.of(context)
+                            .push(noMovement(const SearchPage()));
                       },
                       icon: const Icon(
                         Icons.search,
@@ -64,11 +58,8 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                     ),
                     IconButton(
                       onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.fade,
-                                child: const SavedListScreen()));
+                        Navigator.of(context)
+                            .push(noMovement(const SavedListScreen()));
                       },
                       icon: const Icon(
                         Ionicons.bookmarks_outline,

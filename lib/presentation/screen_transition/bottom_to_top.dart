@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 Route bottomToTop( Widget screen) {
- 
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => screen,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {

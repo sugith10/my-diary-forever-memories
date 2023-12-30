@@ -1,10 +1,11 @@
 import 'package:diary/controllers/diary_entry_db_ops_hive.dart';
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
+import 'package:diary/presentation/screen_transition/no_movement.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:sizer/sizer.dart';
 
 class DiaryEntryCard extends StatelessWidget {
@@ -21,40 +22,37 @@ class DiaryEntryCard extends StatelessWidget {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-              DiaryEntryCtrl().deleteDiary(entry.id);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  margin: EdgeInsets.all(10),
-                  backgroundColor: Colors.red,
-                  duration: Duration(seconds: 2),
-                  content: Text(
-                    "Successfully Deleted",
-                    style: TextStyle(color: Colors.white),
-                  ),
+            DiaryEntryCtrl().deleteDiary(entry.id);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.all(10),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 2),
+                content: Text(
+                  "Successfully Deleted",
+                  style: TextStyle(color: Colors.white),
                 ),
-              );
-           
+              ),
+            );
           },
         ),
         children: [
           SlidableAction(
             onPressed: (BuildContext context) {
-              
-                DiaryEntryCtrl().deleteDiary(entry.id);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    margin: EdgeInsets.all(2.h),
-                    backgroundColor: Colors.red,
-                    duration: const Duration(seconds: 2),
-                    content: const Text(
-                      "Successfully Deleted",
-                      style: TextStyle(color: Colors.white),
-                    ),
+              DiaryEntryCtrl().deleteDiary(entry.id);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  margin: EdgeInsets.all(2.h),
+                  backgroundColor: Colors.red,
+                  duration: const Duration(seconds: 2),
+                  content: const Text(
+                    "Successfully Deleted",
+                    style: TextStyle(color: Colors.white),
                   ),
-                );
-            
+                ),
+              );
             },
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
@@ -67,41 +65,37 @@ class DiaryEntryCard extends StatelessWidget {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-           
-              DiaryEntryCtrl().deleteDiary(entry.id);
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  margin: EdgeInsets.all(10),
-                  backgroundColor: Colors.red,
-                  duration: Duration(seconds: 2),
-                  content: Text(
-                    "Successfully Deleted",
-                    style: TextStyle(color: Colors.white),
-                  ),
+            DiaryEntryCtrl().deleteDiary(entry.id);
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                behavior: SnackBarBehavior.floating,
+                margin: EdgeInsets.all(10),
+                backgroundColor: Colors.red,
+                duration: Duration(seconds: 2),
+                content: Text(
+                  "Successfully Deleted",
+                  style: TextStyle(color: Colors.white),
                 ),
-              );
-          
+              ),
+            );
           },
         ),
         children: [
           SlidableAction(
             onPressed: (BuildContext context) {
-           
-                DiaryEntryCtrl().deleteDiary(entry.id);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    margin: EdgeInsets.all(2.h),
-                    backgroundColor: Colors.red,
-                    duration: const Duration(seconds: 2),
-                    content: const Text(
-                      "Successfully Deleted",
-                      style: TextStyle(color: Colors.white),
-                    ),
+              DiaryEntryCtrl().deleteDiary(entry.id);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  behavior: SnackBarBehavior.floating,
+                  margin: EdgeInsets.all(2.h),
+                  backgroundColor: Colors.red,
+                  duration: const Duration(seconds: 2),
+                  content: const Text(
+                    "Successfully Deleted",
+                    style: TextStyle(color: Colors.white),
                   ),
-                );
-             
+                ),
+              );
             },
             backgroundColor: const Color(0xFFFE4A49),
             foregroundColor: Colors.white,
@@ -113,15 +107,10 @@ class DiaryEntryCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(
-            context,
-            PageTransition(
-              type: PageTransitionType.size,
-              alignment: Alignment.bottomCenter,
-              child: DiaryDetailPage(
+              context,
+              bottomToTop(DiaryDetailPage(
                 entry: entry,
-              ),
-            ),
-          );
+              )));
         },
         child: Padding(
           padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),

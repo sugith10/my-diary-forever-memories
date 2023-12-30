@@ -66,7 +66,6 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       // Read and decode the original image
       final bytes = image.readAsBytesSync();
       final originalImage = img.decodeImage(Uint8List.fromList(bytes));
-
       // Resize the image if its height is more than 800 pixels
       if (originalImage != null && originalImage.height > 800) {
         final resizedImage = img.copyResize(originalImage, height: 800);
@@ -191,10 +190,12 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: GetColors().getAlertBoxColor(context),
-          title: const Text(
-            'Edit Confirmation',
-            style: TextStyle(
-              fontSize: 27,
+          title: Center(
+            child: const Text(
+              'Edit Confirmation',
+              style: TextStyle(
+                fontSize: 27,
+              ),
             ),
           ),
           content: const Text(
