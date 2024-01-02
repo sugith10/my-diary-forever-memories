@@ -50,8 +50,8 @@ class SavedListScreen extends StatelessWidget {
                     'assets/images/empty_area/savedlist_not_found.png.png',
                   ),
                   const NotFound(
-                message: "Don't wait create a saved list.",
-              ),
+                    message: "Don't wait create a saved list.",
+                  ),
                 ],
               );
             }
@@ -67,17 +67,11 @@ class SavedListScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
- SizeTransitionPageRoute(
-    child: SavedItems(savedList: savedList),
-    alignment: Alignment.center,
-    duration: Duration(milliseconds: 500),
-  ),
-                        
-
-
-                      // MaterialPageRoute(
-                      //   builder: (context) => SavedItems(savedList: savedList),
-                      // ),
+                      SizeTransitionPageRoute(
+                        child: SavedItems(savedList: savedList),
+                        alignment: Alignment.center,
+                        duration: const Duration(milliseconds: 500),
+                      ),
                     );
                   },
                   child: Column(
