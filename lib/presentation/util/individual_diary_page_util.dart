@@ -31,39 +31,39 @@ class DiaryDetailPageFunctions {
             style: TextStyle(fontSize: 17),
           ),
           actions: [
-            
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-                TextButton(
-                  child: const Text('Delete', style: TextStyle(color: Colors.red)),
+                  child: const Text('Cancel'),
                   onPressed: () {
-                    
-                      DiaryEntryCtrl().deleteDiary(entry.id);
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (context) => MainScreen()),
-                        ModalRoute.withName('/main'),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  behavior: SnackBarBehavior.floating,
-                  margin: EdgeInsets.all(10),
-                  backgroundColor: Colors.red,
-                  duration: Duration(seconds: 2),
-                  content: Text(
-                    "Successfully Deleted",
-                    style: TextStyle(color: Colors.white),
-                  ),
+                    Navigator.of(context).pop();
+                  },
                 ),
-              );
-                    
+                TextButton(
+                  child:
+                      const Text('Delete', style: TextStyle(color: Colors.red)),
+                  onPressed: () {
+                    DiaryEntryCtrl().deleteDiary(entry.id);
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainScreen()),
+                      ModalRoute.withName('/main'),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        margin: EdgeInsets.all(10),
+                        backgroundColor: Colors.red,
+                        duration: Duration(seconds: 2),
+                        content: Center(
+                          child: Text(
+                            "Successfully Deleted",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],
@@ -109,42 +109,39 @@ class DiaryDetailPageFunctions {
                   },
                 ),
                 TextButton(
-              child: const Text('Archive', style: TextStyle(color: Colors.red)),
-              onPressed: () {
-                
-                  ArchiveDiaryCtrl().addArchiveDiary(
-                    id: entry.id,
-                    date: entry.date,
-                    background: entry.background,
-                    title: entry.title,
-                    content: entry.content,
-                    entry.imagePath,
-                    entry.imagePathTwo,
-                    entry.imagePathThree,
-                    entry.imagePathFour,
-                    entry.imagePathFive,
-                  );
-                  DiaryEntryCtrl().deleteDiary(entry.id);
+                  child: const Text('Archive',
+                      style: TextStyle(color: Colors.red)),
+                  onPressed: () {
+                    ArchiveDiaryCtrl().addArchiveDiary(
+                      id: entry.id,
+                      date: entry.date,
+                      background: entry.background,
+                      title: entry.title,
+                      content: entry.content,
+                      entry.imagePath,
+                      entry.imagePathTwo,
+                      entry.imagePathThree,
+                      entry.imagePathFour,
+                      entry.imagePathFive,
+                    );
+                    DiaryEntryCtrl().deleteDiary(entry.id);
 
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => MainScreen()),
-                    ModalRoute.withName('/main'),
-                  );
-                
-              },
-            ),
-
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => MainScreen()),
+                      ModalRoute.withName('/main'),
+                    );
+                  },
+                ),
               ],
             ),
-            
           ],
         );
       },
     );
   }
 
-  showArchiveConfirmationDialog(BuildContext context, DiaryEntry entry){
+  showArchiveConfirmationDialog(BuildContext context, DiaryEntry entry) {
     _showArchiveConfirmationDialog(context, entry);
   }
 
@@ -258,7 +255,8 @@ class DiaryDetailPageFunctions {
       } else if (value == 'Save') {
         SavedScreenFunctions().displayBottomSheet(context, entry.id);
       } else if (value == 'Archive') {
-        DiaryDetailPageFunctions().showArchiveConfirmationDialog(context, entry);
+        DiaryDetailPageFunctions()
+            .showArchiveConfirmationDialog(context, entry);
       }
     });
   }

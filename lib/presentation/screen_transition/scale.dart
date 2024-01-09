@@ -5,6 +5,7 @@ class SizeTransitionPageRoute<T> extends PageRouteBuilder<T> {
   final Alignment alignment;
   final Curve curve;
   final Duration duration;
+  // ignore: annotate_overrides, overridden_fields
   final bool fullscreenDialog;
 
   SizeTransitionPageRoute({

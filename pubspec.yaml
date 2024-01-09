@@ -41,8 +41,7 @@ dependencies:
   flutter_colorpicker: ^1.0.3
   url_launcher: ^6.2.1
   image: ^4.1.3
-  flutter_masonry_view: ^0.0.2
-
+  flutter_masonry_view: 0.0.2
 
 
 dev_dependencies: 
@@ -64,7 +63,7 @@ flutter:
     - assets/images/forever_memories_logo/forever_memories_logo_white.png
     - assets/images/forever_memories_logo/forever_memories_logo_black.png
     - assets/images/fab/start_writing.png
-    - images/profile.png
+    - assets/images/user_profile/user_profile.png
     - assets/images/empty_area/search_not_found_2.png
     - assets/images/empty_area/entry_not_found.png
     - assets/images/empty_area/photo_not_found.png

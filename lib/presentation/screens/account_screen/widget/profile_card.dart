@@ -14,7 +14,7 @@ class ProfileCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20),
       height: 27.h,
-      width: 100.w,
+
       child: Center(
         child: GestureDetector(
           onTap: () {
@@ -83,14 +83,16 @@ class ProfileCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: profileDetails.profilePicturePath != null
-                                ? DecorationImage(
+                                ? 
+                                DecorationImage(
                                     image: FileImage(
                                       File(profileDetails.profilePicturePath!),
                                     ),
                                     fit: BoxFit.cover,
                                   )
+                                
                                 : const DecorationImage(
-                                    image: AssetImage('images/profile.png'),
+                                    image: AssetImage('assets/images/user_profile/user_profile.png'),
                                     fit: BoxFit.cover,
                                   ),
                             border: Border.all(
@@ -149,7 +151,7 @@ class ProfileCard extends StatelessWidget {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage('images/profile.png'),
+                              image: AssetImage('assets/images/user_profile/user_profile.png'),
                               fit: BoxFit.cover,
                             ),
                           ),

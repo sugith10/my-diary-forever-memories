@@ -125,7 +125,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
                                         fit: BoxFit.cover,
                                       )
                                     : const DecorationImage(
-                                        image: AssetImage('images/profile.png'),
+                                        image: AssetImage('assets/images/user_profile/user_profile.png'),
                                         fit: BoxFit.cover,
                                       ),
                             border: Border.all(

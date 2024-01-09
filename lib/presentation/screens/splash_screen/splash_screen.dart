@@ -11,14 +11,17 @@ class Splash extends StatelessWidget {
 
     return Scaffold(
       body: Center(
-        child: Image(
-          image: Theme.of(context).brightness == Brightness.light
-              ? const AssetImage(
-                  'assets/images/forever_memories_logo/forever_memories_logo_black.png',
-                )
-              : const AssetImage(
-                  'assets/images/forever_memories_logo/forever_memories_logo_white.png',
-                ),
+        child: Padding(
+          padding: const EdgeInsets.all(50.0),
+          child: Image(
+            image: Theme.of(context).brightness == Brightness.light
+                ? const AssetImage(
+                    'assets/images/forever_memories_logo/forever_memories_logo_black.png',
+                  )
+                : const AssetImage(
+                    'assets/images/forever_memories_logo/forever_memories_logo_white.png',
+                  ),
+          ),
         ),
       ),
     );

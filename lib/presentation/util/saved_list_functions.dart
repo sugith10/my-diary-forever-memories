@@ -217,10 +217,12 @@ class SavedScreenFunctions {
             backgroundColor: Theme.of(context).brightness == Brightness.light
               ? AppColor.light.color
               : AppColor.showMenuDark.color,
-          title: const Text(
-            'Delete Confirmation',
-            style: TextStyle(
-              fontSize: 27,
+          title: const Center(
+            child: Text(
+              'Delete Confirmation',
+              style: TextStyle(
+                fontSize: 27,
+              ),
             ),
           ),
           content: const Text(
@@ -228,14 +230,18 @@ class SavedScreenFunctions {
             style: TextStyle(fontSize: 17),
           ),
           actions: [
-            TextButton(
-              child: const Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Delete', style: TextStyle(color: Colors.red)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  child: const Text('Cancel'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+              child: const Text('Delete',
+               style: TextStyle(color: Colors.red)),
               onPressed: () {
                 SavedListCtrl().deleteSavedList(savedList.id);
 
@@ -244,8 +250,25 @@ class SavedScreenFunctions {
                   MaterialPageRoute(builder: (context) => MainScreen()),
                   ModalRoute.withName('/main'),
                 );
+                ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        behavior: SnackBarBehavior.floating,
+                        margin: EdgeInsets.all(10),
+                        backgroundColor: Colors.red,
+                        duration: Duration(seconds: 2),
+                        content: Center(
+                          child: Text(
+                            "Successfully Deleted",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    );
               },
             ),
+              ],
+            ),
+            
           ],
         );
       },

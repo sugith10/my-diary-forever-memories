@@ -165,13 +165,10 @@ class CalendarScreen extends StatelessWidget {
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => DiaryDetailPage(
+                              context,
+                              bottomToTop(DiaryDetailPage(
                                 entry: selectedEntries[index],
-                              ),
-                            ),
-                          );
+                              )));
                         },
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 20),

@@ -190,8 +190,8 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: GetColors().getAlertBoxColor(context),
-          title: Center(
-            child: const Text(
+          title: const Center(
+            child: Text(
               'Edit Confirmation',
               style: TextStyle(
                 fontSize: 27,

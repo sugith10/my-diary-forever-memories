@@ -1,4 +1,4 @@
-import 'package:diary/presentation/screen_transition/fab_to_top.dart';
+import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/providers/provider_calendar.dart';
 import 'package:diary/presentation/screens/create_screen/create_screen.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/fab/create_floating_icon.dart';
@@ -15,7 +15,7 @@ class CreatePageFAB extends StatelessWidget {
       shape: const CircleBorder(),
       onPressed: () {
         final changer = Provider.of<Changer>(context, listen: false);
-       Navigator.of(context).push(fabToTop(CreateDiaryPage(
+       Navigator.of(context).push(bottomToTop(CreateDiaryPage(
                     changer: changer,
                     selectedColor: GetColors().getThemeColor(context))));
       },

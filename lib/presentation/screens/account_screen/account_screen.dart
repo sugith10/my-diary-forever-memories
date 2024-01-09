@@ -53,7 +53,7 @@ class AccountScreen extends StatelessWidget {
                   const ContentDivider(),
                   ProfileOptions(
                       function: () =>
-                        Navigator.of(context).push(rightToLeft(CustomizationPage())),
+                        Navigator.of(context).push(rightToLeft(const CustomizationPage())),
                     item: 'Customization',
                     icon: Ionicons.color_palette_outline,
                   ),
@@ -99,7 +99,7 @@ class AccountScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text('© 2023 DayProduction® v1.1.0',
+                  const Text('© 2024 DayProduction® v1.2.0',
                       style: TextStyle(fontSize: 15)),
                   const SizedBox(
                     height: 10,

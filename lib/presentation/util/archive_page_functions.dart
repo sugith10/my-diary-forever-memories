@@ -75,9 +75,11 @@ class ArchivePageUtil {
                         margin: EdgeInsets.all(10),
                         backgroundColor: Colors.red,
                         duration: Duration(seconds: 2),
-                        content: Text(
-                          "Successfully Deleted",
-                          style: TextStyle(color: Colors.white),
+                        content: Center(
+                          child: Text(
+                            "Successfully Deleted",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ),
                       ),
                     );
