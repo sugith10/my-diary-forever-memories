@@ -203,63 +203,69 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
             style: TextStyle(fontSize: 17),
           ),
           actions: [
-            TextButton(
-              child: const Text(
-                'Cancel',
-              ),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-            TextButton(
-              child: const Text('Save', style: TextStyle(color: Colors.red)),
-              onPressed: () async {
-                final title = titleController.text;
-                final content = contentController.text;
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  child: const Text(
+                    'Cancel',
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                TextButton(
+                  child:
+                      const Text('Save', style: TextStyle(color: Colors.red)),
+                  onPressed: () async {
+                    final title = titleController.text;
+                    final content = contentController.text;
 
-                String? imagePath;
-                if (_image != null) {
-                  imagePath = await saveImage(_image!);
-                }
+                    String? imagePath;
+                    if (_image != null) {
+                      imagePath = await saveImage(_image!);
+                    }
 
-                if (title.isNotEmpty) {
-                  final updatedEntry = DiaryEntry(
-                    id: widget.entry.id,
-                    date: widget.entry.date,
-                    title: title,
-                    content: content,
-                    imagePath: imagePath,
-                    background: widget.entry.background,
-                  );
+                    if (title.isNotEmpty) {
+                      final updatedEntry = DiaryEntry(
+                        id: widget.entry.id,
+                        date: widget.entry.date,
+                        title: title,
+                        content: content,
+                        imagePath: imagePath,
+                        background: widget.entry.background,
+                      );
 
-                  await DiaryEntryCtrl()
-                      .updateDiaryEntry(updatedEntry)
-                      .then((value) {
-                    log("DiaryEntry updated successfully!");
-                  }).catchError((error) {
-                    log("Error updating DiaryEntry: $error");
-                  });
-                  // ignore: use_build_context_synchronously
-                  Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    '/main',
-                    (route) => false,
-                  );
-                } else {
-                  // ignore: use_build_context_synchronously
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      behavior: SnackBarBehavior.floating,
-                      margin: EdgeInsets.all(10),
-                      backgroundColor: Colors.red,
-                      content: Text('Title cannot be empty!'),
-                      duration: Duration(seconds: 2),
-                    ),
-                  );
-                  // ignore: use_build_context_synchronously
-                  Navigator.pop(context);
-                }
-              },
+                      await DiaryEntryCtrl()
+                          .updateDiaryEntry(updatedEntry)
+                          .then((value) {
+                        log("DiaryEntry updated successfully!");
+                      }).catchError((error) {
+                        log("Error updating DiaryEntry: $error");
+                      });
+                      // ignore: use_build_context_synchronously
+                      Navigator.pushNamedAndRemoveUntil(
+                        context,
+                        '/main',
+                        (route) => false,
+                      );
+                    } else {
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          margin: EdgeInsets.all(10),
+                          backgroundColor: Colors.red,
+                          content: Text('Title cannot be empty!'),
+                          duration: Duration(seconds: 2),
+                        ),
+                      );
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
+              ],
             ),
           ],
         );

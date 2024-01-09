@@ -3,6 +3,7 @@ import 'package:diary/controllers/profile_details_db_ops_hive.dart';
 import 'package:diary/models/profile_details.dart';
 import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/presentation/screens/edit_profile_screen/edit_profile_screen.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sizer/sizer.dart';
@@ -34,7 +35,7 @@ class ProfileCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).brightness == Brightness.light
                   ? Colors.white
-                  : const Color.fromARGB(255, 25, 25, 25),
+                  : AppColor.darkCard.color,
             ),
             child: ValueListenableBuilder(
                 valueListenable:

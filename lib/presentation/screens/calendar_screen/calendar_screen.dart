@@ -2,10 +2,10 @@ import 'package:diary/models/diary_entry.dart';
 import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/presentation/screens/calendar_screen/widget/create_diary_text.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
-import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
+import 'package:diary/presentation/screens/my_diary_screen/widget/dairy_card.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/screens/create_screen/create_screen.dart';
-import 'package:diary/providers/provider_calendar.dart';
+import 'package:diary/providers/calendar_scrn_prvdr.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/util/get_colors.dart';
@@ -27,7 +27,7 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final changer = Provider.of<Changer>(context);
+    final changer = Provider.of<CalenderScreenProvider>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +38,7 @@ class CalendarScreen extends StatelessWidget {
           },
           child: Row(
             children: [
-              Consumer<Changer>(
+              Consumer<CalenderScreenProvider>(
                 builder: (context, changer, child) {
                   return AppbarTitleWidget(
                     text: DateFormat('d MMMM,y').format(changer.selectedDate),
@@ -98,7 +98,7 @@ class CalendarScreen extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(
             child: Container(
-              margin: const EdgeInsets.only(left: 10, right: 10),
+              margin: const EdgeInsets.only(left: 5, right: 5),
               child: Visibility(
                 visible: changer.isCalendarVisible,
                 child: Padding(
@@ -162,16 +162,16 @@ class CalendarScreen extends StatelessWidget {
                 return SliverList(
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              bottomToTop(DiaryDetailPage(
-                                entry: selectedEntries[index],
-                              )));
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
+                      return Padding(
+                        padding: const EdgeInsets.only(left: 10,right: 10),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                bottomToTop(DiaryDetailPage(
+                                  entry: selectedEntries[index],
+                                )));
+                          },
                           child: DiaryCardView(
                             entry: selectedEntries[index],
                           ),

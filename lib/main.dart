@@ -1,4 +1,4 @@
-import 'package:diary/providers/provider_theme.dart';
+import 'package:diary/providers/theme_select_prvdr.dart';
 import 'package:diary/models/app_preference_db_model.dart';
 import 'package:diary/models/archive_db_model.dart';
 import 'package:diary/models/diary_entry.dart';
@@ -8,9 +8,9 @@ import 'package:diary/presentation/screens/main_screen/main_screen.dart';
 import 'package:diary/presentation/screens/splash_screen/onboarding_screen.dart';
 import 'package:diary/presentation/screens/splash_screen/splash_screen.dart';
 import 'package:diary/presentation/theme/app_theme.dart';
-import 'package:diary/providers/provider_mainscreen.dart';
-import 'package:diary/providers/provider_onboarding.dart';
-import 'package:diary/providers/provider_calendar.dart';
+import 'package:diary/providers/main_scrn_prvdr.dart';
+import 'package:diary/providers/onboarding_scrn_prvdr.dart';
+import 'package:diary/providers/calendar_scrn_prvdr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -58,13 +58,13 @@ Future<void> main() async {
           create: (context) => ThemeNotifier(),
         ),
         ChangeNotifierProvider(
-          create: (context) => Changer(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => OnboardingState(),
+          create: (context) => OnboardingScreenProvider(),
         ),
         ChangeNotifierProvider(
           create: (context) => MainScreenProvider(),
+        ),
+         ChangeNotifierProvider(
+          create: (context) => CalenderScreenProvider(),
         ),
       ],
       child: const MyApp(),
@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/splash': (context) => const Splash(),
           '/onboarding': (context) => Onbording(
-                onboardingState: Provider.of<OnboardingState>(context),
+                onboardingState: Provider.of<OnboardingScreenProvider>(context),
               ),
            '/main': (context) => MainScreen(),   
         },

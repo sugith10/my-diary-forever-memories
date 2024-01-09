@@ -3,7 +3,7 @@ import 'package:diary/presentation/screens/account_screen/widget/info_container.
 import 'package:diary/presentation/screens/customization_screen/widget/theme_switch_card.dart';
 import 'package:diary/presentation/screens/customization_screen/widget/theme_switch_card_body.dart';
 import 'package:diary/presentation/screens/widget/appbar_with_back_button_only_common.dart';
-import 'package:diary/providers/provider_theme.dart';
+import 'package:diary/providers/theme_select_prvdr.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

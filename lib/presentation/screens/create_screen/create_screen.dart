@@ -8,7 +8,7 @@ import 'package:diary/presentation/screens/widget/back_button.dart';
 import 'package:diary/presentation/screens/widget/create_screen_bottom_navigationbar.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/controllers/diary_entry_db_ops_hive.dart';
-import 'package:diary/providers/provider_calendar.dart';
+import 'package:diary/providers/calendar_scrn_prvdr.dart';
 import 'package:diary/presentation/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/screens/widget/save_text_button_common.dart';
 import 'package:diary/presentation/util/create_screen_functions.dart';
@@ -24,7 +24,7 @@ import 'package:image/image.dart' as img;
 
 // ignore: must_be_immutable
 class CreateDiaryPage extends StatefulWidget {
-  final Changer changer;
+  final CalenderScreenProvider changer;
   Color selectedColor;
 
   CreateDiaryPage(
@@ -180,7 +180,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                     },
                     child: Row(
                       children: [
-                        Consumer<Changer>(
+                        Consumer<CalenderScreenProvider>(
                           builder: (context, changer, child) {
                             return Text(
                               DateFormat('d MMMM,y')

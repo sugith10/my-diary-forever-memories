@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Changer extends ChangeNotifier{
+class CalenderScreenProvider extends ChangeNotifier{
   bool _isCalendarVisible = true;
   DateTime _selectedDate = DateTime.now(); // Store the selected date
 

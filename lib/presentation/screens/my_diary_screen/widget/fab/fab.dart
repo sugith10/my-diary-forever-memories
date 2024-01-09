@@ -1,5 +1,5 @@
 import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
-import 'package:diary/providers/provider_calendar.dart';
+import 'package:diary/providers/calendar_scrn_prvdr.dart';
 import 'package:diary/presentation/screens/create_screen/create_screen.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/fab/create_floating_icon.dart';
 import 'package:diary/presentation/util/get_colors.dart';
@@ -14,7 +14,7 @@ class CreatePageFAB extends StatelessWidget {
     return FloatingActionButton(
       shape: const CircleBorder(),
       onPressed: () {
-        final changer = Provider.of<Changer>(context, listen: false);
+        final changer = Provider.of<CalenderScreenProvider>(context, listen: false);
        Navigator.of(context).push(bottomToTop(CreateDiaryPage(
                     changer: changer,
                     selectedColor: GetColors().getThemeColor(context))));

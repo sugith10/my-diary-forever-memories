@@ -1,6 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/controllers/app_preference_db_ops_hive.dart';
-import 'package:diary/providers/provider_onboarding.dart';
+import 'package:diary/providers/onboarding_scrn_prvdr.dart';
 import 'package:diary/models/app_preference_db_model.dart';
 import 'package:diary/models/content_model.dart';
 import 'package:diary/presentation/screens/main_screen/main_screen.dart';
@@ -15,7 +15,7 @@ class Onbording extends StatelessWidget {
   Onbording({super.key, required this.onboardingState});
 
   final PageController pageController = PageController(initialPage: 0);
-  final OnboardingState onboardingState;
+  final OnboardingScreenProvider onboardingState;
 
   @override
   Widget build(BuildContext context) {

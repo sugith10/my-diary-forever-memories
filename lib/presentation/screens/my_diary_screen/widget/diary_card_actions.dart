@@ -2,16 +2,16 @@ import 'package:diary/controllers/diary_entry_db_ops_hive.dart';
 import 'package:diary/models/diary_entry.dart';
 import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
-import 'package:diary/presentation/screens/widget/dairy_card_view_common.dart';
+import 'package:diary/presentation/screens/my_diary_screen/widget/dairy_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:sizer/sizer.dart';
 
-class DiaryEntryCard extends StatelessWidget {
+class DiaryCardActions extends StatelessWidget {
   final DiaryEntry entry;
   final int index;
 
-  const DiaryEntryCard(this.entry, this.index, {super.key});
+  const DiaryCardActions(this.entry, this.index, {super.key});
 
   @override
   Widget build(BuildContext context) {

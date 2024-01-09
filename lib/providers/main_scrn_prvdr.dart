@@ -1,7 +1,4 @@
-
 import 'package:flutter/material.dart';
-
-
 
 class MainScreenProvider extends ChangeNotifier {
    int _currentIndex = 0;

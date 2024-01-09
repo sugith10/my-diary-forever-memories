@@ -1,4 +1,5 @@
 import 'package:diary/models/diary_entry.dart';
+import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -13,8 +14,8 @@ class DiaryCardView extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Theme.of(context).brightness == Brightness.light
-            ? Colors.white
-            : const Color.fromARGB(255, 9, 9, 9),
+            ? AppColor.lightCard.color
+            : AppColor.darkCard.color,
         borderRadius: BorderRadius.circular(12.0),
         boxShadow: [
           BoxShadow(

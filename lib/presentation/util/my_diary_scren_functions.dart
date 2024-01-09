@@ -1,15 +1,16 @@
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/presentation/screens/my_diary_screen/widget/diary_card_view.dart';
+import 'package:diary/presentation/screens/my_diary_screen/widget/diary_card_actions.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MyDiaryScreenFunctions {
   Future<DateTimeRange?> _handleDateRangePick(BuildContext context) async {
+    final DateTime now = DateTime.now();
     final DateTimeRange? pickedDateRange = await showDateRangePicker(
       context: context,
       firstDate: DateTime(DateTime.now().day),
-      lastDate: DateTime.now(),
+      lastDate: now,
       locale: Localizations.localeOf(context),
       saveText: 'Done',
       builder: (BuildContext context, Widget? child) {
@@ -34,8 +35,6 @@ class MyDiaryScreenFunctions {
       initialEntryMode: Theme.of(context).brightness == Brightness.light
           ? DatePickerEntryMode.calendar
           : DatePickerEntryMode.input,
-      initialDateRange:
-          DateTimeRange(start: DateTime.now().subtract(const Duration(days: 15)), end: DateTime.now()),
       helpText: 'Select Date Range',
       cancelText: 'Cancel',
       confirmText: 'OK',
@@ -45,11 +44,15 @@ class MyDiaryScreenFunctions {
       fieldEndHintText: 'End Date',
     );
     if (pickedDateRange != null) {
-      // final startDate = pickedDateRange.start;
-      // final endDate = pickedDateRange.end;
-      // final formattedStartDate = DateFormat('d MMMM, y').format(startDate);
-      // final formattedEndDate = DateFormat('d MMMM, y').format(endDate);
-      // print('Selected date range: $formattedStartDate - $formattedEndDate');
+      final DateTime adjustedStartDate =
+          pickedDateRange.start.subtract(const Duration(days: 1));
+      final DateTime adjustedEndDate =
+          pickedDateRange.end.add(const Duration(days: 1));
+
+      final adjustedDateRange =
+          DateTimeRange(start: adjustedStartDate, end: adjustedEndDate);
+
+      return adjustedDateRange;
     }
     return pickedDateRange;
   }
@@ -64,7 +67,6 @@ class MyDiaryScreenFunctions {
 
     final dateParts = formattedDate.split(' - ');
 
-    // Function to get the common day abbreviation
     String getCommonDayAbbreviation(String fullDay) {
       return DateFormat.E().format(DateTime.parse(date)).substring(0, 3);
     }
@@ -87,7 +89,7 @@ class MyDiaryScreenFunctions {
               ),
               const SizedBox(width: 4),
               Text(
-                '(${getCommonDayAbbreviation(date)})', // Include common day abbreviation in parentheses
+                '(${getCommonDayAbbreviation(date)})', 
                 style: const TextStyle(
                   fontSize: 15.0,
                 ),
@@ -97,7 +99,7 @@ class MyDiaryScreenFunctions {
         ),
         Column(
           children: entries.map((entry) {
-            return DiaryEntryCard(entry, entries.indexOf(entry),
+            return DiaryCardActions(entry, entries.indexOf(entry),
                 key: ValueKey(entry.id));
           }).toList(),
         ),

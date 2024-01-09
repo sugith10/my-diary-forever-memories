@@ -1,10 +1,10 @@
-import 'package:diary/providers/provider_onboarding.dart';
+import 'package:diary/providers/onboarding_scrn_prvdr.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 class BuidDot extends StatelessWidget {
   final int index;
-  final OnboardingState onboardingState;
+  final OnboardingScreenProvider onboardingState;
   final BuildContext context;
 
   const BuidDot({ required this.index, required this.onboardingState, required  this.context, super.key});
@@ -24,7 +24,7 @@ class BuidDot extends StatelessWidget {
 }
 
 
-Container buildDot(int index, BuildContext context, OnboardingState onboardingState) {
+Container buildDot(int index, BuildContext context, OnboardingScreenProvider onboardingState) {
     
     return Container(
       height: 10.sp,
