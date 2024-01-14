@@ -78,6 +78,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
+        title: 'My Diary',
         theme: AppTheme().lightMode,
         darkTheme: AppTheme().darkMode,
         themeMode: Provider.of<ThemeNotifier>(context).isDarkMode

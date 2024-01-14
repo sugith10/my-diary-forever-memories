@@ -8,7 +8,7 @@ You can download the latest version of "My Diary - Memories Forever" on your And
 
 ## Project Overview
 
-This Flutter project is a diary app named "My Diary - Memories Forever." The project has been restructured for simplicity and clarity, following a more straightforward folder structure.
+This Flutter project is a diary app named "My Diary - Memories Forever." The project follows a simplified folder structure for clarity and ease of understanding.
 
 ## File Structure
 
@@ -24,12 +24,16 @@ lib
 |   |-- state_management_provider.dart
 |
 |-- presentation
-|   |-- screen
+|   |-- screens
 |       |-- screen.dart
+|       |-- widget
+|           |-- widget.dart
 |   |-- theme
 |       |-- app_theme.dart
 |   |-- util
 |       |-- screen_functions.dart
+|-- screen_transition
+|   |-- screen_transition.dart
 |
 |-- main.dart
 ```
@@ -49,16 +53,22 @@ lib
 
 4. **Presentation Layer (`presentation`):**
    - Manages the user interface (UI) and user experience (UX) aspects.
-   - Includes three subfolders:
-     - **Screen (`screen`):**
+   - Includes two subfolders:
+     - **Screens (`screens`):**
        - Contains the main screen of the diary app (`screen.dart`).
+       - Also includes a `widget` folder with `widget.dart` for reusable widgets related to screens.
      - **Theme (`theme`):**
        - Houses the `app_theme.dart` file for managing the app's visual theme.
      - **Util (`util`):**
        - Contains `screen_functions.dart` with utility functions related to the screen.
+     - **Screen Transition (`screen_transition`):**
+       - Contains `screen_transition.dart` for handling screen transitions.
+
+5. **Main File (`main.dart`):**
+   - Entry point of the Flutter application.
 
 ## Key Principles
 
-- **Simplicity and Clarity:** The updated structure focuses on straightforward organization for better understanding.
+- **Simplicity and Clarity:** The structure focuses on straightforward organization for better understanding.
 - **Database Integration:** Utilizes the Hive database for efficient storage and retrieval of diary entries.
 - **State Management:** Implements state management using the Provider package for a streamlined user interface.
