@@ -99,7 +99,7 @@ class AccountScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text('© 2024 DayProduction® v1.2.0',
+                  const Text('© 2024 DayProduction® v1.2.5',
                       style: TextStyle(fontSize: 15)),
                   const SizedBox(
                     height: 10,
