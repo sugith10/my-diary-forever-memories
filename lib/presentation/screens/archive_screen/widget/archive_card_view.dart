@@ -1,5 +1,5 @@
 import 'package:diary/models/archive_db_model.dart';
-import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
+import 'package:diary/presentation/screen_transitions/bottom_to_top.dart';
 import 'package:diary/presentation/screens/archive_screen/individual_archive_page/individual_archive_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

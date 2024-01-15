@@ -1,5 +1,5 @@
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
+import 'package:diary/presentation/screen_transitions/bottom_to_top.dart';
 import 'package:diary/presentation/screens/calendar_screen/widget/create_diary_text.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/dairy_card.dart';

@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/presentation/screen_transition/no_movement.dart';
+import 'package:diary/presentation/screen_transitions/no_movement.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/fab/fab.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/my_diary_title.dart';
 import 'package:diary/presentation/screens/my_diary_screen/widget/no_diaries.dart';

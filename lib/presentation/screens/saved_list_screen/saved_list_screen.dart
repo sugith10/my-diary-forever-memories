@@ -1,5 +1,5 @@
 import 'package:diary/models/savedlist_db_model.dart';
-import 'package:diary/presentation/screen_transition/scale.dart';
+import 'package:diary/presentation/screen_transitions/scale.dart';
 import 'package:diary/presentation/screens/saved_list_screen/saved_item_screen/saved_item_screen.dart';
 import 'package:diary/presentation/screens/widget/not_found.dart';
 import 'package:diary/presentation/screens/widget/appbar_titlestyle_common.dart';

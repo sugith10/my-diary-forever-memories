@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:diary/controllers/profile_details_db_ops_hive.dart';
 import 'package:diary/models/profile_details.dart';
-import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
+import 'package:diary/presentation/screen_transitions/bottom_to_top.dart';
 import 'package:diary/presentation/screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';

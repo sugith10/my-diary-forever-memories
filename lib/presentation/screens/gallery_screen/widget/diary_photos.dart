@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:diary/models/diary_entry.dart';
-import 'package:diary/presentation/screen_transition/bottom_to_top.dart';
+import 'package:diary/presentation/screen_transitions/bottom_to_top.dart';
 import 'package:diary/presentation/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';

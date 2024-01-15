@@ -11,15 +11,45 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
+// ignore: must_be_immutable
 class Onbording extends StatelessWidget {
   Onbording({super.key, required this.onboardingState});
 
   final PageController pageController = PageController(initialPage: 0);
   final OnboardingScreenProvider onboardingState;
 
+  Map<double, double> titleFontSizes = {
+    700: 10.0,
+    750: 12.0,
+    780: 18.0,
+    800: 20.0,
+    820: 24.0,
+    850: 30.0,
+    900: 32.0,
+  };
+
+  Map<double, double> descriptionFontSizes = {
+    700: 12.0,
+    750: 13.0,
+    780: 14.0,
+    800: 15.0,
+    820: 18.0,
+    850: 20.0,
+    900: 22.0,
+  };
+
   @override
   Widget build(BuildContext context) {
     ThemeMode themeMode = GetColors().getThemeMode(context);
+
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    // Find the nearest screen height in the defined map
+    double nearestHeight = titleFontSizes.keys.reduce(
+      (prev, curr) => (curr - screenHeight).abs() < (prev - screenHeight).abs()
+          ? curr
+          : prev,
+    );
 
     return Scaffold(
       body: PopScope(
@@ -44,21 +74,18 @@ class Onbording extends StatelessWidget {
                       Text(
                         OnboardingContentList().contents[i].title,
                         style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height >= 800
-                                ? 30.0
-                                : 25.0,
-                            fontWeight: FontWeight.w600),
+                           fontSize: titleFontSizes[nearestHeight] ?? 20.0, // Default size: 16.0
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                       SizedBox(height: 1.5.h),
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Text(
-                         OnboardingContentList().contents[i].discription,
+                          OnboardingContentList().contents[i].discription,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: MediaQuery.of(context).size.height >= 800
-                                ? 20.0
-                                : 15.0,
+                          fontSize: descriptionFontSizes[nearestHeight] ?? 20.0, // Default size: 21.0
                             color: OnboardingScreenFunctions()
                                 .getDescriptionColor(context),
                           ),
@@ -72,7 +99,7 @@ class Onbording extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-               OnboardingContentList().contents.length,
+                OnboardingContentList().contents.length,
                 (index) => BuidDot(
                     index: index,
                     context: context,
@@ -85,9 +112,10 @@ class Onbording extends StatelessWidget {
               height: 60,
               child: ElevatedButton(
                 onPressed: () {
-                  if (onboardingState.currentIndex ==  OnboardingContentList().contents.length - 1) {
-                     AppPreferenceCtrl()
-                    .showOnboarding(AppPreference(showOnboarding: false));
+                  if (onboardingState.currentIndex ==
+                      OnboardingContentList().contents.length - 1) {
+                    AppPreferenceCtrl()
+                        .showOnboarding(AppPreference(showOnboarding: false));
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -118,7 +146,8 @@ class Onbording extends StatelessWidget {
                   delay: const Duration(milliseconds: 600),
                   duration: const Duration(milliseconds: 700),
                   child: Text(
-                    onboardingState.currentIndex ==  OnboardingContentList().contents.length - 1
+                    onboardingState.currentIndex ==
+                            OnboardingContentList().contents.length - 1
                         ? "Continue"
                         : "Next",
                     style: const TextStyle(
@@ -128,8 +157,8 @@ class Onbording extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {       
-                 AppPreferenceCtrl()
+              onPressed: () {
+                AppPreferenceCtrl()
                     .showOnboarding(AppPreference(showOnboarding: false));
                 Navigator.pushReplacement(
                   context,

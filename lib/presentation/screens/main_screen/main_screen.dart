@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Widget> _mainScreens = [
@@ -30,7 +29,7 @@ class MainScreen extends StatelessWidget {
     'Gallery ',
     'Account ',
   ];
-  
+
   MainScreen({super.key});
 
   @override
@@ -39,10 +38,7 @@ class MainScreen extends StatelessWidget {
     final bottomNavigationProvider = Provider.of<MainScreenProvider>(context);
     double displayWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: 
-   
-      PopScope(
-        
+      body: PopScope(
         child: _mainScreens[currentIndex],
       ),
       bottomNavigationBar: Padding(
@@ -107,7 +103,11 @@ class MainScreen extends StatelessWidget {
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     fontFamily: 'Poppins',
-                                    fontSize: 10.sp,
+                                    fontSize:
+                                        MediaQuery.of(context).size.height <=
+                                                800
+                                            ? 10.0
+                                            : 14.0,
                                   ),
                                 ),
                               ),
@@ -126,10 +126,12 @@ class MainScreen extends StatelessWidget {
                                 color: isSelected
                                     ? Theme.of(context).brightness ==
                                             Brightness.light
-                                        ? Colors.black87 // Light theme color
-                                        : Colors.white // Dark theme color
+                                        ? Colors.black87
+                                        : Colors.white
                                     : Theme.of(context).brightness ==
-                                            Brightness.light ? Colors.black26 : Colors.white54,
+                                            Brightness.light
+                                        ? Colors.black26
+                                        : Colors.white54,
                               ),
                             ],
                           ),
