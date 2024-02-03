@@ -43,23 +43,15 @@ class Onboarding extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeMode themeMode = GetColors().getThemeMode(context);
-
     double screenHeight = MediaQuery.of(context).size.height;
      double screenWidth = MediaQuery.of(context).size.width ;
-
-    // Find the nearest screen height in the defined map
-    // double nearestHeight = titleFontSizes.keys.reduce(
-    //   (prev, curr) => (curr - screenHeight).abs() < (prev - screenHeight).abs()
-    //       ? curr
-    //       : prev,
-    // );
 
     return Scaffold(
       body: PopScope(
         canPop: false,
         child: Column(
           children: [
-         const SizedBox(height: 70,),
+            SizedBox(height:calculateLottieSizedbox(screenHeight, screenWidth)), 
             Lottie.asset(
               OnboardingScreenFunctions().getLottieJsonFileName(themeMode),
               width: double.infinity,
@@ -74,6 +66,7 @@ class Onboarding extends StatelessWidget {
                 itemBuilder: (_, i) {
                   return Column(
                     children: [
+                      
                       const Spacer(),
                       Text(
                         OnboardingContentList().contents[i].title,
@@ -187,28 +180,67 @@ class Onboarding extends StatelessWidget {
       ),
     );
   }
+
+
+
+
+double calculateTitleFontSize(double screenHeight, double screenWidth) {
+  double fontSize;
+log('$screenHeight');
+log('$screenWidth');
+  if (screenHeight >= 700 && screenHeight < 750 && screenWidth >= 320 && screenWidth < 400) {
+    log('a');
+    fontSize = 15.0;
+  } else if (screenHeight >= 750 && screenHeight < 780 && screenWidth >= 360 && screenWidth < 411) {
+    log('b');
+    fontSize = 16.0;
+  } else if (screenHeight >= 780 && screenHeight < 800 && screenWidth >= 375 && screenWidth < 411) {
+    log('c');
+    fontSize = 17.0;
+  } else if (screenHeight >= 800 && screenHeight < 820 && screenWidth >= 375 && screenWidth < 411) {
+    log('d');
+    fontSize = 18.0;
+  } else if (screenHeight >= 820 && screenHeight < 850 && screenWidth >= 390 && screenWidth < 411) {
+    log('e');
+    fontSize = 19.0;
+  } else if (screenHeight >= 850 && screenHeight < 900 && screenWidth >= 411 && screenWidth < 480) {
+    log('f');
+    fontSize = 20.0;
+  } else if (screenHeight >= 850 && screenWidth >= 390) {
+    log('g');
+    fontSize = 22.0;
+  } else {
+    log('h');
+    fontSize = 22.0; 
+  }
+
+  fontSize  * 0.01;
+
+  return fontSize;
+}
+
 double calculateDescriptionFontSize(double screenHeight, double screenWidth) {
   double fontSize;
 
-  if (screenHeight >= 700 && screenHeight < 750 && screenWidth >= 320 && screenWidth < 360) {
+  if (screenHeight >= 700 && screenHeight < 750 && screenWidth >= 320 && screenWidth < 400) {
     log('a');
-    fontSize = 12.0;
-  } else if (screenHeight >= 750 && screenHeight < 780 && screenWidth >= 360 && screenWidth < 411) {
-    log('b');
-    fontSize = 13.0;
-  } else if (screenHeight >= 780 && screenHeight < 800 && screenWidth >= 375 && screenWidth < 411) {
-    log('c');
-    fontSize = 14.0;
-  } else if (screenHeight >= 800 && screenHeight < 820 && screenWidth >= 375 && screenWidth < 411) {
-    log('d');
     fontSize = 15.0;
-  } else if (screenHeight >= 820 && screenHeight < 850 && screenWidth >= 411 && screenWidth < 411) {
+  } else if (screenHeight >= 750 && screenHeight < 780 && screenWidth >= 320 && screenWidth < 410) {
+    log('b');
+    fontSize = 16.0;
+  } else if (screenHeight >= 780 && screenHeight < 800 && screenWidth >= 400 && screenWidth < 450) {
+    log('c');
+    fontSize = 17.0;
+  } else if (screenHeight >= 800 && screenHeight < 820 && screenWidth >= 400 && screenWidth < 480) {
+    log('d');
+    fontSize = 17.5;
+  } else if (screenHeight >= 820 && screenHeight < 850 && screenWidth >= 410 && screenWidth < 480) {
     log('e');
     fontSize = 18.0;
-  } else if (screenHeight >= 850 && screenHeight < 900 && screenWidth >= 411 && screenWidth < 480) {
+  } else if (screenHeight >= 850 && screenHeight < 900 && screenWidth >= 410 && screenWidth < 480) {
     log('f');
     fontSize = 18.0;
-  } else if (screenHeight >= 900 && screenWidth >= 480) {
+  } else if (screenHeight >= 900 && screenWidth >= 390) {
     log('g');
     fontSize = 22.0;
   } else {
@@ -221,40 +253,38 @@ double calculateDescriptionFontSize(double screenHeight, double screenWidth) {
   return fontSize;
 }
 
+double calculateLottieSizedbox(double screenHeight, double screenWidth) {
+  double sizedBox;
 
-
-double calculateTitleFontSize(double screenHeight, double screenWidth) {
-  double fontSize;
-
-  if (screenHeight >= 700 && screenHeight < 750 && screenWidth >= 320 && screenWidth < 360) {
+  if (screenHeight >= 700 && screenHeight < 750 && screenWidth >= 320 && screenWidth < 400) {
     log('a');
-    fontSize = 15.0;
-  } else if (screenHeight >= 750 && screenHeight < 780 && screenWidth >= 360 && screenWidth < 411) {
+    sizedBox = 0;
+  } else if (screenHeight >= 750 && screenHeight < 780 && screenWidth >= 320 && screenWidth < 410) {
     log('b');
-    fontSize = 16.0;
-  } else if (screenHeight >= 780 && screenHeight < 800 && screenWidth >= 375 && screenWidth < 411) {
+    sizedBox = 10;
+  } else if (screenHeight >= 780 && screenHeight < 800 && screenWidth >= 390 && screenWidth < 450) {
     log('c');
-    fontSize = 17.0;
-  } else if (screenHeight >= 800 && screenHeight < 820 && screenWidth >= 375 && screenWidth < 411) {
+    sizedBox = 20;
+  } else if (screenHeight >= 800 && screenHeight < 820 && screenWidth >= 400 && screenWidth < 480) {
     log('d');
-    fontSize = 18.0;
-  } else if (screenHeight >= 820 && screenHeight < 850 && screenWidth >= 411 && screenWidth < 411) {
+    sizedBox = 35;
+  } else if (screenHeight >= 820 && screenHeight < 850 && screenWidth >= 410 && screenWidth < 480) {
     log('e');
-    fontSize = 19.0;
-  } else if (screenHeight >= 850 && screenHeight < 900 && screenWidth >= 411 && screenWidth < 480) {
+    sizedBox = 40;
+  } else if (screenHeight >= 850 && screenHeight < 900 && screenWidth >= 410 && screenWidth < 480) {
     log('f');
-    fontSize = 20.0;
-  } else if (screenHeight >= 900 && screenWidth >= 480) {
-    log('g');
-    fontSize = 22.0;
+    sizedBox = 50;
+  } else if (screenHeight >= 850 && screenWidth >= 390) {
+    log('gfds');
+    sizedBox = 65;
   } else {
-    log('h');
-    fontSize = 24.0; 
+    log('hsds');
+    sizedBox = 65; 
   }
 
-  fontSize  * 0.01;
+  sizedBox  * 0.01;
 
-  return fontSize;
+  return sizedBox;
 }
 
 }

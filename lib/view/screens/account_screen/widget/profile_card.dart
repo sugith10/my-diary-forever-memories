@@ -56,24 +56,32 @@ class ProfileCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              profileDetails.name,
-                              style: const TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.w500),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                            SizedBox(
+                              width: 100,
+                              child: Text(
+                                profileDetails.name,
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                             const SizedBox(
                               height: 5,
                             ),
-                            Text(
-                              profileDetails.email,
-                              style: TextStyle(
-                                color: Theme.of(context).brightness ==
-                                        Brightness.light
-                                    ? Colors.black26
-                                    : Colors.white60,
-                                fontSize: 15,
+                            SizedBox(
+                              width: 120,
+                              child: Text(
+                                profileDetails.email,
+                                style: TextStyle(
+                                  color: Theme.of(context).brightness ==
+                                          Brightness.light
+                                      ? Colors.black26
+                                      : Colors.white60,
+                                  fontSize: 15,
+
+                                ),
+                                 overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
