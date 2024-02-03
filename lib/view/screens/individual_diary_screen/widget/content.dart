@@ -16,7 +16,7 @@ class DiaryContent extends StatelessWidget {
         fontWeight: FontWeight.w500,
         fontSize: 18,
         color: CreateDiaryScreenFunctions().isColorBright(
-                DiaryDetailPageFunctions().hexToColor(backgroundColor))
+                DiaryDetailPageFunctions().hexToColor(backgroundColor, context))
             ? Colors.black
             : Colors.white,
         letterSpacing: 0.5,

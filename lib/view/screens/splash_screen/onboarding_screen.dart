@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
 import 'package:diary/model/app_preference_db_model.dart';
@@ -12,8 +14,8 @@ import 'package:lottie/lottie.dart';
 import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
-class Onbording extends StatelessWidget {
-  Onbording({super.key, required this.onboardingState});
+class Onboarding extends StatelessWidget {
+  Onboarding({super.key, required this.onboardingState});
 
   final PageController pageController = PageController(initialPage: 0);
   final OnboardingScreenProvider onboardingState;
@@ -43,20 +45,21 @@ class Onbording extends StatelessWidget {
     ThemeMode themeMode = GetColors().getThemeMode(context);
 
     double screenHeight = MediaQuery.of(context).size.height;
+     double screenWidth = MediaQuery.of(context).size.width ;
 
     // Find the nearest screen height in the defined map
-    double nearestHeight = titleFontSizes.keys.reduce(
-      (prev, curr) => (curr - screenHeight).abs() < (prev - screenHeight).abs()
-          ? curr
-          : prev,
-    );
+    // double nearestHeight = titleFontSizes.keys.reduce(
+    //   (prev, curr) => (curr - screenHeight).abs() < (prev - screenHeight).abs()
+    //       ? curr
+    //       : prev,
+    // );
 
     return Scaffold(
       body: PopScope(
         canPop: false,
         child: Column(
           children: [
-            const Spacer(),
+         const SizedBox(height: 70,),
             Lottie.asset(
               OnboardingScreenFunctions().getLottieJsonFileName(themeMode),
               width: double.infinity,
@@ -71,10 +74,11 @@ class Onbording extends StatelessWidget {
                 itemBuilder: (_, i) {
                   return Column(
                     children: [
+                      const Spacer(),
                       Text(
                         OnboardingContentList().contents[i].title,
                         style: TextStyle(
-                           fontSize: titleFontSizes[nearestHeight] ?? 20.0, // Default size: 16.0
+                           fontSize:calculateTitleFontSize( screenHeight, screenWidth).sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -85,12 +89,13 @@ class Onbording extends StatelessWidget {
                           OnboardingContentList().contents[i].discription,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                          fontSize: descriptionFontSizes[nearestHeight] ?? 20.0, // Default size: 21.0
+                          fontSize:calculateDescriptionFontSize( screenHeight, screenWidth), 
                             color: OnboardingScreenFunctions()
                                 .getDescriptionColor(context),
                           ),
                         ),
                       ),
+                       const Spacer(),
                     ],
                   );
                 },
@@ -182,4 +187,74 @@ class Onbording extends StatelessWidget {
       ),
     );
   }
+double calculateDescriptionFontSize(double screenHeight, double screenWidth) {
+  double fontSize;
+
+  if (screenHeight >= 700 && screenHeight < 750 && screenWidth >= 320 && screenWidth < 360) {
+    log('a');
+    fontSize = 12.0;
+  } else if (screenHeight >= 750 && screenHeight < 780 && screenWidth >= 360 && screenWidth < 411) {
+    log('b');
+    fontSize = 13.0;
+  } else if (screenHeight >= 780 && screenHeight < 800 && screenWidth >= 375 && screenWidth < 411) {
+    log('c');
+    fontSize = 14.0;
+  } else if (screenHeight >= 800 && screenHeight < 820 && screenWidth >= 375 && screenWidth < 411) {
+    log('d');
+    fontSize = 15.0;
+  } else if (screenHeight >= 820 && screenHeight < 850 && screenWidth >= 411 && screenWidth < 411) {
+    log('e');
+    fontSize = 18.0;
+  } else if (screenHeight >= 850 && screenHeight < 900 && screenWidth >= 411 && screenWidth < 480) {
+    log('f');
+    fontSize = 18.0;
+  } else if (screenHeight >= 900 && screenWidth >= 480) {
+    log('g');
+    fontSize = 22.0;
+  } else {
+    log('h');
+    fontSize = 21.0; 
+  }
+
+  fontSize  * 0.01;
+
+  return fontSize;
+}
+
+
+
+double calculateTitleFontSize(double screenHeight, double screenWidth) {
+  double fontSize;
+
+  if (screenHeight >= 700 && screenHeight < 750 && screenWidth >= 320 && screenWidth < 360) {
+    log('a');
+    fontSize = 15.0;
+  } else if (screenHeight >= 750 && screenHeight < 780 && screenWidth >= 360 && screenWidth < 411) {
+    log('b');
+    fontSize = 16.0;
+  } else if (screenHeight >= 780 && screenHeight < 800 && screenWidth >= 375 && screenWidth < 411) {
+    log('c');
+    fontSize = 17.0;
+  } else if (screenHeight >= 800 && screenHeight < 820 && screenWidth >= 375 && screenWidth < 411) {
+    log('d');
+    fontSize = 18.0;
+  } else if (screenHeight >= 820 && screenHeight < 850 && screenWidth >= 411 && screenWidth < 411) {
+    log('e');
+    fontSize = 19.0;
+  } else if (screenHeight >= 850 && screenHeight < 900 && screenWidth >= 411 && screenWidth < 480) {
+    log('f');
+    fontSize = 20.0;
+  } else if (screenHeight >= 900 && screenWidth >= 480) {
+    log('g');
+    fontSize = 22.0;
+  } else {
+    log('h');
+    fontSize = 24.0; 
+  }
+
+  fontSize  * 0.01;
+
+  return fontSize;
+}
+
 }

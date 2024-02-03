@@ -88,7 +88,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/splash',
         routes: {
           '/splash': (context) => const Splash(),
-          '/onboarding': (context) => Onbording(
+          '/onboarding': (context) => Onboarding(
                 onboardingState: Provider.of<OnboardingScreenProvider>(context),
               ),
            '/main': (context) => MainScreen(),   

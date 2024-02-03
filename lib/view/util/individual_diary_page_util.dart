@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:diary/controller/db_controller/archive_db_ops_hive.dart';
 import 'package:diary/controller/db_controller/diary_entry_db_ops_hive.dart';
@@ -5,6 +6,7 @@ import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screens/edit_diary_screen/edit_diary_screen.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/theme/app_color.dart';
+import 'package:diary/view/util/get_colors.dart';
 import 'package:diary/view/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -132,12 +134,16 @@ class DiaryDetailPageFunctions {
     _showArchiveConfirmationDialog(context, entry);
   }
 
-  Color _hexToColor(String code) {
-    return Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+  Color _hexToColor(String color,BuildContext context) {
+     log('current color -> $color');
+   if(color == '#FFFFFF' || color == '#000000'){
+    return GetColors().getThemeColor(context);
+   }
+    return Color(int.parse(color.substring(1, 7), radix: 16) + 0xFF000000);
   }
 
-  Color hexToColor(String code) {
-    return _hexToColor(code);
+  Color hexToColor(String color, BuildContext context) {
+    return _hexToColor(color, context);
   }
 
   _showOriginalImage(BuildContext context, DiaryEntry entry) {

@@ -36,7 +36,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
           ],
           bottom: const BottomBorderWidget()),
       body: Container(
-        color: DiaryDetailPageFunctions().hexToColor(widget.entry.background),
+        color: DiaryDetailPageFunctions().hexToColor(widget.entry.background,context),
         child: ListView(
           children: [
             Padding(
@@ -79,7 +79,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
               padding: const EdgeInsets.all(16),
               child: DiaryContent(
                   content: widget.entry.content,
-                  backgroundColor: widget.entry.background),
+                  backgroundColor: widget.entry.background,),
             ),
           ],
         ),

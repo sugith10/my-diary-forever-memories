@@ -33,7 +33,7 @@ class IndividualArchive extends StatelessWidget {
         ],
       ),
       body: Container(
-        color: DiaryDetailPageFunctions().hexToColor(archiveDiary.background),
+        color: DiaryDetailPageFunctions().hexToColor(archiveDiary.background, context),
         child: ListView(
           children: [
             Padding(

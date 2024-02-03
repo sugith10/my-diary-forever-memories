@@ -86,7 +86,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-          DiaryDetailPageFunctions().hexToColor(widget.entry.background),
+          DiaryDetailPageFunctions().hexToColor(widget.entry.background, context),
       appBar: AppBar(
         leading: const BackButtonWidget(),
         actions: [
@@ -118,7 +118,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     fontSize: 24,
                     color: CreateDiaryScreenFunctions().isColorBright(
                       DiaryDetailPageFunctions()
-                          .hexToColor(widget.entry.background),
+                          .hexToColor(widget.entry.background, context),
                     )
                         ? Colors.black
                         : Colors.white,
@@ -159,7 +159,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     fontSize: 18,
                     color: CreateDiaryScreenFunctions().isColorBright(
                       DiaryDetailPageFunctions()
-                          .hexToColor(widget.entry.background),
+                          .hexToColor(widget.entry.background, context),
                     )
                         ? Colors.black
                         : Colors.white,
@@ -321,7 +321,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       case 2:
         CreateDiaryScreenFunctions().showColorPickerDialog(
           context,
-          DiaryDetailPageFunctions().hexToColor(widget.entry.background),
+          DiaryDetailPageFunctions().hexToColor(widget.entry.background, context),
           (Color color) {
             setState(() {
               widget.entry.background =
