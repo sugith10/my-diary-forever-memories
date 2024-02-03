@@ -11,6 +11,9 @@ class ProfileOptions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+       customBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(22.5),
+        ),
       onTap: (){
         function();
       },

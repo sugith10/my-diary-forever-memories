@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 
 class AppbarTitleWidget extends StatelessWidget {
   final String text;
@@ -10,9 +9,9 @@ class AppbarTitleWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
         fontFamily: 'SFPRO',
-        fontSize: 15.sp,
+        fontSize: 20,
         fontWeight: FontWeight.w600,
       ),
     );

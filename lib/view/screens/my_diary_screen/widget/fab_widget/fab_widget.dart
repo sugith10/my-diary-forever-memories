@@ -14,10 +14,16 @@ class CreatePageFAB extends StatelessWidget {
     return FloatingActionButton(
       shape: const CircleBorder(),
       onPressed: () {
-        final changer = Provider.of<CalenderScreenProvider>(context, listen: false);
-       Navigator.of(context).push(bottomToTop(CreateDiaryPage(
-                    changer: changer,
-                    selectedColor: GetColors().getThemeColor(context))));
+        final changer =
+            Provider.of<CalenderScreenProvider>(context, listen: false);
+        Navigator.of(context).push(
+          bottomToTop(
+            CreateDiaryPage(
+              changer: changer,
+              selectedColor: GetColors().getThemeColor(context),
+            ),
+          ),
+        );
       },
       elevation: 3,
       child: const CreateFloatIcon(),

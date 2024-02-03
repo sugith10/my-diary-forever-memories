@@ -1,5 +1,5 @@
 import 'package:diary/model/diary_entry.dart';
-import 'package:diary/view/screens/my_diary_screen/widget/diary_card_actions.dart';
+import 'package:diary/view/screens/my_diary_screen/widget/diary_card_widget/diary_card_slide_widget/diary_card_actions.dart';
 import 'package:diary/view/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

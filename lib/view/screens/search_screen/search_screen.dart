@@ -2,7 +2,7 @@ import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
-import 'package:diary/view/screens/my_diary_screen/widget/dairy_card.dart';
+import 'package:diary/view/screens/my_diary_screen/widget/diary_card_widget/dairy_card.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:diary/view/screens/individual_diary_screen/individual_diary_page.dart';

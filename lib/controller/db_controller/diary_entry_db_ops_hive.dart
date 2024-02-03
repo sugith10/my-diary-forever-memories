@@ -1,7 +1,9 @@
 import 'dart:developer';
 import 'package:diary/model/diary_entry.dart';
+import 'package:diary/view/screens/widget/snackbar_message_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 
 class DiaryEntryCtrl {
 
@@ -24,7 +26,7 @@ final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
     diaryEntryNotifier.addAll(box.values);
   }
 
-  Future<void> deleteDiary(String id) async {
+  Future<void> deleteDiary(String id, BuildContext context) async {
   final box = Hive.box<DiaryEntry>('_boxName');
   if (box.containsKey(id)) {
     box.delete(id);
@@ -32,6 +34,7 @@ final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
   } else {
     log('Entry with ID $id not found');
   }
+   SnackBarMessage(message:"Successfully Deleted" ).scaffoldMessenger(context);
 }
 
 Future<void> updateDiaryEntry(DiaryEntry entry) async {

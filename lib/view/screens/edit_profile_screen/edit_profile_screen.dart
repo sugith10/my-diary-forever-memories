@@ -1,10 +1,12 @@
+import 'dart:developer';
 import 'dart:io';
-import 'package:diary/controller/profile_details_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/profile_details_db_ops_hive.dart';
 import 'package:diary/model/profile_details.dart';
 import 'package:diary/view/screens/widget/save_text_button_common.dart';
+import 'package:diary/view/screens/widget/snackbar_message_widget.dart';
+
 import 'package:diary/view/util/get_colors.dart';
 import 'package:diary/view/util/save_image.dart';
-import 'package:diary/view/util/snackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
@@ -125,7 +127,8 @@ class _EditProfScreenState extends State<EditProfScreen> {
                                         fit: BoxFit.cover,
                                       )
                                     : const DecorationImage(
-                                        image: AssetImage('assets/images/user_profile/user_profile.png'),
+                                        image: AssetImage(
+                                            'assets/images/user_profile/user_profile.png'),
                                         fit: BoxFit.cover,
                                       ),
                             border: Border.all(
@@ -255,7 +258,22 @@ class _EditProfScreenState extends State<EditProfScreen> {
         Navigator.pop(context);
       } else {}
     } else {
-      ShowSnackBar().showSnackBar(context, "Fill all fields...", Colors.red);
+//problem with coustom snackbar widget -> leave it...
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.all(10),
+          backgroundColor: Colors.red,
+          duration: Duration(seconds: 2),
+          content: Center(
+            child: Text(
+              "Fill all fields...",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      );
     }
+   
   }
 }

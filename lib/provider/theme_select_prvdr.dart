@@ -1,4 +1,4 @@
-import 'package:diary/controller/app_preference_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
 import 'package:diary/model/app_preference_db_model.dart';
 import 'package:flutter/material.dart';
 

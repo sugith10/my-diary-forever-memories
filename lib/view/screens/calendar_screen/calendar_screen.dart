@@ -2,7 +2,7 @@ import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/calendar_screen/widget/create_diary_text.dart';
 import 'package:diary/view/screens/individual_diary_screen/individual_diary_page.dart';
-import 'package:diary/view/screens/my_diary_screen/widget/dairy_card.dart';
+import 'package:diary/view/screens/my_diary_screen/widget/diary_card_widget/dairy_card.dart';
 import 'package:diary/view/theme/app_color.dart';
 import 'package:diary/view/screens/create_screen/create_screen.dart';
 import 'package:diary/provider/calendar_scrn_prvdr.dart';
@@ -14,7 +14,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 // ignore: must_be_immutable
@@ -30,9 +29,13 @@ class CalendarScreen extends StatelessWidget {
     final changer = Provider.of<CalenderScreenProvider>(context);
 
     return Scaffold(
+//appbar starting
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: InkWell(
+          customBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
           onTap: () {
             changer.toggleCalendarVisibility();
           },
@@ -69,9 +72,10 @@ class CalendarScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Theme.of(context).brightness == Brightness.light
-                            ? AppColor.dark.color
-                            : Colors.white,
+                        color:
+                            Theme.of(context).brightness == Brightness.light
+                                ? AppColor.dark.color
+                                : Colors.white,
                         width: 1.5,
                       ),
                     ),
@@ -79,10 +83,8 @@ class CalendarScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         DateFormat.d().format(today),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.sp,
-                        ),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
                       ),
                     ),
                   ),
@@ -94,6 +96,8 @@ class CalendarScreen extends StatelessWidget {
         elevation: 0,
         bottom: const BottomBorderWidget(),
       ),
+////appbar ending
+
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
@@ -104,11 +108,11 @@ class CalendarScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: TableCalendar(
-                    headerStyle: HeaderStyle(
+                    headerStyle: const HeaderStyle(
                       formatButtonVisible: false,
                       titleCentered: true,
                       titleTextStyle: TextStyle(
-                        fontSize: 15.sp,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -139,6 +143,8 @@ class CalendarScreen extends StatelessWidget {
                         color: Color.fromARGB(255, 255, 255, 255),
                       ),
                       weekendTextStyle: const TextStyle(color: Colors.red),
+
+                      // defaultTextStyle: TextStyle(color: Colors.grey)
                     ),
                     eventLoader: (day) {
                       final hasDiaryEntry = Hive.box<DiaryEntry>('_boxName')
@@ -163,7 +169,12 @@ class CalendarScreen extends StatelessWidget {
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.only(left: 10,right: 10),
+                        padding: const EdgeInsets.only(
+                          left: 10,
+                          right: 10,
+                          top: 5,
+                          bottom: 5,
+                        ),
                         child: GestureDetector(
                           onTap: () {
                             Navigator.push(

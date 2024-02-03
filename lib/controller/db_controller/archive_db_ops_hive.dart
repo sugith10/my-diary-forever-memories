@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/controller/diary_entry_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/diary_entry_db_ops_hive.dart';
 import 'package:diary/model/archive_db_model.dart';
 import 'package:diary/model/diary_entry.dart';
 import 'package:flutter/material.dart';

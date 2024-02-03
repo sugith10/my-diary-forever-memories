@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:diary/controller/app_preference_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:flutter/material.dart';
 

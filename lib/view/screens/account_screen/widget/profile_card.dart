@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/controller/profile_details_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/profile_details_db_ops_hive.dart';
 import 'package:diary/model/profile_details.dart';
 
 import 'package:diary/view/screen_transitions/bottom_to_top.dart';

@@ -1,34 +1,38 @@
 import 'dart:developer';
 import 'dart:io';
-import 'dart:typed_data';
+import 'package:diary/controller/image_pick_controller/image_pick_controller.dart';
 import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screens/create_screen/image_view_screen.dart';
 import 'package:diary/view/screens/create_screen/widget/down_icon.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
 import 'package:diary/view/screens/widget/create_screen_bottom_navigationbar.dart';
+import 'package:diary/view/screens/widget/snackbar_message_widget.dart';
 import 'package:diary/view/theme/app_color.dart';
-import 'package:diary/controller/diary_entry_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/diary_entry_db_ops_hive.dart';
 import 'package:diary/provider/calendar_scrn_prvdr.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/view/screens/widget/save_text_button_common.dart';
 import 'package:diary/view/util/create_screen_functions.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'package:image/image.dart' as img;
 
 // ignore: must_be_immutable
 class CreateDiaryPage extends StatefulWidget {
   final CalenderScreenProvider changer;
   Color selectedColor;
 
-  CreateDiaryPage(
-      {super.key, required this.changer, required this.selectedColor});
+  CreateDiaryPage({
+    super.key,
+    required this.changer,
+    required this.selectedColor,
+  }){
+    log('selected color ->-> $selectedColor');
+  }
 
   @override
   State<CreateDiaryPage> createState() => _CreatePageState();
@@ -54,31 +58,6 @@ class _CreatePageState extends State<CreateDiaryPage> {
     });
   }
 
-  Future<String?> saveImage(File image) async {
-    try {
-      final appDocDir = await getApplicationDocumentsDirectory();
-      final uniqueFileName = DateTime.now().millisecondsSinceEpoch.toString();
-      final imagePath = "${appDocDir.path}/$uniqueFileName.jpg";
-      // Read and decode the original image
-      final bytes = image.readAsBytesSync();
-      final originalImage = img.decodeImage(Uint8List.fromList(bytes));
-
-      // Resize the image if its height is more than 800 pixels
-      if (originalImage != null && originalImage.height > 800) {
-        final resizedImage = img.copyResize(originalImage, height: 800);
-        File(imagePath).writeAsBytesSync(img.encodeJpg(resizedImage));
-      } else {
-        // Save the original image if its height is not more than 300 pixels
-        image.copy(imagePath);
-      }
-
-      return imagePath;
-    } catch (e) {
-      log("Error saving image: $e");
-      return null;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +74,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                 Navigator.pop(context);
                 String? imagePath;
                 if (_image != null) {
-                  imagePath = await saveImage(_image!);
+                  imagePath = await ImagePickCntrl().saveImage(_image!);
                 }
                 final entry = DiaryEntry(
                   id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -121,15 +100,8 @@ class _CreatePageState extends State<CreateDiaryPage> {
                   log("Error adding DiaryEntry: $error");
                 });
               } else {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    margin: EdgeInsets.all(10),
-                    backgroundColor: Colors.red,
-                    content: Text('Title cannot be empty!'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
+                SnackBarMessage(message: "Title cannot be empty!")
+                    .scaffoldMessenger(context);
               }
               // ignore: use_build_context_synchronously
             }),
@@ -219,9 +191,9 @@ class _CreatePageState extends State<CreateDiaryPage> {
                   border: InputBorder.none,
                 ),
                 cursorColor: const Color.fromRGBO(27, 94, 32, 1),
-               
                 style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w700,
                     color: CreateDiaryScreenFunctions()
                             .isColorBright(widget.selectedColor)
                         ? Colors.black

@@ -39,7 +39,6 @@ class CreateDiaryScreenFunctions {
                     color); // Call the provided callback with the new color
               },
               availableColors: const [
-                Color.fromARGB(255, 248, 248, 248),
                 Color.fromARGB(255, 250, 240, 248),
                 Color.fromARGB(255, 223, 244, 255),
                 Color.fromARGB(255, 225, 223, 255),
@@ -50,7 +49,6 @@ class CreateDiaryScreenFunctions {
                 Color.fromARGB(255, 164, 153, 139),
                 Color.fromARGB(255, 111, 98, 98),
                 Color.fromARGB(255, 97, 96, 108),
-                Color.fromARGB(255, 0, 0, 0),
               ],
             ),
           ),
@@ -87,7 +85,7 @@ class CreateDiaryScreenFunctions {
     return color.computeLuminance() > 0.4;
   }
 
-   bool isColorBright(Color color) {
-  return _isColorBright(color);
-}
+  bool isColorBright(Color color) {
+    return _isColorBright(color);
+  }
 }
