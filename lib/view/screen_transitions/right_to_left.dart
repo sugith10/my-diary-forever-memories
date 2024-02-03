@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-Route rightToLeft(Widget screen) {
+Route rightToLeft(Widget screen,
+    {Duration duration = const Duration(milliseconds: 350)}) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => screen,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -13,5 +14,6 @@ Route rightToLeft(Widget screen) {
         child: child,
       );
     },
+    transitionDuration: duration,
   );
 }

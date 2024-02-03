@@ -16,6 +16,7 @@ import 'package:diary/view/util/create_screen_functions.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -47,16 +48,52 @@ class _CreatePageState extends State<CreateDiaryPage> {
 
   File? _image;
 
-  Future getImage() async {
+  // Future getImage() async {
+  //   final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+  //   if (image == null) return;
+
+  //   final imageTemporary = File(image.path);
+
+  //   setState(() {
+  //     _image = imageTemporary;
+  //   });
+  // }
+  Future<void> _getImage() async {
+  try {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (image == null) return;
-
-    final imageTemporary = File(image.path);
-
-    setState(() {
-      _image = imageTemporary;
-    });
+    if (image == null) {
+      return;
+    } else {
+      final croppedFile = await ImageCropper().cropImage(
+        sourcePath: image.path,
+        aspectRatioPresets: [
+          CropAspectRatioPreset.ratio3x2,
+          CropAspectRatioPreset.ratio4x3,
+        ],
+        androidUiSettings: const AndroidUiSettings(
+          activeControlsWidgetColor: Color.fromARGB(255, 155, 155, 155),
+          lockAspectRatio: true,
+          toolbarTitle: 'Crop',
+          toolbarColor: Color.fromARGB(255, 0, 0, 0),
+          toolbarWidgetColor: Color.fromARGB(255, 255, 255, 255),
+          initAspectRatio: CropAspectRatioPreset.ratio4x3,
+        ),
+        iosUiSettings: const IOSUiSettings(
+          title: 'Crop',
+        ),
+      );
+      if (croppedFile != null) {
+        setState(() {
+          _image = File(croppedFile.path);
+        });
+      }
+    }
+  } catch (e) {
+    // Handle exceptions if needed
+    print('Failed image picker or cropper: $e');
   }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -309,7 +346,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
         break;
 
       case 1:
-        getImage();
+        _getImage();
 
         break;
       case 2:
@@ -354,7 +391,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
         PopupMenuItem(
           child: GestureDetector(
             onTap: () {
-              getImage();
+              _getImage();
               Navigator.pop(context);
             },
             child: const Center(

@@ -26,7 +26,7 @@ class DiaryCardActions extends StatelessWidget {
           },
         ),
         children: [
-       SlidableActionWidget(entry: entry, radius: BorderRadius.only(
+       SlidableActionWidget(entry: entry, radius: const BorderRadius.only(
         bottomRight: Radius.circular(10),
         topRight: Radius.circular(10),
       ),),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Route bottomToTop( Widget screen) {
+Route bottomToTop( Widget screen,  {Duration duration = const Duration(milliseconds: 350)}) {
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => screen,
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -13,7 +13,10 @@ Route bottomToTop( Widget screen) {
       return SlideTransition(
         position: animation.drive(tween),
         child: child,
+        
       );
+      
     },
+    transitionDuration: duration
   );
 }

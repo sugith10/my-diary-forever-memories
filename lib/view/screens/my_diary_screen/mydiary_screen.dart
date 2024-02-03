@@ -164,7 +164,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                           groupedEntries.putIfAbsent(dateKey, () => []);
                           groupedEntries[dateKey]!.add(entry);
                         }
-                        log('Grouped Entries Length: ${groupedEntries.length}');
+                     
                         if (sortedEntries.isEmpty) {
                           return const SliverFillRemaining(
                             child: Center(
@@ -176,7 +176,6 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                           delegate: SliverChildBuilderDelegate(
                             (BuildContext context, int index) {
                               if (index >= groupedEntries.length) {
-                                log('Index out of bounds: $index');
                                 return const SizedBox();
                               }
                               final dateKey =
