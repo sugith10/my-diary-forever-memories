@@ -23,7 +23,7 @@ lib
 |-- provider
 |   |-- state_management_provider.dart
 |
-|-- presentation
+|-- view
 |   |-- screens
 |       |-- screen.dart
 |       |-- widget
