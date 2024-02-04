@@ -2,7 +2,9 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:diary/model/diary_entry.dart';
+import 'package:diary/view/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/create_screen/image_view_screen.dart';
+import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
 import 'package:diary/view/screens/widget/create_screen_bottom_navigationbar.dart';
 import 'package:diary/view/theme/app_color.dart';
@@ -244,11 +246,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                         log("Error updating DiaryEntry: $error");
                       });
                       // ignore: use_build_context_synchronously
-                      Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        '/main',
-                        (route) => false,
-                      );
+                       Navigator.of(context).pushReplacement(noMovement(MainScreen()));
                     } else {
                       // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(

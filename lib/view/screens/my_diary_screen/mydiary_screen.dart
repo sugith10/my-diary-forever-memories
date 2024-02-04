@@ -4,6 +4,7 @@ import 'package:diary/view/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/fab_widget/fab_widget.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/diary_card_widget/my_diary_title.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/no_diaries_widget.dart';
+import 'package:diary/view/screens/my_diary_screen/widget/popup_menu_text_widget.dart';
 import 'package:diary/view/screens/search_screen/search_screen.dart';
 import 'package:diary/view/theme/app_color.dart';
 import 'package:diary/view/screens/saved_list_screen/saved_list_screen.dart';
@@ -82,15 +83,15 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                               items: <PopupMenuEntry>[
                                 const PopupMenuItem(
                                   value: 'Newest First',
-                                  child: Text('Newest First'),
+                                  child: PopUpMenuText(title: 'Newest First'),
                                 ),
                                 const PopupMenuItem(
                                   value: 'Oldest First',
-                                  child: Text('Oldest First'),
+                                  child: PopUpMenuText(title: 'Oldest First'),
                                 ),
                                 const PopupMenuItem(
                                   value: 'Range Pick',
-                                  child: Text('Range Pick'),
+                                  child:PopUpMenuText(title: 'Range Pick'),
                                 ),
                               ],
                             ).then((value) async {
@@ -200,3 +201,5 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
     );
   }
 }
+
+

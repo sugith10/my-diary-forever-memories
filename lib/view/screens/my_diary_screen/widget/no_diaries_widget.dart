@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class NoDiaries extends StatefulWidget {
-  const NoDiaries({Key? key}) : super(key: key);
+  const NoDiaries({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _NoDiariesState createState() => _NoDiariesState();
 }
 

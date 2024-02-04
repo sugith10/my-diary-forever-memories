@@ -1,7 +1,6 @@
 import 'dart:developer';
-
 import 'package:diary/model/app_preference_db_model.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class AppPreferenceCtrl {
   final box = Hive.box<AppPreference>('appPreferenceBox');

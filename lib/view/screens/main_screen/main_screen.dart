@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:diary/controller/screen_controller/screen_size_find_controller/main_screen_size_controller/main_screen_size_controller.dart';
 import 'package:diary/provider/main_scrn_prvdr.dart';
 import 'package:diary/view/screens/my_diary_screen/mydiary_screen.dart';
 import 'package:diary/view/screens/calendar_screen/calendar_screen.dart';
@@ -110,7 +109,7 @@ class MainScreen extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                     fontFamily: 'Poppins',
                                     fontSize:
-                                         calculateBottomNavFontSize(screenHeight,screenWidth).sp,
+                                     MainScreenSizeCntrl().calculateBottomNavFontSize(screenHeight:  screenHeight,screenWidth:  screenWidth).sp,
                                   ),
                                 ),
                               ),
@@ -152,37 +151,5 @@ class MainScreen extends StatelessWidget {
   }
 
 
-  double calculateBottomNavFontSize(double screenHeight, double screenWidth) {
-  double fontSize;
-  log('$screenHeight & $screenWidth' );
-  if (screenHeight >= 700 && screenHeight < 750 && screenWidth >= 320 && screenWidth < 360) {
-    log('a');
-    fontSize = 8.5;
-  } else if (screenHeight >= 700 && screenHeight < 780 && screenWidth >= 300 && screenWidth < 400) {
-    log('b');
-    fontSize = 8.5;
-  } else if (screenHeight >= 780 && screenHeight < 800 && screenWidth >= 375 && screenWidth < 411) {
-    log('c');
-    fontSize = 8.7;
-  } else if (screenHeight >= 800 && screenHeight < 820 && screenWidth >= 375 && screenWidth < 411) {
-    log('d');
-    fontSize = 8.8;
-  } else if (screenHeight >= 820 && screenHeight < 850 && screenWidth >= 411 && screenWidth < 440) {
-    log('e');
-    fontSize = 8.9;
-  } else if (screenHeight >= 850 && screenHeight < 900 && screenWidth >= 411 && screenWidth < 480) {
-    log('f');
-    fontSize = 9.5;
-  } else if (screenHeight >= 900 && screenWidth >= 480) {
-    log('g');
-    fontSize = 10.0;
-  } else {
-    log('h');
-    fontSize = 10.0; 
-  }
 
-  fontSize  * 0.01;
-
-  return fontSize;
-}
 }

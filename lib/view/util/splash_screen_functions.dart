@@ -16,7 +16,6 @@ class SplashScreenController {
         
           Navigator.pushReplacementNamed(context, '/onboarding');
         } else {
-        
           Navigator.of(context).pushReplacement(noMovement(MainScreen()));
         }
       // }

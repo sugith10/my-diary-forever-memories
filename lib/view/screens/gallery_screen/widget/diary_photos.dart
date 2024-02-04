@@ -3,7 +3,8 @@ import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 
 class DiaryPhotos extends StatelessWidget {
   final String imagePath;
