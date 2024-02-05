@@ -1,4 +1,3 @@
-
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
 import 'package:diary/controller/screen_controller/screen_size_find_controller/onboarding_screen_size_cntrl/onboarding_screen_size_cntrl.dart';
@@ -7,24 +6,26 @@ import 'package:diary/model/content_model.dart';
 import 'package:diary/provider/onboarding_scrn_prvdr.dart';
 import 'package:diary/view/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
-import 'package:diary/view/screens/splash_screen/widget/onboarding_dot.dart';
+import 'package:diary/view/screens/onboarding_screen/widget/onboarding_dot.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:diary/view/util/onboarding_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class Onboarding extends StatelessWidget {
-  Onboarding({super.key, required this.onboardingState});
+  Onboarding({super.key});
 
   final PageController pageController = PageController(initialPage: 0);
-  final OnboardingScreenProvider onboardingState;
   final OnboardingContentList onboardingContentList = OnboardingContentList();
   final OnboardingPageSizeCntrl _onboardingPageSizeCntrl = OnboardingPageSizeCntrl();
   final AppPreferenceCtrl _appPreferenceCtrl = AppPreferenceCtrl();
 
   @override
   Widget build(BuildContext context) {
+    OnboardingScreenProvider onboardingState =
+        Provider.of<OnboardingScreenProvider>(context);
     ThemeMode themeMode = GetColors().getThemeMode(context);
     double screenHeight = MediaQuery.of(context).size.height;
     double screenWidth = MediaQuery.of(context).size.width;

@@ -5,7 +5,6 @@ import 'package:diary/model/profile_details.dart';
 import 'package:diary/model/savedlist_db_model.dart';
 import 'package:diary/provider/theme_select_prvdr.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
-import 'package:diary/view/screens/splash_screen/onboarding_screen.dart';
 import 'package:diary/view/screens/splash_screen/splash_screen.dart';
 import 'package:diary/view/theme/app_theme.dart';
 import 'package:diary/provider/main_scrn_prvdr.dart';
@@ -15,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart'; 
+import 'package:sizer/sizer.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +46,7 @@ Future<void> main() async {
   }
   await Hive.openBox<ArchiveDiary>('archiveDiaryEntryBox');
 
-   SystemChrome.setPreferredOrientations([
+  SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
@@ -63,7 +62,7 @@ Future<void> main() async {
         ChangeNotifierProvider(
           create: (context) => MainScreenProvider(),
         ),
-         ChangeNotifierProvider(
+        ChangeNotifierProvider(
           create: (context) => CalenderScreenProvider(),
         ),
       ],
@@ -88,10 +87,8 @@ class MyApp extends StatelessWidget {
         initialRoute: '/splash',
         routes: {
           '/splash': (context) => const Splash(),
-          '/onboarding': (context) => Onboarding(
-                onboardingState: Provider.of<OnboardingScreenProvider>(context),
-              ),
-           '/main': (context) => MainScreen(),   
+       
+          '/main': (context) => MainScreen(),
         },
       ),
     );

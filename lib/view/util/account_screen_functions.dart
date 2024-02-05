@@ -3,6 +3,8 @@
 import 'dart:developer';
 import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
 import 'package:diary/model/app_preference_db_model.dart';
+import 'package:diary/view/screen_transitions/no_movement.dart';
+import 'package:diary/view/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
@@ -64,7 +66,7 @@ class ProfileScreenFunctions {
   }
 
   String _getGreeting() {
-    var now = DateTime.now();
+    DateTime now = DateTime.now();
     if (now.isAfter(DateTime(now.year, now.month, now.day, 0, 0)) &&
         now.isBefore(DateTime(now.year, now.month, now.day, 12, 0))) {
       return '🤓 Good morning';
@@ -125,7 +127,7 @@ class ProfileScreenFunctions {
                  final onboardingStatus = AppPreference(showOnboarding: true);
                   await appPreferenceFunctions.showOnboarding(onboardingStatus);
 
-                    Navigator.pushReplacementNamed(context, '/onboarding');
+                  Navigator.of(context).pushReplacement(noMovement(Onboarding()));
                   },
                 ),
               ],

@@ -1,10 +1,8 @@
-import 'dart:developer';
-
 class OnboardingPageSizeCntrl {
   double _calculateLottieSizedbox(
       {required double screenHeight, required double screenWidth}) {
     double sizedBox;
-    log('sizedbox');
+
     if (screenHeight >= 700 &&
         screenHeight < 750 &&
         screenWidth >= 320 &&
@@ -55,8 +53,7 @@ class OnboardingPageSizeCntrl {
   double _calculateTitleFontSize(
       {required double screenHeight, required double screenWidth}) {
     double fontSize;
-    log('$screenHeight');
-    log('$screenWidth');
+
     if (screenHeight >= 700 &&
         screenHeight < 750 &&
         screenWidth >= 320 &&
@@ -129,13 +126,13 @@ class OnboardingPageSizeCntrl {
         screenHeight < 850 &&
         screenWidth >= 380 &&
         screenWidth < 400) {
-      log('SM A53');
+      // log('SM A53');
       fontSize = 18.0;
     } else if (screenHeight >= 850 &&
         screenHeight < 900 &&
         screenWidth >= 410 &&
         screenWidth < 480) {
-      log('SM M21');
+      // log('SM M21');
       fontSize = 18.0;
     } else if (screenHeight >= 900 && screenWidth >= 390) {
       fontSize = 22.0;
