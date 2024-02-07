@@ -4,7 +4,7 @@
 
 You can download the latest version of "My Diary - Memories Forever" on your Android device using the following link:
 
-[Download My Diary - Memories Forever](https://www.amazon.com/dp/B0CPC9V42B/ref=apps_sf_sta)
+[Download My Diary - Memories Forever](https://play.google.com/store/apps/details?id=com.dayproduction.diary)
 
 ## Project Overview
 
