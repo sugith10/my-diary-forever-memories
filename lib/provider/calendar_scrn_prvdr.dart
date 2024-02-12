@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class CalenderScreenProvider extends ChangeNotifier{
   bool _isCalendarVisible = true;
-  DateTime _selectedDate = DateTime.now(); // Store the selected date
+  DateTime _selectedDate = DateTime.now();
 
   bool get isCalendarVisible => _isCalendarVisible;
-  DateTime get selectedDate => _selectedDate; // Getter for the selected date
+  DateTime get selectedDate => _selectedDate;
 
   void toggleCalendarVisibility() {
     _isCalendarVisible = !_isCalendarVisible;
@@ -13,7 +13,7 @@ class CalenderScreenProvider extends ChangeNotifier{
   }
 
   void selectDate(DateTime date) {
-    _selectedDate = date; // Update the selected date
+    _selectedDate = date;
     notifyListeners();
   }
 
