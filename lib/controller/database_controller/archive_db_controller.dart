@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/controller/database_controller/diary_entry_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/model/archive_db_model.dart';
 import 'package:diary/model/diary_entry.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class ArchiveDiaryDatabaseManager {
       ValueNotifier<List<ArchiveDiary>>([]);
 
   /// Hive box for storing archived diary entries.
-  final archiveBox = Hive.box<ArchiveDiary>('archiveDiaryEntryBox');
+  final archiveBox = Hive.box<ArchiveDiary>('archiveDiaryBox');
 
   /// Moves a diary entry to the archived diaries database.
     Future<void> addDiaryToArchive(
@@ -74,7 +74,7 @@ class ArchiveDiaryDatabaseManager {
     );
 
     // Adding the diary to the main diary entry database.
-    DiaryEntryCtrl().addDiaryEntry(movedEntry);
+    DiaryEntryDatabaseManager().addDiaryEntry(movedEntry);
 
     // Deleting the archived diary from the archive database.
     deleteArchivedDiary(archive.id);

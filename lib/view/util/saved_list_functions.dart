@@ -43,7 +43,7 @@ class SavedScreenFunctions {
                 onPressed: () async {
                   String listName = listNameController.text;
                   if (listName.isNotEmpty) {
-                    await SavedListCtrl().createSavedList(listName);
+                    await SavedListDatabaseManager().createSavedList(listName);
                     // Navigator.pop(context); // Close the dialog
                   } else {
                     // Show a snackbar or handle the case when the list name is empty
@@ -127,16 +127,17 @@ class SavedScreenFunctions {
                       String listName = savedList[index].listName;
                       String listId = savedList[index].id;
                       // Check if the diary entry is in the current SavedList
-                      bool isChecked = SavedListCtrl()
+                      SavedListDatabaseManager savedListDatabaseManager =  SavedListDatabaseManager();
+                      bool isChecked = savedListDatabaseManager
                           .isDiaryEntryInSavedList(listId, entryId);
                       return InkWell(
                         onTap: () {
                          
 
                           isChecked == false
-                              ? SavedListCtrl()
+                              ? savedListDatabaseManager
                                   .addMapToDiaryEntryIds(listId, entryId)
-                              : SavedListCtrl()
+                              : savedListDatabaseManager
                                   .deleteDiaryEntry(listId, entryId);
 
                           // Navigator.pop(context);
@@ -243,7 +244,7 @@ class SavedScreenFunctions {
               child: const Text('Delete',
                style: TextStyle(color: Colors.red)),
               onPressed: () {
-                SavedListCtrl().deleteSavedList(savedList.id);
+               SavedListDatabaseManager().deleteSavedList(savedList.id);
 
                 Navigator.pushAndRemoveUntil(
                   context,

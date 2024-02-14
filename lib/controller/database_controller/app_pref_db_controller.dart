@@ -2,15 +2,17 @@ import 'dart:developer';
 import 'package:diary/model/app_preference_db_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-/// Manages interactions with the Hive database for Application Preferences.
+/// Manages interactions with the Hive database for user app preferences.
 class AppPrefDatabaseManager {
   final Box<AppPreference> _box;
+
+  /// Creates an instance of [AppPrefDatabaseManager].
   AppPrefDatabaseManager() : _box = Hive.box<AppPreference>('appPreferenceBox');
 
   /// Adds the theme preference to the AppPreference database.
   Future<void> addThemePreference(AppPreference isDark) async {
     await _box.put(isDark.id, isDark);
-    log('Theme preference added to app preference database. Theme isDark: ${isDark.isDark}');
+     log('Theme preference added to app preference database. Theme isDark: ${isDark.isDark}');
   }
 
   /// Retrieves the current theme preference from the AppPreference database.

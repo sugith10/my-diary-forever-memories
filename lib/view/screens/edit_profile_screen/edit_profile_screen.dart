@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/controller/database_controller/profile_details_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/profile_details_db_controller.dart';
 import 'package:diary/model/profile_details.dart';
 import 'package:diary/view/screens/widget/save_text_button_common.dart';
 
@@ -37,7 +37,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
   @override
   Widget build(BuildContext context) {
     final List<ProfileDetails> profileDetailsList =
-        ProfileDetailsCtrl().getAllProfileDetails();
+        ProfileDetailsDatabaseManager().getAllProfileDetails();
 
     final ProfileDetails profileDetails = profileDetailsList.isNotEmpty
         ? profileDetailsList.first
@@ -250,7 +250,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
         location: _locationController.text.trim(),
         profilePicturePath: imagePath,
       );
-      await ProfileDetailsCtrl().addProfileDetails(details);
+      await ProfileDetailsDatabaseManager().addProfileDetails(details);
       // log('Profile details added: $details');
       if (mounted) {
         Navigator.pop(context);

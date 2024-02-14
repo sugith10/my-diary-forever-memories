@@ -147,7 +147,7 @@ class CalendarScreen extends StatelessWidget {
                       // defaultTextStyle: TextStyle(color: Colors.grey)
                     ),
                     eventLoader: (day) {
-                      final hasDiaryEntry = Hive.box<DiaryEntry>('_boxName')
+                      final hasDiaryEntry = Hive.box<DiaryEntry>('diaryEntryBox')
                           .values
                           .any((entry) => isSameDay(entry.date, day));
                       return hasDiaryEntry ? [day] : [];
@@ -158,7 +158,7 @@ class CalendarScreen extends StatelessWidget {
             ),
           ),
           ValueListenableBuilder<Box<DiaryEntry>>(
-            valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+            valueListenable: Hive.box<DiaryEntry>('diaryEntryBox').listenable(),
             builder: (context, box, child) {
               List<DiaryEntry> diaryEntries = box.values.toList();
               final selectedEntries = diaryEntries

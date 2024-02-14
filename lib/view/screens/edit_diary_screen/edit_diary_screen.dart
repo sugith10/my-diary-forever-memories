@@ -8,7 +8,7 @@ import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
 import 'package:diary/view/screens/widget/create_screen_bottom_navigationbar.dart';
 import 'package:diary/view/theme/app_color.dart';
-import 'package:diary/controller/database_controller/diary_entry_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/view/screens/widget/save_text_button_common.dart';
 import 'package:diary/view/util/create_screen_functions.dart';
@@ -238,7 +238,7 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                         background: widget.entry.background,
                       );
 
-                      await DiaryEntryCtrl()
+                      await DiaryEntryDatabaseManager()
                           .updateDiaryEntry(updatedEntry)
                           .then((value) {
                         log("DiaryEntry updated successfully!");

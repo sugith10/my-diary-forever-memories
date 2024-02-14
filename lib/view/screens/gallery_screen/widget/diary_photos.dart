@@ -16,7 +16,7 @@ class DiaryPhotos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final diaryEntry = Hive.box<DiaryEntry>('_boxName').values.firstWhere(
+    final diaryEntry = Hive.box<DiaryEntry>('diaryEntryBox').values.firstWhere(
           (entry) => entry.imagePath == imagePath,
         );
 

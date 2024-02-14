@@ -1,4 +1,4 @@
-import 'package:diary/controller/database_controller/diary_entry_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/individual_diary_screen/individual_diary_page.dart';
@@ -22,7 +22,7 @@ class DiaryCardActions extends StatelessWidget {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-            DiaryEntryCtrl().deleteDiary(entry.id, context);
+           DiaryEntryDatabaseManager().deleteDiary(entry.id, context);
           },
         ),
         children: [
@@ -39,7 +39,7 @@ class DiaryCardActions extends StatelessWidget {
         motion: const ScrollMotion(),
         dismissible: DismissiblePane(
           onDismissed: () {
-            DiaryEntryCtrl().deleteDiary(entry.id, context);
+            DiaryEntryDatabaseManager().deleteDiary(entry.id, context);
           },
         ),
         children: [
@@ -80,7 +80,7 @@ class SlidableActionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlidableAction(
       onPressed: (BuildContext context) {
-        DiaryEntryCtrl().deleteDiary(entry.id, context);
+       DiaryEntryDatabaseManager().deleteDiary(entry.id, context);
       },
        borderRadius: radius,
       backgroundColor: const Color(0xFFFE4A49),

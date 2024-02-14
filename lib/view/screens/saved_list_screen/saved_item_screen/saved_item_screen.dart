@@ -28,7 +28,7 @@ class _SavedItemsState extends State<SavedItems> {
   }
 
   List<DiaryEntry> getDiaryEntries(List<String> diaryEntryIds) {
-    final diaryEntryBox = Hive.box<DiaryEntry>('_boxName');
+    final diaryEntryBox = Hive.box<DiaryEntry>('diaryEntryBox');
     return diaryEntryIds
         .map((entryId) => diaryEntryBox.get(entryId))
         .where((entry) => entry != null)
@@ -62,7 +62,7 @@ class _SavedItemsState extends State<SavedItems> {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ValueListenableBuilder<Box<DiaryEntry>>(
-          valueListenable: Hive.box<DiaryEntry>('_boxName').listenable(),
+          valueListenable: Hive.box<DiaryEntry>('diaryEntryBox').listenable(),
           builder: (context, box, child) {
             final selectedDiaryEntries = getDiaryEntries(diaryEntryIds);
             if (selectedDiaryEntries.isNotEmpty) {

@@ -14,7 +14,7 @@ class GalleryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final box = Hive.box<DiaryEntry>('_boxName');
+    final box = Hive.box<DiaryEntry>('diaryEntryBox');
     final imageCount =
         box.values.where((entry) => entry.imagePath != null).length;
 

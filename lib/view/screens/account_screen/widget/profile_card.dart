@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/controller/database_controller/profile_details_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/profile_details_db_controller.dart';
 import 'package:diary/model/profile_details.dart';
 
 import 'package:diary/view/screen_transitions/bottom_to_top.dart';
@@ -43,7 +43,7 @@ class ProfileCard extends StatelessWidget {
                     Hive.box<ProfileDetails>('_profileBoxName').listenable(),
                 builder: (context, box, child) {
                   final List<ProfileDetails> profileDetailsList =
-                      ProfileDetailsCtrl().getAllProfileDetails();
+                      ProfileDetailsDatabaseManager().getAllProfileDetails();
 
                   if (profileDetailsList.isNotEmpty) {
                     final ProfileDetails profileDetails =

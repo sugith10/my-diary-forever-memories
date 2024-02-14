@@ -19,18 +19,18 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
-  final Box<DiaryEntry> diaryBox = Hive.box<DiaryEntry>('_boxName');
-  List<DiaryEntry> searchResults = [];
+  final Box<DiaryEntry> _diaryBox = Hive.box<DiaryEntry>('diaryEntryBox');
+  List<DiaryEntry> _searchResults = [];
 
-  void searchDiaryEntries(String query) {
+  void _searchDiaryEntries(String query) {
     query = query.toLowerCase();
     if (query.isEmpty) {
       setState(() {
-        searchResults = [];
+        _searchResults = [];
       });
     } else {
       setState(() {
-        searchResults = diaryBox.values.where((entry) {
+        _searchResults = _diaryBox.values.where((entry) {
           return entry.title.toLowerCase().contains(query);
         }).toList();
       });
@@ -46,7 +46,7 @@ class _SearchPageState extends State<SearchPage> {
         title: TextField(
           controller: _searchController,
           onChanged: (query) {
-            searchDiaryEntries(query);
+            _searchDiaryEntries(query);
           },
           autofocus: true,
           decoration: InputDecoration(
@@ -62,7 +62,7 @@ class _SearchPageState extends State<SearchPage> {
         elevation: 0,
         bottom: const BottomBorderWidget(),
       ),
-      body: searchResults.isEmpty
+      body: _searchResults.isEmpty
           ? Center(
               child: Image.asset(
                 'assets/images/empty_area/search_not_found_2.png',
@@ -72,10 +72,10 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Expanded(
                   child: ListView.builder(
-                    itemCount: searchResults.length,
+                    itemCount: _searchResults.length,
                     itemBuilder: (context, index) {
-                      final entry = searchResults[index];
-                      return InkWell(
+                      final entry = _searchResults[index];
+                      return GestureDetector(
                         onTap: () {
                           Navigator.push(context, bottomToTop( DiaryDetailPage(
                                 entry: entry,

@@ -24,7 +24,7 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(DiaryEntryAdapter().typeId)) {
     Hive.registerAdapter(DiaryEntryAdapter());
   }
-  await Hive.openBox<DiaryEntry>('_boxName');
+  await Hive.openBox<DiaryEntry>('diaryEntryBox');
 
   if (!Hive.isAdapterRegistered(ProfileDetailsAdapter().typeId)) {
     Hive.registerAdapter(ProfileDetailsAdapter());
@@ -44,7 +44,7 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(ArchiveDiaryAdapter().typeId)) {
     Hive.registerAdapter(ArchiveDiaryAdapter());
   }
-  await Hive.openBox<ArchiveDiary>('archiveDiaryEntryBox');
+  await Hive.openBox<ArchiveDiary>('archiveDiaryBox');
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

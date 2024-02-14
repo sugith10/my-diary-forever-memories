@@ -131,7 +131,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                     ),
                     ValueListenableBuilder(
                       valueListenable:
-                          Hive.box<DiaryEntry>('_boxName').listenable(),
+                          Hive.box<DiaryEntry>('diaryEntryBox').listenable(),
                       builder: (context, box, child) {
                         var sortedEntries = box.values.toList();
                         switch (selectedSortOption) {
