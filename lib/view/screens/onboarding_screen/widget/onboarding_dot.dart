@@ -24,15 +24,3 @@ class BuidDot extends StatelessWidget {
 }
 
 
-Container buildDot(int index, BuildContext context, OnboardingScreenProvider onboardingState) {
-    
-    return Container(
-      height: 10.sp,
-      width: onboardingState.currentIndex == index ? 25.sp : 10.sp,
-      margin: EdgeInsets.only(right: 5.sp),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20.sp),
-        color: const Color.fromRGBO(226, 232, 240, 1),
-      ),
-    );
-  }

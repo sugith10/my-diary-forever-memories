@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class OnboardingScreenFunctions{
    String _getLottieJsonFileName(ThemeMode themeMode) {
     return themeMode == ThemeMode.dark
-        ? 'assets/images/onboarding_screen_animation/onboarding_lottie_dark.json'
-        : 'assets/images/onboarding_screen_animation/onboarding_lottie_light.json';
+        ? 'assets/json/onboarding_screen_animation/onboarding_lottie_dark.json'
+        : 'assets/json/onboarding_screen_animation/onboarding_lottie_light.json';
   }
 
   String getLottieJsonFileName(ThemeMode themeMode){

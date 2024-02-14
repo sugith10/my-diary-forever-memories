@@ -1,4 +1,5 @@
-import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
+
+import 'package:diary/controller/db_controller/app_pref_db_controller.dart';
 import 'package:diary/model/app_preference_db_model.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +13,7 @@ class ThemeNotifier extends ChangeNotifier {
   bool get isDarkMode => _isDarkMode;
 
   Future<void> _initializeTheme() async {
-    final themePreference = await AppPreferenceCtrl().getThemePreference();
+    final themePreference = await AppPrefDatabaseManager().getThemePreference();
     if (themePreference != null) {
       _isDarkMode = themePreference.isDark ?? false;
     } 
@@ -23,7 +24,7 @@ class ThemeNotifier extends ChangeNotifier {
     if (_isDarkMode != false) {
       _isDarkMode = false;
       notifyListeners();
-      await AppPreferenceCtrl().addThemePreference(
+      await AppPrefDatabaseManager().addThemePreference(
         AppPreference( isDark: _isDarkMode),
       );
     }
@@ -33,7 +34,7 @@ class ThemeNotifier extends ChangeNotifier {
     if (_isDarkMode != true) {
       _isDarkMode = true;
       notifyListeners();
-      await AppPreferenceCtrl().addThemePreference(
+      await AppPrefDatabaseManager().addThemePreference(
         AppPreference(isDark: _isDarkMode),
       );
     }

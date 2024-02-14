@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:developer';
-import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/app_pref_db_controller.dart';
 import 'package:diary/model/app_preference_db_model.dart';
 import 'package:diary/view/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/onboarding_screen/onboarding_screen.dart';
@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ProfileScreenFunctions {
+final class ProfileScreenFunctions {
   Future<void> _launchEmail() async {
     const String emailAddress = 'dayproductionltd@gmail.com';
     const String emailSubject = '';
@@ -123,7 +123,7 @@ class ProfileScreenFunctions {
                   child:
                       const Text('Logout', style: TextStyle(color: Colors.red)),
                   onPressed: ()async {
-                  final appPreferenceFunctions = AppPreferenceCtrl();
+                  final appPreferenceFunctions = AppPrefDatabaseManager();
                  final onboardingStatus = AppPreference(showOnboarding: true);
                   await appPreferenceFunctions.showOnboarding(onboardingStatus);
 

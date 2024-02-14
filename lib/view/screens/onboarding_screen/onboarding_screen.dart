@@ -1,5 +1,5 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/app_pref_db_controller.dart';
 import 'package:diary/controller/screen_controller/screen_size_find_controller/onboarding_screen_size_cntrl/onboarding_screen_size_cntrl.dart';
 import 'package:diary/model/app_preference_db_model.dart';
 import 'package:diary/model/content_model.dart';
@@ -20,7 +20,7 @@ class Onboarding extends StatelessWidget {
   final PageController pageController = PageController(initialPage: 0);
   final OnboardingContentList onboardingContentList = OnboardingContentList();
   final OnboardingPageSizeCntrl _onboardingPageSizeCntrl = OnboardingPageSizeCntrl();
-  final AppPreferenceCtrl _appPreferenceCtrl = AppPreferenceCtrl();
+  final AppPrefDatabaseManager _appPreferenceCtrl = AppPrefDatabaseManager();
 
   @override
   Widget build(BuildContext context) {

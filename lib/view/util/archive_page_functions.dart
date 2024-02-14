@@ -5,8 +5,8 @@ import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-
-class ArchivePageUtil {
+ 
+final class ArchivePageUtil {
   _showOriginalImage(BuildContext context, ArchiveDiary archive) {
     if (archive.imagePath != null) {
       showDialog(

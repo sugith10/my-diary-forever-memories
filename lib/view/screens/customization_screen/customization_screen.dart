@@ -1,4 +1,4 @@
-import 'package:diary/controller/db_controller/app_preference_db_ops_hive.dart';
+import 'package:diary/controller/db_controller/app_pref_db_controller.dart';
 import 'package:diary/view/screens/account_screen/widget/info_container.dart';
 import 'package:diary/view/screens/customization_screen/widget/theme_switch_card.dart';
 import 'package:diary/view/screens/customization_screen/widget/theme_switch_card_body.dart';
@@ -21,7 +21,7 @@ class _CustomizationPageState extends State<CustomizationPage> {
   @override
   void initState() {
     super.initState();
-    AppPreferenceCtrl().getThemePreference().then((preference) {
+    AppPrefDatabaseManager().getThemePreference().then((preference) {
       if (preference != null) {
         setState(() {
           selectedTheme = preference.isDark == true ? 2 : 1;
