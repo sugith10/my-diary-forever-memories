@@ -1,17 +1,21 @@
 import 'dart:developer';
-import 'package:diary/controller/db_controller/diary_entry_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/diary_entry_db_ops_hive.dart';
 import 'package:diary/model/archive_db_model.dart';
 import 'package:diary/model/diary_entry.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
-class ArchiveDiaryCtrl {
+/// Manages interactions with the Hive database for archived diary entries.
+class ArchiveDiaryDatabaseManager {
+  /// Notifier for changes in the list of archived diaries.
   final ValueNotifier<List<ArchiveDiary>> archiveDiaryNotifier =
       ValueNotifier<List<ArchiveDiary>>([]);
 
+  /// Hive box for storing archived diary entries.
   final archiveBox = Hive.box<ArchiveDiary>('archiveDiaryEntryBox');
 
-  Future<void> addArchiveDiary(
+  /// Moves a diary entry to the archived diaries database.
+    Future<void> addDiaryToArchive(
     String? imagePath,
     String? imagePathTwo,
     String? imagePathThree,
@@ -23,7 +27,7 @@ class ArchiveDiaryCtrl {
     required String title,
     required String content,
   }) async {
-    final newSavedList = ArchiveDiary(
+    final newArchiveDiary = ArchiveDiary(
       id: id,
       date: date,
       background: background,
@@ -35,30 +39,27 @@ class ArchiveDiaryCtrl {
       imagePathFour: imagePathFour,
       imagePathFive: imagePathFive,
     );
-    await archiveBox.put(newSavedList.id, newSavedList);
-    log('Created saved list successfully');
+
+    await archiveBox.put(newArchiveDiary.id, newArchiveDiary);
+    log('Added diary to the archive database. ID: ${newArchiveDiary.id}');
 
     archiveDiaryNotifier.value = archiveBox.values.toList();
-
-    log('Updated List: ${archiveBox.values.toList()}');
+    log('Updated archived diary list: ${archiveBox.values.toList()}');
   }
 
-  List<ArchiveDiary> getAllArchiveDairy() {
-    return archiveBox.values.toList();
-  }
-
-  Future<void> deleteArchive(String id) async {
-    final box = Hive.box<ArchiveDiary>('archiveDiaryEntryBox');
-    if (box.containsKey(id)) {
-      box.delete(id);
-      log('Deleted entry with ID: $id');
+  /// Deletes an archived diary by ID.
+  Future<void> deleteArchivedDiary(String id) async {
+    if (archiveBox.containsKey(id)) {
+      archiveBox.delete(id);
+      log('Deleted archived diary with ID: $id');
     } else {
-      log('Entry with ID $id not found');
+      log('Archived diary with ID $id not found');
     }
   }
 
-  Future<void> moveToDiary(BuildContext context, ArchiveDiary archive) async {
-    log('started');
+  /// Moves an archived diary back to the main diary entry database.
+  Future<void> moveToDiaryDB(BuildContext context, ArchiveDiary archive) async {
+    log('Started moving archived diary to main diary database');
     final DiaryEntry movedEntry = DiaryEntry(
       id: archive.id,
       date: archive.date,
@@ -72,12 +73,11 @@ class ArchiveDiaryCtrl {
       imagePathFive: archive.imagePathFive,
     );
 
-    
-    
+    // Adding the diary to the main diary entry database.
     DiaryEntryCtrl().addDiaryEntry(movedEntry);
 
-    ArchiveDiaryCtrl().deleteArchive(archive.id);
-
-
+    // Deleting the archived diary from the archive database.
+    deleteArchivedDiary(archive.id);
+    log('Moved archived diary successfully');
   }
 }

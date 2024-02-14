@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:diary/controller/db_controller/archive_db_ops_hive.dart';
-import 'package:diary/controller/db_controller/diary_entry_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/archive_db_controller.dart';
+import 'package:diary/controller/database_controller/diary_entry_db_ops_hive.dart';
 import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screens/edit_diary_screen/edit_diary_screen.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
@@ -101,7 +101,7 @@ class DiaryDetailPageFunctions {
                   child: const Text('Archive',
                       style: TextStyle(color: Colors.red)),
                   onPressed: () {
-                    ArchiveDiaryCtrl().addArchiveDiary(
+                    ArchiveDiaryDatabaseManager().addDiaryToArchive(
                       id: entry.id,
                       date: entry.date,
                       background: entry.background,

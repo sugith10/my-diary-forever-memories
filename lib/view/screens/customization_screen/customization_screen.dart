@@ -1,4 +1,4 @@
-import 'package:diary/controller/db_controller/app_pref_db_controller.dart';
+import 'package:diary/controller/database_controller/app_pref_db_controller.dart';
 import 'package:diary/view/screens/account_screen/widget/info_container.dart';
 import 'package:diary/view/screens/customization_screen/widget/theme_switch_card.dart';
 import 'package:diary/view/screens/customization_screen/widget/theme_switch_card_body.dart';

@@ -1,5 +1,5 @@
 
-import 'package:diary/controller/db_controller/app_pref_db_controller.dart';
+import 'package:diary/controller/database_controller/app_pref_db_controller.dart';
 import 'package:diary/model/app_preference_db_model.dart';
 import 'package:flutter/material.dart';
 

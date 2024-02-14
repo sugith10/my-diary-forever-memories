@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/controller/db_controller/archive_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/archive_db_controller.dart';
 import 'package:diary/model/archive_db_model.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/theme/app_color.dart';
@@ -62,7 +62,7 @@ final class ArchivePageUtil {
                   child:
                       const Text('Delete', style: TextStyle(color: Colors.red)),
                   onPressed: () {
-                    ArchiveDiaryCtrl().deleteArchive(archive.id);
+                    ArchiveDiaryDatabaseManager().deleteArchivedDiary(archive.id);
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => MainScreen()),
@@ -134,7 +134,7 @@ final class ArchivePageUtil {
       if (value == 'Delete') {
         ArchivePageUtil().showDeleteConfirmationDialog(context, archive);
       } else if (value == 'Move') {
-        ArchiveDiaryCtrl().moveToDiary(context, archive);
+        ArchiveDiaryDatabaseManager().moveToDiaryDB(context, archive);
         Navigator.pop(context);
       }
     });

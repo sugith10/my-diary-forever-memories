@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/controller/db_controller/profile_details_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/profile_details_db_ops_hive.dart';
 import 'package:diary/model/profile_details.dart';
 import 'package:diary/view/screens/widget/save_text_button_common.dart';
 

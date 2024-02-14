@@ -8,7 +8,7 @@ import 'package:diary/view/screens/widget/back_button.dart';
 import 'package:diary/view/screens/widget/create_screen_bottom_navigationbar.dart';
 import 'package:diary/view/screens/widget/snackbar_message_widget.dart';
 import 'package:diary/view/theme/app_color.dart';
-import 'package:diary/controller/db_controller/diary_entry_db_ops_hive.dart';
+import 'package:diary/controller/database_controller/diary_entry_db_ops_hive.dart';
 import 'package:diary/provider/calendar_scrn_prvdr.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/view/screens/widget/save_text_button_common.dart';
