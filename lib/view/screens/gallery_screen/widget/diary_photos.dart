@@ -20,7 +20,7 @@ class DiaryPhotos extends StatelessWidget {
           (entry) => entry.imagePath == imagePath,
         );
 
-    return InkWell(
+    return GestureDetector(
       onTap: () {
         Navigator.push(
             context, bottomToTop(DiaryDetailPage(entry: diaryEntry)));

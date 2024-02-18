@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:diary/controller/database_controller/profile_details_db_controller.dart';
 import 'package:diary/model/profile_details.dart';
+import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/view/screens/widget/save_text_button_common.dart';
-
 import 'package:diary/view/util/get_colors.dart';
 import 'package:diary/view/util/save_image.dart';
 import 'package:flutter/material.dart';
@@ -63,17 +63,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
           )
         ],
         elevation: 0,
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(0),
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color.fromARGB(255, 0, 0, 0),
-                width: 0.1,
-              ),
-            ),
-          ),
-        ),
+        bottom:const BottomBorderWidget(),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),

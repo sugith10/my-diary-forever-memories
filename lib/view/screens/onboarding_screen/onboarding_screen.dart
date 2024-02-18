@@ -7,6 +7,7 @@ import 'package:diary/provider/onboarding_scrn_prvdr.dart';
 import 'package:diary/view/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/screens/onboarding_screen/widget/onboarding_dot.dart';
+import 'package:diary/view/theme/app_color.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:diary/view/util/onboarding_screen_functions.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ class Onboarding extends StatelessWidget {
 
   final PageController pageController = PageController(initialPage: 0);
   final OnboardingContentList onboardingContentList = OnboardingContentList();
-  final OnboardingPageSizeCntrl _onboardingPageSizeCntrl = OnboardingPageSizeCntrl();
+  final OnboardingPageSizeCntrl _onboardingPageSizeCntrl =
+      OnboardingPageSizeCntrl();
   final AppPrefDatabaseManager _appPreferenceCtrl = AppPrefDatabaseManager();
 
   @override
@@ -56,7 +58,7 @@ class Onboarding extends StatelessWidget {
                       Text(
                         onboardingContentList.contents[i].title,
                         style: TextStyle(
-                          fontSize:_onboardingPageSizeCntrl
+                          fontSize: _onboardingPageSizeCntrl
                               .calculateTitleFontSize(
                                 screenHeight: screenHeight,
                                 screenWidth: screenWidth,
@@ -72,8 +74,10 @@ class Onboarding extends StatelessWidget {
                           onboardingContentList.contents[i].discription,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: _onboardingPageSizeCntrl.calculateDescriptionFontSize(
-                               screenHeight:  screenHeight,screenWidth:  screenWidth),
+                            fontSize: _onboardingPageSizeCntrl
+                                .calculateDescriptionFontSize(
+                                    screenHeight: screenHeight,
+                                    screenWidth: screenWidth),
                             color: OnboardingScreenFunctions()
                                 .getDescriptionColor(context),
                           ),
@@ -125,7 +129,7 @@ class Onboarding extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Satoshi',
                   ),
-                  backgroundColor: const Color(0xFF835DF1),
+                  backgroundColor: AppColor.primary.color,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
@@ -147,9 +151,9 @@ class Onboarding extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-               _appPreferenceCtrl
+                _appPreferenceCtrl
                     .showOnboarding(AppPreference(showOnboarding: false));
-              
+
                 Navigator.of(context).pushReplacement(noMovement(MainScreen()));
               },
               child: FadeInUp(
@@ -167,6 +171,4 @@ class Onboarding extends StatelessWidget {
       ),
     );
   }
-
- 
 }

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screen_transitions/no_movement.dart';
-import 'package:diary/view/screens/create_screen/image_view_screen.dart';
+import 'package:diary/view/screens/create_screen/image_view_screen/image_view_screen.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
 import 'package:diary/view/screens/widget/create_screen_bottom_navigationbar.dart';

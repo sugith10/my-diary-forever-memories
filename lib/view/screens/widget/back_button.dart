@@ -9,7 +9,9 @@ class BackButtonWidget extends StatelessWidget {
     return IconButton(
       onPressed: () {
         Navigator.pop(context);
-        FocusScope.of(context).requestFocus(FocusNode()); 
+
+        //This statement hides the keyboard when the back button is pressed, contributing to a smoother user experience.
+        FocusScope.of(context).requestFocus(FocusNode());
       },
       icon: const Icon(
         Ionicons.chevron_back_outline,

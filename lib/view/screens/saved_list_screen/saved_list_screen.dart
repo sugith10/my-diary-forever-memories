@@ -63,7 +63,7 @@ class SavedListScreen extends StatelessWidget {
               itemCount: savedLists.length,
               itemBuilder: (BuildContext context, int index) {
                 final savedList = savedLists[index];
-                return InkWell(
+                return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,

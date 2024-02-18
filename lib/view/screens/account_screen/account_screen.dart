@@ -6,6 +6,7 @@ import 'package:diary/view/screens/account_screen/widget/profile_card.dart';
 import 'package:diary/view/screens/archive_screen/archive_screen.dart';
 import 'package:diary/view/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
+import 'package:diary/view/theme/app_color.dart';
 import 'package:diary/view/util/account_screen_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
@@ -45,15 +46,15 @@ class AccountScreen extends StatelessWidget {
               child: Column(
                 children: [
                   ProfileOptions(
-                    function: () =>
-                        Navigator.of(context).push(rightToLeft(const ArchivePage())),
+                    function: () => Navigator.of(context)
+                        .push(rightToLeft(const ArchivePage())),
                     item: 'Archived',
                     icon: Icons.archive_outlined,
                   ),
                   const ContentDivider(),
                   ProfileOptions(
-                      function: () =>
-                        Navigator.of(context).push(rightToLeft(const CustomizationPage())),
+                    function: () => Navigator.of(context)
+                        .push(rightToLeft(const CustomizationPage())),
                     item: 'Customization',
                     icon: Ionicons.color_palette_outline,
                   ),
@@ -92,14 +93,29 @@ class AccountScreen extends StatelessWidget {
                   ),
                   const ContentDivider(),
                   const SizedBox(height: 20),
-                  const Text(
-                    'Made with 💙 in India',
-                    style: TextStyle(fontSize: 18),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Made with ',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      Icon(
+                        Icons.favorite,
+                        color: AppColor.primary.color,
+                        size: 24.0,
+                      ),
+                      const Text(
+                        ' in India',
+                        style: TextStyle(fontSize: 18),
+                      ),
+                    ],
                   ),
+
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text('© 2024 DayProduction® v1.3.1',
+                  const Text('© 2024 DayProduction® v1.4.0',
                       style: TextStyle(fontSize: 15)),
                   const SizedBox(
                     height: 10,
