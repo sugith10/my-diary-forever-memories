@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/controller/image_pick_controller/image_pick_controller.dart';
-import 'package:diary/model/diary_entry.dart';
 import 'package:diary/view/screens/create_screen/image_view_screen/image_view_screen.dart';
 import 'package:diary/view/screens/create_screen/widget/down_icon.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
@@ -24,12 +23,13 @@ import 'package:sizer/sizer.dart';
 class CreateDiaryPage extends StatefulWidget {
   final CalenderScreenProvider changer;
   Color selectedColor;
+  bool edit;
 
-  CreateDiaryPage({
-    super.key,
-    required this.changer,
-    required this.selectedColor,
-  }){
+  CreateDiaryPage(
+      {super.key,
+      required this.changer,
+      required this.selectedColor,
+      this.edit = false}) {
     log('selected color ->-> $selectedColor');
   }
 
@@ -39,9 +39,7 @@ class CreateDiaryPage extends StatefulWidget {
 
 class _CreatePageState extends State<CreateDiaryPage> {
   final TextEditingController titleController = TextEditingController();
-
   final TextEditingController contentController = TextEditingController();
-
   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
 
   File? _image;
@@ -66,32 +64,39 @@ class _CreatePageState extends State<CreateDiaryPage> {
           leading: const BackButtonWidget(),
           actions: [
             SaveButton(onPressed: () async {
-              final title = titleController.text;
-              final content = contentController.text;
+              final String title = titleController.text;
+              final String content = contentController.text;
 
               if (title.isNotEmpty) {
-                Navigator.pop(context);
-                String? imagePath;
-                if (_image != null) {
-                  imagePath = await ImagePickCntrl().saveImage(_image!);
-                }
-                final entry = DiaryEntry(
-                  id: DateTime.now().millisecondsSinceEpoch.toString(),
-                  date: widget.changer.selectedDate,
-                  title: title,
-                  content: content,
-                  imagePath: imagePath,
-                  background:
-                      '#${widget.selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
-                );
-                widget.changer.selectDate(DateTime.now());
-
-                await DiaryEntryDatabaseManager().addDiaryEntry(entry);
+                if (!widget.edit) {
+                  Navigator.pop(context);
+                  String? imagePath;
+                  if (_image != null) {
+                    imagePath = await ImagePickCntrl().saveImage(_image!);
+                  }
+                  widget.changer.selectDate(DateTime.now());
+                  await DiaryEntryDatabaseManager()
+                      .addDiaryEntry(
+                    id: DateTime.now().millisecondsSinceEpoch.toString(),
+                    date: widget.changer.selectedDate,
+                    title: title,
+                    content: content,
+                    background:
+                        '#${widget.selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                    imagePath: imagePath,
+                  )
+                      .then((value) {
+                    log("DiaryEntry updated successfully!");
+                  }).catchError((error) {
+                    log("Error updating DiaryEntry: $error");
+                  });
+                } else {}
               } else {
-                SnackBarMessage(message: "Title cannot be empty!")
+                SnackBarMessage(
+                        message: "Title cannot be empty...",
+                        color: const Color.fromRGBO(244, 67, 54, 1))
                     .scaffoldMessenger(context);
               }
-              // ignore: use_build_context_synchronously
             }),
           ],
           elevation: 0,
@@ -106,36 +111,40 @@ class _CreatePageState extends State<CreateDiaryPage> {
                 children: [
                   TextButton(
                     onPressed: () async {
-                      final pickedDate = await showDatePicker(
-                        context: context,
-                        initialDate: widget.changer.selectedDate,
-                        firstDate: DateTime(2023),
-                        lastDate: DateTime.now(),
-                        initialEntryMode: DatePickerEntryMode.calendar,
-                        builder: (BuildContext context, Widget? child) {
-                          final isDark =
-                              Theme.of(context).brightness == Brightness.dark;
-                          return Theme(
-                            data: isDark
-                                ? ThemeData.dark().copyWith(
-                                    colorScheme: ColorScheme.dark(
-                                      primary: AppColor.darkBuilder.color,
-                                      secondary: AppColor.darkFourth.color,
+                      try {
+                        log('one pick function');
+                        final pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: widget.changer.selectedDate,
+                          firstDate: DateTime(2023),
+                          lastDate: DateTime.now(),
+                          initialEntryMode: DatePickerEntryMode.calendar,
+                          builder: (BuildContext context, Widget? child) {
+                            final isDark =
+                                Theme.of(context).brightness == Brightness.dark;
+                            return Theme(
+                              data: isDark
+                                  ? ThemeData.dark().copyWith(
+                                      colorScheme: ColorScheme.dark(
+                                        primary: AppColor.darkBuilder.color,
+                                        secondary: AppColor.darkFourth.color,
+                                      ),
+                                    )
+                                  : ThemeData.light().copyWith(
+                                      colorScheme: ColorScheme.light(
+                                        primary: AppColor.primary.color,
+                                        secondary: AppColor.primary.color,
+                                      ),
                                     ),
-                                  )
-                                : ThemeData.light().copyWith(
-                                    colorScheme: ColorScheme.light(
-                                      primary: AppColor.primary.color,
-                                      secondary: AppColor.primary.color,
-                                    ),
-                                  ),
-                            child: child ?? Container(),
-                          );
-                        },
-                      );
-
-                      if (pickedDate != null) {
-                        widget.changer.selectDate(pickedDate);
+                              child: child ?? const SizedBox(),
+                            );
+                          },
+                        );
+                        if (pickedDate != null) {
+                          widget.changer.selectDate(pickedDate);
+                        }
+                      } catch (e) {
+                        log(e.toString());
                       }
                     },
                     child: Row(

@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/model/diary_entry.dart';
+import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/fab_widget/fab_widget.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/diary_card_widget/my_diary_title.dart';

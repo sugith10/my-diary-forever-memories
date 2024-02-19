@@ -1,11 +1,12 @@
 import 'dart:developer';
-import 'package:diary/model/diary_entry.dart';
+import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/screens/widget/snackbar_message_widget.dart';
+import 'package:diary/view/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 /// Manages interactions with the Hive database for storing user-written diary entries
-class DiaryEntryDatabaseManager {
+final class DiaryEntryDatabaseManager {
   /// Notifier for changes in the list of diary entries.
   final ValueNotifier<List<DiaryEntry>> diaryEntriesNotifier =
       ValueNotifier<List<DiaryEntry>>([]);
@@ -17,7 +18,34 @@ class DiaryEntryDatabaseManager {
   final box = Hive.box<DiaryEntry>('diaryEntryBox');
 
   /// Adds a new diary entry to the database.
-  Future<void> addDiaryEntry(DiaryEntry entry) async {
+  Future<void> addDiaryEntry({
+    required String id,
+    required DateTime date,
+    required String background,
+    required String title,
+    required String content,
+    String? imagePath,
+    String? imagePathTwo,
+    String? imagePathThree,
+    String? imagePathFour,
+    String? imagePathFive,
+  }) async {
+    final entry = DiaryEntry(
+      id: id,
+      date: date,
+      title: title,
+      content: content,
+      background: background,
+      imagePath: imagePath,
+      imagePathTwo: imagePathTwo,
+      imagePathThree: imagePathThree,
+      imagePathFour: imagePathFour,
+      imagePathFive: imagePathFive,
+    );
+    await _addDiaryEntry(entry);
+  }
+
+  Future<void> _addDiaryEntry(DiaryEntry entry) async {
     await box.put(entry.id, entry);
     diaryEntryNotifier.add(entry);
     log('Added entry with ID: ${entry.id}');
@@ -37,11 +65,42 @@ class DiaryEntryDatabaseManager {
     } else {
       log('Entry with ID $id not found');
     }
-    SnackBarMessage(message: "Successfully Deleted").scaffoldMessenger(context);
+    SnackBarMessage(
+      message: "Successfully Deleted",
+      color: AppColor.fail.color,
+    ).scaffoldMessenger(context);
   }
 
   /// Updates an existing diary entry in the database.
-  Future<void> updateDiaryEntry(DiaryEntry entry) async {
+  Future<void> updateDiaryEntry({
+    required String id,
+    required DateTime date,
+    required String background,
+    required String title,
+    required String content,
+    String? imagePath,
+    String? imagePathTwo,
+    String? imagePathThree,
+    String? imagePathFour,
+    String? imagePathFive,
+  }) async {
+    final entry = DiaryEntry(
+      id: id,
+      date: date,
+      title: title,
+      content: content,
+      background: background,
+      imagePath: imagePath,
+      imagePathTwo: imagePathTwo,
+      imagePathThree: imagePathThree,
+      imagePathFour: imagePathFour,
+      imagePathFive: imagePathFive,
+    );
+    await _updateDiaryEntry(entry);
+  }
+
+  
+  Future<void> _updateDiaryEntry(DiaryEntry entry) async {
     if (box.containsKey(entry.id)) {
       await box.put(entry.id, entry);
       log('Updated entry with ID: ${entry.id}');

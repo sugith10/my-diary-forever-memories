@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'package:diary/model/profile_details.dart';
+import 'package:diary/model/hive_database_model/profile_details/profile_details.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 /// Manages interactions with the Hive database for storing user profile details.
-class ProfileDetailsDatabaseManager {
+final class ProfileDetailsDatabaseManager {
   /// Notifier for changes in the list of user profile details.
   final ValueNotifier<List<ProfileDetails>> profileDetailsNotifier =
       ValueNotifier<List<ProfileDetails>>([]);

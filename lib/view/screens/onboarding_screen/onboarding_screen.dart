@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/controller/database_controller/app_pref_db_controller.dart';
 import 'package:diary/controller/screen_controller/screen_size_find_controller/onboarding_screen_size_cntrl/onboarding_screen_size_cntrl.dart';
-import 'package:diary/model/app_preference_db_model.dart';
+import 'package:diary/model/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
 import 'package:diary/model/content_model.dart';
 import 'package:diary/provider/onboarding_scrn_prvdr.dart';
 import 'package:diary/view/screen_transitions/no_movement.dart';

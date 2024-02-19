@@ -1,4 +1,4 @@
-import 'package:diary/model/savedlist_db_model.dart';
+import 'package:diary/model/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
 import 'package:diary/view/screen_transitions/scale.dart';
 import 'package:diary/view/screens/saved_list_screen/saved_item_screen/saved_item_screen.dart';
 import 'package:diary/view/screens/widget/not_found.dart';

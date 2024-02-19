@@ -1,10 +1,10 @@
 import 'dart:developer';
-import 'package:diary/model/savedlist_db_model.dart';
+import 'package:diary/model/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 /// Manages interactions with the Hive database for storing and managing saved lists.
-class SavedListDatabaseManager {
+final class SavedListDatabaseManager {
   /// Notifier for changes in the list of saved lists.
   final ValueNotifier<List<SavedList>> savedListsNotifier =
       ValueNotifier<List<SavedList>>([]);

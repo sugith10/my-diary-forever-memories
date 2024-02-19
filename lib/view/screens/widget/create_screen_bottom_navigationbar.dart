@@ -1,3 +1,4 @@
+import 'package:diary/view/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
@@ -21,7 +22,9 @@ class CreatePageBottomNav extends StatelessWidget {
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: BottomNavigationBar(
-            selectedItemColor: const Color(0xFF835DF1),
+            enableFeedback: true,
+            elevation: 1,
+            selectedItemColor: AppColor.primary.color,
             showUnselectedLabels: false,
             showSelectedLabels: false,
             type: BottomNavigationBarType.fixed,

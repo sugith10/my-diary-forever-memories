@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:diary/model/diary_entry.dart';
+import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/create_screen/image_view_screen/image_view_screen.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
@@ -87,8 +87,8 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          DiaryDetailPageFunctions().hexToColor(widget.entry.background, context),
+      backgroundColor: DiaryDetailPageFunctions()
+          .hexToColor(widget.entry.background, context),
       appBar: AppBar(
         leading: const BackButtonWidget(),
         actions: [
@@ -229,24 +229,22 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
                     }
 
                     if (title.isNotEmpty) {
-                      final updatedEntry = DiaryEntry(
-                        id: widget.entry.id,
-                        date: widget.entry.date,
-                        title: title,
-                        content: content,
-                        imagePath: imagePath,
-                        background: widget.entry.background,
-                      );
-
                       await DiaryEntryDatabaseManager()
-                          .updateDiaryEntry(updatedEntry)
+                          .updateDiaryEntry(
+                              id: widget.entry.id,
+                              date: widget.entry.date,
+                              title: title,
+                              content: content,
+                              imagePath: imagePath,
+                              background: widget.entry.background)
                           .then((value) {
                         log("DiaryEntry updated successfully!");
                       }).catchError((error) {
                         log("Error updating DiaryEntry: $error");
                       });
                       // ignore: use_build_context_synchronously
-                       Navigator.of(context).pushReplacement(noMovement(MainScreen()));
+                      Navigator.of(context)
+                          .pushReplacement(noMovement(MainScreen()));
                     } else {
                       // ignore: use_build_context_synchronously
                       ScaffoldMessenger.of(context).showSnackBar(
@@ -319,7 +317,8 @@ class _EditDiaryEntryScreenState extends State<EditDiaryEntryScreen> {
       case 2:
         CreateDiaryScreenFunctions().showColorPickerDialog(
           context,
-          DiaryDetailPageFunctions().hexToColor(widget.entry.background, context),
+          DiaryDetailPageFunctions()
+              .hexToColor(widget.entry.background, context),
           (Color color) {
             setState(() {
               widget.entry.background =

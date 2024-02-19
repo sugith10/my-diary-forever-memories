@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:diary/model/archive_db_model.dart';
+import 'package:diary/model/hive_database_model/archive_db_model/archive_db_model.dart';
 import 'package:diary/view/screens/individual_diary_screen/widget/content.dart';
 import 'package:diary/view/screens/individual_diary_screen/widget/date.dart';
 import 'package:diary/view/screens/individual_diary_screen/widget/title.dart';

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 class  SnackBarMessage {
   final String message;
+  final Color color;
 
-  SnackBarMessage({required this.message});
+  SnackBarMessage({required this.message, required this.color});
 
    _scaffoldMessenger(BuildContext context){
     log('welcome to message');
@@ -14,7 +15,7 @@ class  SnackBarMessage {
               SnackBar(
                 behavior: SnackBarBehavior.floating,
                 margin: const EdgeInsets.all(10),
-                backgroundColor: Colors.red,
+                backgroundColor: color,
                 duration: const Duration(seconds: 2),
                 content: Center(
                   child: Text(

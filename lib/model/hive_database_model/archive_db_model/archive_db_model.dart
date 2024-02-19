@@ -1,15 +1,13 @@
 import 'package:hive_flutter/hive_flutter.dart';
+part 'archive_db_model.g.dart';
 
-part 'diary_entry.g.dart';
-
-
-@HiveType(typeId: 0)
-class DiaryEntry { 
-  @HiveField(0)               
+@HiveType(typeId: 5)
+class ArchiveDiary {
+  @HiveField(0)
   String id;
 
   @HiveField(1)
-  DateTime date;                                              
+  DateTime date;
 
   @HiveField(2)
   String title;
@@ -20,35 +18,35 @@ class DiaryEntry {
   @HiveField(4)
   String? imagePath;
 
-   @HiveField(5)
+  @HiveField(5)
   String? imagePathTwo;
 
   @HiveField(6)
-  String? imagePathThree; 
+  String? imagePathThree;
 
   @HiveField(7)
-  String? imagePathFour; 
+  String? imagePathFour;
 
   @HiveField(8)
-  String? imagePathFive; 
+  String? imagePathFive;
 
-  @HiveField(9) 
+  @HiveField(9)
   String background;
 
-  DiaryEntry({
+  ArchiveDiary({
     required this.id,
     required this.date,
     required this.title,
     required this.content,
-    this.imagePath, 
-    this.imagePathTwo, 
-    this.imagePathThree, 
-    this.imagePathFour, 
-    this.imagePathFive, 
+    this.imagePath,
+    this.imagePathTwo,
+    this.imagePathThree,
+    this.imagePathFour,
+    this.imagePathFive,
     required this.background,
   });
 
-   Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return {
       'id': id,
       'date': date.toIso8601String(),
@@ -63,4 +61,3 @@ class DiaryEntry {
     };
   }
 }
-

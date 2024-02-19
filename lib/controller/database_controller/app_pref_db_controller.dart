@@ -1,9 +1,9 @@
 import 'dart:developer';
-import 'package:diary/model/app_preference_db_model.dart';
+import 'package:diary/model/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 /// Manages interactions with the Hive database for user app preferences.
-class AppPrefDatabaseManager {
+final class AppPrefDatabaseManager {
   final Box<AppPreference> _box;
 
   /// Creates an instance of [AppPrefDatabaseManager].

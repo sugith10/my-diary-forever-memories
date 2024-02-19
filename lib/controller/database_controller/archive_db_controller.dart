@@ -1,12 +1,11 @@
 import 'dart:developer';
 import 'package:diary/controller/database_controller/diary_entry_db_controller.dart';
-import 'package:diary/model/archive_db_model.dart';
-import 'package:diary/model/diary_entry.dart';
+import 'package:diary/model/hive_database_model/archive_db_model/archive_db_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 /// Manages interactions with the Hive database for archived diary entries.
-class ArchiveDiaryDatabaseManager {
+final class ArchiveDiaryDatabaseManager {
   /// Notifier for changes in the list of archived diaries.
   final ValueNotifier<List<ArchiveDiary>> archiveDiaryNotifier =
       ValueNotifier<List<ArchiveDiary>>([]);
@@ -60,7 +59,8 @@ class ArchiveDiaryDatabaseManager {
   /// Moves an archived diary back to the main diary entry database.
   Future<void> moveToDiaryDB(BuildContext context, ArchiveDiary archive) async {
     log('Started moving archived diary to main diary database');
-    final DiaryEntry movedEntry = DiaryEntry(
+    // Adding the diary to the main diary entry database.
+    DiaryEntryDatabaseManager().addDiaryEntry(
       id: archive.id,
       date: archive.date,
       background: archive.background,
@@ -72,9 +72,6 @@ class ArchiveDiaryDatabaseManager {
       imagePathFour: archive.imagePathFour,
       imagePathFive: archive.imagePathFive,
     );
-
-    // Adding the diary to the main diary entry database.
-    DiaryEntryDatabaseManager().addDiaryEntry(movedEntry);
 
     // Deleting the archived diary from the archive database.
     deleteArchivedDiary(archive.id);

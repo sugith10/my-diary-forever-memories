@@ -10,6 +10,9 @@ enum AppColor {
   //primary colors
   primary,
   secondary,
+  //notification colors
+  success,
+  fail,
   //light mode
   light,
   lightCard,
@@ -35,6 +38,11 @@ extension AppColorExtension on AppColor {
         return const Color.fromRGBO(131, 93, 241, 1);
       case AppColor.secondary:
         return const Color.fromARGB(255, 183, 184, 185);
+      //notification colors
+      case AppColor.success:
+        return const Color.fromRGBO(102, 187, 106, 1);
+      case AppColor.fail:
+        return const Color.fromRGBO(239, 83, 80, 1);
       //light mode
       case AppColor.light:
         return const Color.fromARGB(255, 255, 255, 255);

@@ -1,4 +1,4 @@
-import 'package:diary/model/diary_entry.dart';
+import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/calendar_screen/widget/create_diary_text.dart';
 import 'package:diary/view/screens/individual_diary_screen/individual_diary_page.dart';

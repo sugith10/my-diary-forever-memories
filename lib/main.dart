@@ -1,8 +1,8 @@
-import 'package:diary/model/app_preference_db_model.dart';
-import 'package:diary/model/archive_db_model.dart';
-import 'package:diary/model/diary_entry.dart';
-import 'package:diary/model/profile_details.dart';
-import 'package:diary/model/savedlist_db_model.dart';
+import 'package:diary/model/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
+import 'package:diary/model/hive_database_model/archive_db_model/archive_db_model.dart';
+import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/model/hive_database_model/profile_details/profile_details.dart';
+import 'package:diary/model/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
 import 'package:diary/provider/theme_select_prvdr.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/screens/splash_screen/splash_screen.dart';
