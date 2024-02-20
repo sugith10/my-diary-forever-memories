@@ -124,7 +124,7 @@ final class ProfileScreenFunctions {
                       const Text('Logout', style: TextStyle(color: Colors.red)),
                   onPressed: ()async {
                   final appPreferenceFunctions = AppPrefDatabaseManager();
-                 final onboardingStatus = AppPreference(showOnboarding: true);
+                  final onboardingStatus = AppPreference(showOnboarding: true);
                   await appPreferenceFunctions.showOnboarding(onboardingStatus);
 
                   Navigator.of(context).pushReplacement(noMovement(Onboarding()));

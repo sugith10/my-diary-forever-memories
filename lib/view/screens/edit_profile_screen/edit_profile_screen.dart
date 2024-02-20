@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:diary/controller/database_controller/profile_details_db_controller.dart';
 import 'package:diary/model/hive_database_model/profile_details/profile_details.dart';
@@ -42,10 +43,21 @@ class _EditProfScreenState extends State<EditProfScreen> {
     final ProfileDetails profileDetails = profileDetailsList.isNotEmpty
         ? profileDetailsList.first
         : ProfileDetails(name: '', email: '');
+    if(profileDetailsList.isNotEmpty){
+      _nameController.text = profileDetails.name;
+      _emailController.text = profileDetails.email;
+      if(profileDetails.location != null){
+        _locationController.text = profileDetails.location!;
+      }
+    }
+
 
     if (_profilePicture == null && profileDetails.profilePicturePath != null) {
       _profilePicture = File(profileDetails.profilePicturePath!);
     }
+    
+    log(profileDetails.name);
+  
 
     return Scaffold(
       appBar: AppBar(
