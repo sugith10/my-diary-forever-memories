@@ -42,16 +42,25 @@ class _CreatePageState extends State<CreateDiaryPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
-  DateTime date = widget.changer.selectedDate;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    if (widget.diary != null) {
+      titleController.text = widget.diary!.title;
+      contentController.text = widget.diary!.content;
+      widget.changer.selectDate(widget.diary!.date);
+    }
+  }
 
   File? _image;
 
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
-
     final imageTemporary = File(image.path);
-
     setState(() {
       _image = imageTemporary;
     });
@@ -59,12 +68,6 @@ class _CreatePageState extends State<CreateDiaryPage> {
 
   @override
   Widget build(BuildContext context) {
-    if(widget.diary != null){
-      titleController.text = widget.diary!.title;
-      contentController.text = widget.diary!.content;
-      
-    }
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: widget.selectedColor,
@@ -76,7 +79,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
               final String content = contentController.text;
 
               if (title.isNotEmpty) {
-                if (widget.diary == null ) {
+                if (widget.diary == null) {
                   Navigator.pop(context);
                   String? imagePath;
                   if (_image != null) {
@@ -117,7 +120,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Row(
                 children: [
-                  TextButton(
+                  IconButton(
                     onPressed: () async {
                       try {
                         log('one pick function');
@@ -155,7 +158,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                         log(e.toString());
                       }
                     },
-                    child: Row(
+                    icon: Row(
                       children: [
                         Consumer<CalenderScreenProvider>(
                           builder: (context, changer, child) {

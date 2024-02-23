@@ -113,14 +113,14 @@ final class ProfileScreenFunctions {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextButton(
-                  child: const Text('Cancel'),
+                IconButton(
+                  icon: const Text('Cancel'),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                 ),
-                TextButton(
-                  child:
+                IconButton(
+                  icon:
                       const Text('Logout', style: TextStyle(color: Colors.red)),
                   onPressed: ()async {
                   final appPreferenceFunctions = AppPrefDatabaseManager();
