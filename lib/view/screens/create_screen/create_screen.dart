@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/controller/image_pick_controller/image_pick_controller.dart';
+import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/screens/create_screen/image_view_screen/image_view_screen.dart';
 import 'package:diary/view/screens/create_screen/widget/down_icon.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
@@ -23,13 +24,13 @@ import 'package:sizer/sizer.dart';
 class CreateDiaryPage extends StatefulWidget {
   final CalenderScreenProvider changer;
   Color selectedColor;
-  bool edit;
+  DiaryEntry? diary;
 
   CreateDiaryPage(
       {super.key,
       required this.changer,
       required this.selectedColor,
-      this.edit = false}) {
+      this.diary}) {
     log('selected color ->-> $selectedColor');
   }
 
@@ -41,6 +42,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
+  DateTime date = widget.changer.selectedDate;
 
   File? _image;
 
@@ -57,6 +59,12 @@ class _CreatePageState extends State<CreateDiaryPage> {
 
   @override
   Widget build(BuildContext context) {
+    if(widget.diary != null){
+      titleController.text = widget.diary!.title;
+      contentController.text = widget.diary!.content;
+      
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: widget.selectedColor,
@@ -68,7 +76,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
               final String content = contentController.text;
 
               if (title.isNotEmpty) {
-                if (!widget.edit) {
+                if (widget.diary == null ) {
                   Navigator.pop(context);
                   String? imagePath;
                   if (_image != null) {

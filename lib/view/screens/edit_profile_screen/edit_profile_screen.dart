@@ -52,6 +52,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
     }
 
 
+
     if (_profilePicture == null && profileDetails.profilePicturePath != null) {
       _profilePicture = File(profileDetails.profilePicturePath!);
     }
