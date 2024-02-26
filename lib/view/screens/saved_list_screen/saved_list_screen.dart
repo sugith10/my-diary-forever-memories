@@ -39,7 +39,7 @@ class SavedListScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ValueListenableBuilder(
           valueListenable:
-              Hive.box<SavedList>('_savedListBoxName').listenable(),
+              Hive.box<SavedList>('savedListBoxName').listenable(),
           builder: (context, Box<SavedList> box, child) {
             final List<SavedList> savedLists = box.values.toList();
             if (savedLists.isEmpty) {

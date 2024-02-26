@@ -1,20 +1,12 @@
-import 'package:diary/model/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
-import 'package:diary/model/hive_database_model/archive_db_model/archive_db_model.dart';
-import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/model/hive_database_model/profile_details/profile_details.dart';
-import 'package:diary/model/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
-import 'package:diary/provider/theme_select_prvdr.dart';
-import 'package:diary/view/screens/main_screen/main_screen.dart';
-import 'package:diary/view/screens/splash_screen/splash_screen.dart';
-import 'package:diary/view/theme/app_theme.dart';
-import 'package:diary/provider/main_scrn_prvdr.dart';
-import 'package:diary/provider/onboarding_scrn_prvdr.dart';
-import 'package:diary/provider/calendar_scrn_prvdr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:provider/provider.dart';
-import 'package:sizer/sizer.dart';
+import 'app.dart';
+import 'model/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
+import 'model/hive_database_model/archive_db_model/archive_db_model.dart';
+import 'model/hive_database_model/diary_entry_db_model/diary_entry.dart';
+import 'model/hive_database_model/profile_details/profile_details.dart';
+import 'model/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,12 +21,12 @@ Future<void> main() async {
   if (!Hive.isAdapterRegistered(ProfileDetailsAdapter().typeId)) {
     Hive.registerAdapter(ProfileDetailsAdapter());
   }
-  await Hive.openBox<ProfileDetails>('_profileBoxName');
+  await Hive.openBox<ProfileDetails>('profileBox');
 
   if (!Hive.isAdapterRegistered(SavedListAdapter().typeId)) {
     Hive.registerAdapter(SavedListAdapter());
   }
-  await Hive.openBox<SavedList>('_savedListBoxName');
+  await Hive.openBox<SavedList>('savedListBoxName');
 
   if (!Hive.isAdapterRegistered(AppPreferenceAdapter().typeId)) {
     Hive.registerAdapter(AppPreferenceAdapter());
@@ -50,47 +42,6 @@ Future<void> main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => ThemeNotifier(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => OnboardingScreenProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => MainScreenProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => CalenderScreenProvider(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) => MaterialApp(
-        title: 'My Diary',
-        theme: AppTheme().lightMode,
-        darkTheme: AppTheme().darkMode,
-        themeMode: Provider.of<ThemeNotifier>(context).isDarkMode
-            ? ThemeMode.dark
-            : ThemeMode.light,
-        debugShowCheckedModeBanner: false,
-        initialRoute: '/splash',
-        routes: {
-          '/splash': (context) => const Splash(),
-       
-          '/main': (context) => MainScreen(),
-        },
-      ),
-    );
-  }
+  runApp(const MyApp());
 }

@@ -116,7 +116,7 @@ class SavedScreenFunctions {
             ),
             ValueListenableBuilder(
               valueListenable:
-                  Hive.box<SavedList>('_savedListBoxName').listenable(),
+                  Hive.box<SavedList>('savedListBoxName').listenable(),
               builder: (context, box, child) {
                 List<SavedList> savedList = box.values.toList();
                 if (savedList.isNotEmpty) {

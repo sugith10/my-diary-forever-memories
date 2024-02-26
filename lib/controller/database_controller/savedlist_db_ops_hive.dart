@@ -10,7 +10,7 @@ final class SavedListDatabaseManager {
       ValueNotifier<List<SavedList>>([]);
 
   /// Hive box for storing saved lists.
-  final box = Hive.box<SavedList>('_savedListBoxName');
+  final box = Hive.box<SavedList>('savedListBoxName');
 
   /// Creates a new saved list with the specified name.
   Future<void> createSavedList(String listName) async {

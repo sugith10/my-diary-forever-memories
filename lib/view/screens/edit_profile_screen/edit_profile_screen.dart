@@ -84,7 +84,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: ValueListenableBuilder(
             valueListenable:
-                Hive.box<ProfileDetails>('_profileBoxName').listenable(),
+                Hive.box<ProfileDetails>('profileBox').listenable(),
             builder: (context, box, child) {
               return Column(
                 children: [

@@ -10,7 +10,7 @@ final class ProfileDetailsDatabaseManager {
       ValueNotifier<List<ProfileDetails>>([]);
 
   /// Hive box for storing user profile details.
-  final box = Hive.box<ProfileDetails>('_profileBoxName');
+  final box = Hive.box<ProfileDetails>('profileBox');
 
   /// Adds user profile details to the database.
   Future<void> addProfileDetails(ProfileDetails details) async {
