@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/view/screen_transitions/no_movement.dart';
+import 'package:diary/src/components/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/create_screen/image_view_screen/image_view_screen.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/screens/widget/back_button.dart';

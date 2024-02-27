@@ -1,6 +1,6 @@
 
 import 'package:diary/model/hive_database_model/archive_db_model/archive_db_model.dart';
-import 'package:diary/view/screen_transitions/bottom_to_top.dart';
+import 'package:diary/src/components/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/archive_screen/individual_archive_screen/individual_archive_page.dart';
 import 'package:diary/view/theme/app_color.dart';
 import 'package:flutter/material.dart';

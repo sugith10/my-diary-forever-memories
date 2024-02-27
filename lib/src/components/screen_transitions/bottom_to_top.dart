@@ -13,9 +13,7 @@ Route bottomToTop( Widget screen,  {Duration duration = const Duration(milliseco
       return SlideTransition(
         position: animation.drive(tween),
         child: child,
-        
       );
-      
     },
     transitionDuration: duration
   );

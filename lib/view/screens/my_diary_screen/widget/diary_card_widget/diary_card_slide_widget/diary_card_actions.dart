@@ -1,6 +1,6 @@
 import 'package:diary/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/view/screen_transitions/bottom_to_top.dart';
+import 'package:diary/src/components/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/individual_diary_screen/individual_diary_page.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/diary_card_widget/dairy_card.dart';
 

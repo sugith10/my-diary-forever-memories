@@ -26,13 +26,12 @@ class CreateDiaryPage extends StatefulWidget {
   Color selectedColor;
   DiaryEntry? diary;
 
-  CreateDiaryPage(
-      {super.key,
-      required this.changer,
-      required this.selectedColor,
-      this.diary}) {
-    log('selected color ->-> $selectedColor');
-  }
+  CreateDiaryPage({
+    super.key,
+    required this.changer,
+    required this.selectedColor,
+    this.diary,
+  });
 
   @override
   State<CreateDiaryPage> createState() => _CreatePageState();
@@ -45,7 +44,6 @@ class _CreatePageState extends State<CreateDiaryPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 
     if (widget.diary != null) {

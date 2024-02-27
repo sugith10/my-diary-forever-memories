@@ -1,4 +1,4 @@
-import 'package:diary/view/screen_transitions/right_to_left.dart';
+import 'package:diary/src/components/screen_transitions/right_to_left.dart';
 import 'package:diary/view/screens/customization_screen/customization_screen.dart';
 import 'package:diary/view/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/view/screens/account_screen/widget/account_screen_content_item.dart';
