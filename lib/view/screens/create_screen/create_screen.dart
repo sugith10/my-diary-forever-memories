@@ -23,13 +23,13 @@ import 'package:sizer/sizer.dart';
 // ignore: must_be_immutable
 class CreateDiaryPage extends StatefulWidget {
   final CalenderScreenProvider? changer;
+  final DiaryEntry? diary;
   Color selectedColor;
-  DiaryEntry? diary;
 
   CreateDiaryPage({
     super.key,
-    required this.changer,
     required this.selectedColor,
+    this.changer,
     this.diary,
   });
 
@@ -41,6 +41,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
+  DateTime date = DateTime.now();
 
   @override
   void initState() {
@@ -49,7 +50,9 @@ class _CreatePageState extends State<CreateDiaryPage> {
     if (widget.diary != null) {
       titleController.text = widget.diary!.title;
       contentController.text = widget.diary!.content;
-      widget.changer.selectDate(widget.diary!.date);
+      date = widget.diary!.date;
+    }else{
+      date  = widget.changer!.selectedDate;
     }
   }
 
@@ -83,11 +86,14 @@ class _CreatePageState extends State<CreateDiaryPage> {
                   if (_image != null) {
                     imagePath = await ImagePickCntrl().saveImage(_image!);
                   }
-                  widget.changer.selectDate(DateTime.now());
+                  if(widget.changer != null){
+                     widget.changer!.selectDate(DateTime.now());
+                  }
+                 
                   await DiaryEntryDatabaseManager()
                       .addDiaryEntry(
                     id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    date: widget.changer.selectedDate,
+                    date: date,
                     title: title,
                     content: content,
                     background:
@@ -124,7 +130,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                         log('one pick function');
                         final pickedDate = await showDatePicker(
                           context: context,
-                          initialDate: widget.changer.selectedDate,
+                          initialDate: date,
                           firstDate: DateTime(2023),
                           lastDate: DateTime.now(),
                           initialEntryMode: DatePickerEntryMode.calendar,
@@ -150,7 +156,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                           },
                         );
                         if (pickedDate != null) {
-                          widget.changer.selectDate(pickedDate);
+                          date = pickedDate;
                         }
                       } catch (e) {
                         log(e.toString());
