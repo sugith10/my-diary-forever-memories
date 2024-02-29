@@ -22,7 +22,7 @@ import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
 class CreateDiaryPage extends StatefulWidget {
-  final CalenderScreenProvider changer;
+  final CalenderScreenProvider? changer;
   Color selectedColor;
   DiaryEntry? diary;
 
