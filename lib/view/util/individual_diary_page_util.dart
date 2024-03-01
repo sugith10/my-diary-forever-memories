@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:diary/controller/database_controller/archive_db_controller.dart';
 import 'package:diary/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/src/components/screen_transitions/no_movement.dart';
+import 'package:diary/view/screens/create_screen/create_screen.dart';
 import 'package:diary/view/screens/edit_diary_screen/edit_diary_screen.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/theme/app_color.dart';
@@ -52,7 +54,6 @@ class DiaryDetailPageFunctions {
                       MaterialPageRoute(builder: (context) => MainScreen()),
                       ModalRoute.withName('/main'),
                     );
-                   
                   },
                 ),
               ],
@@ -113,7 +114,7 @@ class DiaryDetailPageFunctions {
                       entry.imagePathFour,
                       entry.imagePathFive,
                     );
-                   DiaryEntryDatabaseManager().deleteDiary(entry.id, context);
+                    DiaryEntryDatabaseManager().deleteDiary(entry.id, context);
 
                     Navigator.pushAndRemoveUntil(
                       context,
@@ -134,11 +135,11 @@ class DiaryDetailPageFunctions {
     _showArchiveConfirmationDialog(context, entry);
   }
 
-  Color _hexToColor(String color,BuildContext context) {
-     log('current color -> $color');
-   if(color == '#FFFFFF' || color == '#000000'){
-    return GetColors().getThemeColor(context);
-   }
+  Color _hexToColor(String color, BuildContext context) {
+    log('current color -> $color');
+    if (color == '#FFFFFF' || color == '#000000') {
+      return GetColors().getThemeColor(context);
+    }
     return Color(int.parse(color.substring(1, 7), radix: 16) + 0xFF000000);
   }
 
@@ -237,12 +238,22 @@ class DiaryDetailPageFunctions {
       ],
     ).then((value) {
       if (value == 'Edit') {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => EditDiaryEntryScreen(
-                      entry: entry,
-                    )));
+        Navigator.of(context).push(
+          noMovement(
+            CreateDiaryPage(
+              selectedColor: entry. ,
+
+            ),
+          ),
+        );
+
+        // Navigator.push(${widget.selectedColor.value.toRadixString(16).substring(2).toUpperCase()}
+          
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (context) => EditDiaryEntryScreen(
+        //               entry: entry,
+        //             )));
       } else if (value == 'Delete') {
         DiaryDetailPageFunctions().showDeleteConfirmationDialog(context, entry);
       } else if (value == 'Save') {

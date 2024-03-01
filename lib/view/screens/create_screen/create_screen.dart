@@ -42,6 +42,8 @@ class _CreatePageState extends State<CreateDiaryPage> {
   final TextEditingController contentController = TextEditingController();
   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
   DateTime date = DateTime.now();
+  File? _image;
+  
 
   @override
   void initState() {
@@ -51,12 +53,15 @@ class _CreatePageState extends State<CreateDiaryPage> {
       titleController.text = widget.diary!.title;
       contentController.text = widget.diary!.content;
       date = widget.diary!.date;
+       if (widget.diary!.imagePath != null) {
+      _image = File(widget.diary!.imagePath!);
+    }
     }else{
       date  = widget.changer!.selectedDate;
     }
   }
 
-  File? _image;
+
 
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
