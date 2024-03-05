@@ -9,11 +9,14 @@ class SaveButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       type: MaterialType.transparency,
-      child: TextButton(
-        onPressed: onPressed,
-        child: const Text(
-          'Save',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 10),
+        child: IconButton(
+          onPressed: onPressed,
+          icon: const Text(
+            'Save',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+          ),
         ),
       ),
     );

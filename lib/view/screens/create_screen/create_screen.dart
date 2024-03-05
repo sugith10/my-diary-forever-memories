@@ -22,14 +22,14 @@ import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
 class CreateDiaryPage extends StatefulWidget {
-  final CalenderScreenProvider? changer;
+  final CalenderScreenProvider changer;
   final DiaryEntry? diary;
   Color selectedColor;
 
   CreateDiaryPage({
     super.key,
     required this.selectedColor,
-    this.changer,
+    required this.changer,
     this.diary,
   });
 
@@ -41,9 +41,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
-  DateTime date = DateTime.now();
   File? _image;
-  
 
   @override
   void initState() {
@@ -52,16 +50,12 @@ class _CreatePageState extends State<CreateDiaryPage> {
     if (widget.diary != null) {
       titleController.text = widget.diary!.title;
       contentController.text = widget.diary!.content;
-      date = widget.diary!.date;
-       if (widget.diary!.imagePath != null) {
-      _image = File(widget.diary!.imagePath!);
-    }
-    }else{
-      date  = widget.changer!.selectedDate;
+     
+      if (widget.diary!.imagePath != null) {
+        _image = File(widget.diary!.imagePath!);
+      }
     }
   }
-
-
 
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -74,6 +68,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: widget.selectedColor,
@@ -91,14 +86,12 @@ class _CreatePageState extends State<CreateDiaryPage> {
                   if (_image != null) {
                     imagePath = await ImagePickCntrl().saveImage(_image!);
                   }
-                  if(widget.changer != null){
-                     widget.changer!.selectDate(DateTime.now());
-                  }
-                 
+                  widget.changer.selectDate(DateTime.now());
+
                   await DiaryEntryDatabaseManager()
                       .addDiaryEntry(
                     id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    date: date,
+                    date: widget.changer.selectedDate,
                     title: title,
                     content: content,
                     background:
@@ -135,7 +128,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                         log('one pick function');
                         final pickedDate = await showDatePicker(
                           context: context,
-                          initialDate: date,
+                          initialDate: widget.changer.selectedDate,
                           firstDate: DateTime(2023),
                           lastDate: DateTime.now(),
                           initialEntryMode: DatePickerEntryMode.calendar,
@@ -161,7 +154,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                           },
                         );
                         if (pickedDate != null) {
-                          date = pickedDate;
+                          widget.changer.selectDate(pickedDate);
                         }
                       } catch (e) {
                         log(e.toString());

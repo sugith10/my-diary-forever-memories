@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:diary/controller/database_controller/archive_db_controller.dart';
 import 'package:diary/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/provider/calendar_scrn_prvdr.dart';
 import 'package:diary/src/components/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/create_screen/create_screen.dart';
 import 'package:diary/view/screens/edit_diary_screen/edit_diary_screen.dart';
@@ -11,6 +12,7 @@ import 'package:diary/view/theme/app_color.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:diary/view/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 class DiaryDetailPageFunctions {
@@ -238,11 +240,17 @@ class DiaryDetailPageFunctions {
       ],
     ).then((value) {
       if (value == 'Edit') {
+        final changer =
+            Provider.of<CalenderScreenProvider>(context, listen: false);
+        changer.selectDate(entry.date);
         Navigator.of(context).push(
           noMovement(
             CreateDiaryPage(
-                selectedColor: DiaryDetailPageFunctions()
-                    .hexToColor(entry.background, context)),
+              selectedColor: DiaryDetailPageFunctions()
+                  .hexToColor(entry.background, context),
+              changer: changer,
+              diary: entry,
+            ),
           ),
         );
 
