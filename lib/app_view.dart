@@ -22,7 +22,6 @@ class MyAppView extends StatelessWidget {
         initialRoute: '/splash',
         routes: {
           '/splash': (context) => const Splash(),
-       
           '/main': (context) => MainScreen(),
         },
       ),
