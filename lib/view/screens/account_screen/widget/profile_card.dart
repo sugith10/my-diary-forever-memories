@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:diary/controller/database_controller/profile_details_db_controller.dart';
-import 'package:diary/model/hive_database_model/profile_details/profile_details.dart';
+import 'package:diary/features/user_details/profile_details/profile_details.dart';
 
-import 'package:diary/src/components/screen_transitions/bottom_to_top.dart';
+import 'package:diary/view/util/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/edit_profile_screen/edit_profile_screen.dart';
 import 'package:diary/view/theme/app_color.dart';
 import 'package:flutter/material.dart';

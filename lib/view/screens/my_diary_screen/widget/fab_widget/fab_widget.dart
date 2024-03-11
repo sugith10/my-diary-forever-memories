@@ -1,4 +1,4 @@
-import 'package:diary/src/components/screen_transitions/bottom_to_top.dart';
+import 'package:diary/view/util/screen_transitions/bottom_to_top.dart';
 import 'package:diary/provider/calendar_scrn_prvdr.dart';
 import 'package:diary/view/screens/create_screen/create_screen.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/fab_widget/create_floating_icon.dart';

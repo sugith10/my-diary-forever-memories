@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/controller/database_controller/profile_details_db_controller.dart';
-import 'package:diary/model/hive_database_model/profile_details/profile_details.dart';
+import 'package:diary/features/user_details/profile_details/profile_details.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/view/screens/widget/save_text_button_common.dart';
 import 'package:diary/view/util/get_colors.dart';
@@ -25,10 +25,17 @@ class _EditProfScreenState extends State<EditProfScreen> {
   final TextEditingController _locationController = TextEditingController();
   File? _profilePicture;
 
+  @override
+  void dispose() {
+    _nameController;
+    _emailController;
+    _locationController;
+    super.dispose();
+  }
+
   Future getImage() async {
     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image == null) return;
-
     final imageTemporary = File(image.path);
     setState(() {
       _profilePicture = imageTemporary;

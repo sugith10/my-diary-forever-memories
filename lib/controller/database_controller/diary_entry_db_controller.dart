@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/features/my_diary/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/screens/widget/snackbar_message_widget.dart';
 import 'package:diary/view/theme/app_color.dart';
 import 'package:flutter/material.dart';

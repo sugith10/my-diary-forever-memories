@@ -1,10 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:diary/controller/database_controller/app_pref_db_controller.dart';
 import 'package:diary/controller/screen_controller/screen_size_find_controller/onboarding_screen_size_cntrl/onboarding_screen_size_cntrl.dart';
-import 'package:diary/model/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
-import 'package:diary/model/content_model.dart';
+import 'package:diary/features/app_preference/data/model/app_preference_db_model/app_preference_db_model.dart';
+import 'package:diary/features/app_preference/views/utils/content_model.dart';
 import 'package:diary/provider/onboarding_scrn_prvdr.dart';
-import 'package:diary/src/components/screen_transitions/no_movement.dart';
+import 'package:diary/view/util/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/main_screen/main_screen.dart';
 import 'package:diary/view/screens/onboarding_screen/widget/onboarding_dot.dart';
 import 'package:diary/view/theme/app_color.dart';

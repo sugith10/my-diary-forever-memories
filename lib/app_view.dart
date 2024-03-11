@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import 'provider/theme_select_prvdr.dart';
 import 'view/screens/main_screen/main_screen.dart';
-import 'src/modules/splash/view/splash_screen.dart';
+import 'view/screens/splash/view/splash_screen.dart';
 import 'view/theme/app_theme.dart';
 
 class MyAppView extends StatelessWidget {

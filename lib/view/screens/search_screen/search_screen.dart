@@ -1,5 +1,5 @@
-import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/src/components/screen_transitions/bottom_to_top.dart';
+import 'package:diary/features/my_diary/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/view/util/screen_transitions/bottom_to_top.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/diary_card_widget/dairy_card.dart';

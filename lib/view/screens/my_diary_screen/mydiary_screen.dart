@@ -1,6 +1,6 @@
 import 'dart:developer';
-import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/src/components/screen_transitions/no_movement.dart';
+import 'package:diary/features/my_diary/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/view/util/screen_transitions/no_movement.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/fab_widget/fab_widget.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/diary_card_widget/my_diary_title.dart';
 import 'package:diary/view/screens/my_diary_screen/widget/no_diaries_widget.dart';

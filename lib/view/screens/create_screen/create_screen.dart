@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/controller/image_pick_controller/image_pick_controller.dart';
-import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/features/my_diary/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/screens/create_screen/image_view_screen/image_view_screen.dart';
 import 'package:diary/view/screens/create_screen/widget/down_icon.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
@@ -55,6 +55,13 @@ class _CreatePageState extends State<CreateDiaryPage> {
         _image = File(widget.diary!.imagePath!);
       }
     }
+  }
+
+  @override
+  void dispose() {
+    titleController;
+    contentController;
+    super.dispose();
   }
 
   Future getImage() async {

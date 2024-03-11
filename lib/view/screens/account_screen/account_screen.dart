@@ -1,9 +1,9 @@
-import 'package:diary/src/components/screen_transitions/right_to_left.dart';
+import 'package:diary/view/util/screen_transitions/right_to_left.dart';
 import 'package:diary/view/screens/customization_screen/customization_screen.dart';
 import 'package:diary/view/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/view/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/view/screens/account_screen/widget/profile_card.dart';
-import 'package:diary/view/screens/archive_screen/archive_screen.dart';
+import 'package:diary/features/archive_diary/views/pages/archive_screen/archive_screen.dart';
 import 'package:diary/view/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/view/theme/app_color.dart';

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'app.dart';
-import 'model/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
-import 'model/hive_database_model/archive_db_model/archive_db_model.dart';
-import 'model/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'model/hive_database_model/profile_details/profile_details.dart';
-import 'model/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
+import 'features/app_preference/data/model/app_preference_db_model/app_preference_db_model.dart';
+import 'features/archive_diary/model/archive_db_model/archive_db_model.dart';
+import 'features/my_diary/diary_entry_db_model/diary_entry.dart';
+import 'features/user_details/profile_details/profile_details.dart';
+import 'features/saved_list/savedlist_db_model/savedlist_db_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
