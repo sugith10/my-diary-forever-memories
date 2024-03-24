@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BottomBorderWidget extends StatelessWidget implements PreferredSizeWidget {
+class BottomBorderWidget extends StatelessWidget
+    implements PreferredSizeWidget {
   const BottomBorderWidget({super.key});
 
   @override
@@ -11,7 +12,9 @@ class BottomBorderWidget extends StatelessWidget implements PreferredSizeWidget 
     return Container(
       decoration: BoxDecoration(
         border: Border.all(
-          color: Theme.of(context).brightness == Brightness.light ?const Color.fromARGB(255, 0, 0, 0) : const Color.fromARGB(255, 255, 255, 255),
+          color: Theme.of(context).brightness == Brightness.light
+              ? const Color.fromARGB(255, 0, 0, 0)
+              : const Color.fromARGB(255, 255, 255, 255),
           width: 0.1,
         ),
       ),

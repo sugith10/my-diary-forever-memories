@@ -1,9 +1,9 @@
-import 'package:diary/view/util/screen_transitions/right_to_left.dart';
+import 'package:diary/core/utils/screen_transitions/right_to_left.dart';
 import 'package:diary/view/screens/customization_screen/customization_screen.dart';
 import 'package:diary/view/screens/account_screen/widget/account_screen_content_divider.dart';
 import 'package:diary/view/screens/account_screen/widget/account_screen_content_item.dart';
 import 'package:diary/view/screens/account_screen/widget/profile_card.dart';
-import 'package:diary/features/archive_diary/views/pages/archive_screen/archive_screen.dart';
+import 'package:diary/view/screens/archive_screen/archive_screen.dart';
 import 'package:diary/view/screens/widget/appbar_titlestyle_common.dart';
 import 'package:diary/view/screens/widget/appbar_bottom_common.dart';
 import 'package:diary/view/theme/app_color.dart';
@@ -24,15 +24,15 @@ class AccountScreen extends StatelessWidget {
           title: AppbarTitleWidget(
             text: greetingTitle,
           ),
-          actions: [
-            IconButton(
-                onPressed: () {
-                  ProfileScreenFunctions().showPopupDialog(context);
-                },
-                icon: const Icon(
-                  Icons.power_settings_new_outlined,
-                  color: Color.fromARGB(255, 197, 60, 50),
-                )),
+          actions: const [
+            // IconButton(
+            //     onPressed: () {
+            //       ProfileScreenFunctions().showPopupDialog(context);
+            //     },
+            //     icon: const Icon(
+            //       Icons.power_settings_new_outlined,
+            //       color: Color.fromARGB(255, 197, 60, 50),
+            //     )),
           ],
           elevation: 0,
           bottom: const BottomBorderWidget()),
@@ -115,7 +115,7 @@ class AccountScreen extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  const Text('© 2024 DayProduction® v1.4.0',
+                  const Text('© 2024 DayProduction® v1.4.2',
                       style: TextStyle(fontSize: 15)),
                   const SizedBox(
                     height: 10,

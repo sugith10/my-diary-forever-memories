@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CalenderScreenProvider extends ChangeNotifier{
@@ -14,6 +16,7 @@ class CalenderScreenProvider extends ChangeNotifier{
 
   void selectDate(DateTime date) {
     _selectedDate = date;
+    log(date.toString());
     notifyListeners();
   }
 

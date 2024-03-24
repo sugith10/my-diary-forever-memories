@@ -1,12 +1,12 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:diary/controller/image_pick_controller/image_pick_controller.dart';
-import 'package:diary/features/my_diary/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/model/hive_database_model/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/screens/create_screen/image_view_screen/image_view_screen.dart';
 import 'package:diary/view/screens/create_screen/widget/down_icon.dart';
 import 'package:diary/view/screens/widget/back_button.dart';
 import 'package:diary/view/screens/widget/create_screen_bottom_navigationbar.dart';
-import 'package:diary/view/screens/widget/snackbar_message_widget.dart';
+import 'package:diary/core/widgets/snackbar_message.dart';
 import 'package:diary/view/theme/app_color.dart';
 import 'package:diary/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/provider/calendar_scrn_prvdr.dart';
@@ -22,14 +22,14 @@ import 'package:sizer/sizer.dart';
 
 // ignore: must_be_immutable
 class CreateDiaryPage extends StatefulWidget {
-  final CalenderScreenProvider changer;
+  final CalenderScreenProvider? changer;
   final DiaryEntry? diary;
   Color selectedColor;
 
   CreateDiaryPage({
     super.key,
     required this.selectedColor,
-    required this.changer,
+    this.changer,
     this.diary,
   });
 
@@ -41,27 +41,22 @@ class _CreatePageState extends State<CreateDiaryPage> {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController contentController = TextEditingController();
   final ValueNotifier<int> _selectedIndexNotifier = ValueNotifier<int>(0);
+  DateTime date = DateTime.now();
   File? _image;
 
   @override
   void initState() {
     super.initState();
-
     if (widget.diary != null) {
       titleController.text = widget.diary!.title;
       contentController.text = widget.diary!.content;
-     
+      date = widget.diary!.date;
       if (widget.diary!.imagePath != null) {
         _image = File(widget.diary!.imagePath!);
       }
+    } else {
+      date = widget.changer!.selectedDate;
     }
-  }
-
-  @override
-  void dispose() {
-    titleController;
-    contentController;
-    super.dispose();
   }
 
   Future getImage() async {
@@ -75,7 +70,6 @@ class _CreatePageState extends State<CreateDiaryPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: widget.selectedColor,
@@ -93,12 +87,14 @@ class _CreatePageState extends State<CreateDiaryPage> {
                   if (_image != null) {
                     imagePath = await ImagePickCntrl().saveImage(_image!);
                   }
-                  widget.changer.selectDate(DateTime.now());
+                  if (widget.changer != null) {
+                    widget.changer!.selectDate(DateTime.now());
+                  }
 
                   await DiaryEntryDatabaseManager()
                       .addDiaryEntry(
                     id: DateTime.now().millisecondsSinceEpoch.toString(),
-                    date: widget.changer.selectedDate,
+                    date: date,
                     title: title,
                     content: content,
                     background:
@@ -110,12 +106,38 @@ class _CreatePageState extends State<CreateDiaryPage> {
                   }).catchError((error) {
                     log("Error updating DiaryEntry: $error");
                   });
-                } else {}
+                } else {
+                  //edit diary
+                  log('edit');
+                  String? imagePath;
+                  if (_image != null) {
+                    imagePath = await ImagePickCntrl().saveImage(_image!);
+                  }
+                  if (widget.changer != null) {
+                    widget.changer!.selectDate(DateTime.now());
+                  }
+                  await DiaryEntryDatabaseManager()
+                      .updateDiaryEntry(
+                    id: widget.diary!.id,
+                    date: date,
+                    title: title,
+                    content: content,
+                    imagePath: imagePath,
+                    background:
+                        '#${widget.selectedColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                  )
+                      .then((value) {
+                    log("DiaryEntry updated successfully!");
+                    Navigator.popUntil(context, (route) => route.isFirst);
+                  }).catchError((error) {
+                    log("Error updating DiaryEntry: $error");
+                  });
+                }
               } else {
                 SnackBarMessage(
-                        message: "Title cannot be empty...",
-                        color: const Color.fromRGBO(244, 67, 54, 1))
-                    .scaffoldMessenger(context);
+                  message: "Title can't be empty...",
+                  color: const Color.fromARGB(255, 225, 43, 43),
+                ).scaffoldMessenger(context);
               }
             }),
           ],
@@ -135,7 +157,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                         log('one pick function');
                         final pickedDate = await showDatePicker(
                           context: context,
-                          initialDate: widget.changer.selectedDate,
+                          initialDate: date,
                           firstDate: DateTime(2023),
                           lastDate: DateTime.now(),
                           initialEntryMode: DatePickerEntryMode.calendar,
@@ -161,7 +183,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                           },
                         );
                         if (pickedDate != null) {
-                          widget.changer.selectDate(pickedDate);
+                          date = pickedDate;
                         }
                       } catch (e) {
                         log(e.toString());
@@ -170,15 +192,17 @@ class _CreatePageState extends State<CreateDiaryPage> {
                     icon: Row(
                       children: [
                         Consumer<CalenderScreenProvider>(
+                          
                           builder: (context, changer, child) {
                             return Text(
                               DateFormat('d MMMM,y')
-                                  .format(changer.selectedDate),
+                                  .format(date),
                               style: TextStyle(
-                                  color: CreateDiaryScreenFunctions()
-                                          .isColorBright(widget.selectedColor)
-                                      ? Colors.black
-                                      : Colors.white),
+                                color: CreateDiaryScreenFunctions()
+                                        .isColorBright(widget.selectedColor)
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
                             );
                           },
                         ),
@@ -199,12 +223,13 @@ class _CreatePageState extends State<CreateDiaryPage> {
                 decoration: InputDecoration(
                   hintText: 'Title',
                   hintStyle: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w500,
-                      color: CreateDiaryScreenFunctions()
-                              .isColorBright(widget.selectedColor)
-                          ? Colors.black
-                          : Colors.white),
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    color: CreateDiaryScreenFunctions()
+                            .isColorBright(widget.selectedColor)
+                        ? Colors.black
+                        : Colors.white,
+                  ),
                   border: InputBorder.none,
                 ),
                 cursorColor: const Color.fromRGBO(27, 94, 32, 1),
