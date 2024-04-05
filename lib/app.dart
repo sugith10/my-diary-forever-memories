@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app_view.dart';
-import 'core/presentation/provider/calendar_scrn_prvdr.dart';
-import 'core/presentation/provider/main_scrn_prvdr.dart';
-import 'core/presentation/provider/onboarding_scrn_prvdr.dart';
-import 'core/presentation/provider/theme_select_prvdr.dart';
+import 'core/presentation/providers/calendar_scrn_prvdr.dart';
+import 'core/presentation/providers/main_scrn_prvdr.dart';
+import 'core/presentation/providers/onboarding_scrn_prvdr.dart';
+import 'core/presentation/providers/theme_select_prvdr.dart';
 
 class MyApp extends StatelessWidget{
   const MyApp({super.key});

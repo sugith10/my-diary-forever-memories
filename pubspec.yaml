@@ -60,19 +60,11 @@ flutter:
   fonts:
     - family: Satoshi
       fonts:
-        - asset: assets/fonts/Satoshi-Light.ttf
-          weight: 200
-        - asset: assets/fonts/Satoshi-Regular.ttf
-          weight: 300
-        - asset: assets/fonts/Satoshi-Medium.ttf
-          weight: 400
         - asset: assets/fonts/Satoshi-Bold.ttf
           weight: 500
     
     - family: SFPRO
       fonts:
-        - asset: assets/fonts/sfpro/SFPRODISPLAYREGULAR.otf
-          weight: 300
         - asset: assets/fonts/sfpro/SFPRODISPLAYMEDIUM.otf
           weight: 400
         - asset: assets/fonts/sfpro/SFPRODISPLAYBOLD.otf
@@ -80,11 +72,5 @@ flutter:
 
     - family: Poppins
       fonts:
-        - asset: assets/fonts/Poppins/Poppins-Light.ttf
-          weight: 200
-        - asset: assets/fonts/Poppins/Poppins-Regular.ttf
-          weight: 300
-        - asset: assets/fonts/Poppins/Poppins-Medium.ttf
-          weight: 400
         - asset: assets/fonts/Poppins/Poppins-Bold.ttf
           weight: 500

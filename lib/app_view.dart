@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-import 'core/presentation/provider/theme_select_prvdr.dart';
-import 'view/pages/main_screen/main_screen.dart';
-import 'view/pages/splash_screen/splash_screen.dart';
+import 'core/presentation/providers/theme_select_prvdr.dart';
+import 'core/presentation/pages/pages/main_page/main_page.dart';
+import 'core/presentation/pages/pages/splash_page/splash_page.dart';
 import 'core/presentation/theme/app_theme.dart';
 
 class MyAppView extends StatelessWidget {
