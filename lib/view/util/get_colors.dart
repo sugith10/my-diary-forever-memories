@@ -1,4 +1,4 @@
-import 'package:diary/view/theme/app_color.dart';
+import 'package:diary/core/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 
 class GetColors {

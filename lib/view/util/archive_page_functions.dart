@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:diary/controller/database_controller/archive_db_controller.dart';
-import 'package:diary/model/hive_database_model/archive_db_model/archive_db_model.dart';
-import 'package:diary/view/screens/main_screen/main_screen.dart';
-import 'package:diary/view/theme/app_color.dart';
+import 'package:diary/core/data/model/hive/hive_database_model/archive_db_model/archive_db_model.dart';
+import 'package:diary/view/pages/main_screen/main_screen.dart';
+import 'package:diary/core/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
  

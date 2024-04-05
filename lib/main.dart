@@ -1,13 +1,14 @@
-import 'package:diary/core/hive_box_names/hive_box_names.dart';
+
+import 'package:diary/core/data/model/hive/hive_box_names/hive_box_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'app.dart';
-import 'model/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
-import 'model/hive_database_model/archive_db_model/archive_db_model.dart';
-import 'model/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'model/hive_database_model/profile_details/profile_details.dart';
-import 'model/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
+import 'core/data/model/hive/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
+import 'core/data/model/hive/hive_database_model/archive_db_model/archive_db_model.dart';
+import 'core/data/model/hive/hive_database_model/diary_entry_db_model/diary_entry.dart';
+import 'core/data/model/hive/hive_database_model/profile_details/profile_details.dart';
+import 'core/data/model/hive/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

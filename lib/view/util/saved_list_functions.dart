@@ -1,9 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:diary/controller/database_controller/savedlist_db_ops_hive.dart';
-import 'package:diary/model/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
-import 'package:diary/view/screens/main_screen/main_screen.dart';
-import 'package:diary/view/theme/app_color.dart';
+import 'package:diary/core/data/model/hive/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
+import 'package:diary/view/pages/main_screen/main_screen.dart';
+import 'package:diary/core/presentation/theme/app_color.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
