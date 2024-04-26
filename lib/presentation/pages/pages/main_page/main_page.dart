@@ -13,7 +13,7 @@ import 'package:sizer/sizer.dart';
 class MainScreen extends StatelessWidget {
   final List<Widget> _mainScreens = [
     const MyDiaryScreen(),
-    CalendarScreen(),
+   const CalendarScreen(),
     const GalleryScreen(),
     const AccountScreen(),
   ];
@@ -107,7 +107,7 @@ class MainScreen extends StatelessWidget {
                                   isSelected ? listOfStrings[index] : '',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
-                                    fontFamily: 'Poppins',
+                               
                                     fontSize:
                                      MainScreenSizeCntrl().calculateBottomNavFontSize(screenHeight:  screenHeight,screenWidth:  screenWidth).sp,
                                   ),

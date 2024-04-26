@@ -7,9 +7,9 @@ import 'package:diary/presentation/providers/onboarding_scrn_prvdr.dart';
 import 'package:diary/presentation/navigation/screen_transitions/no_movement.dart';
 import 'package:diary/presentation/pages/pages/main_page/main_page.dart';
 import 'package:diary/presentation/pages/pages/onboarding_page/widget/onboarding_dot.dart';
-import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/pages/util/get_colors.dart';
 import 'package:diary/presentation/pages/util/onboarding_screen_functions.dart';
+import 'package:diary/presentation/theme/app_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -57,12 +57,12 @@ class _OnboardingState extends State<Onboarding> {
                 onPageChanged: (int index) {
                   onboardingState.updateIndex(index);
                 },
-                itemBuilder: (_, i) {
+                itemBuilder: (_, index) {
                   return Column(
                     children: [
                       const Spacer(),
                       Text(
-                        onboardingContentList.contents[i].title,
+                        onboardingContentList.contents[index].title,
                         style: TextStyle(
                           fontSize: _onboardingPageSizeCntrl
                               .calculateTitleFontSize(
@@ -77,7 +77,7 @@ class _OnboardingState extends State<Onboarding> {
                       Container(
                         margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                         child: Text(
-                          onboardingContentList.contents[i].discription,
+                          onboardingContentList.contents[index].discription,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: _onboardingPageSizeCntrl
@@ -129,17 +129,16 @@ class _OnboardingState extends State<Onboarding> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  elevation: 0,
+                 
                   textStyle: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: 'Satoshi',
+                   
                   ),
-                  backgroundColor: AppColor.primary.color,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  // backgroundColor: MyAppDarkColor.instance.focus,
+                  // shape: RoundedRectangleBorder(
+                  //   borderRadius: BorderRadius.circular(12),
+                  // ),
+                  // padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: FadeInUp(
                   delay: const Duration(milliseconds: 600),
@@ -149,8 +148,8 @@ class _OnboardingState extends State<Onboarding> {
                             onboardingContentList.contents.length - 1
                         ? "Continue"
                         : "Next",
-                    style: const TextStyle(
-                        color: Color.fromRGBO(255, 255, 255, 1)),
+                    // style: const TextStyle(
+                    //     color: Color.fromRGBO(255, 255, 255, 1)),
                   ),
                 ),
               ),

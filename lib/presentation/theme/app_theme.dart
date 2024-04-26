@@ -1,14 +1,16 @@
 import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/theme/app_colors.dart';
+import 'package:diary/presentation/theme/app_fonts.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static final  _textStyle = TextStyle(color: AppColor.dark.color);
+  static final _textStyle = TextStyle(color: AppColor.dark.color);
   final ThemeData lightMode = ThemeData(
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
       primary: Colors.white,
     ),
-    fontFamily: 'SFPRO',
+    fontFamily: MyAppFonts.sfPro,
     textTheme: TextTheme(
       labelLarge: _textStyle,
       displayLarge: _textStyle,
@@ -40,6 +42,17 @@ class AppTheme {
         ),
       ),
     ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+          backgroundColor: MyAppDarkColor.instance.focus,
+          foregroundColor: Colors.white,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          textStyle: const TextStyle(
+            fontFamily: MyAppFonts.satoshi,
+            fontWeight: FontWeight.w600
+          )),
+    ),
   );
 
   final ThemeData darkMode = ThemeData(
@@ -50,7 +63,7 @@ class AppTheme {
       background: AppColor.dark.color,
       secondary: AppColor.dark.color,
     ),
-    fontFamily: 'SFPRO',
+    fontFamily: MyAppFonts.sfPro,
     scaffoldBackgroundColor: AppColor.dark.color,
     appBarTheme: AppBarTheme(backgroundColor: AppColor.dark.color),
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
