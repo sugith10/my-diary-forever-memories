@@ -27,6 +27,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
           actions: [
             IconButton(
               onPressed: () {
+                
                 DiaryDetailPageFunctions().showingMenu(context, widget.entry);
               },
               icon: const Icon(
@@ -36,15 +37,17 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
           ],
           bottom: const BottomBorderWidget()),
       body: Container(
-        color: DiaryDetailPageFunctions().hexToColor(widget.entry.background,context),
+        color: DiaryDetailPageFunctions()
+            .hexToColor(widget.entry.background, context),
         child: ListView(
           children: [
             Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: DiaryDate(
-                  date: widget.entry.date,
-                  backgroundColor: widget.entry.background,
-                )),
+              padding: const EdgeInsets.all(16.0),
+              child: DiaryDate(
+                date: widget.entry.date,
+                backgroundColor: widget.entry.background,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(16),
               child: Row(
@@ -78,8 +81,9 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
             Padding(
               padding: const EdgeInsets.all(16),
               child: DiaryContent(
-                  content: widget.entry.content,
-                  backgroundColor: widget.entry.background,),
+                content: widget.entry.content,
+                backgroundColor: widget.entry.background,
+              ),
             ),
           ],
         ),

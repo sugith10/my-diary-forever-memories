@@ -1,3 +1,5 @@
+
+
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
@@ -8,22 +10,28 @@ import 'package:diary/presentation/pages/pages/onboarding_page/onboarding_page.d
 import 'package:flutter/material.dart';
 
 class SplashScreenController {
-  _setup(BuildContext context) {
-    Timer(
-      const Duration(seconds: 2),
-      () async {
-        final onboardingStatus =
-            await AppPrefDatabaseManager().getOnboardingStatus();
+_setup(BuildContext context) {
+  Timer? timer;
 
-        if (onboardingStatus == null ||
-            onboardingStatus.showOnboarding == true) {
-          Navigator.of(context).pushReplacement(noMovement(const Onboarding()));
-        } else {
-          Navigator.of(context).pushReplacement(noMovement(MainScreen()));
-        }
-      },
-    );
-  }
+  timer = Timer(
+    const Duration(seconds: 2),
+    () async {
+      final onboardingStatus =
+          await AppPrefDatabaseManager().getOnboardingStatus();
+
+      if (onboardingStatus == null ||
+          onboardingStatus.showOnboarding == true) {
+        Navigator.of(context).pushReplacement(noMovement(const Onboarding()));
+      } else {
+        Navigator.of(context).pushReplacement(noMovement(MainScreen()));
+      }
+
+      // Dispose the timer after completing its task
+      timer?.cancel();
+    },
+  );
+}
+
 
   setup(BuildContext context) {
     _setup(context);

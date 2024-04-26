@@ -249,7 +249,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
                         : Colors.white),
                 textCapitalization: TextCapitalization.sentences,
                 autofocus: true,
-                maxLines: 2,
+                maxLines: null,
               ),
             ),
             SizedBox(

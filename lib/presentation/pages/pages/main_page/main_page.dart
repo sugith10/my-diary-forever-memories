@@ -12,7 +12,7 @@ import 'package:sizer/sizer.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Widget> _mainScreens = [
-    const MyDiaryScreen(),
+    const HomePage(),
    const CalendarScreen(),
     const GalleryScreen(),
     const AccountScreen(),

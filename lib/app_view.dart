@@ -21,7 +21,7 @@ class MyAppView extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/splash',
         routes: {
-          '/splash': (context) => const Splash(),
+          '/splash': (context) => const SplashPage(),
           '/main': (context) => MainScreen(),
         },
       ),

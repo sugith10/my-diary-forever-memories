@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:diary/data/model/hive/hive_database_model/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/presentation/navigation/screen_transitions/no_movement.dart';
 import 'package:diary/presentation/pages/pages/my_diary_page/widget/fab_widget/fab_widget.dart';
@@ -17,14 +16,14 @@ import 'package:intl/intl.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 
-class MyDiaryScreen extends StatefulWidget {
-  const MyDiaryScreen({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MyDiaryScreen> createState() => _MyDiaryScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyDiaryScreenState extends State<MyDiaryScreen> {
+class _HomePageState extends State<HomePage> {
   String selectedSortOption = 'Newest First';
 
   List<DiaryEntry> filterEntriesByDateRange(
@@ -91,7 +90,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                                 ),
                                 const PopupMenuItem(
                                   value: 'Range Pick',
-                                  child:PopUpMenuText(title: 'Range Pick'),
+                                  child: PopUpMenuText(title: 'Range Pick'),
                                 ),
                               ],
                             ).then((value) async {
@@ -136,26 +135,24 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                         var sortedEntries = box.values.toList();
                         switch (selectedSortOption) {
                           case 'Newest First':
-                            sortedEntries.sort(
-                                (a, b) => b.date.compareTo(a.date));
+                            sortedEntries
+                                .sort((a, b) => b.date.compareTo(a.date));
                             break;
                           case 'Oldest First':
-                            sortedEntries.sort(
-                                (a, b) => a.date.compareTo(b.date));
+                            sortedEntries
+                                .sort((a, b) => a.date.compareTo(b.date));
                             break;
                           case 'Range Pick':
                             if (myDiaryScreenProvider.selectedDateRange !=
                                 null) {
-                              log(
-                                  'range pick - in value listenable builder');
                               sortedEntries = filterEntriesByDateRange(
                                   sortedEntries,
                                   myDiaryScreenProvider.selectedDateRange!);
                             }
                             break;
                           default:
-                            sortedEntries.sort(
-                                (a, b) => b.date.compareTo(a.date));
+                            sortedEntries
+                                .sort((a, b) => b.date.compareTo(a.date));
                             break;
                         }
                         Map<String, List<DiaryEntry>> groupedEntries = {};
@@ -165,7 +162,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
                           groupedEntries.putIfAbsent(dateKey, () => []);
                           groupedEntries[dateKey]!.add(entry);
                         }
-                     
+
                         if (sortedEntries.isEmpty) {
                           return const SliverFillRemaining(
                             child: Center(
@@ -201,5 +198,3 @@ class _MyDiaryScreenState extends State<MyDiaryScreen> {
     );
   }
 }
-
-

@@ -252,14 +252,6 @@ class DiaryDetailPageFunctions {
             ),
           ),
         );
-
-        // Navigator.push(${widget.selectedColor.value.toRadixString(16).substring(2).toUpperCase()}
-
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (context) => EditDiaryEntryScreen(
-        //               entry: entry,
-        //             )));
       } else if (value == 'Delete') {
         DiaryDetailPageFunctions().showDeleteConfirmationDialog(context, entry);
       } else if (value == 'Save') {

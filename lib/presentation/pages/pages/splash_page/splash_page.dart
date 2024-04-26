@@ -3,13 +3,22 @@ import 'package:diary/presentation/utils/app_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class Splash extends StatelessWidget {
-  const Splash({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
+
+  @override
+ State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    super.initState();
+    SplashScreenController().setup(context);
+  }
 
   @override
   Widget build(BuildContext context) {
-    SplashScreenController().setup(context);
-
     return Scaffold(
       body: Center(
         child: Padding(
@@ -21,19 +30,18 @@ class Splash extends StatelessWidget {
   }
 
   SvgPicture _logo(BuildContext context) {
-    if(Theme.of(context).brightness == Brightness.light){
-        return SvgPicture.asset(
-          MyAppAssets.lightScreenLogo,
-          width: 150,
-          height: 150,
-        );
-    }else{
+    if (Theme.of(context).brightness == Brightness.light) {
       return SvgPicture.asset(
-          MyAppAssets.darkScreenLogo,
-            width: 150,
-          height: 150,
-        );
+        MyAppAssets.lightScreenLogo,
+        width: 150,
+        height: 150,
+      );
+    } else {
+      return SvgPicture.asset(
+        MyAppAssets.darkScreenLogo,
+        width: 150,
+        height: 150,
+      );
     }
-   
   }
 }
