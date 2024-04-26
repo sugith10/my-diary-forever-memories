@@ -65,12 +65,13 @@ flutter:
     
     - family: SFPRO
       fonts:
-        - asset: assets/fonts/sfpro/SFPRODISPLAYMEDIUM.otf
+        - asset: assets/fonts/SF Pro/SFPRODISPLAYREGULAR.otf
           weight: 400
-        - asset: assets/fonts/sfpro/SFPRODISPLAYBOLD.otf
+        - asset: assets/fonts/SF Pro/SFPRODISPLAYMEDIUM.otf
           weight: 500
+        - asset: assets/fonts/SF Pro/SFPRODISPLAYBOLD.otf
+          weight: 600
 
-    - family: Poppins
+    - family: Skyscapers
       fonts:
-        - asset: assets/fonts/Poppins/Poppins-Bold.ttf
-          weight: 500
+        - asset: assets/fonts/Skyscapers/Skyscapers.ttf
