@@ -6,6 +6,9 @@ You can download the latest version of "My Diary - Memories Forever" on your And
 
 [Download My Diary - Memories Forever](https://play.google.com/store/apps/details?id=com.dayproduction.diary)
 
+![take-my-tym-cover](https://raw.githubusercontent.com/sugith10/images/main/projects/my-diary-cover.png)
+
+
 ## Project Overview
 
 This Flutter project is a diary app named "My Diary - Memories Forever." The project follows a simplified folder structure (MVVM) for clarity and ease of understanding.
