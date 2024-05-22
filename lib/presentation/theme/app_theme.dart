@@ -1,5 +1,5 @@
 import 'package:diary/presentation/theme/app_color.dart';
-import 'package:diary/presentation/theme/app_colors.dart';
+import 'package:diary/presentation/theme/color/app_colors.dart';
 import 'package:diary/presentation/theme/app_fonts.dart';
 import 'package:flutter/material.dart';
 
@@ -44,7 +44,7 @@ class AppTheme {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-          backgroundColor: MyAppDarkColor.instance.focus,
+          backgroundColor: AppDarkColor.instance.focus,
           foregroundColor: Colors.white,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

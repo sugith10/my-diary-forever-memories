@@ -1,6 +1,7 @@
 import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/utils/assets/app_svg.dart';
+import 'package:diary/presentation/widgets/svg_icon.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 
 class CreatePageBottomNav extends StatelessWidget {
   final ValueNotifier<int> selectedIndexNotifier;
@@ -24,6 +25,7 @@ class CreatePageBottomNav extends StatelessWidget {
           child: BottomNavigationBar(
             enableFeedback: true,
             elevation: 1,
+            //TODO:change color here
             selectedItemColor: AppColor.primary.color,
             showUnselectedLabels: false,
             showSelectedLabels: false,
@@ -32,15 +34,15 @@ class CreatePageBottomNav extends StatelessWidget {
             onTap: onTap,
             items: const [
               BottomNavigationBarItem(
-                icon: Icon(Ionicons.time_outline),
+                icon: SvgIcon(path: AppSvg.time),
                 label: 'Time',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Ionicons.image_outline),
+                icon: SvgIcon(path: AppSvg.gallery),
                 label: 'Gallery',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Ionicons.color_palette_outline),
+                icon: SvgIcon(path: AppSvg.colorPick),
                 label: 'Color',
               ),
             ],

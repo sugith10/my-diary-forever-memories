@@ -1,7 +1,9 @@
 import 'package:diary/presentation/pages/util/splash_screen_functions.dart';
-import 'package:diary/presentation/utils/app_assets.dart';
+import 'package:diary/presentation/utils/assets/app_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+
+import '../../util/get_theme_type.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -23,25 +25,15 @@ class _SplashPageState extends State<SplashPage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(50.0),
-          child: _logo(context),
+          child:  SvgPicture.asset(
+        isDark(context) ? AppSvg.darkLogo : AppSvg.lightLogo,
+        width: 150,
+        height: 150,
+      ),
         ),
       ),
     );
   }
 
-  SvgPicture _logo(BuildContext context) {
-    if (Theme.of(context).brightness == Brightness.light) {
-      return SvgPicture.asset(
-        MyAppAssets.lightScreenLogo,
-        width: 150,
-        height: 150,
-      );
-    } else {
-      return SvgPicture.asset(
-        MyAppAssets.darkScreenLogo,
-        width: 150,
-        height: 150,
-      );
-    }
-  }
+  
 }

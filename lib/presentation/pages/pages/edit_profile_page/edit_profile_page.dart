@@ -6,10 +6,11 @@ import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart'
 import 'package:diary/presentation/pages/pages/widget/save_text_button_common.dart';
 import 'package:diary/presentation/pages/util/get_colors.dart';
 import 'package:diary/presentation/pages/util/save_image.dart';
+import 'package:diary/presentation/utils/assets/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:ionicons/ionicons.dart';
+
 import 'package:sizer/sizer.dart';
 
 class EditProfScreen extends StatefulWidget {
@@ -43,22 +44,19 @@ class _EditProfScreenState extends State<EditProfScreen> {
     final ProfileDetails profileDetails = profileDetailsList.isNotEmpty
         ? profileDetailsList.first
         : ProfileDetails(name: '', email: '');
-    if(profileDetailsList.isNotEmpty){
+    if (profileDetailsList.isNotEmpty) {
       _nameController.text = profileDetails.name;
       _emailController.text = profileDetails.email;
-      if(profileDetails.location != null){
+      if (profileDetails.location != null) {
         _locationController.text = profileDetails.location!;
       }
     }
 
-
-
     if (_profilePicture == null && profileDetails.profilePicturePath != null) {
       _profilePicture = File(profileDetails.profilePicturePath!);
     }
-    
+
     log(profileDetails.name);
-  
 
     return Scaffold(
       appBar: AppBar(
@@ -66,7 +64,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Ionicons.chevron_back_outline, size: 25),
+          icon: const Icon(Icons.chevron_left_rounded, size: 25),
         ),
         actions: [
           SaveButton(
@@ -76,7 +74,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
           )
         ],
         elevation: 0,
-        bottom:const BottomBorderWidget(),
+        bottom: const BottomBorderWidget(),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -128,8 +126,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
                                         fit: BoxFit.cover,
                                       )
                                     : const DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/user_profile/user_profile.png'),
+                                        image: AssetImage(AppPng.profile),
                                         fit: BoxFit.cover,
                                       ),
                             border: Border.all(
@@ -275,6 +272,5 @@ class _EditProfScreenState extends State<EditProfScreen> {
         ),
       );
     }
-   
   }
 }

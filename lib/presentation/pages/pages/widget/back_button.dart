@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
 
 class BackButtonWidget extends StatelessWidget {
   const BackButtonWidget({super.key});
@@ -13,7 +12,7 @@ class BackButtonWidget extends StatelessWidget {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       icon: const Icon(
-        Ionicons.chevron_back_outline,
+        Icons.chevron_left,
         size: 25,
       ),
     );

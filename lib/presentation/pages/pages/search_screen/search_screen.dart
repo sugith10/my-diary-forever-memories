@@ -2,7 +2,7 @@ import 'package:diary/data/model/hive/hive_database_model/diary_entry_db_model/d
 import 'package:diary/presentation/navigation/screen_transitions/bottom_to_top.dart';
 import 'package:diary/presentation/pages/pages/widget/back_button.dart';
 import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart';
-import 'package:diary/presentation/pages/pages/my_diary_page/widget/diary_card_widget/dairy_card.dart';
+import 'package:diary/presentation/pages/pages/home_page/widget/diary_card_widget/dairy_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:diary/presentation/pages/pages/individual_diary_page/individual_diary_page.dart';

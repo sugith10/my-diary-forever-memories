@@ -14,21 +14,21 @@ dependencies:
     sdk: flutter
 
   table_calendar: 3.0.9
-  ionicons: 0.2.2
   lottie: 2.7.0
   intl: ^0.18.1
-  hive_flutter: ^1.1.0
+  hive_flutter: 1.1.0
   path_provider: ^2.1.1
   provider: ^6.0.5
   sizer: 2.0.15
   animate_do: 3.1.2
   flutter_slidable: ^3.0.0
   image_picker: ^1.0.4
-  flutter_colorpicker: 1.0.3
+  flutter_colorpicker: ^1.1.0
   url_launcher: ^6.2.1
   image: ^4.1.3
   flutter_masonry_view: 0.0.2
   flutter_svg: ^2.0.10+1
+  iconly: ^1.0.1
 
 
 dev_dependencies: 
@@ -45,18 +45,11 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/app_logo/
-    - assets/json/onboarding_screen_animation/onboarding_lottie_light.json
-    - assets/json/onboarding_screen_animation/onboarding_lottie_dark.json
-    - assets/images/forever_memories_logo/forever_memories_logo_white.png
-    - assets/images/forever_memories_logo/forever_memories_logo_black.png
-    - assets/images/fab/start_writing.png
-    - assets/images/user_profile/user_profile.png
-    - assets/images/empty_area/search_not_found_2.png
-    - assets/images/empty_area/entry_not_found.png
-    - assets/images/empty_area/photo_not_found.png
-    - assets/images/empty_area/savedlist_not_found.png.png
-    - assets/images/empty_area/archived_not_found.png
+    - assets/
+    - assets/svg/
+    - assets/lottie/
+    - assets/png/
+    - assets/png/empty_area/
 
   fonts:
     - family: Satoshi
@@ -72,7 +65,3 @@ flutter:
           weight: 500
         - asset: assets/fonts/SF Pro/SFPRODISPLAYBOLD.otf
           weight: 600
-
-    - family: Skyscapers
-      fonts:
-        - asset: assets/fonts/Skyscapers/Skyscapers.ttf

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
 
 
@@ -9,7 +8,6 @@ class  SnackBarMessage {
   SnackBarMessage({required this.message, required this.color});
 
    _scaffoldMessenger(BuildContext context){
-    log('welcome to message');
     return ScaffoldMessenger.of( context).showSnackBar(
       
               SnackBar(

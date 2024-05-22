@@ -1,9 +1,8 @@
-
-import 'package:diary/data/model/hive/hive_box_names/hive_box_names.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'app.dart';
+import 'config/hive_box_name.dart';
 import 'data/model/hive/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
 import 'data/model/hive/hive_database_model/archive_db_model/archive_db_model.dart';
 import 'data/model/hive/hive_database_model/diary_entry_db_model/diary_entry.dart';

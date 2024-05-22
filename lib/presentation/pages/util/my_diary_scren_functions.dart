@@ -1,5 +1,5 @@
 import 'package:diary/data/model/hive/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/presentation/pages/pages/my_diary_page/widget/diary_card_widget/diary_card_slide_widget/diary_card_actions.dart';
+import 'package:diary/presentation/pages/pages/home_page/widget/diary_card_widget/diary_card_slide_widget/diary_card_actions.dart';
 import 'package:diary/presentation/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

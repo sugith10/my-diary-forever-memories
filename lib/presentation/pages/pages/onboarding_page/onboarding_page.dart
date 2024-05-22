@@ -3,13 +3,14 @@ import 'package:diary/data/controller/database_controller/app_pref_db_controller
 import 'package:diary/data/controller/screen_controller/screen_size_find_controller/onboarding_screen_size_cntrl/onboarding_screen_size_cntrl.dart';
 import 'package:diary/data/model/hive/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
 import 'package:diary/presentation/pages/util/content_model.dart';
+import 'package:diary/presentation/pages/util/get_theme_type.dart';
 import 'package:diary/presentation/providers/onboarding_scrn_prvdr.dart';
 import 'package:diary/presentation/navigation/screen_transitions/no_movement.dart';
 import 'package:diary/presentation/pages/pages/main_page/main_page.dart';
 import 'package:diary/presentation/pages/pages/onboarding_page/widget/onboarding_dot.dart';
 import 'package:diary/presentation/pages/util/get_colors.dart';
 import 'package:diary/presentation/pages/util/onboarding_screen_functions.dart';
-import 'package:diary/presentation/theme/app_fonts.dart';
+import 'package:diary/presentation/utils/assets/app_lottie.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +48,9 @@ class _OnboardingState extends State<Onboarding> {
                   screenHeight: screenHeight, screenWidth: screenWidth),
             ),
             Lottie.asset(
-              OnboardingScreenFunctions().getLottieJsonFileName(themeMode),
+              isDark(context)
+                  ? AppLottie.onboardingLight
+                  : AppLottie.onboardingDark,
               width: double.infinity,
             ),
             Expanded(
@@ -129,16 +132,9 @@ class _OnboardingState extends State<Onboarding> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                 
                   textStyle: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
-                   
                   ),
-                  // backgroundColor: MyAppDarkColor.instance.focus,
-                  // shape: RoundedRectangleBorder(
-                  //   borderRadius: BorderRadius.circular(12),
-                  // ),
-                  // padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: FadeInUp(
                   delay: const Duration(milliseconds: 600),
@@ -148,8 +144,6 @@ class _OnboardingState extends State<Onboarding> {
                             onboardingContentList.contents.length - 1
                         ? "Continue"
                         : "Next",
-                    // style: const TextStyle(
-                    //     color: Color.fromRGBO(255, 255, 255, 1)),
                   ),
                 ),
               ),

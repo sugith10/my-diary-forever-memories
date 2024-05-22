@@ -2,13 +2,15 @@ import 'package:diary/data/model/hive/hive_database_model/diary_entry_db_model/d
 import 'package:diary/data/model/hive/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
 import 'package:diary/presentation/navigation/screen_transitions/bottom_to_top.dart';
 import 'package:diary/presentation/pages/pages/individual_diary_page/individual_diary_page.dart';
-import 'package:diary/presentation/pages/pages/widget/not_found.dart';
 import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/pages/pages/widget/back_button.dart';
-import 'package:diary/presentation/pages/pages/my_diary_page/widget/diary_card_widget/dairy_card.dart';
+import 'package:diary/presentation/pages/pages/home_page/widget/diary_card_widget/dairy_card.dart';
 import 'package:diary/presentation/pages/util/saved_list_functions.dart';
+import 'package:diary/presentation/utils/assets/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+
+import '../../../../widgets/empty_widget.dart';
 
 class SavedItems extends StatefulWidget {
   final SavedList savedList;
@@ -83,16 +85,9 @@ class _SavedItemsState extends State<SavedItems> {
                 },
               );
             } else {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/empty_area/savedlist_not_found.png.png',
-                  ),
-                  const NotFound(
-                    message: "No diary entries found for this list.",
-                  ),
-                ],
+              return const EmptyWidget(
+                image: AppPng.emptyList,
+                message: "No diary entries found for this list.",
               );
             }
           },

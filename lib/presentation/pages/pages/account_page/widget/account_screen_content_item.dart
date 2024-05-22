@@ -1,20 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../../../widgets/svg_icon.dart';
+
 class ProfileOptions extends StatelessWidget {
-  const ProfileOptions({required this.function, required this.item, required this.icon, super.key});
+  const ProfileOptions({
+    required this.function,
+    required this.item,
+    required this.icon,
+    super.key,
+  });
 
   final Function function;
   final String item;
-  final IconData icon;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-       customBorder: RoundedRectangleBorder(
+      customBorder: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(22.5),
-        ),
-      onTap: (){
+      ),
+      onTap: () {
         function();
       },
       child: Row(
@@ -23,10 +30,7 @@ class ProfileOptions extends StatelessWidget {
             backgroundColor: Theme.of(context).brightness == Brightness.light
                 ? const Color(0xFFF1F5FF)
                 : const Color.fromARGB(255, 25, 25, 25),
-            child: Icon(icon,
-                color: Theme.of(context).brightness == Brightness.light
-                    ? Colors.black
-                    : const Color.fromARGB(255, 171, 170, 170)),
+            child: SvgIcon(path: icon),
           ),
           const SizedBox(
             width: 18,

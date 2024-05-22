@@ -1,9 +1,12 @@
+import 'package:diary/config/hive_box_name.dart';
 import 'package:diary/data/model/hive/hive_database_model/archive_db_model/archive_db_model.dart';
 import 'package:diary/presentation/pages/pages/archive_page/widget/archive_card_widget.dart';
-import 'package:diary/presentation/pages/pages/widget/not_found.dart';
 import 'package:diary/presentation/pages/pages/widget/appbar_with_back_button_only_common.dart';
+import 'package:diary/presentation/utils/assets/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+import '../../../widgets/empty_widget.dart';
 
 class ArchivePage extends StatelessWidget {
   const ArchivePage({super.key});
@@ -13,18 +16,15 @@ class ArchivePage extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(),
       body: ValueListenableBuilder(
-        valueListenable: Hive.box<ArchiveDiary>('archiveDiaryBox').listenable(),
+        valueListenable: Hive.box<ArchiveDiary>(HiveBoxName.archiveDiaryBox).listenable(),
         builder: (context, Box<ArchiveDiary> box, child) {
           final archiveDiaries = box.values.toList();
 
           if (archiveDiaries.isEmpty) {
-            return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                      'assets/images/empty_area/archived_not_found.png'),
-                  const NotFound(message: "No archived diaries."),
-                ]);
+            return const EmptyWidget(
+              image: AppPng.emptyArchive,
+              message: "No Archived Diaries Found",
+            );
           }
 
           return Column(
@@ -35,7 +35,7 @@ class ArchivePage extends StatelessWidget {
                   itemCount: archiveDiaries.length,
                   itemBuilder: (context, index) {
                     final archiveDiary = archiveDiaries[index];
-                    
+
                     return Padding(
                       padding: const EdgeInsets.fromLTRB(8, 6, 8, 6),
                       child: ArchiveCardView(

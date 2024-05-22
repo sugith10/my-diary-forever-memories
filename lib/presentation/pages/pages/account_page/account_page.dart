@@ -6,10 +6,12 @@ import 'package:diary/presentation/pages/pages/account_page/widget/profile_card.
 import 'package:diary/presentation/pages/pages/archive_page/archive_page.dart';
 import 'package:diary/presentation/pages/pages/widget/appbar_titlestyle_common.dart';
 import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart';
-import 'package:diary/presentation/theme/app_color.dart';
 import 'package:diary/presentation/pages/util/account_screen_functions.dart';
+import 'package:diary/presentation/pages/util/get_theme_type.dart';
+import 'package:diary/presentation/utils/assets/app_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+
+import 'widget/app_info.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});
@@ -24,15 +26,16 @@ class AccountScreen extends StatelessWidget {
           title: AppbarTitleWidget(
             text: greetingTitle,
           ),
-          actions: const [
-            // IconButton(
-            //     onPressed: () {
-            //       ProfileScreenFunctions().showPopupDialog(context);
-            //     },
-            //     icon: const Icon(
-            //       Icons.power_settings_new_outlined,
-            //       color: Color.fromARGB(255, 197, 60, 50),
-            //     )),
+          actions: [
+            IconButton(
+              onPressed: () {
+                // ProfileScreenFunctions().showPopupDialog(context);
+              },
+              icon: const Icon(
+                Icons.power_settings_new_outlined,
+                color: Color.fromARGB(255, 197, 60, 50),
+              ),
+            ),
           ],
           elevation: 0,
           bottom: const BottomBorderWidget()),
@@ -49,14 +52,14 @@ class AccountScreen extends StatelessWidget {
                     function: () => Navigator.of(context)
                         .push(rightToLeft(const ArchivePage())),
                     item: 'Archived',
-                    icon: Icons.archive_outlined,
+                    icon: AppSvg.archive,
                   ),
                   const ContentDivider(),
                   ProfileOptions(
                     function: () => Navigator.of(context)
                         .push(rightToLeft(const CustomizationPage())),
                     item: 'Customization',
-                    icon: Ionicons.color_palette_outline,
+                    icon: isDark(context) ?  AppSvg.darkMode :  AppSvg.lightMode,
                   ),
                   const ContentDivider(),
                   //backup
@@ -69,57 +72,31 @@ class AccountScreen extends StatelessWidget {
                   // ),
                   // const ContentDivider(),
                   ProfileOptions(
-                    function: () async {
-                      await ProfileScreenFunctions().launchEmail();
+                    function: () {
+                      ProfileScreenFunctions().launchEmail();
                     },
                     item: 'Feedback',
-                    icon: Icons.feedback_outlined,
+                    icon: AppSvg.feedback,
                   ),
                   const ContentDivider(),
                   ProfileOptions(
-                    function: () async {
-                      await ProfileScreenFunctions().launchPrivacyPolicy();
+                    function: () {
+                      ProfileScreenFunctions().launchPrivacyPolicy();
                     },
                     item: 'Privacy Policy',
-                    icon: Ionicons.newspaper_outline,
+                    icon: AppSvg.terms,
                   ),
                   const ContentDivider(),
                   ProfileOptions(
-                    function: () async {
-                      await ProfileScreenFunctions().launchTermsConditions();
+                    function: () {
+                      ProfileScreenFunctions().launchTermsConditions();
                     },
                     item: 'Terms & Conditions',
-                    icon: Ionicons.newspaper_outline,
+                    icon: AppSvg.terms,
                   ),
                   const ContentDivider(),
                   const SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'Made with ',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Icon(
-                        Icons.favorite,
-                        color: AppColor.primary.color,
-                        size: 24.0,
-                      ),
-                      const Text(
-                        ' in India',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  const Text('© 2024 DayProduction® v1.4.2',
-                      style: TextStyle(fontSize: 15)),
-                  const SizedBox(
-                    height: 10,
-                  )
+                  const AppInfoWidget(),
                 ],
               ),
             )),

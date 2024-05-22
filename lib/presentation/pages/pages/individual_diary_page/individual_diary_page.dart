@@ -7,7 +7,9 @@ import 'package:diary/presentation/pages/pages/widget/back_button.dart';
 import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/pages/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+
+import '../../../utils/assets/app_svg.dart';
+import '../../../widgets/svg_icon.dart';
 
 class DiaryDetailPage extends StatefulWidget {
   final DiaryEntry entry;
@@ -30,9 +32,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
                 
                 DiaryDetailPageFunctions().showingMenu(context, widget.entry);
               },
-              icon: const Icon(
-                Ionicons.ellipsis_vertical_outline,
-              ),
+              icon: const SvgIcon(path: AppSvg.more),
             )
           ],
           bottom: const BottomBorderWidget()),

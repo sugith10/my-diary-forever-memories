@@ -8,7 +8,9 @@ import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart'
 import 'package:diary/presentation/pages/util/archive_page_functions.dart';
 import 'package:diary/presentation/pages/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
+
+import '../../../utils/assets/app_svg.dart';
+import '../../../widgets/svg_icon.dart';
 
 class IndividualArchive extends StatelessWidget {
   final ArchiveDiary archiveDiary;
@@ -26,9 +28,7 @@ class IndividualArchive extends StatelessWidget {
             onPressed: () {
               ArchivePageUtil().showingMenu(context, archiveDiary);
             },
-            icon: const Icon(
-              Ionicons.ellipsis_vertical_outline,
-            ),
+            icon: const SvgIcon(path: AppSvg.more),
           )
         ],
       ),

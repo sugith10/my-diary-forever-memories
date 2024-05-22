@@ -6,6 +6,8 @@ import 'package:diary/presentation/pages/pages/widget/appbar_titlestyle_common.d
 import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart';
 import 'package:diary/presentation/pages/pages/widget/back_button.dart';
 import 'package:diary/presentation/pages/util/saved_list_functions.dart';
+import 'package:diary/presentation/utils/assets/app_png.dart';
+import 'package:diary/presentation/widgets/empty_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:sizer/sizer.dart';
@@ -38,21 +40,13 @@ class SavedListScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ValueListenableBuilder(
-          valueListenable:
-              Hive.box<SavedList>('savedListBoxName').listenable(),
+          valueListenable: Hive.box<SavedList>('savedListBoxName').listenable(),
           builder: (context, Box<SavedList> box, child) {
             final List<SavedList> savedLists = box.values.toList();
             if (savedLists.isEmpty) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/empty_area/savedlist_not_found.png.png',
-                  ),
-                  const NotFound(
-                    message: "Don't wait create a saved list.",
-                  ),
-                ],
+              return const EmptyWidget(
+                image: AppPng.emptyList,
+                message: "Don't wait create a saved list.",
               );
             }
             return GridView.builder(

@@ -1,10 +1,12 @@
 import 'dart:io';
+import 'package:diary/config/hive_box_name.dart';
 import 'package:diary/data/controller/database_controller/profile_details_db_controller.dart';
 import 'package:diary/data/model/hive/hive_database_model/profile_details/profile_details.dart';
 
 import 'package:diary/presentation/navigation/screen_transitions/bottom_to_top.dart';
 import 'package:diary/presentation/pages/pages/edit_profile_page/edit_profile_page.dart';
 import 'package:diary/presentation/theme/app_color.dart';
+import 'package:diary/presentation/utils/assets/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sizer/sizer.dart';
@@ -16,7 +18,6 @@ class ProfileCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(left: 20, right: 20),
       height: 27.h,
-
       child: Center(
         child: GestureDetector(
           onTap: () {
@@ -40,7 +41,8 @@ class ProfileCard extends StatelessWidget {
             ),
             child: ValueListenableBuilder(
                 valueListenable:
-                    Hive.box<ProfileDetails>('profileBox').listenable(),
+                    Hive.box<ProfileDetails>(HiveBoxName.profileBox)
+                        .listenable(),
                 builder: (context, box, child) {
                   final List<ProfileDetails> profileDetailsList =
                       ProfileDetailsDatabaseManager().getAllProfileDetails();
@@ -79,9 +81,8 @@ class ProfileCard extends StatelessWidget {
                                       ? Colors.black26
                                       : Colors.white60,
                                   fontSize: 15,
-
                                 ),
-                                 overflow: TextOverflow.ellipsis,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ],
@@ -93,16 +94,14 @@ class ProfileCard extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             image: profileDetails.profilePicturePath != null
-                                ? 
-                                DecorationImage(
+                                ? DecorationImage(
                                     image: FileImage(
                                       File(profileDetails.profilePicturePath!),
                                     ),
                                     fit: BoxFit.cover,
                                   )
-                                
                                 : const DecorationImage(
-                                    image: AssetImage('assets/images/user_profile/user_profile.png'),
+                                    image: AssetImage(AppPng.profile),
                                     fit: BoxFit.cover,
                                   ),
                             border: Border.all(
@@ -161,7 +160,7 @@ class ProfileCard extends StatelessWidget {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage('assets/images/user_profile/user_profile.png'),
+                              image: AssetImage(AppPng.profile),
                               fit: BoxFit.cover,
                             ),
                           ),

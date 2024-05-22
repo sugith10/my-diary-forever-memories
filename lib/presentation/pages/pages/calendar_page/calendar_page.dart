@@ -1,20 +1,20 @@
-import 'package:diary/data/model/hive/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/presentation/navigation/screen_transitions/bottom_to_top.dart';
-import 'package:diary/presentation/pages/pages/calendar_page/widget/create_diary_text.dart';
-import 'package:diary/presentation/pages/pages/individual_diary_page/individual_diary_page.dart';
-import 'package:diary/presentation/pages/pages/my_diary_page/widget/diary_card_widget/dairy_card.dart';
-import 'package:diary/presentation/theme/app_color.dart';
-import 'package:diary/presentation/pages/pages/create_page/create_page.dart';
-import 'package:diary/presentation/providers/calendar_scrn_prvdr.dart';
-import 'package:diary/presentation/pages/pages/widget/appbar_titlestyle_common.dart';
-import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart';
-import 'package:diary/presentation/pages/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:ionicons/ionicons.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
+
+import '../../../../data/model/hive/hive_database_model/diary_entry_db_model/diary_entry.dart';
+import '../../../navigation/screen_transitions/bottom_to_top.dart';
+import '../../../providers/calendar_scrn_prvdr.dart';
+import '../../../theme/app_color.dart';
+import '../../util/get_colors.dart';
+import '../create_page/create_page.dart';
+import '../individual_diary_page/individual_diary_page.dart';
+import '../home_page/widget/diary_card_widget/dairy_card.dart';
+import '../widget/appbar_bottom_common.dart';
+import '../widget/appbar_titlestyle_common.dart';
+import 'widget/create_diary_text.dart';
 
 class CalendarScreen extends StatefulWidget {
   const CalendarScreen({super.key});
@@ -59,8 +59,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     const SizedBox(width: 10),
                     Icon(
                       changer.isCalendarVisible
-                          ? Ionicons.chevron_down_outline
-                          : Ionicons.chevron_up_outline,
+                          ? Icons.keyboard_arrow_down_rounded
+                          : Icons.keyboard_arrow_up_rounded,
                     ),
                   ],
                 ),

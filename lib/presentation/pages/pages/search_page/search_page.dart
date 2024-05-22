@@ -2,7 +2,8 @@ import 'package:diary/data/model/hive/hive_database_model/diary_entry_db_model/d
 import 'package:diary/presentation/navigation/screen_transitions/bottom_to_top.dart';
 import 'package:diary/presentation/pages/pages/widget/back_button.dart';
 import 'package:diary/presentation/pages/pages/widget/appbar_bottom_common.dart';
-import 'package:diary/presentation/pages/pages/my_diary_page/widget/diary_card_widget/dairy_card.dart';
+import 'package:diary/presentation/pages/pages/home_page/widget/diary_card_widget/dairy_card.dart';
+import 'package:diary/presentation/utils/assets/app_png.dart';
 import 'package:flutter/material.dart';
 
 import 'package:diary/presentation/pages/pages/individual_diary_page/individual_diary_page.dart';
@@ -41,7 +42,12 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: const BackButtonWidget(),
+        leading: IconButton(
+          icon: const Icon(Icons.keyboard_backspace),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: TextField(
           controller: _searchController,
           onChanged: (query) {
@@ -54,7 +60,6 @@ class _SearchPageState extends State<SearchPage> {
             border: InputBorder.none,
           ),
           cursorColor: const Color.fromARGB(115, 95, 95, 95),
-         
           style: const TextStyle(fontSize: 20),
           textCapitalization: TextCapitalization.sentences,
         ),
@@ -63,9 +68,7 @@ class _SearchPageState extends State<SearchPage> {
       ),
       body: _searchResults.isEmpty
           ? Center(
-              child: Image.asset(
-                'assets/images/empty_area/search_not_found_2.png',
-              ),
+              child: Image.asset(AppPng.searchBackground),
             )
           : Column(
               children: [
@@ -76,10 +79,11 @@ class _SearchPageState extends State<SearchPage> {
                       final entry = _searchResults[index];
                       return GestureDetector(
                         onTap: () {
-                          Navigator.push(context, bottomToTop( DiaryDetailPage(
+                          Navigator.push(
+                              context,
+                              bottomToTop(DiaryDetailPage(
                                 entry: entry,
                               )));
-    
                         },
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
