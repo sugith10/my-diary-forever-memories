@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/data/model/hive/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
+import 'package:diary/data/model/hive/hive_db_model/app_preference_db_model/app_preference_db_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 /// Manages interactions with the Hive database for user app preferences.

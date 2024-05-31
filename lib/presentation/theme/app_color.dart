@@ -35,7 +35,7 @@ extension AppColorExtension on AppColor {
         return const Color.fromRGBO(186, 186, 186, 1);
       //primary colors
       case AppColor.primary:
-        return const Color.fromRGBO(131, 93, 241, 1);
+        return const Color(0xFF0073DD);
       case AppColor.secondary:
         return const Color.fromARGB(255, 183, 184, 185);
       //notification colors

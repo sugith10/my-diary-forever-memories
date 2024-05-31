@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:diary/data/model/hive/hive_database_model/profile_details/profile_details.dart';
+import 'package:diary/data/model/hive/hive_db_model/profile_details/profile_details.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

@@ -1,18 +1,26 @@
+import 'package:diary/app.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hive_flutter/adapters.dart';
-import 'app.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 import 'config/hive_box_name.dart';
-import 'data/model/hive/hive_database_model/app_preference_db_model/app_preference_db_model.dart';
-import 'data/model/hive/hive_database_model/archive_db_model/archive_db_model.dart';
-import 'data/model/hive/hive_database_model/diary_entry_db_model/diary_entry.dart';
-import 'data/model/hive/hive_database_model/profile_details/profile_details.dart';
-import 'data/model/hive/hive_database_model/savedlist_db_model/savedlist_db_model.dart';
+import 'data/model/hive/hive_db_model/app_preference_db_model/app_preference_db_model.dart';
+import 'data/model/hive/hive_db_model/archive_db_model/archive_db_model.dart';
+import 'data/model/hive/hive_db_model/diary_entry_db_model/diary_entry.dart';
+import 'data/model/hive/hive_db_model/profile_details/profile_details.dart';
+import 'data/model/hive/hive_db_model/savedlist_db_model/savedlist_db_model.dart';
+import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Hive.initFlutter();
+  await Future.wait([
+    Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    ),
+    Hive.initFlutter()
+  ]);
 
   if (!Hive.isAdapterRegistered(DiaryEntryAdapter().typeId)) {
     Hive.registerAdapter(DiaryEntryAdapter());

@@ -34,8 +34,8 @@ class AppTheme {
         const FloatingActionButtonThemeData(backgroundColor: Colors.white),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
+        foregroundColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
             // This is the color when the button is in the default state
             return const Color.fromARGB(255, 0, 0, 0);
           },
@@ -60,7 +60,7 @@ class AppTheme {
     buttonBarTheme: const ButtonBarThemeData(),
     colorScheme: ColorScheme.dark(
       primary: AppColor.dark.color,
-      background: AppColor.dark.color,
+      surface: AppColor.dark.color,
       secondary: AppColor.dark.color,
     ),
     fontFamily: MyAppFonts.sfPro,
@@ -70,8 +70,8 @@ class AppTheme {
         backgroundColor: Color.fromARGB(255, 25, 25, 25)),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith<Color>(
-          (Set<MaterialState> states) {
+        foregroundColor: WidgetStateProperty.resolveWith<Color>(
+          (Set<WidgetState> states) {
             // This is the color when the button is in the default state
             return const Color.fromARGB(255, 255, 255, 255);
           },
