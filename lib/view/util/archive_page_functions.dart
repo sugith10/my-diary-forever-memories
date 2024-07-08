@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:diary/data/controller/database_controller/archive_db_controller.dart';
 import 'package:diary/data/model/hive/archive_db_model/archive_db_model.dart';
+import 'package:diary/core/theme/app_color/app_colors.dart';
 
-import 'package:diary/view/theme/color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
-import '../page/navigation_menu/main_page.dart';
+import '../../feature/navigation_menu/page/main_navigation_menu.dart';
  
 final class ArchivePageUtil {
   _showOriginalImage(BuildContext context, ArchiveDiary archive) {
@@ -36,9 +36,7 @@ final class ArchivePageUtil {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? AppColor.light.color
-              : AppColor.showMenuDark.color,
+       
           title: const Center(
             child: Text(
               'Delete Confirmation',
@@ -68,7 +66,7 @@ final class ArchivePageUtil {
                     ArchiveDiaryDatabaseManager().deleteArchivedDiary(archive.id);
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => MainScreen()),
+                      MaterialPageRoute(builder: (context) => const MainNavigationMenu()),
                       ModalRoute.withName('/main'),
                     );
                     ScaffoldMessenger.of(context).showSnackBar(
@@ -104,7 +102,7 @@ final class ArchivePageUtil {
     showMenu(
       color: Theme.of(context).brightness == Brightness.light
           ? const Color.fromARGB(255, 255, 255, 255)
-          : AppColor.showMenuDark.color,
+          :AppDarkColor.instance.menu,
       context: context,
       position: const RelativeRect.fromLTRB(1, 0, 0, 5),
       items: <PopupMenuEntry>[

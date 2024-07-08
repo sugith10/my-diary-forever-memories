@@ -1,18 +1,14 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:diary/data/controller/database_controller/profile_details_db_controller.dart';
 import 'package:diary/data/model/hive/profile_details/profile_details.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:diary/view/util/save_image.dart';
-import 'package:diary/utils/assets/app_png.dart';
+import 'package:diary/core/util/asset_path/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:image_picker/image_picker.dart';
 
-
-
-import '../widget/appbar_bottom_common.dart';
 import '../widget/save_text_button_common.dart';
 
 class EditProfScreen extends StatefulWidget {
@@ -58,8 +54,6 @@ class _EditProfScreenState extends State<EditProfScreen> {
       _profilePicture = File(profileDetails.profilePicturePath!);
     }
 
-    log(profileDetails.name);
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -75,8 +69,7 @@ class _EditProfScreenState extends State<EditProfScreen> {
             },
           )
         ],
-        elevation: 0,
-        bottom: const BottomBorderWidget(),
+       
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),

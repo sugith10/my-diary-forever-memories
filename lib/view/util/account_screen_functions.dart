@@ -7,10 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../data/controller/database_controller/app_pref_db_controller.dart';
+import '../../core/repository/app_pref_db_controller.dart';
 import '../../data/model/hive/app_preference_db_model/app_preference_db_model.dart';
-import '../route/page_transition/no_movement.dart';
-import '../page/onboarding_page/onboarding_page.dart';
+
 import 'get_colors.dart';
 
 final class ProfileScreenFunctions {
@@ -125,14 +124,14 @@ final class ProfileScreenFunctions {
                   icon:
                       const Text('Logout', style: TextStyle(color: Colors.red)),
                   onPressed: () async {
-                    final appPreferenceFunctions = AppPrefDatabaseManager();
-                    final onboardingStatus =
-                        AppPreference(showOnboarding: true);
+                    final appPreferenceFunctions = AppPrefRepo();
+                    final welcomeStatus =
+                        AppPreference(showwelcome: true);
                     await appPreferenceFunctions
-                        .showOnboarding(onboardingStatus);
-
-                    Navigator.of(context)
-                        .pushReplacement(noMovement(const Onboarding()));
+                        .showwelcome(welcomeStatus);
+//TODO: FIX THE LOCGOOUT
+                    // Navigator.of(context)
+                    //     .pushReplacement(noMovement(const welcome()));
                   },
                 ),
               ],

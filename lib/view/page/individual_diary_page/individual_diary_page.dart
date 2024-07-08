@@ -2,10 +2,11 @@ import 'dart:io';
 import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/view/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 
-import '../../../utils/assets/app_svg.dart';
-import '../../components/app_custom_app_bar.dart';
-import '../../components/svg_icon.dart';
+import '../../../core/util/asset_path/app_svg.dart';
+import '../../../core/widget/app_custom_app_bar.dart';
+import '../../../core/widget/svg_icon.dart';
 import 'widget/content.dart';
 import 'widget/date.dart';
 import 'widget/title.dart';
@@ -28,7 +29,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
             onPressed: () {
               DiaryDetailPageFunctions().showingMenu(context, widget.entry);
             },
-            icon: const SvgIcon(path: AppSvg.more),
+            icon: const Icon(IconlyLight.filter),
           )
         ],
       ),

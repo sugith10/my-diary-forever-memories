@@ -1,8 +1,6 @@
-import 'package:diary/view_model/providers/theme_select_prvdr.dart';
+import 'package:diary/core/theme/app_color/app_colors.dart';
+import 'package:diary/utils/is_dark.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../../../theme/color/app_color.dart';
 
 class AppInfoWidget extends StatelessWidget {
   const AppInfoWidget({
@@ -22,7 +20,9 @@ class AppInfoWidget extends StatelessWidget {
             ),
             Icon(
               Icons.favorite,
-              color: Provider.of<ThemeProvider>(context).pageFour,
+              color: IsDark.check(context)
+                  ? AppDarkColor.instance.pageFour
+                  : AppLightColor.instance.pageFour,
               size: 24.0,
             ),
             const Text(

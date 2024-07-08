@@ -1,16 +1,18 @@
+import 'package:diary/core/theme/app_theme/app_theme.dart';
+import 'package:diary/feature/customization/view_model/bloc/theme_bloc_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-import 'presentation/page/navigation_menu/main_page.dart';
-import 'presentation/page/splash_page/splash_page.dart';
-import 'presentation/providers/theme_select_prvdr.dart';
-import 'presentation/theme/app_theme.dart';
+import 'core/route/app_route_package.dart';
+import 'core/route/route_name/route_name.dart';
 
 class MyAppView extends StatelessWidget {
   const MyAppView({super.key});
   @override
   Widget build(BuildContext context) {
+    final themeBloc = context.watch<ThemeBloc>();
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       splitScreenMode: true,
@@ -18,19 +20,16 @@ class MyAppView extends StatelessWidget {
       fontSizeResolver: FontSizeResolvers.radius,
       child: Builder(builder: (context) {
         return MaterialApp(
-          title: 'My Diary',
-          theme: AppTheme().lightMode,
-          darkTheme: AppTheme().darkMode,
-          themeMode: Provider.of<ThemeNotifier>(context).isDarkMode
-              ? ThemeMode.dark
-              : ThemeMode.light,
-          debugShowCheckedModeBanner: false,
-          initialRoute: '/splash',
-          routes: {
-            '/splash': (context) => const SplashPage(),
-            '/main': (context) => MainScreen(),
-          },
-        );
+              title: 'My Diary',
+              theme: AppLightTheme().theme,
+              darkTheme: AppDarkTheme().theme,
+              themeMode: themeBloc.isDarkMode
+                  ? ThemeMode.dark
+                  : ThemeMode.light,
+              debugShowCheckedModeBanner: false,
+              initialRoute: RouteName.initial,
+              onGenerateRoute: AppRoute.generateRoute,
+            );
       }),
     );
   }

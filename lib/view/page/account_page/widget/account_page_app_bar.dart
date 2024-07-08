@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../components/app_custom_app_bar.dart';
+import '../../../../core/widget/app_custom_app_bar.dart';
 import '../../widget/appbar_titlestyle_common.dart';
 
 class AccountPageAppBar extends StatelessWidget implements PreferredSizeWidget{

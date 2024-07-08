@@ -2,13 +2,14 @@ import 'dart:io';
 
 
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 
 import '../../../data/model/hive/archive_db_model/archive_db_model.dart';
-import '../../../utils/assets/app_svg.dart';
+import '../../../core/util/asset_path/app_svg.dart';
 import '../../util/archive_page_functions.dart';
 import '../../util/individual_diary_page_util.dart';
-import '../../components/app_custom_app_bar.dart';
-import '../../components/svg_icon.dart';
+import '../../../core/widget/app_custom_app_bar.dart';
+import '../../../core/widget/svg_icon.dart';
 import '../individual_diary_page/widget/content.dart';
 import '../individual_diary_page/widget/date.dart';
 import '../individual_diary_page/widget/title.dart';
@@ -25,7 +26,7 @@ class IndividualArchive extends StatelessWidget {
             onPressed: () {
               ArchivePageUtil().showingMenu(context, archiveDiary);
             },
-            icon: const SvgIcon(path: AppSvg.more),
+            icon: const Icon(IconlyLight.category),
           )],),
       body: Container(
         color: DiaryDetailPageFunctions().hexToColor(archiveDiary.background, context),

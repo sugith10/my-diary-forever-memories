@@ -17,7 +17,7 @@ class AppPreferenceAdapter extends TypeAdapter<AppPreference> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AppPreference(
-      showOnboarding: fields[1] as bool?,
+      showwelcome: fields[1] as bool?,
       isDark: fields[2] as bool?,
     );
   }
@@ -29,7 +29,7 @@ class AppPreferenceAdapter extends TypeAdapter<AppPreference> {
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.showOnboarding)
+      ..write(obj.showwelcome)
       ..writeByte(2)
       ..write(obj.isDark);
   }

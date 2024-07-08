@@ -1,12 +1,12 @@
 import 'package:diary/data/model/hive/hive_box_name.dart';
 import 'package:diary/data/model/hive/archive_db_model/archive_db_model.dart';
 import 'package:diary/view/page/archive_page/widget/archive_card_widget.dart';
-import 'package:diary/utils/assets/app_png.dart';
+import 'package:diary/core/util/asset_path/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../components/app_custom_app_bar.dart';
-import '../../components/empty_widget.dart';
+import '../../../core/widget/app_custom_app_bar.dart';
+import '../../../core/widget/empty_widget.dart';
 
 class ArchivePage extends StatelessWidget {
   const ArchivePage({super.key});

@@ -3,8 +3,7 @@ import 'dart:io';
 import 'package:diary/data/controller/image_pick_controller/image_pick_controller.dart';
 import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
 
-import 'package:diary/view/components/snackbar_message.dart';
-import 'package:diary/view/theme/color/app_color.dart';
+import 'package:diary/core/widget/snackbar_message.dart';
 import 'package:diary/data/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/view_model/providers/calendar_scrn_prvdr.dart';
 import 'package:diary/view/util/create_screen_functions.dart';
@@ -16,9 +15,9 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 
-import '../../components/app_custom_app_bar.dart';
+import '../../../core/widget/app_custom_app_bar.dart';
 import '../image_view_page/image_view_page.dart';
-import '../widget/create_screen_bottom_navigationbar.dart';
+import 'widget/create_screen_bottom_navigationbar.dart';
 import '../widget/save_text_button_common.dart';
 import 'widget/down_icon.dart';
 
@@ -137,7 +136,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
             } else {
               SnackBarMessage(
                 message: "Title can't be empty...",
-                color: const Color.fromARGB(255, 225, 43, 43),
+              
               ).scaffoldMessenger(context);
             }
           }),
@@ -167,15 +166,15 @@ class _CreatePageState extends State<CreateDiaryPage> {
                             return Theme(
                               data: isDark
                                   ? ThemeData.dark().copyWith(
-                                      colorScheme: ColorScheme.dark(
-                                        primary: AppColor.darkBuilder.color,
-                                        secondary: AppColor.darkFourth.color,
+                                      colorScheme: const ColorScheme.dark(
+                                        // primary: AppColor.darkBuilder.color,
+                                        // secondary: AppColor.darkFourth.color,
                                       ),
                                     )
                                   : ThemeData.light().copyWith(
-                                      colorScheme: ColorScheme.light(
-                                        primary: AppColor.primary.color,
-                                        secondary: AppColor.primary.color,
+                                      colorScheme: const ColorScheme.light(
+                                        // primary: AppColor.primary.color,
+                                        // secondary: AppColor.primary.color,
                                       ),
                                     ),
                               child: child ?? const SizedBox(),
@@ -296,7 +295,7 @@ class _CreatePageState extends State<CreateDiaryPage> {
           ],
         ),
       ),
-      bottomNavigationBar: CreatePageBottomNav(
+      bottomNavigationBar: CreatePageBottomBar(
         selectedIndexNotifier: _selectedIndexNotifier,
         onTap: (index) {
           _selectedIndexNotifier.value = index;
@@ -317,15 +316,15 @@ class _CreatePageState extends State<CreateDiaryPage> {
             return Theme(
               data: isDark
                   ? ThemeData.dark().copyWith(
-                      colorScheme: ColorScheme.dark(
-                        primary: AppColor.darkBuilder.color,
-                        secondary: AppColor.darkFourth.color,
+                      colorScheme: const ColorScheme.dark(
+                        // primary: AppColor.darkBuilder.color,
+                        // secondary: AppColor.darkFourth.color,
                       ),
                     )
                   : ThemeData.light().copyWith(
-                      colorScheme: ColorScheme.light(
-                        primary: AppColor.primary.color,
-                        secondary: AppColor.primary.color,
+                      colorScheme: const ColorScheme.light(
+                        // primary: AppColor.primary.color,
+                        // secondary: AppColor.primary.color,
                       ),
                     ),
               child: child ?? Container(),

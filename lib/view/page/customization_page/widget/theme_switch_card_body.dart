@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class ThemeSwitchCardBody extends StatelessWidget {
+class ThemeCardBody extends StatelessWidget {
   final String text;
   final Color color;
 
-  const ThemeSwitchCardBody({
+  const ThemeCardBody({
     super.key,
     required this.text,
     required this.color,

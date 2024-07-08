@@ -2,13 +2,14 @@ import 'dart:io';
 import 'package:diary/data/controller/database_controller/profile_details_db_controller.dart';
 import 'package:diary/data/model/hive/profile_details/profile_details.dart';
 
-import 'package:diary/view/route/page_transition/bottom_to_top.dart';
-import 'package:diary/view/theme/color/app_color.dart';
+import 'package:diary/core/route/page_transition/bottom_to_top.dart';
+import 'package:diary/core/theme/app_color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 
+import '../../../../core/util/asset_path/app_png.dart';
 import '../../edit_profile_page/edit_profile_page.dart';
 
 class ProfileCard extends StatelessWidget {
@@ -38,7 +39,7 @@ class ProfileCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               color: Theme.of(context).brightness == Brightness.light
                   ? Colors.white
-                  : AppColor.darkCard.color,
+                  : AppDarkColor.instance.card,
             ),
             child: ValueListenableBuilder(
                 valueListenable:
@@ -104,7 +105,7 @@ class ProfileCard extends StatelessWidget {
                                   )
                                 
                                 : const DecorationImage(
-                                    image: AssetImage('assets/images/user_profile/user_profile.png'),
+                                    image: AssetImage(AppPng.profile),
                                     fit: BoxFit.cover,
                                   ),
                             border: Border.all(
@@ -163,7 +164,7 @@ class ProfileCard extends StatelessWidget {
                           decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage('assets/images/user_profile/user_profile.png'),
+                              image: AssetImage(AppPng.profile),
                               fit: BoxFit.cover,
                             ),
                           ),

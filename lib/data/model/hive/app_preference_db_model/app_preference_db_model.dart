@@ -8,12 +8,12 @@ class AppPreference{
   final String id = "1";
 
   @HiveField(1)
-  final bool? showOnboarding;
+  final bool? showwelcome;
 
   @HiveField(2)
   final bool? isDark;
 
   AppPreference({
-    this.showOnboarding, this.isDark,
+    this.showwelcome, this.isDark,
   });
 }

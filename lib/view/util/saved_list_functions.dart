@@ -2,14 +2,14 @@
 
 import 'package:diary/data/controller/database_controller/savedlist_db_ops_hive.dart';
 import 'package:diary/data/model/hive/savedlist_db_model/savedlist_db_model.dart';
-import 'package:diary/view/theme/color/app_color.dart';
+
 import 'package:diary/view/util/get_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 
 
-import '../page/navigation_menu/main_page.dart';
+import '../../feature/navigation_menu/page/main_navigation_menu.dart';
 
 class SavedScreenFunctions {
   void _showCreateListDialog(BuildContext context) {
@@ -18,9 +18,7 @@ class SavedScreenFunctions {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? AppColor.light.color
-              : AppColor.showMenuDark.color,
+   
           title: const Center(child: Text('Create a Saved List')),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -90,9 +88,9 @@ class SavedScreenFunctions {
                 height: 2.5,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Theme.of(context).brightness == Brightness.light
-                      ? AppColor.dark.color
-                      : Colors.white,
+                  // color: Theme.of(context).brightness == Brightness.light
+                  //     ? App
+                  //     : Colors.white,
                 ),
               ),
             ),
@@ -217,9 +215,7 @@ class SavedScreenFunctions {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-            backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? AppColor.light.color
-              : AppColor.showMenuDark.color,
+      
           title: const Center(
             child: Text(
               'Delete Confirmation',
@@ -250,7 +246,7 @@ class SavedScreenFunctions {
 
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => MainScreen()),
+                  MaterialPageRoute(builder: (context) => const MainNavigationMenu()),
                   ModalRoute.withName('/main'),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(

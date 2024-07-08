@@ -1,9 +1,8 @@
 import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/view/theme/color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../page/home_page/widget/diary_card_widget/diary_card_slide_widget/diary_card_actions.dart';
+import '../../feature/home/widget/diary_card_widget/diary_card_slide_widget/diary_card_actions.dart';
 
 class MyDiaryScreenFunctions {
   Future<DateTimeRange?> _handleDateRangePick(BuildContext context) async {
@@ -19,15 +18,13 @@ class MyDiaryScreenFunctions {
         return Theme(
           data: isDark
               ? ThemeData.dark().copyWith(
-                  colorScheme: ColorScheme.dark(
-                    primary: AppColor.primary.color,
-                    secondary: AppColor.primary.color,
+                  colorScheme: const ColorScheme.dark(
+               
                   ),
                 )
               : ThemeData.light().copyWith(
-                  colorScheme: ColorScheme.light(
-                    primary: AppColor.primary.color,
-                    secondary: AppColor.primary.color,
+                  colorScheme: const ColorScheme.light(
+                 
                   ),
                 ),
           child: child ?? Container(),

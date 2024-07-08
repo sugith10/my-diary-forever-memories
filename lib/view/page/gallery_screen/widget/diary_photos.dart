@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/view/route/page_transition/bottom_to_top.dart';
+import 'package:diary/core/route/page_transition/bottom_to_top.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 

@@ -1,4 +1,3 @@
-import 'package:diary/view/theme/color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
@@ -12,9 +11,6 @@ class CreateDiaryScreenFunctions {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Theme.of(context).brightness == Brightness.light
-              ? AppColor.light.color
-              : AppColor.showMenuDark.color,
           title: Center(
               child: ShaderMask(
             blendMode: BlendMode.srcIn,

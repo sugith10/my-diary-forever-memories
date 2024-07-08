@@ -1,8 +1,8 @@
 
 import 'package:diary/data/model/hive/archive_db_model/archive_db_model.dart';
-import 'package:diary/view/route/page_transition/bottom_to_top.dart';
+import 'package:diary/core/route/page_transition/bottom_to_top.dart';
+import 'package:diary/core/theme/app_color/app_colors.dart';
 
-import 'package:diary/view/theme/color/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
@@ -30,8 +30,8 @@ class ArchiveCardView extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
          color: Theme.of(context).brightness == Brightness.light
-            ? AppColor.lightCard.color
-            : AppColor.darkCard.color,
+            ? AppLightColor.instance.card
+            : AppDarkColor.instance.card,
           borderRadius: BorderRadius.circular(12.0),
           boxShadow: [
             BoxShadow(

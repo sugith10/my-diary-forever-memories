@@ -1,4 +1,4 @@
-class MainScreenSizeCntrl {
+class MainNavigationMenuSizeCntrl {
   double _calculateBottomNavFontSize({required double screenHeight,required double screenWidth}) {
     double fontSize;
 

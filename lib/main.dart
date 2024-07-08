@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'config/hive_box_name.dart';
-import 'data/model/hive/hive_db_model/app_preference_db_model/app_preference_db_model.dart';
-import 'data/model/hive/hive_db_model/archive_db_model/archive_db_model.dart';
-import 'data/model/hive/hive_db_model/diary_entry_db_model/diary_entry.dart';
-import 'data/model/hive/hive_db_model/profile_details/profile_details.dart';
-import 'data/model/hive/hive_db_model/savedlist_db_model/savedlist_db_model.dart';
+import 'data/model/hive/hive_box_name.dart';
+import 'data/model/hive/app_preference_db_model/app_preference_db_model.dart';
+import 'data/model/hive/archive_db_model/archive_db_model.dart';
+import 'data/model/hive/diary_entry_db_model/diary_entry.dart';
+import 'data/model/hive/profile_details/profile_details.dart';
+import 'data/model/hive/savedlist_db_model/savedlist_db_model.dart';
+import 'feature/customization/model/theme_model.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -21,6 +22,10 @@ Future<void> main() async {
     ),
     Hive.initFlutter()
   ]);
+
+  if (!Hive.isAdapterRegistered(ThemeModelAdapter().typeId)) {
+    Hive.registerAdapter(ThemeModelAdapter());
+  }
 
   if (!Hive.isAdapterRegistered(DiaryEntryAdapter().typeId)) {
     Hive.registerAdapter(DiaryEntryAdapter());
