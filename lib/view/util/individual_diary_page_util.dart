@@ -4,19 +4,15 @@ import 'package:diary/data/controller/database_controller/archive_db_controller.
 import 'package:diary/data/controller/database_controller/diary_entry_db_controller.dart';
 import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
 import 'package:diary/core/theme/app_color/app_colors.dart';
-import 'package:diary/view_model/providers/calendar_scrn_prvdr.dart';
-import 'package:diary/core/route/page_transition/no_movement.dart';
 import 'package:diary/view/util/get_colors.dart';
 import 'package:diary/view/util/saved_list_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 
 
-import '../page/create_page/create_page.dart';
 import '../../feature/navigation_menu/page/main_navigation_menu.dart';
 
-class DiaryDetailPageFunctions {
+class ViewDiaryPageFunctions {
   void _showDeleteConfirmationDialog(BuildContext context, DiaryEntry entry) {
     showDialog(
       context: context,
@@ -227,7 +223,7 @@ class DiaryDetailPageFunctions {
         //   child: Row(
         //     children: [
         //       const Icon(Icons.share_outlined),
-        //       SizedBox(
+        //       SizedBox( 
         //         width: 3.w,
         //       ),
         //       const Text('Share'),
@@ -237,25 +233,13 @@ class DiaryDetailPageFunctions {
       ],
     ).then((value) {
       if (value == 'Edit') {
-        final changer =
-            Provider.of<CalenderPageProvider>(context, listen: false);
-        changer.selectDate(entry.date);
-        Navigator.of(context).push(
-          noMovement(
-            CreateDiaryPage(
-              selectedColor: DiaryDetailPageFunctions()
-                  .hexToColor(entry.background, context),
-              changer: changer,
-              diary: entry,
-            ),
-          ),
-        );
+       
       } else if (value == 'Delete') {
-        DiaryDetailPageFunctions().showDeleteConfirmationDialog(context, entry);
+        ViewDiaryPageFunctions().showDeleteConfirmationDialog(context, entry);
       } else if (value == 'Save') {
         SavedScreenFunctions().displayBottomSheet(context, entry.id);
       } else if (value == 'Archive') {
-        DiaryDetailPageFunctions()
+        ViewDiaryPageFunctions()
             .showArchiveConfirmationDialog(context, entry);
       }
     });

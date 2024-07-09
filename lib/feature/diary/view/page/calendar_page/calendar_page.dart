@@ -6,7 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 import '../../../../../data/model/hive/diary_entry_db_model/diary_entry.dart';
 import '../../../../../core/route/page_transition/bottom_to_top.dart';
 import '../../../../../view_model/providers/calendar_scrn_prvdr.dart';
-import '../../../../../view/page/individual_diary_page/individual_diary_page.dart';
+import '../individual_diary_page.dart';
 import '../../../../home/widget/diary_card_widget/dairy_card.dart';
 import 'widget/calendar_widget.dart';
 import 'widget/calendar_page_app_bar.dart';
@@ -60,7 +60,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             Navigator.push(
                               context,
                               bottomToTop(
-                                DiaryDetailPage(
+                                ViewDiaryPage(
                                   entry: selectedEntries[index],
                                 ),
                               ),

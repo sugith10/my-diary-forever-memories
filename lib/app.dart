@@ -1,4 +1,7 @@
 import 'package:diary/feature/customization/view_model/bloc/theme_bloc_bloc.dart';
+import 'package:diary/feature/diary/data/diary_data.dart';
+import 'package:diary/feature/diary/repository/diary_repo.dart';
+import 'package:diary/feature/diary/view_model/bloc/create_diary_bloc/create_diary_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
@@ -16,11 +19,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        //BlocF
         BlocProvider(
             create: (context) => ThemeBloc(AppThemeRepo(AppThemeData()))),
-
+        BlocProvider(create: (context) => DiaryBloc(DiaryRepo(DiaryData()))),
         //Provider
-      
+
         ChangeNotifierProvider(
           create: (context) => WelcomeProvider(),
         ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:flutter_masonry_view/flutter_masonry_view.dart';
 
-import '../../../../../core/widget/app_custom_app_bar.dart';
+import '../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../view/page/gallery_screen/widget/diary_photos.dart';
 import '../../../../../view/page/widget/appbar_titlestyle_common.dart';
 import 'widget/no_photos.dart';
@@ -25,7 +25,7 @@ class GalleryScreen extends StatelessWidget {
         .toList();
 
     return Scaffold(
-      appBar: const CustomAppBar(
+      appBar: const DefaultAppBar(
         title: AppbarTitle(text: 'Gallery'),
       ),
       body: Container(

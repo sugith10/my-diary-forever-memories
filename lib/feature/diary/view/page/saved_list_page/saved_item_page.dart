@@ -6,10 +6,10 @@ import 'package:diary/core/util/asset_path/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../../../../core/widget/app_custom_app_bar.dart';
-import '../../../../../../core/widget/empty_widget.dart';
-import '../../../../../home/widget/diary_card_widget/dairy_card.dart';
-import '../../../../../../view/page/individual_diary_page/individual_diary_page.dart';
+import '../../../../../core/widget/custom_app_bar.dart';
+import '../../../../../core/widget/empty_widget.dart';
+import '../../../../home/widget/diary_card_widget/dairy_card.dart';
+import '../individual_diary_page.dart';
 
 class SavedItems extends StatefulWidget {
   final SavedList savedList;
@@ -40,7 +40,7 @@ class _SavedItemsState extends State<SavedItems> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: DefaultAppBar(
         title: Text(
           widget.savedList.listName,
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
@@ -71,7 +71,7 @@ class _SavedItemsState extends State<SavedItems> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        bottomToTop(DiaryDetailPage(
+                        bottomToTop(ViewDiaryPage(
                           entry: selectedDiaryEntries[index],
                         )),
                       );

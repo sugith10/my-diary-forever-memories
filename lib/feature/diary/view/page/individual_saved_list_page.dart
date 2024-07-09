@@ -9,7 +9,7 @@ import 'package:hive_flutter/adapters.dart';
 
 import '../../../../core/widget/empty_widget.dart';
 import '../../../home/widget/diary_card_widget/dairy_card.dart';
-import '../../../../view/page/individual_diary_page/individual_diary_page.dart';
+import 'individual_diary_page.dart';
 
 class IndividualSavedListPage extends StatefulWidget {
   final SavedList savedList;
@@ -63,7 +63,7 @@ class _IndividualSavedListPageState extends State<IndividualSavedListPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        bottomToTop(DiaryDetailPage(
+                        bottomToTop(ViewDiaryPage(
                           entry: selectedDiaryEntries[index],
                         )),
                       );

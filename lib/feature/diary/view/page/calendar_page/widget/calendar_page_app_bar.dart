@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../view_model/providers/calendar_scrn_prvdr.dart';
-import '../../../../../../core/widget/app_custom_app_bar.dart';
+import '../../../../../../core/widget/custom_app_bar.dart';
 import '../../../../../../view/page/widget/appbar_titlestyle_common.dart';
 
 class CalendarPageAppBar extends StatelessWidget
@@ -17,7 +17,7 @@ class CalendarPageAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBar(
+    return DefaultAppBar(
       title: Row(
         children: [
           InkWell(

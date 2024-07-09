@@ -4,7 +4,7 @@ import 'package:diary/core/route/page_transition/bottom_to_top.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../../../../view/page/individual_diary_page/individual_diary_page.dart';
+import '../../individual_diary_page.dart';
 
 
 class DiaryPhotos extends StatelessWidget {
@@ -24,7 +24,7 @@ class DiaryPhotos extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.push(
-            context, bottomToTop(DiaryDetailPage(entry: diaryEntry)));
+            context, bottomToTop(ViewDiaryPage(entry: diaryEntry)));
       },
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),

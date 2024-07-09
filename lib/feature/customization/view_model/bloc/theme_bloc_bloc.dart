@@ -14,16 +14,13 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   bool _isDarkMode = false;
   bool get isDarkMode => _isDarkMode;
   int _value = 1;
-
   int get value => _value;
 
   final AppThemeRepo _appThemeRepo;
 
-  // Initialize the ThemeBloc with the AppThemeRepo
   ThemeBloc(this._appThemeRepo) : super(ThemeInitial()) {
-    // Listen for a ThemeGetEvent
     on<ThemeGetEvent>(_getTheme);
-    // Listen for a ThemeSetEvent
+
     on<ThemeSetEvent>(_setTheme);
 
     // Add a ThemeGetEvent to the stream
@@ -38,15 +35,16 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
       // If the ThemeModel is ThemeModel.night
       if (themeModel == ThemeModel.night) {
         // Set the value of the dark mode boolean variable to true
+
         _isDarkMode = true;
         _value = 2;
-        // Emit a ThemeCurrentState with ThemeModel.day
-        emit(const ThemeCurrentState(ThemeModel.day));
+
+        emit(const ThemeCurrentState(ThemeModel.night));
       } else if (themeModel == ThemeModel.day) {
         // Set the value of the dark mode boolean variable to false
         _isDarkMode = false;
         _value = 1;
-        // Emit a ThemeCurrentState with ThemeModel.day
+
         emit(const ThemeCurrentState(ThemeModel.day));
       }
     } catch (e) {
@@ -59,20 +57,20 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   _setTheme(ThemeSetEvent event, Emitter<ThemeState> emit) async {
     try {
       // If the ThemeModel is ThemeModel.day
-      if (event.theme == ThemeModel.day) {
+      if (event.theme == ThemeModel.day && _isDarkMode != false) {
         // Set the value of the dark mode boolean variable to false
         _isDarkMode = false;
         _value = 1;
         // Set the ThemeModel preference in the AppThemeRepo
-        log(event.theme.toString());
+
         emit(ThemeCurrentState(event.theme));
         await _appThemeRepo.setThemePreference(event.theme);
-      } else if (event.theme == ThemeModel.night) {
+      } else if (event.theme == ThemeModel.night && _isDarkMode != true) {
         // Set the value of the dark mode boolean variable to true
         _isDarkMode = true;
         _value = 2;
         // Set the ThemeModel preference in the AppThemeRepo
-        log(event.theme.toString());
+
         emit(ThemeCurrentState(event.theme));
         await _appThemeRepo.setThemePreference(event.theme);
       }

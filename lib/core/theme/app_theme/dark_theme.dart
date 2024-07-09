@@ -4,7 +4,8 @@ class AppDarkTheme {
   static final _color = AppDarkColor.instance;
   static final _appTheme = _AppTheme(
     colorScheme: ColorScheme.dark(
-      primary: _color.background,
+      primary: _color.primaryText,
+      secondary: _color.secondaryText,
     ),
     fontFamily: AppFont.outfit,
     scaffoldBackgroundColor: _color.background,
@@ -112,13 +113,17 @@ class AppDarkTheme {
       ),
     ),
     textButtonThemeData: const TextButtonThemeData(),
-    iconButtonThemeData: const IconButtonThemeData(),
+    iconButtonThemeData: IconButtonThemeData(
+      style: IconButton.styleFrom(
+        foregroundColor: _color.primaryText,
+      ),
+    ),
     dividerThemeData: const DividerThemeData(),
     textSelectionThemeData: TextSelectionThemeData(
       cursorColor: _color.primaryText,
       selectionColor: _color.unfocus,
     ),
-    iconThemeData:  IconThemeData(
+    iconThemeData: IconThemeData(
       color: _color.primaryText,
     ),
     dialogBackgroundColor: _color.card,
@@ -152,7 +157,27 @@ class AppDarkTheme {
       hintStyle: TextStyle(
         color: _color.secondaryText,
       ),
-      
+    ),
+    datePickerTheme: DatePickerThemeData(
+      todayBorder: BorderSide(color: _color.primaryText),
+      todayForegroundColor: WidgetStatePropertyAll(_color.primaryText),
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(_color.primaryText),
+        enableFeedback: true,
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(_color.primaryText),
+        enableFeedback: true,
+      ),
+    ),
+    menuTheme: MenuThemeData(
+      style: MenuStyle(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      ),
     ),
   );
 

@@ -1,5 +1,4 @@
 import 'package:diary/feature/customization/model/theme_model.dart';
-import 'package:flutter/material.dart';
 import '../data/theme_data.dart';
 
 class AppThemeRepo {

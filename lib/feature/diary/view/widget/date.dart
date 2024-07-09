@@ -18,7 +18,7 @@ class DiaryDate extends StatelessWidget {
          DateFormat('d MMMM,y').format(date),
         style: TextStyle(
           fontSize: 11.sh,
-         color:CreateDiaryScreenFunctions().isColorBright(DiaryDetailPageFunctions().hexToColor(backgroundColor,context)) 
+         color:CreateDiaryScreenFunctions().isColorBright(ViewDiaryPageFunctions().hexToColor(backgroundColor,context)) 
          ? Colors.black : Colors.white ,
         ),
       ),

@@ -11,6 +11,7 @@ import 'data/model/hive/diary_entry_db_model/diary_entry.dart';
 import 'data/model/hive/profile_details/profile_details.dart';
 import 'data/model/hive/savedlist_db_model/savedlist_db_model.dart';
 import 'feature/customization/model/theme_model.dart';
+import 'feature/diary/model/diary_model.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -25,6 +26,9 @@ Future<void> main() async {
 
   if (!Hive.isAdapterRegistered(ThemeModelAdapter().typeId)) {
     Hive.registerAdapter(ThemeModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(DiaryModelAdapter().typeId)) {
+    Hive.registerAdapter(DiaryModelAdapter());
   }
 
   if (!Hive.isAdapterRegistered(DiaryEntryAdapter().typeId)) {
@@ -51,6 +55,7 @@ Future<void> main() async {
     Hive.registerAdapter(ArchiveDiaryAdapter());
   }
   await Hive.openBox<ArchiveDiary>(HiveBoxName.archiveDiaryBox);
+
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,

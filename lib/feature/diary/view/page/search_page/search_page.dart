@@ -6,7 +6,7 @@ import 'package:hive_flutter/adapters.dart';
 import '../../../../../data/model/hive/diary_entry_db_model/diary_entry.dart';
 import '../../../../../core/route/page_transition/bottom_to_top.dart';
 import '../../../../home/widget/diary_card_widget/dairy_card.dart';
-import '../../../../../view/page/individual_diary_page/individual_diary_page.dart';
+import '../individual_diary_page.dart';
 import 'widget/search_text_field.dart';
 
 class SearchPage extends StatefulWidget {
@@ -72,7 +72,7 @@ class _SearchPageState extends State<SearchPage> {
                           Navigator.push(
                             context,
                             bottomToTop(
-                              DiaryDetailPage(
+                              ViewDiaryPage(
                                 entry: entry,
                               ),
                             ),

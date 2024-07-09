@@ -1,10 +1,7 @@
 import 'package:diary/core/route/page_transition/right_to_left.dart';
-import 'package:diary/feature/profile/data/profile_option_data.dart';
 import 'package:diary/view/util/account_screen_functions.dart';
-import 'package:diary/view/util/get_theme_type.dart';
 import 'package:diary/core/util/asset_path/app_svg.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../../../view/page/account_page/widget/profile_card.dart';

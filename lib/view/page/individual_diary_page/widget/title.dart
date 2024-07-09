@@ -16,7 +16,7 @@ class DiaryTitle extends StatelessWidget {
       style: TextStyle(
         fontSize: 20.sh,
         fontWeight: FontWeight.w700,
-        color:CreateDiaryScreenFunctions().isColorBright(DiaryDetailPageFunctions().hexToColor(backgroundColor, context)) ? Colors.black : Colors.white ,
+        color:CreateDiaryScreenFunctions().isColorBright(ViewDiaryPageFunctions().hexToColor(backgroundColor, context)) ? Colors.black : Colors.white ,
       ),
       // overflow: TextOverflow.ellipsis,
     );

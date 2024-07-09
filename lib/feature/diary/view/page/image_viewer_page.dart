@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
+import '../../../../core/widget/custom_app_bar.dart';
+
 class ImageViewerPage extends StatelessWidget {
   final File imageFile;
 
@@ -9,8 +11,9 @@ class ImageViewerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Image Viewer'),
+      appBar: const DefaultAppBar(
+        title: Text('Image Viewer'),
+        showLeading: true,
       ),
       body: Center(
         child: Image.file(

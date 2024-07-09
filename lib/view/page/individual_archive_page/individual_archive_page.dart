@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../../data/model/hive/archive_db_model/archive_db_model.dart';
-import '../../../core/util/asset_path/app_svg.dart';
 import '../../util/archive_page_functions.dart';
 import '../../util/individual_diary_page_util.dart';
-import '../../../core/widget/app_custom_app_bar.dart';
-import '../../../core/widget/svg_icon.dart';
+import '../../../core/widget/custom_app_bar.dart';
 import '../individual_diary_page/widget/content.dart';
-import '../individual_diary_page/widget/date.dart';
+import '../../../feature/diary/view/widget/date.dart';
 import '../individual_diary_page/widget/title.dart';
 
 
@@ -22,14 +20,14 @@ class IndividualArchive extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(children: [ IconButton(
+      appBar: DefaultAppBar(children: [ IconButton(
             onPressed: () {
               ArchivePageUtil().showingMenu(context, archiveDiary);
             },
             icon: const Icon(IconlyLight.category),
           )],),
       body: Container(
-        color: DiaryDetailPageFunctions().hexToColor(archiveDiary.background, context),
+        color: ViewDiaryPageFunctions().hexToColor(archiveDiary.background, context),
         child: ListView(
           children: [
             Padding(

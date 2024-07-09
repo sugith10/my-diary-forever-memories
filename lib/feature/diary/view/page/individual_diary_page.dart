@@ -4,37 +4,36 @@ import 'package:diary/view/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
-import '../../../core/util/asset_path/app_svg.dart';
-import '../../../core/widget/app_custom_app_bar.dart';
-import '../../../core/widget/svg_icon.dart';
-import 'widget/content.dart';
-import 'widget/date.dart';
-import 'widget/title.dart';
+import '../../../../core/widget/custom_app_bar.dart';
+import '../../../../view/page/individual_diary_page/widget/content.dart';
+import '../widget/date.dart';
+import '../../../../view/page/individual_diary_page/widget/title.dart';
 
-class DiaryDetailPage extends StatefulWidget {
+class ViewDiaryPage extends StatefulWidget {
   final DiaryEntry entry;
-  const DiaryDetailPage({required this.entry, super.key});
+  const ViewDiaryPage({required this.entry, super.key});
 
   @override
-  State<DiaryDetailPage> createState() => _DiaryDetailPageState();
+  State<ViewDiaryPage> createState() => _ViewDiaryPageState();
 }
 
-class _DiaryDetailPageState extends State<DiaryDetailPage> {
+class _ViewDiaryPageState extends State<ViewDiaryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
+      appBar: DefaultAppBar(
         children: [
           IconButton(
             onPressed: () {
-              DiaryDetailPageFunctions().showingMenu(context, widget.entry);
+              ViewDiaryPageFunctions().showingMenu(context, widget.entry);
             },
             icon: const Icon(IconlyLight.filter),
           )
         ],
       ),
+     
       body: Container(
-        color: DiaryDetailPageFunctions()
+        color: ViewDiaryPageFunctions()
             .hexToColor(widget.entry.background, context),
         child: ListView(
           children: [
@@ -60,7 +59,7 @@ class _DiaryDetailPageState extends State<DiaryDetailPage> {
             if (widget.entry.imagePath != null)
               GestureDetector(
                 onTap: () {
-                  DiaryDetailPageFunctions()
+                  ViewDiaryPageFunctions()
                       .showOriginalImage(context, widget.entry);
                 },
                 child: Padding(

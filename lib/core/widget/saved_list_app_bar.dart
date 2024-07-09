@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../theme/app_properties/app_icons.dart';
-import '../../view/util/saved_list_functions.dart';
 
 class SavedListAppBar extends StatelessWidget implements PreferredSizeWidget {
 final String title;

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:toastification/toastification.dart';
 
 import 'core/route/app_route_package.dart';
 import 'core/route/route_name/route_name.dart';
@@ -19,17 +20,19 @@ class MyAppView extends StatelessWidget {
       minTextAdapt: false,
       fontSizeResolver: FontSizeResolvers.radius,
       child: Builder(builder: (context) {
-        return MaterialApp(
-              title: 'My Diary',
-              theme: AppLightTheme().theme,
-              darkTheme: AppDarkTheme().theme,
-              themeMode: themeBloc.isDarkMode
-                  ? ThemeMode.dark
-                  : ThemeMode.light,
-              debugShowCheckedModeBanner: false,
-              initialRoute: RouteName.initial,
-              onGenerateRoute: AppRoute.generateRoute,
-            );
+        return ToastificationWrapper(
+          child: MaterialApp(
+                title: 'My Diary',
+                theme: AppLightTheme().theme,
+                darkTheme: AppDarkTheme().theme,
+                themeMode: themeBloc.isDarkMode
+                    ? ThemeMode.dark
+                    : ThemeMode.light,
+                debugShowCheckedModeBanner: false,
+                initialRoute: RouteName.initial,
+                onGenerateRoute: AppRoute.generateRoute,
+              ),
+        );
       }),
     );
   }

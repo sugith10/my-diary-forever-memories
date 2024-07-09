@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/route/page_transition/bottom_to_top.dart';
-import '../../../../view/page/create_page/create_page.dart';
-import '../../../../view/util/get_colors.dart';
 import '../../../../view_model/providers/calendar_scrn_prvdr.dart';
 
 class CreateDiaryTextActionWidget extends StatelessWidget {
@@ -21,16 +18,7 @@ class CreateDiaryTextActionWidget extends StatelessWidget {
         children: [
           InkWell(
             borderRadius: BorderRadius.circular(16),
-            onTap: () {
-              Navigator.of(context).push(
-                bottomToTop(
-                  CreateDiaryPage(
-                    changer: changer,
-                    selectedColor: GetColors().getThemeColor(context),
-                  ),
-                ),
-              );
-            },
+            onTap: () {},
             child: const Padding(
               padding: EdgeInsets.all(10),
               child: _CreateDiaryText(),

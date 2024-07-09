@@ -25,6 +25,8 @@ class _AppTheme {
   final BottomNavigationBarThemeData bottomNavigationBarThemeData;
   final InputDecorationTheme inputDecorationThemeData;
   final ColorScheme colorScheme;
+  final DatePickerThemeData datePickerTheme;
+  final MenuThemeData menuTheme;
   
   const _AppTheme({
     required this.colorScheme,
@@ -44,6 +46,8 @@ class _AppTheme {
     required this.floatingActionButtonThemeData,
     required this.bottomNavigationBarThemeData,
     required this.inputDecorationThemeData
+    ,required this.datePickerTheme,
+    required this.menuTheme,
   });
 
   ThemeData get themeData {
@@ -63,8 +67,9 @@ class _AppTheme {
       popupMenuTheme: popupMenuThemeData,
       bottomSheetTheme: bottomSheetThemeData,
       floatingActionButtonTheme: floatingActionButtonThemeData,
-      bottomNavigationBarTheme: bottomNavigationBarThemeData
-      
+      bottomNavigationBarTheme: bottomNavigationBarThemeData,
+      datePickerTheme: datePickerTheme,
+      menuTheme: menuTheme,
     );
   }
 }

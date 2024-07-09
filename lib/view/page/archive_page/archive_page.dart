@@ -5,7 +5,7 @@ import 'package:diary/core/util/asset_path/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import '../../../core/widget/app_custom_app_bar.dart';
+import '../../../core/widget/custom_app_bar.dart';
 import '../../../core/widget/empty_widget.dart';
 
 class ArchivePage extends StatelessWidget {
@@ -14,7 +14,7 @@ class ArchivePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: const DefaultAppBar(),
       body: ValueListenableBuilder(
         valueListenable: Hive.box<ArchiveDiary>(HiveBoxName.archiveDiaryBox).listenable(),
         builder: (context, Box<ArchiveDiary> box, child) {

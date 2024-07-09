@@ -5,7 +5,7 @@ import 'package:diary/view/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../../../../../view/page/individual_diary_page/individual_diary_page.dart';
+import '../../../../diary/view/page/individual_diary_page.dart';
 import '../dairy_card.dart';
 
 class DiaryCardActions extends StatelessWidget {
@@ -49,7 +49,7 @@ class DiaryCardActions extends StatelessWidget {
           Navigator.push(
             context,
             bottomToTop(
-              DiaryDetailPage(
+              ViewDiaryPage(
                 entry: entry,
               ),
             ),
@@ -78,7 +78,7 @@ class SlidableActionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlidableAction(
       onPressed: (BuildContext context) {
-       DiaryDetailPageFunctions().showDeleteConfirmationDialog(context, entry);
+       ViewDiaryPageFunctions().showDeleteConfirmationDialog(context, entry);
       },
       borderRadius: radius,
       backgroundColor: const Color(0xFFFE4A49),

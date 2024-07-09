@@ -5,7 +5,8 @@ class AppLightTheme {
   static final _appTheme = _AppTheme(
     fontFamily: AppFont.outfit,
     colorScheme: ColorScheme.light(
-      primary: _color.background,
+      primary: _color.primaryText,
+      secondary: _color.secondaryText,
     ),
     scaffoldBackgroundColor: _color.background,
     appBarTheme: AppBarTheme(
@@ -110,14 +111,19 @@ class AppLightTheme {
         animationDuration: const Duration(milliseconds: 200),
       ),
     ),
-    textButtonThemeData: const TextButtonThemeData(),
-    iconButtonThemeData: const IconButtonThemeData(),
+    textButtonThemeData: TextButtonThemeData(
+        style: TextButton.styleFrom(
+            textStyle: TextStyle(
+      color: _color.primaryText,
+    ))),
+    iconButtonThemeData: IconButtonThemeData(
+        style: IconButton.styleFrom(foregroundColor: _color.primaryText)),
     dividerThemeData: const DividerThemeData(),
     textSelectionThemeData: TextSelectionThemeData(
       cursorColor: _color.secondaryText,
       selectionColor: _color.unfocus,
     ),
-    iconThemeData:  IconThemeData(
+    iconThemeData: IconThemeData(
       color: _color.primaryText,
     ),
     dialogBackgroundColor: _color.card,
@@ -150,6 +156,27 @@ class AppLightTheme {
       border: InputBorder.none,
       hintStyle: TextStyle(
         color: _color.secondaryText,
+      ),
+    ),
+    datePickerTheme: DatePickerThemeData(
+      todayBorder: BorderSide(color: _color.primaryText),
+      todayForegroundColor: WidgetStatePropertyAll(_color.primaryText),
+      cancelButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(_color.primaryText),
+        enableFeedback: true,
+      ),
+      confirmButtonStyle: ButtonStyle(
+        foregroundColor: WidgetStatePropertyAll(_color.primaryText),
+        enableFeedback: true,
+      ),
+    ),
+    menuTheme: MenuThemeData(
+      style: MenuStyle(
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
       ),
     ),
   );

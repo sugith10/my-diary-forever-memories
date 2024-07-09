@@ -4,33 +4,30 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../../core/widget/svg_icon.dart';
 import '../../../../core/util/asset_path/app_svg.dart';
 
-class CreatePageBottomBar extends StatelessWidget {
-  final ValueNotifier<int> selectedIndexNotifier;
-  final Function(int) onTap;
+class CreateDiaryBottomBar extends StatelessWidget {
 
-  const CreatePageBottomBar({
+  final Function(int) function;
+
+  const CreateDiaryBottomBar({
     super.key,
-    required this.selectedIndexNotifier,
-    required this.onTap,
+
+    required this.function,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<int>(
-      valueListenable: selectedIndexNotifier,
-      builder: (context, selectedIndex, child) {
-        return Padding(
+   return Padding(
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
           child: BottomNavigationBar(
             enableFeedback: true,
-            elevation: 1,
+         
             showUnselectedLabels: false,
             showSelectedLabels: false,
             type: BottomNavigationBarType.fixed,
-            currentIndex: selectedIndex,
-            onTap: onTap,
+            
+            onTap: function,
             items: const [
               BottomNavigationBarItem(
                 icon: FaIcon(
@@ -51,7 +48,5 @@ class CreatePageBottomBar extends StatelessWidget {
             ],
           ),
         );
-      },
-    );
   }
 }

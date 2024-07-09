@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/widget/app_custom_app_bar.dart';
+import '../../../../core/widget/custom_app_bar.dart';
 import '../../widget/appbar_titlestyle_common.dart';
 
 class AccountPageAppBar extends StatelessWidget implements PreferredSizeWidget{
@@ -13,7 +13,7 @@ class AccountPageAppBar extends StatelessWidget implements PreferredSizeWidget{
 
   @override
   Widget build(BuildContext context) {
-    return CustomAppBar(
+    return DefaultAppBar(
       title: AppbarTitle(
         text: greetingTitle,
       ),
