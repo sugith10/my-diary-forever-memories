@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../../view_model/providers/calendar_scrn_prvdr.dart';
+import '../../../../view_model/provider/calendar_scrn_prvdr.dart';
 import '../../../../../../core/widget/custom_app_bar.dart';
-import '../../../../../../view/page/widget/appbar_titlestyle_common.dart';
+import '../../../../../../core/widget/appbar_titlestyle_common.dart';
 
 class CalendarPageAppBar extends StatelessWidget
     implements PreferredSizeWidget {

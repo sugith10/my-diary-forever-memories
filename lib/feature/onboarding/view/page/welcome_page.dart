@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../../../core/util/asset_path/app_lottie.dart';
-import '../../../../view/util/get_theme_type.dart';
+import '../../../../core/util/util/get_theme_type.dart';
 
 import '../../data/onboarding_content_data.dart';
 

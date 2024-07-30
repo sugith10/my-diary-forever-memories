@@ -21,7 +21,7 @@ class DiaryModelAdapter extends TypeAdapter<DiaryModel> {
       date: fields[1] as DateTime,
       title: fields[2] as String,
       content: fields[3] as String,
-      background: fields[9] as Color,
+      background: fields[9] as String,
       imagePath: fields[4] as String?,
     );
   }

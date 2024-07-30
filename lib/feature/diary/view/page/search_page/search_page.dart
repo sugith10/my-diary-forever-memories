@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/adapters.dart';
 
-import '../../../../../data/model/hive/diary_entry_db_model/diary_entry.dart';
+import '../../../../../core/model/diary_model/diary_model.dart';
 import '../../../../../core/route/page_transition/bottom_to_top.dart';
 import '../../../../home/widget/diary_card_widget/dairy_card.dart';
 import '../individual_diary_page.dart';
@@ -18,8 +18,8 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
-  final Box<DiaryEntry> _diaryBox = Hive.box<DiaryEntry>('diaryEntryBox');
-  List<DiaryEntry> _searchResults = [];
+  final Box<DiaryModel> _diaryBox = Hive.box<DiaryModel>('DiaryModelBox');
+  List<DiaryModel> _searchResults = [];
 
   void _searchDiaryEntries(String query) {
     query = query.toLowerCase();

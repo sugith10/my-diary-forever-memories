@@ -1,4 +1,4 @@
-import 'package:diary/utils/is_dark.dart';
+import 'package:diary/core/util/is_dark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

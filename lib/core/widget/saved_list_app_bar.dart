@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../theme/app_properties/app_icons.dart';
 
-class SavedListAppBar extends StatelessWidget implements PreferredSizeWidget {
+class SavedListModelAppBar extends StatelessWidget implements PreferredSizeWidget {
 final String title;
 final IconData icon;
 final VoidCallback callback;
 
-  const SavedListAppBar({
+  const SavedListModelAppBar({
     super.key,
     required this.title,
     required this.icon,

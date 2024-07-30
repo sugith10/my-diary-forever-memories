@@ -1,6 +1,6 @@
-import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/core/model/diary_model/diary_model.dart';
 import 'package:diary/core/route/page_transition/bottom_to_top.dart';
-import 'package:diary/view/util/individual_diary_page_util.dart';
+import 'package:diary/core/util/util/individual_diary_page_util.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -9,7 +9,7 @@ import '../../../../diary/view/page/individual_diary_page.dart';
 import '../dairy_card.dart';
 
 class DiaryCardActions extends StatelessWidget {
-  final DiaryEntry entry;
+  final DiaryModel entry;
   final int index;
 
   const DiaryCardActions(this.entry, this.index, {super.key});
@@ -71,7 +71,7 @@ class SlidableActionWidget extends StatelessWidget {
     required this.radius,
   });
 
-  final DiaryEntry entry;
+  final DiaryModel entry;
   final BorderRadius radius;
 
   @override

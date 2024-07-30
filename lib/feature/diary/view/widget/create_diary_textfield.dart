@@ -1,7 +1,7 @@
 import 'package:diary/core/theme/app_color/app_colors.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../view/util/create_screen_functions.dart';
+import '../../../../core/util/util/create_screen_functions.dart';
 
 class CreateDairyTextField extends StatelessWidget {
   const CreateDairyTextField({

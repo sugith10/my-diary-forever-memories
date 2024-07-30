@@ -1,60 +1,61 @@
 import 'package:diary/core/widget/saved_list_app_bar.dart';
-import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/data/model/hive/savedlist_db_model/savedlist_db_model.dart';
+import 'package:diary/core/model/diary_model/diary_model.dart';
+
 import 'package:diary/core/route/page_transition/bottom_to_top.dart';
-import 'package:diary/view/util/saved_list_functions.dart';
+import 'package:diary/core/util/util/saved_list_functions.dart';
 import 'package:diary/core/util/asset_path/app_png.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
 import '../../../../core/widget/empty_widget.dart';
 import '../../../home/widget/diary_card_widget/dairy_card.dart';
+import '../../../saved_list/model/savedlist_model/savedlist_model.dart';
 import 'individual_diary_page.dart';
 
-class IndividualSavedListPage extends StatefulWidget {
-  final SavedList savedList;
-  const IndividualSavedListPage({required this.savedList, super.key});
+class IndividualSavedListModelPage extends StatefulWidget {
+  final SavedListModel savedListModel;
+  const IndividualSavedListModelPage({required this.savedListModel, super.key});
 
   @override
-  State<IndividualSavedListPage> createState() =>
-      _IndividualSavedListPageState();
+  State<IndividualSavedListModelPage> createState() =>
+      _IndividualSavedListModelPageState();
 }
 
-class _IndividualSavedListPageState extends State<IndividualSavedListPage> {
-  late List<String> diaryEntryIds;
+class _IndividualSavedListModelPageState extends State<IndividualSavedListModelPage> {
+  late List<String> diaryIdList;
 
   @override
   void initState() {
     super.initState();
-    diaryEntryIds = widget.savedList.diaryEntryIds;
+    diaryIdList = widget.savedListModel.diaryIdList;
   }
 
-  List<DiaryEntry> getDiaryEntries(List<String> diaryEntryIds) {
-    final diaryEntryBox = Hive.box<DiaryEntry>('diaryEntryBox');
-    return diaryEntryIds
-        .map((entryId) => diaryEntryBox.get(entryId))
+  List<DiaryModel> getDiaryEntries(List<String> diaryIdList) {
+    final DiaryModelBox = Hive.box<DiaryModel>('DiaryModelBox');
+    return diaryIdList
+        .map((entryId) => DiaryModelBox.get(entryId))
         .where((entry) => entry != null)
-        .cast<DiaryEntry>()
+        .cast<DiaryModel>()
         .toList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: SavedListAppBar(
-        title: widget.savedList.listName,
+      appBar: SavedListModelAppBar(
+        title: widget.savedListModel.listName,
         icon: Icons.delete_outline_rounded,
         callback: () {
           SavedScreenFunctions()
-              .showDeleteConfirmationDialog(context, widget.savedList);
+              .showDeleteConfirmationDialog(context, widget.savedListModel);
         },
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ValueListenableBuilder<Box<DiaryEntry>>(
-          valueListenable: Hive.box<DiaryEntry>('diaryEntryBox').listenable(),
+        child: ValueListenableBuilder<Box<DiaryModel>>(
+          valueListenable: Hive.box<DiaryModel>('DiaryModelBox').listenable(),
           builder: (context, box, child) {
-            final selectedDiaryEntries = getDiaryEntries(diaryEntryIds);
+            final selectedDiaryEntries = getDiaryEntries(diaryIdList);
             if (selectedDiaryEntries.isNotEmpty) {
               return ListView.builder(
                 itemCount: selectedDiaryEntries.length,

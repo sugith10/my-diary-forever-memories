@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../../../../../data/model/hive/diary_entry_db_model/diary_entry.dart';
-import '../../../../../../view_model/providers/calendar_scrn_prvdr.dart';
+import '../../../../../../core/model/diary_model/diary_model.dart';
+import '../../../../view_model/provider/calendar_scrn_prvdr.dart';
 
 class CalendarWidget extends StatelessWidget {
   const CalendarWidget({
@@ -61,10 +61,10 @@ class CalendarWidget extends StatelessWidget {
           weekendTextStyle: const TextStyle(color: Colors.red),
         ),
         eventLoader: (day) {
-          final hasDiaryEntry = Hive.box<DiaryEntry>('diaryEntryBox')
+          final hasDiaryModel = Hive.box<DiaryModel>('DiaryModelBox')
               .values
               .any((entry) => isSameDay(entry.date, day));
-          return hasDiaryEntry ? [day] : [];
+          return hasDiaryModel ? [day] : [];
         },
       ),
     );

@@ -7,7 +7,7 @@ class AppDarkTheme {
       primary: _color.primaryText,
       secondary: _color.secondaryText,
     ),
-    fontFamily: AppFont.outfit,
+    fontFamily: GoogleFonts.plusJakartaSans().fontFamily! ,
     scaffoldBackgroundColor: _color.background,
     appBarTheme: AppBarTheme(
       backgroundColor: _color.background,

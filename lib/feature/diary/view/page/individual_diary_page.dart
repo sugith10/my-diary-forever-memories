@@ -1,16 +1,16 @@
 import 'dart:io';
-import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
-import 'package:diary/view/util/individual_diary_page_util.dart';
+import 'package:diary/core/model/diary_model/diary_model.dart';
+import 'package:diary/core/util/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
 import '../../../../core/widget/custom_app_bar.dart';
-import '../../../../view/page/individual_diary_page/widget/content.dart';
+import '../widget/content.dart';
 import '../widget/date.dart';
-import '../../../../view/page/individual_diary_page/widget/title.dart';
+import '../widget/title.dart';
 
 class ViewDiaryPage extends StatefulWidget {
-  final DiaryEntry entry;
+  final DiaryModel entry;
   const ViewDiaryPage({required this.entry, super.key});
 
   @override

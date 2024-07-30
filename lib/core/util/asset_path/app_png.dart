@@ -7,12 +7,12 @@ class AppPng {
       "assets/png/empty_area/photo_not_found.png";
       
   static const String emptyList =
-      "assets/png/empty_area/savedlist_not_found.png.png";
+      "assets/png/empty_area/SavedListModel_not_found.png.png";
 
   static const String searchPageIntro =
       "assets/png/empty_area/search_not_found_2.png";
 
   //Icons
   static const String fab = "assets/png/start_writing.png";
-  static const String profile = "assets/png/user_profile.png";
+  static const String profile = "assets/png/UserModel_profile.png";
 }

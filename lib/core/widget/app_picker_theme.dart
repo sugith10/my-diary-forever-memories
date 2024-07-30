@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../utils/is_dark.dart';
+import '../util/is_dark.dart';
 import '../theme/app_color/app_colors.dart';
 
 class AppPickerTheme extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../view_model/providers/calendar_scrn_prvdr.dart';
+import '../../view_model/provider/calendar_scrn_prvdr.dart';
 
 class CreateDiaryTextActionWidget extends StatelessWidget {
   const CreateDiaryTextActionWidget({

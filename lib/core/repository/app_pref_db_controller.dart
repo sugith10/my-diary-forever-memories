@@ -1,27 +1,27 @@
-import 'package:diary/data/model/hive/app_preference_db_model/app_preference_db_model.dart';
+import 'package:diary/feature/auth/model/app_preference_model/app_preference_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-/// Manages interactions with the Hive database for user app preferences.
+/// Manages interactions with the Hive database for UserModel app preferences.
 final class AppPrefRepo {
-  final Box<AppPreference> _box;
+  final Box<AppPreferenceModel> _box;
 
   /// Creates an instance of [AppPrefRepo].
-  AppPrefRepo() : _box = Hive.box<AppPreference>('appPreferenceBox');
+  AppPrefRepo() : _box = Hive.box<AppPreferenceModel>('AppPreferenceModelBox');
 
-  /// Adds the theme preference to the AppPreference database.
-  Future<void> addThemePreference(AppPreference isDark) async {
+  /// Adds the theme preference to the AppPreferenceModel database.
+  Future<void> addThemePreference(AppPreferenceModel isDark) async {
     await _box.put(isDark.id, isDark);
   }
 
-  /// Retrieves the current theme preference from the AppPreference database.
-  Future<AppPreference?> getThemePreference() async => _box.get('1');
+  /// Retrieves the current theme preference from the AppPreferenceModel database.
+  Future<AppPreferenceModel?> getThemePreference() async => _box.get('1');
 
-  /// Saves the welcome screen status to the AppPreference database.
-  Future<void> showwelcome(AppPreference showwelcome) async {
+  /// Saves the welcome screen status to the AppPreferenceModel database.
+  Future<void> showwelcome(AppPreferenceModel showwelcome) async {
     await _box.put(showwelcome.id, showwelcome);
    
   }
 
-  /// Retrieves the welcome screen status from the AppPreference database.
-  Future<AppPreference?> getwelcomeStatus() async => _box.get('1');
+  /// Retrieves the welcome screen status from the AppPreferenceModel database.
+  Future<AppPreferenceModel?> getwelcomeStatus() async => _box.get('1');
 }

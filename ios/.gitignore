@@ -2,7 +2,7 @@
 *.mode1v3
 *.mode2v3
 *.moved-aside
-*.pbxuser
+*.pbxUserModel
 *.perspectivev3
 **/*sync/
 .sconsign.dblite
@@ -13,7 +13,7 @@ Icon?
 **/Pods/
 **/.symlinks/
 profile
-xcuserdata
+xcUserModeldata
 **/.generated/
 Flutter/App.framework
 Flutter/Flutter.framework
@@ -30,5 +30,5 @@ Runner/GeneratedPluginRegistrant.*
 # Exceptions to above rules.
 !default.mode1v3
 !default.mode2v3
-!default.pbxuser
+!default.pbxUserModel
 !default.perspectivev3

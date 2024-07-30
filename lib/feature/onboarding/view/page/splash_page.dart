@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../../../core/route/route_name/route_name.dart';
-import '../../../../view/util/get_theme_type.dart';
+import '../../../../core/util/util/get_theme_type.dart';
 import '../../view_model/bloc/splash_bloc/splash_bloc.dart';
 
 class SplashPage extends StatefulWidget {

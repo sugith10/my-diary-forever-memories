@@ -2,6 +2,7 @@ import 'package:diary/core/util/asset_path/app_font.dart';
 import 'package:diary/core/theme/app_color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 part 'dark_theme.dart';
 part 'light_theme.dart';

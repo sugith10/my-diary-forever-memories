@@ -1,16 +1,16 @@
 import 'package:diary/core/route/page_transition/right_to_left.dart';
-import 'package:diary/view/util/account_screen_functions.dart';
+import 'package:diary/core/util/util/account_screen_functions.dart';
 import 'package:diary/core/util/asset_path/app_svg.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
-import '../../../../view/page/account_page/widget/profile_card.dart';
-import '../../../../view/page/archive_page/archive_page.dart';
+import '../widget/profile_card.dart';
+import '../../../archive/view/page/archive_page.dart';
 import '../../../customization/view/page/customization_page.dart';
-import '../../../../view/page/account_page/widget/account_page_app_bar.dart';
-import '../../../../view/page/account_page/widget/account_screen_content_divider.dart';
+import '../widget/account_page_app_bar.dart';
+import '../widget/account_screen_content_divider.dart';
 import '../widget/profile_options_widget.dart';
-import '../../../../view/page/account_page/widget/app_info.dart';
+import '../widget/app_info.dart';
 
 class AccountScreen extends StatelessWidget {
   const AccountScreen({super.key});

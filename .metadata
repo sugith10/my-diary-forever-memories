@@ -31,7 +31,7 @@ migration:
       create_revision: 761747bfc538b5af34aa0d3fac380f1bc331ec49
       base_revision: 761747bfc538b5af34aa0d3fac380f1bc331ec49
 
-  # User provided section
+  # UserModel provided section
 
   # List of Local paths (relative to this file) that should be
   # ignored by the migrate tool.

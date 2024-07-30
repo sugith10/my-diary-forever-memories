@@ -1,6 +1,6 @@
 import 'package:diary/core/util/asset_path/app_svg.dart';
 import 'package:diary/core/widget/svg_icon.dart';
-import 'package:diary/utils/is_dark.dart';
+import 'package:diary/core/util/is_dark.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

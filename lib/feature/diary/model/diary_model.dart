@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 part 'diary_model.g.dart';
@@ -20,7 +19,7 @@ class DiaryModel {
   String content;
 
   @HiveField(9)
-  Color background;
+  String background;
 
   @HiveField(4)
   String? imagePath;
@@ -39,7 +38,7 @@ class DiaryModel {
     DateTime? date,
     String? title,
     String? content,
-    Color? background,
+    String? background,
     String? imagePath,
   }) {
     return DiaryModel(
@@ -69,14 +68,15 @@ class DiaryModel {
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
       title: map['title'] as String,
       content: map['content'] as String,
-      background: map['background'] as Color,
+      background: map['background'] as String,
       imagePath: map['imagePath'] != null ? map['imagePath'] as String : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory DiaryModel.fromJson(String source) => DiaryModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory DiaryModel.fromJson(String source) =>
+      DiaryModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
@@ -86,23 +86,22 @@ class DiaryModel {
   @override
   bool operator ==(covariant DiaryModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.id == id &&
-      other.date == date &&
-      other.title == title &&
-      other.content == content &&
-      other.background == background &&
-      other.imagePath == imagePath;
+
+    return other.id == id &&
+        other.date == date &&
+        other.title == title &&
+        other.content == content &&
+        other.background == background &&
+        other.imagePath == imagePath;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      date.hashCode ^
-      title.hashCode ^
-      content.hashCode ^
-      background.hashCode ^
-      imagePath.hashCode;
+        date.hashCode ^
+        title.hashCode ^
+        content.hashCode ^
+        background.hashCode ^
+        imagePath.hashCode;
   }
 }

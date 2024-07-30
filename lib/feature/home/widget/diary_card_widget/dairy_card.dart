@@ -1,10 +1,10 @@
-import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/core/model/diary_model/diary_model.dart';
 import 'package:diary/core/theme/app_color/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DiaryCardView extends StatelessWidget {
-  final DiaryEntry entry;
+  final DiaryModel entry;
 
   const DiaryCardView({required this.entry, super.key});
 

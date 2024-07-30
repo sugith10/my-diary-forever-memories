@@ -1,4 +1,4 @@
-import 'package:diary/data/model/hive/app_preference_db_model/app_preference_db_model.dart';
+import 'package:diary/feature/auth/model/app_preference_model/app_preference_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +22,7 @@ class WelcomeBloc extends Bloc<WelcomeEvent, WelcomeState> {
   }
 
   _toHome(WelcomeToHomeEvent event, Emitter<WelcomeState> emit) async {
-    await AppPrefRepo().showwelcome(AppPreference(showwelcome: false));
+    await AppPrefRepo().showwelcome(AppPreferenceModel(showwelcome: false));
     emit(WelcomeToHomeState());
   }
 }

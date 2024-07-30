@@ -6,7 +6,7 @@ You can download the latest version of "My Diary - Memories Forever" on your And
 
 [Download My Diary - Memories Forever](https://play.google.com/store/apps/details?id=com.dayproduction.diary)
 
-![take-my-tym-cover](https://raw.githubusercontent.com/sugith10/images/main/projects/my-diary-cover.png)
+![take-my-tym-cover](https://raw.githubUserModelcontent.com/sugith10/images/main/projects/my-diary-cover.png)
 
 
 ## Project Overview
@@ -41,7 +41,7 @@ lib/
       Handles data repositories responsible for interacting with data services.
 
 **Presentation Layer (`presentation`):**
-   - Manages the user interface (UI) and user experience (UX) aspects.
+   - Manages the UserModel interface (UI) and UserModel experience (UX) aspects.
    - Subfolders:
      - **Pages (`pages`):**
        Contains the pages of the application.
@@ -64,4 +64,4 @@ lib/
 
 - **Simplicity and Clarity:** The structure focuses on straightforward organization for better understanding.
 - **Database Integration:** Utilizes the Hive database for efficient storage and retrieval of diary entries.
-- **State Management:** Implements state management using the Provider package for a streamlined user interface.
+- **State Management:** Implements state management using the Provider package for a streamlined UserModel interface.

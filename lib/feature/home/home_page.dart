@@ -1,8 +1,8 @@
-import 'package:diary/data/model/hive/hive_box_name.dart';
-import 'package:diary/data/model/hive/diary_entry_db_model/diary_entry.dart';
+import 'package:diary/core/util/hive_box_name.dart';
+import 'package:diary/core/model/diary_model/diary_model.dart';
 import 'package:diary/core/route/page_transition/no_movement.dart';
-import 'package:diary/view/util/my_diary_scren_functions.dart';
-import 'package:diary/view_model/providers/my_diary_scrn_prvdr.dart';
+import 'package:diary/core/util/util/my_diary_scren_functions.dart';
+import 'package:diary/feature/diary/view_model/provider/my_diary_scrn_prvdr.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:iconly/iconly.dart';
@@ -26,8 +26,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String selectedSortOption = 'Newest First';
 
-  List<DiaryEntry> filterEntriesByDateRange(
-      List<DiaryEntry> entries, DateTimeRange dateRange) {
+  List<DiaryModel> filterEntriesByDateRange(
+      List<DiaryModel> entries, DateTimeRange dateRange) {
     return entries
         .where((entry) =>
             entry.date.isAfter(dateRange.start) &&
@@ -62,7 +62,7 @@ class _HomePageState extends State<HomePage> {
                         IconButton(
                             onPressed: () {
                               Navigator.of(context)
-                                  .push(noMovement(const SavedListScreen()));
+                                  .push(noMovement(const SavedListModelScreen()));
                             },
                             icon: const Icon(IconlyLight.bookmark)),
                         IconButton(
@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     ValueListenableBuilder(
                       valueListenable:
-                          Hive.box<DiaryEntry>(HiveBoxName.diaryBox)
+                          Hive.box<DiaryModel>(HiveBoxName.diaryBox)
                               .listenable(),
                       builder: (context, box, child) {
                         var sortedEntries = box.values.toList();
@@ -143,7 +143,7 @@ class _HomePageState extends State<HomePage> {
                                 .sort((a, b) => b.date.compareTo(a.date));
                             break;
                         }
-                        Map<String, List<DiaryEntry>> groupedEntries = {};
+                        Map<String, List<DiaryModel>> groupedEntries = {};
                         for (var entry in sortedEntries) {
                           final dateKey =
                               DateFormat('y-MM-dd').format(entry.date);

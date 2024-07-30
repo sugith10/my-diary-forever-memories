@@ -1,5 +1,5 @@
-import 'package:diary/view/util/create_screen_functions.dart';
-import 'package:diary/view/util/individual_diary_page_util.dart';
+import 'package:diary/core/util/util/create_screen_functions.dart';
+import 'package:diary/core/util/util/individual_diary_page_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';

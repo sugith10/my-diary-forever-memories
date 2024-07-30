@@ -1,7 +1,7 @@
 import 'package:diary/core/route/page_transition/bottom_to_top.dart';
 import 'package:flutter/material.dart';
 
-import '../../../diary/view/page/create_page/page/create_page.dart';
+import '../../../diary/view/page/create_diary_page.dart';
 import 'create_floating_icon.dart';
 
 class CreatePageFAB extends StatelessWidget {
@@ -10,7 +10,7 @@ class CreatePageFAB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      // shape: const CircleBorder(),
+      shape: const CircleBorder(),
 
       onPressed: () {
         Navigator.of(context).push(

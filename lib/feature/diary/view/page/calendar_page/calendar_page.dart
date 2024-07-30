@@ -3,9 +3,9 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-import '../../../../../data/model/hive/diary_entry_db_model/diary_entry.dart';
+import '../../../../../core/model/diary_model/diary_model.dart';
 import '../../../../../core/route/page_transition/bottom_to_top.dart';
-import '../../../../../view_model/providers/calendar_scrn_prvdr.dart';
+import '../../../view_model/provider/calendar_scrn_prvdr.dart';
 import '../individual_diary_page.dart';
 import '../../../../home/widget/diary_card_widget/dairy_card.dart';
 import 'widget/calendar_widget.dart';
@@ -21,7 +21,7 @@ class CalendarScreen extends StatefulWidget {
 
 class _CalendarScreenState extends State<CalendarScreen> {
   bool diaryFound = false;
-  DiaryEntry? diaryEntryForSelectedDate;
+  DiaryModel? DiaryModelForSelectedDate;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +37,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
               child: CalendarWidget(calenderProvider: changer),
             ),
           ),
-          ValueListenableBuilder<Box<DiaryEntry>>(
-            valueListenable: Hive.box<DiaryEntry>('diaryEntryBox').listenable(),
+          ValueListenableBuilder<Box<DiaryModel>>(
+            valueListenable: Hive.box<DiaryModel>('DiaryModelBox').listenable(),
             builder: (context, box, child) {
-              List<DiaryEntry> diaryEntries = box.values.toList();
+              List<DiaryModel> diaryEntries = box.values.toList();
               final selectedEntries = diaryEntries
                   .where((entry) => isSameDay(entry.date, changer.selectedDate))
                   .toList();

@@ -6,7 +6,7 @@ import 'package:diary/feature/diary/model/diary_model.dart';
 import 'package:diary/feature/diary/view/page/image_viewer_page.dart';
 import 'package:flutter/material.dart';
 
-import '../../feature/diary/view/page/create_page/page/create_page.dart';
+import '../../feature/diary/view/page/create_diary_page.dart';
 import '../../feature/error/view/page/error_page.dart';
 import '../../feature/navigation_menu/page/main_navigation_menu.dart';
 import '../../feature/onboarding/view/page/splash_page.dart';
